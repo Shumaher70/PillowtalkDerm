@@ -1,3 +1,3 @@
 export default function Home() {
-   return <h1 className="text-header-lg">hello</h1>;
+   return <main className="px-[16px] lg:px-[80px]">hello</main>;
 }
