@@ -30,6 +30,10 @@
    font-size: 28px;
 }
 
+.text-p {
+   font-size: 16px;
+}
+
 .flex-center {
    justify-content: center;
    align-items: center;
@@ -46,4 +50,8 @@
 
 .bg-secondary {
    background-color: #f4f3ef;
+}
+
+.bg-pink {
+   background-color: #b42e8b;
 }
