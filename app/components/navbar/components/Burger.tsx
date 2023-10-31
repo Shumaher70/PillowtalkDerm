@@ -1,9 +1,11 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-const Burger = () => {
+const Burger = ({ className }: { className?: string }) => {
    return (
       <>
-         <RxHamburgerMenu className="text-[30px]" />
+         <RxHamburgerMenu
+            className={`text-[30px] cursor-pointer ${className}`}
+         />
       </>
    );
 };
