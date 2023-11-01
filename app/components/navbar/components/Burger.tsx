@@ -1,17 +1,29 @@
-import { Dispatch, SetStateAction } from 'react';
+'use client';
+
+import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import SideBarInfo from '../sideBarInfo/SideBarInfo';
 
 interface BurgerProps {
    className?: string;
-   setTriggerSideBar: Dispatch<SetStateAction<boolean>>;
 }
 
-const Burger = ({ className, setTriggerSideBar }: BurgerProps) => {
+const Burger = ({ className }: BurgerProps) => {
+   const [triggerSideBar, setTriggerSideBar] = useState(false);
+   const triggerSideBarHandler = () =>
+      setTriggerSideBar((previous) => !previous);
+
    return (
-      <div onClick={() => setTriggerSideBar(true)}>
-         <RxHamburgerMenu
-            className={`text-[30px] cursor-pointer ${className}`}
+      <div>
+         <SideBarInfo
+            triggerSideBarHandler={triggerSideBarHandler}
+            triggerSideBar={triggerSideBar}
          />
+         <div onClick={triggerSideBarHandler}>
+            <RxHamburgerMenu
+               className={`text-[30px] cursor-pointer ${className}`}
+            />
+         </div>
       </div>
    );
 };
