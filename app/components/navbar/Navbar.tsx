@@ -1,13 +1,20 @@
-import { AiOutlineUser } from 'react-icons/ai';
+'use client';
+import { useState } from 'react';
 
-import logo from '../../../public/logo.svg';
-import Image from 'next/image';
 import Burger from './components/Burger';
 import Search from './components/Search';
 import Cart from './components/Cart';
 import Info from './components/Info';
+import Login from './components/Login';
+import Logo from './components/Logo';
+import SideBarInfo from './sideBarInfo/SideBarInfo';
 
 const Navbar = () => {
+   const [triggerSideBar, setTriggerSideBar] = useState(false);
+   const triggerSideBarHandler = () => {
+      setTriggerSideBar(false);
+   };
+
    return (
       <header
          className="
@@ -23,28 +30,31 @@ const Navbar = () => {
          lg:rounded-b-[30px] 
          bg-accent
          fixed 
-         top-0"
+         top-0
+         "
       >
          <nav className="flex flex-between w-full">
+            <SideBarInfo
+               triggerSideBar={triggerSideBar}
+               triggerSideBarHandler={triggerSideBarHandler}
+            />
+
             <div className="flex justify-start gap-3 w-full">
                <Info className="hidden lg:flex" />
-               <Burger className="lg:hidden" />
+               <Burger
+                  className="lg:hidden"
+                  setTriggerSideBar={setTriggerSideBar}
+               />
                <Search className="block lg:hidden" />
             </div>
 
             <div className="flex flex-center w-full">
-               <Image
-                  width={0}
-                  height={0}
-                  src={logo}
-                  alt="logo"
-                  className="lg:w-[200px] w-[135px]"
-               />
+               <Logo />
             </div>
 
             <div className="flex justify-end items-center gap-3 w-full">
                <Search className="hidden lg:block" />
-               <AiOutlineUser className="text-[30px] " />
+               <Login />
                <Cart />
             </div>
          </nav>
