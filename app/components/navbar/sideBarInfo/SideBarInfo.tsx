@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { AiOutlineClose } from 'react-icons/ai';
 
-import Button from '../../Button';
+import ButtonGroup from './components/ButtonGroup';
 
 interface SideBarInfoProps {
    triggerSideBar: boolean;
@@ -53,26 +53,11 @@ const SideBarInfo = ({
          >
             <div className="p-[16px] flex justify-between items-center">
                <div className="flex flex-wrap gap-3 z-10">
-                  <Button
-                     text="shop"
-                     size="sm"
-                     className={`${
-                        shop ? 'text-white bg-gradient' : 'text-black bg-white'
-                     }`}
-                     onClick={shopHandler}
-                  />
-                  <Button
-                     text="skin nerd academy"
-                     size="sm"
-                     className={`${
-                        blog ? 'text-white bg-gradient' : 'text-black bg-white'
-                     }`}
-                     onClick={blogHandler}
-                  />
-                  <Button
-                     text="about"
-                     size="sm"
-                     className="bg-white text-black"
+                  <ButtonGroup
+                     shop={shop}
+                     blog={blog}
+                     shopHandler={shopHandler}
+                     blogHandler={blogHandler}
                   />
                </div>
 
