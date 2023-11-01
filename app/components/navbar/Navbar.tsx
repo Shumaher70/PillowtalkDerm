@@ -1,20 +1,11 @@
-'use client';
-import { useState } from 'react';
-
 import Burger from './components/Burger';
 import Search from './components/Search';
 import Cart from './components/Cart';
 import Info from './components/Info';
 import Login from './components/Login';
 import Logo from './components/Logo';
-import SideBarInfo from './sideBarInfo/SideBarInfo';
 
 const Navbar = () => {
-   const [triggerSideBar, setTriggerSideBar] = useState(false);
-   const triggerSideBarHandler = () => {
-      setTriggerSideBar(false);
-   };
-
    return (
       <header
          className="
@@ -34,17 +25,9 @@ const Navbar = () => {
          "
       >
          <nav className="flex flex-between w-full">
-            <SideBarInfo
-               triggerSideBar={triggerSideBar}
-               triggerSideBarHandler={triggerSideBarHandler}
-            />
-
             <div className="flex justify-start gap-3 w-full">
                <Info className="hidden lg:flex" />
-               <Burger
-                  className="lg:hidden"
-                  setTriggerSideBar={setTriggerSideBar}
-               />
+               <Burger className="lg:hidden" />
                <Search className="block lg:hidden" />
             </div>
 
