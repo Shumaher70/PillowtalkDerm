@@ -1,12 +1,18 @@
+import { Dispatch, SetStateAction } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-const Burger = ({ className }: { className?: string }) => {
+interface BurgerProps {
+   className?: string;
+   setTriggerSideBar: Dispatch<SetStateAction<boolean>>;
+}
+
+const Burger = ({ className, setTriggerSideBar }: BurgerProps) => {
    return (
-      <>
+      <div onClick={() => setTriggerSideBar(true)}>
          <RxHamburgerMenu
             className={`text-[30px] cursor-pointer ${className}`}
          />
-      </>
+      </div>
    );
 };
 
