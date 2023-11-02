@@ -19,7 +19,7 @@ const ButtonGroup = ({
             text="shop"
             size="sm"
             className={`${
-               shop ? 'text-white bg-gradient' : 'text-black bg-white'
+               shop ? 'text-white bg-gradient' : '!text-black bg-white'
             }`}
             onClick={shopHandler}
          />
@@ -27,11 +27,11 @@ const ButtonGroup = ({
             text="skin nerd academy"
             size="sm"
             className={`${
-               blog ? 'text-white bg-gradient' : 'text-black bg-white'
+               blog ? 'text-white bg-gradient' : '!text-black bg-white'
             }`}
             onClick={blogHandler}
          />
-         <Button text="about" size="sm" className="bg-white text-black" />
+         <Button text="about" size="sm" className="bg-white !text-black" />
       </>
    );
 };
