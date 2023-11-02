@@ -24,9 +24,8 @@ const Info = ({ className }: { className?: string }) => {
    return (
       <div className={`flex gap-3 ${className}`}>
          {infoControl.map(({ title, src }, index) => (
-            <>
+            <div key={index}>
                <Link
-                  key={index}
                   href={src}
                   className="
                      capitalize 
@@ -41,7 +40,7 @@ const Info = ({ className }: { className?: string }) => {
                >
                   {title}
                </Link>
-            </>
+            </div>
          ))}
       </div>
    );

@@ -10,6 +10,7 @@ interface BurgerProps {
 
 const Burger = ({ className }: BurgerProps) => {
    const [triggerSideBar, setTriggerSideBar] = useState(false);
+
    const triggerSideBarHandler = () =>
       setTriggerSideBar((previous) => !previous);
 
