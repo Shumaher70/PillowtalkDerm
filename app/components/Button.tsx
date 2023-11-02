@@ -25,6 +25,8 @@ const Button = ({
             text-[14px]
             lg:text-[16px]
             rounded-full
+            w-max
+            h-max
             text-white
             ${bg ? 'bg-gradient' : ''}
             ${uppercase ? 'uppercase' : 'capitalize'}
