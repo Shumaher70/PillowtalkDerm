@@ -52,6 +52,10 @@
    background-color: #f4f3ef;
 }
 
+.bg-purple {
+   background-color: #6a1ba6;
+}
+
 .bg-gradient {
    background: linear-gradient(
       99.66deg,
