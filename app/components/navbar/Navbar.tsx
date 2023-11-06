@@ -1,5 +1,5 @@
-import Burger from './components/Burger';
-import Search from './components/Search';
+import Burger from './components/burger/Burger';
+import Search from './components/search/Search';
 import Cart from './components/Cart';
 import Info from './components/Info';
 import Login from './components/Login';
