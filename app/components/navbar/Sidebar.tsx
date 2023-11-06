@@ -1,7 +1,7 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 
-interface SideBarInfoProps {
-   triggerSideBar: boolean;
+interface SidebarProps {
+   triggerSidebar: boolean;
    children: React.ReactNode;
 }
 
@@ -10,11 +10,11 @@ const sideBar = {
    closed: { x: '0' },
 };
 
-const SideBarInfo = ({ triggerSideBar, children }: SideBarInfoProps) => {
+const Sidebar = ({ triggerSidebar, children }: SidebarProps) => {
    return (
       <LazyMotion features={domAnimation}>
          <m.div
-            animate={triggerSideBar ? 'open' : 'closed'}
+            animate={triggerSidebar ? 'open' : 'closed'}
             transition={{ duration: 0.5 }}
             variants={sideBar}
             className="
@@ -37,4 +37,4 @@ const SideBarInfo = ({ triggerSideBar, children }: SideBarInfoProps) => {
    );
 };
 
-export default SideBarInfo;
+export default Sidebar;
