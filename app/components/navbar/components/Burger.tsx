@@ -1,11 +1,11 @@
 'use client';
-
 import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import SideBarInfo from '../sideBarInfo/SideBarInfo';
-import ButtonGroup from '../sideBarInfo/components/ButtonGroup';
 import { AiOutlineClose } from 'react-icons/ai';
-import Card from '../sideBarInfo/components/card/Card';
+
+import SideBarInfo from '../Sidebar';
+import ButtonGroup from '../sideBarInfo/components/ButtonGroup';
+import Card from '../../card/Card';
 import Button from '../../Button';
 
 interface BurgerProps {
