@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-
 import './globals.css';
 
 import Navbar from './components/navbar/Navbar';
@@ -53,11 +51,6 @@ export const schnyderMlightFont = localFont({
    weight: '100',
    variable: '--font-schnyderMlightFont',
 });
-
-export const metadata: Metadata = {
-   title: 'PillowTalkDerm',
-   description: 'PillowTalkDerm shop',
-};
 
 export default function RootLayout({
    children,
