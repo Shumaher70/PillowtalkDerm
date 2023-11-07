@@ -44,19 +44,18 @@ const Search = ({ className, data }: SearchProps) => {
             </div>
 
             <div className="grid grid-cols-2 px-[16px] overflow-auto">
-               {Array.from({ length: 5 }).map((card) => (
-                  <>
-                     <Card
-                        href=""
-                        image="https://pillowtalkderm.com/cdn/shop/files/FlashMask.png?v=1689700581&width=352"
-                        title="Major Fade Flash Mask"
-                        stars={[]}
-                        rating={100}
-                        btn
-                        price={100}
-                        win
-                     />
-                  </>
+               {Array.from({ length: 5 }).map((card, index) => (
+                  <Card
+                     key={index}
+                     href=""
+                     image="https://pillowtalkderm.com/cdn/shop/files/FlashMask.png?v=1689700581&width=352"
+                     title="Major Fade Flash Mask"
+                     stars={[]}
+                     rating={100}
+                     btn
+                     price={100}
+                     win
+                  />
                ))}
             </div>
          </Sidebar>
