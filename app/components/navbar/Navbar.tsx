@@ -1,6 +1,6 @@
 import Burger from './components/burger/Burger';
 import Search from './components/search/Search';
-import Cart from './components/Cart';
+import Cart from './components/cart/Cart';
 import Info from './components/Info';
 import Login from './components/Login';
 import Logo from './components/Logo';
@@ -38,7 +38,7 @@ const Navbar = () => {
             <div className="flex justify-end items-center gap-3 w-full">
                <Search className="hidden lg:block" />
                <Login />
-               <Cart />
+               <Cart data={['1']} />
             </div>
          </nav>
       </header>
