@@ -37,8 +37,8 @@ const Card = ({
 
             {stars && (
                <div className="flex flex-center gap-1">
-                  {Array.from({ length: 5 }).map(() => (
-                     <>{<Stars />}</>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                     <Stars key={index} />
                   ))}
                </div>
             )}
@@ -55,7 +55,7 @@ const Card = ({
 
             {extra && (
                <div className="text-center pt-[8px]">
-                  <ReadMe extra={extra} />
+                  <ReadMe />
                </div>
             )}
 
