@@ -17,7 +17,7 @@ const TopSearches = ({ className, getTopSearch }: TopSearchesProps) => {
    return (
       <div className={`${className}`}>
          <h4
-            className={`${schnyderMlightFont.className} text-[28px] !font-[300]`}
+            className={`${schnyderMlightFont.className} text-title !font-[300]`}
          >
             Top Searches
          </h4>
