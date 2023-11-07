@@ -24,10 +24,10 @@ const Info = ({ className }: { className?: string }) => {
    return (
       <div className={`flex gap-3 ${className}`}>
          {infoControl.map(({ title, src }, index) => (
-            <div key={index}>
-               <Link
-                  href={src}
-                  className="
+            <Link
+               key={index}
+               href={src}
+               className="
                      capitalize 
                      text-p 
                      cursor-pointer 
@@ -37,10 +37,9 @@ const Info = ({ className }: { className?: string }) => {
                      rounded-[20px]
                      hover:bg-white
                      "
-               >
-                  {title}
-               </Link>
-            </div>
+            >
+               {title}
+            </Link>
          ))}
       </div>
    );
