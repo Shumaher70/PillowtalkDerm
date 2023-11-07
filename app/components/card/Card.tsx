@@ -13,9 +13,10 @@ interface CardProps {
    title: string;
    image: string;
    stars?: string[];
-   rating?: string;
+   rating?: number;
    btn?: boolean;
    win?: boolean;
+   price?: number;
 }
 
 const Card = ({
@@ -27,6 +28,7 @@ const Card = ({
    extra,
    title,
    image,
+   price = 0,
 }: CardProps) => {
    return (
       <Link href={href} className="relative bg-white rounded-[8px] m-2">
@@ -43,7 +45,7 @@ const Card = ({
 
             {rating && (
                <div className="flex flex-center">
-                  <Rating />
+                  <Rating rating={rating} />
                </div>
             )}
 
@@ -60,7 +62,7 @@ const Card = ({
             {btn && (
                <div className="flex w-full flex-center pt-[8px]">
                   <Button
-                     text="add-$58"
+                     text={`add - $${price}`}
                      size="sm"
                      uppercase
                      className="bg-purple !w-full"
