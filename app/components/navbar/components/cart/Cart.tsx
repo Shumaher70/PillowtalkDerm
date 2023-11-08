@@ -6,9 +6,12 @@ import { AiOutlineClose } from 'react-icons/ai';
 import Sidebar from '../../Sidebar';
 import ProgressBar from './components/ProgressBar';
 import ProductInCart from './components/productInCart/ProductInCart';
+import Button from '@/app/components/Button';
+import CheckOut from './components/checkOut/CheckOut';
+import CarouselCart from './components/carouselCart/CarouselCart';
 
 interface CartProps {
-   data?: string[];
+   data: string[];
 }
 
 const Cart = ({ data }: CartProps) => {
@@ -16,42 +19,6 @@ const Cart = ({ data }: CartProps) => {
 
    return (
       <>
-         <div>
-            <Sidebar
-               className="bg-secondary"
-               triggerSidebar={triggerSidebar}
-               left
-            >
-               <div className="p-[16px] w-full flex flex-between">
-                  <div className="flex flex-center gap-1">
-                     <div className="w-[25px] h-[25px] rounded-full flex flex-center bg-gradient ">
-                        <p className="text-[12px] text-white">0</p>
-                     </div>
-                     <p className="text-black text-[12px]">Your Cart</p>
-                  </div>
-
-                  <AiOutlineClose
-                     className="text-black text-[15px] cursor-pointer"
-                     onClick={() => setTriggerSidebar(false)}
-                  />
-               </div>
-
-               <div className="p-[16px]">
-                  <ProgressBar totalPrice={32} freeShipping={135} />
-               </div>
-
-               <div className="grid grid-cols-1 p-[16px] overflow-auto">
-                  {data ? (
-                     data.map((card, index) => <ProductInCart key={index} />)
-                  ) : (
-                     <p className="text-black text-p text-center">
-                        Your cart is empty (for now).
-                     </p>
-                  )}
-               </div>
-            </Sidebar>
-         </div>
-
          <div
             className="
                w-[30px] 
@@ -62,9 +29,82 @@ const Cart = ({ data }: CartProps) => {
                bg-gradient 
                text-white 
                text-p 
-               cursor-pointer"
+               cursor-pointer
+               relative
+               "
             onClick={() => setTriggerSidebar(true)}
-         ></div>
+         />
+
+         <div>
+            <Sidebar
+               className="bg-secondary flex-col justify-between h-full"
+               triggerSidebar={triggerSidebar}
+               left
+            >
+               <div className="overflow-auto h-full flex flex-col justify-between">
+                  <div>
+                     <div className="p-[16px] w-full flex flex-between">
+                        <div className="flex flex-center gap-1">
+                           <div className="w-[25px] h-[25px] rounded-full flex flex-center bg-gradient ">
+                              <p className="text-[12px] text-white">0</p>
+                           </div>
+                           <p className="text-black text-[12px]">Your Cart</p>
+                        </div>
+
+                        <AiOutlineClose
+                           className="text-black text-[15px] cursor-pointer"
+                           onClick={() => setTriggerSidebar(false)}
+                        />
+                     </div>
+
+                     <div className="p-[16px] pt-0">
+                        <ProgressBar totalPrice={32} freeShipping={135} />
+                     </div>
+
+                     <div className="flex flex-col justify-between">
+                        <div className="grid grid-cols-1 gap-5 p-[16px]">
+                           {data.length > 0 ? (
+                              data.map((card, index) => (
+                                 <ProductInCart
+                                    key={index}
+                                    image="https://pillowtalkderm.com/cdn/shop/files/FlashMask.png?v=1689700581&width=352"
+                                    title="Major Fade Active Seal Moisturizer"
+                                    price={127}
+                                    totalPrice={127}
+                                    countProduct
+                                    remove
+                                 />
+                              ))
+                           ) : (
+                              <p className="text-black text-p text-center">
+                                 Your cart is empty (for now).
+                              </p>
+                           )}
+                        </div>
+                     </div>
+                  </div>
+
+                  <div className="p-[16px] pt-0">
+                     <CarouselCart data={data} />
+                  </div>
+
+                  {data.length === 0 && (
+                     <Button
+                        text={'continue shopping'}
+                        size={'sm'}
+                        uppercase
+                        className="bg-purple m-[16px]"
+                     />
+                  )}
+               </div>
+
+               {data.length > 0 && (
+                  <div className="w-full">
+                     <CheckOut totalPrice="127" />
+                  </div>
+               )}
+            </Sidebar>
+         </div>
       </>
    );
 };
