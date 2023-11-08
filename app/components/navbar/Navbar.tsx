@@ -38,7 +38,7 @@ const Navbar = () => {
             <div className="flex justify-end items-center gap-3 w-full">
                <Search className="hidden lg:block" />
                <Login />
-               <Cart data={['1']} />
+               <Cart data={['1', '1']} />
             </div>
          </nav>
       </header>
