@@ -55,9 +55,10 @@ const ProductInCart = ({
          )}
          {button && (
             <Button
-               text="sold out"
+               soldOut
                bg
                uppercase
+               text={`add - $${price}`}
                size={'sm'}
                className="text-[9px] absolute right-[20px] bottom-[20px]"
             />
