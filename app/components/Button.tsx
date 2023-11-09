@@ -5,6 +5,7 @@ interface ButtonProps {
    size: 'sm' | 'lg';
    onClick?: () => void;
    className?: string;
+   soldOut?: boolean;
 }
 
 const Button = ({
@@ -14,10 +15,12 @@ const Button = ({
    size = 'sm',
    className,
    onClick,
+   soldOut,
 }: ButtonProps) => {
    return (
       <button
          onClick={onClick}
+         disabled={soldOut ? true : false}
          className={`
             ${size === 'lg' && 'lg:px-[24px] lg:py-[12px] px-[24px] py-[10px]'}
             ${size === 'sm' && 'px-[16px] py-[8px]'}
@@ -30,10 +33,11 @@ const Button = ({
             text-white
             ${bg ? 'bg-gradient' : ''}
             ${uppercase ? 'uppercase' : 'capitalize'}
+            ${soldOut && 'cursor-not-allowed'}
             ${className}
          `}
       >
-         {text}
+         {!soldOut ? text : 'sold out'}
       </button>
    );
 };
