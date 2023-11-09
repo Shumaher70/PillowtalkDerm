@@ -41,7 +41,7 @@ const Cart = ({ data }: CartProps) => {
                triggerSidebar={triggerSidebar}
                left
             >
-               <div className="overflow-auto h-full flex flex-col justify-between">
+               <div className=" overflow-y-auto overflow-x-hidden h-full flex flex-col justify-between">
                   <div>
                      <div className="p-[16px] w-full flex flex-between">
                         <div className="flex flex-center gap-1">
@@ -84,7 +84,8 @@ const Cart = ({ data }: CartProps) => {
                      </div>
                   </div>
 
-                  <div className="p-[16px] pt-0">
+                  <div className="p-[16px] pt-0 relative">
+                     <p className="text-p font-semibold">PAIR IT WITH</p>
                      <CarouselCart data={data} />
                   </div>
 
@@ -93,7 +94,7 @@ const Cart = ({ data }: CartProps) => {
                         text={'continue shopping'}
                         size={'sm'}
                         uppercase
-                        className="bg-purple m-[16px]"
+                        className="bg-purple p-[16px]"
                      />
                   )}
                </div>
