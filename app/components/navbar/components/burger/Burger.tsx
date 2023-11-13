@@ -7,12 +7,19 @@ import Sidebar from '../../Sidebar';
 import ButtonGroup from './components/ButtonGroup';
 import Card from '../../../card/Card';
 import Button from '../../../Button';
+import { Review } from '@prisma/client';
 
 interface BurgerProps {
    className?: string;
+   products: {
+      id: string;
+      images: string[];
+      title: string;
+      price: number;
+   }[];
 }
 
-const Burger = ({ className }: BurgerProps) => {
+const Burger = ({ className, products }: BurgerProps) => {
    const [triggerSideBar, setTriggerSideBar] = useState(false);
    const [shop, setShop] = useState(true);
    const [blog, setBlog] = useState(false);
@@ -69,12 +76,12 @@ const Burger = ({ className }: BurgerProps) => {
             >
                {shop && (
                   <>
-                     {Array.from({ length: 5 }).map((_, index) => (
+                     {products.map((item) => (
                         <Card
                            href=""
-                           title="Major Fade Hyper Serum"
-                           image="https://pillowtalkderm.com/cdn/shop/files/Serum_cb2ae4fe-88df-40f1-8175-cf1ff50fe747.png?v=1689700596&width=352"
-                           key={index}
+                           title={item.title}
+                           image={item.images[0]}
+                           key={item.id}
                         />
                      ))}
                      <div className="w-full h-full flex flex-center">
