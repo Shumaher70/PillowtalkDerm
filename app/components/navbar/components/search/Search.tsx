@@ -7,13 +7,21 @@ import Sidebar from '../../Sidebar';
 import Input from './components/Input';
 import TopSearches from './components/TopSearches';
 import Card from '@/app/components/card/Card';
-
 interface SearchProps {
-   className: string;
-   data?: string[];
+   className?: string;
+   products: {
+      id: string;
+      images: string[];
+      title: string;
+      price: number;
+   }[];
+   reviews: {
+      id: string;
+      rating: number;
+   }[];
 }
 
-const Search = ({ className, data }: SearchProps) => {
+const Search = ({ className, products }: SearchProps) => {
    const [triggerSidebar, setTriggerSidebar] = useState(false);
    const [input, setInput] = useState('');
    const [postInput, setPostInput] = useState('');
@@ -44,16 +52,16 @@ const Search = ({ className, data }: SearchProps) => {
             </div>
 
             <div className="grid grid-cols-2 px-[16px] overflow-auto">
-               {Array.from({ length: 5 }).map((card, index) => (
+               {products.map((item) => (
                   <Card
-                     key={index}
+                     key={item.id}
                      href=""
-                     image="https://pillowtalkderm.com/cdn/shop/files/FlashMask.png?v=1689700581&width=352"
-                     title="Major Fade Flash Mask"
+                     image={item.images[0]}
+                     title={item.title}
                      stars={[]}
                      rating={100}
                      btn
-                     price={100}
+                     price={item.price}
                      win
                   />
                ))}
