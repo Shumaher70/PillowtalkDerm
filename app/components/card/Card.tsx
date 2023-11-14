@@ -6,51 +6,49 @@ import Stars from './components/Stars';
 import Rating from './components/Rating';
 import Button from '@/app/components/Button';
 import AwardWining from './components/AwardWinning';
+import { Review } from '@prisma/client';
+import calcRatingStars from '@/utils/calcRatingStars';
 
 interface CardProps {
-   href: string;
-   extra?: boolean;
-   title: string;
-   image: string;
-   stars?: string[];
-   rating?: number;
+   product: {
+      id: string;
+      images: string[];
+      title: string;
+      price: number;
+      reviews: Review[];
+      soldOut?: boolean;
+   };
+   extra?: string;
    btn?: boolean;
    win?: boolean;
-   price?: number;
+   stars?: boolean;
+   rating?: boolean;
 }
 
-const Card = ({
-   href,
-   stars,
-   rating,
-   btn,
-   win,
-   extra,
-   title,
-   image,
-   price = 0,
-}: CardProps) => {
+const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
+   if (!product) return;
+
+   const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
+
    return (
-      <Link href={href} className="relative bg-white rounded-[8px] m-2">
+      <Link href={''} className="relative bg-white rounded-[8px] m-2">
          <div className="m-[10px] rounded-[5px]">
-            <ImageCard image={image} title={title} />
+            <ImageCard image={product.images[0]} title={product.title} />
 
             {stars && (
                <div className="flex flex-center gap-1">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                     <Stars key={index} stars={stars} />
-                  ))}
+                  <Stars stars={ratingStars} />
                </div>
             )}
 
             {rating && (
                <div className="flex flex-center">
-                  <Rating rating={rating} />
+                  <Rating rating={product.reviews.length} />
                </div>
             )}
 
             <div className="pt-[8px] text-center">
-               <TitleCard title={title} />
+               <TitleCard title={product.title} />
             </div>
 
             {extra && (
@@ -62,10 +60,11 @@ const Card = ({
             {btn && (
                <div className="flex w-full flex-center pt-[8px]">
                   <Button
-                     text={`add - $${price}`}
+                     text={`add - $${product.price}`}
                      size="sm"
                      uppercase
                      className="bg-purple !w-full"
+                     soldOut={product.soldOut}
                   />
                </div>
             )}
