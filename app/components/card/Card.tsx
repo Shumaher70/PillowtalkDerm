@@ -53,7 +53,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
 
             {extra && (
                <div className="text-center pt-[8px]">
-                  <ReadMe />
+                  <ReadMe text={extra} src="" />
                </div>
             )}
 
