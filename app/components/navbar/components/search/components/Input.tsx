@@ -20,7 +20,7 @@ const Input = ({ getInput, postInput }: InputProps) => {
    useEffect(() => {
       if (getInput) {
          const timer = setTimeout(() => {
-            getInput(input);
+            getInput(input.toLowerCase().trim());
          }, 300);
          return () => clearTimeout(timer);
       }
