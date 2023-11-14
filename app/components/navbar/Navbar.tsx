@@ -13,13 +13,8 @@ const Navbar = async () => {
          images: true,
          title: true,
          price: true,
-      },
-   });
-
-   const reviews = await prisma.review.findMany({
-      select: {
-         id: true,
-         rating: true,
+         reviews: true,
+         soldOut: true,
       },
    });
 
@@ -45,11 +40,7 @@ const Navbar = async () => {
             <div className="flex justify-start gap-3 w-full">
                <Info className="hidden lg:flex" />
                <Burger className="lg:hidden" products={products} />
-               <Search
-                  className="block lg:hidden"
-                  products={products}
-                  reviews={reviews}
-               />
+               <Search className="block lg:hidden" products={products} />
             </div>
 
             <div className="flex flex-center w-full">
@@ -57,11 +48,7 @@ const Navbar = async () => {
             </div>
 
             <div className="flex justify-end items-center gap-3 w-full">
-               <Search
-                  className="hidden lg:block"
-                  products={products}
-                  reviews={reviews}
-               />
+               <Search className="hidden lg:block" products={products} />
                <Login />
                <Cart data={['1', '1']} />
             </div>
