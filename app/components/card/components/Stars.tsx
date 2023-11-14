@@ -23,7 +23,11 @@ const Stars = ({ stars }: StarsProps) => {
    return (
       <div className="flex gap-1">
          {starts.map((star, index) => {
-            return star;
+            return (
+               <div key={index} className="div">
+                  {star}
+               </div>
+            );
          })}
       </div>
    );
