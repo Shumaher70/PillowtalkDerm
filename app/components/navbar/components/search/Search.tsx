@@ -7,6 +7,7 @@ import Sidebar from '../../Sidebar';
 import Input from './components/Input';
 import TopSearches from './components/TopSearches';
 import Card from '@/app/components/card/Card';
+import { Review } from '@prisma/client';
 interface SearchProps {
    className?: string;
    products: {
@@ -14,10 +15,7 @@ interface SearchProps {
       images: string[];
       title: string;
       price: number;
-   }[];
-   reviews: {
-      id: string;
-      rating: number;
+      reviews: Review[];
    }[];
 }
 
@@ -52,19 +50,18 @@ const Search = ({ className, products }: SearchProps) => {
             </div>
 
             <div className="grid grid-cols-2 px-[16px] overflow-auto">
-               {products.map((item) => (
-                  <Card
-                     key={item.id}
-                     href=""
-                     image={item.images[0]}
-                     title={item.title}
-                     stars={[]}
-                     rating={100}
-                     btn
-                     price={item.price}
-                     win
-                  />
-               ))}
+               {products.map((product) => {
+                  return (
+                     <Card
+                        key={product.id}
+                        btn
+                        win
+                        stars
+                        rating
+                        product={product}
+                     />
+                  );
+               })}
             </div>
          </Sidebar>
 
