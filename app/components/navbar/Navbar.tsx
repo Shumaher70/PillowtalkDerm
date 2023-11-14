@@ -18,6 +18,14 @@ const Navbar = async () => {
       },
    });
 
+   const blogs = await prisma.blog.findMany({
+      select: {
+         id: true,
+         images: true,
+         title: true,
+      },
+   });
+
    return (
       <header
          className="
@@ -39,8 +47,16 @@ const Navbar = async () => {
          <nav className="flex flex-between w-full">
             <div className="flex justify-start gap-3 w-full">
                <Info className="hidden lg:flex" />
-               <Burger className="lg:hidden" products={products} />
-               <Search className="block lg:hidden" products={products} />
+               <Burger
+                  className="lg:hidden"
+                  products={products}
+                  blogs={blogs}
+               />
+               <Search
+                  className="block lg:hidden"
+                  products={products}
+                  blogs={blogs}
+               />
             </div>
 
             <div className="flex flex-center w-full">
@@ -48,7 +64,11 @@ const Navbar = async () => {
             </div>
 
             <div className="flex justify-end items-center gap-3 w-full">
-               <Search className="hidden lg:block" products={products} />
+               <Search
+                  className="hidden lg:block"
+                  products={products}
+                  blogs={blogs}
+               />
                <Login />
                <Cart data={['1', '1']} />
             </div>
