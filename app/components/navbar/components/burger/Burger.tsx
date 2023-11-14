@@ -8,6 +8,7 @@ import ButtonGroup from './components/ButtonGroup';
 import Card from '../../../card/Card';
 import Button from '../../../Button';
 import { Review } from '@prisma/client';
+import BlogCard from '@/app/components/blogCard/BlogCard';
 
 interface BurgerProps {
    className?: string;
@@ -16,10 +17,17 @@ interface BurgerProps {
       images: string[];
       title: string;
       price: number;
+      reviews: Review[];
+   }[];
+
+   blogs: {
+      id: string;
+      images: string[];
+      title: string;
    }[];
 }
 
-const Burger = ({ className, products }: BurgerProps) => {
+const Burger = ({ className, products, blogs }: BurgerProps) => {
    const [triggerSideBar, setTriggerSideBar] = useState(false);
    const [shop, setShop] = useState(true);
    const [blog, setBlog] = useState(false);
@@ -76,13 +84,8 @@ const Burger = ({ className, products }: BurgerProps) => {
             >
                {shop && (
                   <>
-                     {products.map((item) => (
-                        <Card
-                           href=""
-                           title={item.title}
-                           image={item.images[0]}
-                           key={item.id}
-                        />
+                     {products.slice(0, 5).map((product) => (
+                        <Card product={product} key={product.id} />
                      ))}
                      <div className="w-full h-full flex flex-center">
                         <Button size="sm" uppercase bg text="shop all" />
@@ -92,15 +95,20 @@ const Burger = ({ className, products }: BurgerProps) => {
 
                {blog && (
                   <>
-                     {Array.from({ length: 4 }).map((_, index) => (
-                        <Card
-                           href=""
-                           title="Why is Your Face Puffy? 10 Reasons Why, According to Our Founder"
-                           image="https://pillowtalkderm.com/cdn/shop/articles/Screenshot_2023-09-18_at_1.45.07_PM.png?v=1695059121&width=832"
-                           extra
-                           key={index}
-                        />
+                     {blogs.map((blog) => (
+                        <BlogCard blog={blog} extra={'Read me'} key={blog.id} />
                      ))}
+
+                     <div className="min-h-[100px] w-full relative">
+                        <Button
+                           size="sm"
+                           uppercase
+                           bg
+                           text="view all"
+                           className="absolute bottom-2/4 right-0 translate-x-2/4 translate-y-2/4"
+                        />
+                     </div>
+                     <div className="min-h-[100px] w-full" />
                   </>
                )}
             </div>
