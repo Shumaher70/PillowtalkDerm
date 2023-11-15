@@ -1,4 +1,9 @@
+'use client';
+
 import Link from 'next/link';
+
+import { Review } from '@prisma/client';
+
 import ImageCard from './components/ImageCard';
 import TitleCard from './components/TitleCard';
 import ReadMe from './components/ReadMe';
@@ -6,7 +11,6 @@ import Stars from './components/Stars';
 import Rating from './components/Rating';
 import Button from '@/app/components/Button';
 import AwardWining from './components/AwardWinning';
-import { Review } from '@prisma/client';
 import calcRatingStars from '@/utils/calcRatingStars';
 
 interface CardProps {
@@ -26,9 +30,28 @@ interface CardProps {
 }
 
 const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
-   if (!product) return;
-
    const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
+
+   const postProduct = async () => {
+      const requestOptions = {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({
+            productId: product.id,
+            title: product.title,
+            price: product.price,
+            totalPrice: product.price,
+            quantity: 1,
+         }),
+      };
+      await fetch('http://localhost:3000/api/cart', requestOptions);
+   };
+
+   const clickHandler = (event: React.MouseEvent) => {
+      postProduct();
+   };
 
    return (
       <Link href={''} className="relative bg-white rounded-[8px] m-2">
@@ -65,6 +88,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
                      uppercase
                      className="bg-purple !w-full"
                      soldOut={product.soldOut}
+                     onClick={clickHandler}
                   />
                </div>
             )}
