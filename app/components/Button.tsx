@@ -3,9 +3,10 @@ interface ButtonProps {
    uppercase?: boolean;
    bg?: boolean;
    size: 'sm' | 'lg';
-   onClick?: () => void;
+   onClick?: (e: React.MouseEvent) => void;
    className?: string;
    soldOut?: boolean;
+   children?: React.ReactNode;
 }
 
 const Button = ({
