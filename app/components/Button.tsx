@@ -1,5 +1,5 @@
 interface ButtonProps {
-   text: string;
+   text: string | JSX.Element;
    uppercase?: boolean;
    bg?: boolean;
    size: 'sm' | 'lg';
@@ -31,6 +31,8 @@ const Button = ({
             rounded-full
             w-max
             h-max
+            flex
+            flex-center
             text-white
             ${bg ? 'bg-gradient' : ''}
             ${uppercase ? 'uppercase' : 'capitalize'}
