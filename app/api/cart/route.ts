@@ -18,24 +18,27 @@ export const POST = async (request: NextRequest) => {
 
       if (productId.length > 0) {
          const quantity = (productId[0].quantity += 1);
-         const carts = await prisma.cart.update({
+         const totalPrice = (productId[0].totalPrice +=
+            productId[0].totalPrice);
+         const cart = await prisma.cart.update({
             where: {
                id: productId[0].id,
             },
             data: {
                quantity: quantity,
+               totalPrice: totalPrice,
             },
          });
 
-         return new NextResponse(JSON.stringify(carts), {
+         return new NextResponse(JSON.stringify(cart), {
             status: 200,
          });
       } else {
-         const carts = await prisma.cart.create({
+         const cart = await prisma.cart.create({
             data: body,
          });
 
-         return new NextResponse(JSON.stringify(carts), {
+         return new NextResponse(JSON.stringify(cart), {
             status: 200,
          });
       }
