@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from './components/navbar/Navbar';
 
 import localFont from 'next/font/local';
+import QueryProvider from './QueryProvider';
 
 export const schnyderMlightFont = localFont({
    src: '../public/fonts/SchnyderMLight.woff2',
@@ -18,8 +19,10 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body>
-            <Navbar />
-            {children}
+            <QueryProvider>
+               <Navbar />
+               {children}
+            </QueryProvider>
          </body>
       </html>
    );
