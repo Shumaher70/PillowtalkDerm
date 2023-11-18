@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 import { Review } from '@prisma/client';
 
-import { useMutation } from '@tanstack/react-query';
+import { addCart, sidebar } from '@/redux/features/cartSlice';
+import { useAppDispatch } from '@/redux/hooks';
 
 import ImageCard from './components/ImageCard';
 import TitleCard from './components/TitleCard';
@@ -14,6 +15,7 @@ import Rating from './components/Rating';
 import Button from '@/app/components/Button';
 import AwardWining from './components/AwardWinning';
 import calcRatingStars from '@/utils/calcRatingStars';
+import { useState } from 'react';
 
 interface CardProps {
    product: {
@@ -31,46 +33,30 @@ interface CardProps {
    rating?: boolean;
 }
 
-const postProduct = async (product: {
-   productId: string;
-   title: string;
-   price: number;
-   totalPrice: number;
-   quantity: number;
-}) => {
-   const requestOptions = {
-      method: 'POST',
-      headers: {
-         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-         ...product,
-      }),
-   };
-   const response = await fetch(
-      'http://localhost:3000/api/cart',
-      requestOptions
-   );
-
-   if (!response.ok) {
-      throw new Error('Failed to post Product');
-   }
-   return await response.json();
-};
-
 const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
-   const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
+   const dispatch = useAppDispatch();
 
-   const mutation = useMutation({ mutationFn: postProduct });
+   const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
+   const [load, setLoad] = useState(false);
 
    const clickHandler = (event: React.MouseEvent) => {
-      mutation.mutate({
-         productId: product.id,
-         title: product.title,
-         price: product.price,
-         totalPrice: product.price,
-         quantity: 1,
-      });
+      dispatch(
+         addCart({
+            id: product.id,
+            title: product.title,
+            image: product.images[0],
+            price: product.price,
+            reviews: product.reviews,
+            totalPrice: product.price,
+            soldOut: product.soldOut!,
+            quantity: 1,
+         })
+      );
+      setLoad(true);
+      setTimeout(() => {
+         setLoad(false);
+      }, 500);
+      dispatch(sidebar(true));
    };
 
    const spin = (
@@ -87,7 +73,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
                cy="12"
                r="10"
                stroke="currentColor"
-               stroke-width="4"
+               strokeWidth="4"
             ></circle>
             <path
                className="opacity-75"
@@ -128,9 +114,8 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
             {btn && (
                <div className="flex w-full flex-center pt-[8px]">
                   <Button
-                     text={
-                        mutation.isPending ? spin : `add - $${product.price}`
-                     }
+                     text={load ? spin : `add - $${product.price}`}
+                     disabled={load ? true : false}
                      size="sm"
                      uppercase
                      className="bg-purple !w-full"
