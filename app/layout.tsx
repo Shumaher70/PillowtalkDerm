@@ -4,6 +4,7 @@ import Navbar from './components/navbar/Navbar';
 
 import localFont from 'next/font/local';
 import QueryProvider from './QueryProvider';
+import { Providers } from '@/redux/provider';
 
 export const schnyderMlightFont = localFont({
    src: '../public/fonts/SchnyderMLight.woff2',
@@ -20,8 +21,10 @@ export default function RootLayout({
       <html lang="en">
          <body>
             <QueryProvider>
-               <Navbar />
-               {children}
+               <Providers>
+                  <Navbar />
+                  {children}
+               </Providers>
             </QueryProvider>
          </body>
       </html>
