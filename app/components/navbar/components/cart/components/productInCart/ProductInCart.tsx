@@ -6,17 +6,22 @@ import ImageCard from '@/app/components/card/components/ImageCard';
 import CountProduct from './components/CountProduct';
 import Button from '@/app/components/Button';
 import { AiOutlineClose } from 'react-icons/ai';
+import { Review } from '@prisma/client';
+import calcRatingStars from '@/utils/calcRatingStars';
 
 interface ProductInCartProps {
+   stars?: boolean;
    image: string;
-   stars?: string[];
+   reviews: Review[];
    title: string;
    readme?: string;
    price?: number;
+   buttonPrice?: number;
    totalPrice?: number;
    countProduct?: boolean;
    button?: boolean;
    remove?: boolean;
+   soldOut: boolean;
 }
 
 const ProductInCart = ({
@@ -29,18 +34,23 @@ const ProductInCart = ({
    countProduct,
    button,
    remove,
+   reviews,
+   soldOut,
+   buttonPrice,
 }: ProductInCartProps) => {
    return (
-      <div className="bg-white flex items-center rounded-[8px] p-[16px] relative">
-         <div className="flex gap-3 items-center">
+      <div className="bg-white flex gap-2 flex-between h-full rounded-[8px] p-[16px] relative">
+         <div className="flex gap-3 mr-[150px] items-center">
             <div className="min-w-[65px]">
                <ImageCard image={image} title={title} />
             </div>
 
-            <div className="flex flex-col gap-2 max-w-[150px] mr-[250px]">
-               {stars && <Stars stars={stars} />}
+            <div className="flex flex-col h-full justify-between gap-2">
+               {stars && (
+                  <Stars stars={calcRatingStars(reviews.length, reviews)} />
+               )}
                <TitleCart title={title} />
-               {readme && <ReadMe text={readme} />}
+               {readme && <ReadMe text={readme} src={''} />}
                {price && <p>${price}</p>}
             </div>
          </div>
@@ -50,17 +60,18 @@ const ProductInCart = ({
                ${totalPrice}
             </span>
          )}
+
          {countProduct && (
             <CountProduct className="absolute right-[20px] bottom-[20px]" />
          )}
          {button && (
             <Button
-               soldOut
+               soldOut={soldOut}
                bg
                uppercase
-               text={`add - $${price}`}
+               text={`add - $${buttonPrice}`}
                size={'sm'}
-               className="text-[9px] absolute right-[20px] bottom-[20px]"
+               className="text-[10px] absolute right-[20px] bottom-[20px] "
             />
          )}
 
