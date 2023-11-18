@@ -1,7 +1,7 @@
 import Button from '@/app/components/Button';
 
 interface CheckOutProps {
-   totalPrice: string;
+   totalPrice: number;
 }
 
 const CheckOut = ({ totalPrice }: CheckOutProps) => {
