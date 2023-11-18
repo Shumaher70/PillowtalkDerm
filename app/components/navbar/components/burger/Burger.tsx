@@ -9,22 +9,12 @@ import Card from '../../../card/Card';
 import Button from '../../../Button';
 import { Review } from '@prisma/client';
 import BlogCard from '@/app/components/blogCard/BlogCard';
+import { BlogType, ProductType } from '@/types';
 
 interface BurgerProps {
    className?: string;
-   products: {
-      id: string;
-      images: string[];
-      title: string;
-      price: number;
-      reviews: Review[];
-   }[];
-
-   blogs: {
-      id: string;
-      images: string[];
-      title: string;
-   }[];
+   products: ProductType[];
+   blogs: BlogType[];
 }
 
 const Burger = ({ className, products, blogs }: BurgerProps) => {

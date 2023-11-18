@@ -5,9 +5,10 @@ import Info from './components/Info';
 import Login from './components/Login';
 import Logo from './components/Logo';
 import { prisma } from '@/lib/prisma';
+import { BlogType, ProductType } from '@/types';
 
 const Navbar = async () => {
-   const products = await prisma.product.findMany({
+   const products: ProductType[] = await prisma.product.findMany({
       select: {
          id: true,
          images: true,
@@ -18,7 +19,7 @@ const Navbar = async () => {
       },
    });
 
-   const blogs = await prisma.blog.findMany({
+   const blogs: BlogType[] = await prisma.blog.findMany({
       select: {
          id: true,
          images: true,
@@ -70,7 +71,7 @@ const Navbar = async () => {
                   blogs={blogs}
                />
                <Login />
-               <Cart data={['1', '1']} />
+               <Cart />
             </div>
          </nav>
       </header>

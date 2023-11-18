@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { CiSearch } from 'react-icons/ci';
-import { Blog, Review } from '@prisma/client';
+
+import { BlogType, ProductType } from '@/types';
 
 import Sidebar from '../../Sidebar';
 import Input from './components/Input';
@@ -11,18 +12,8 @@ import Card from '@/app/components/card/Card';
 import BlogCard from '@/app/components/blogCard/BlogCard';
 interface SearchProps {
    className?: string;
-   products: {
-      id: string;
-      images: string[];
-      title: string;
-      price: number;
-      reviews: Review[];
-   }[];
-   blogs: {
-      id: string;
-      images: string[];
-      title: string;
-   }[];
+   products: ProductType[];
+   blogs: BlogType[];
 }
 
 const Search = ({ className, products, blogs }: SearchProps) => {
