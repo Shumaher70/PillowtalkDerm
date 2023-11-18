@@ -1,8 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-
 import Sidebar from '../../Sidebar';
 import ProgressBar from './components/ProgressBar';
 import ProductInCart from './components/productInCart/ProductInCart';
@@ -10,102 +7,112 @@ import Button from '@/app/components/Button';
 import CheckOut from './components/checkOut/CheckOut';
 import CarouselCart from './components/carouselCart/CarouselCart';
 
-interface CartProps {
-   data: string[];
-}
+import { useAppSelector } from '@/redux/hooks';
 
-const Cart = ({ data }: CartProps) => {
-   const [triggerSidebar, setTriggerSidebar] = useState(false);
+import CartIcon from './CartIcon';
+import CloseSidebar from './components/CloseSidebar';
+import { useQuery } from '@tanstack/react-query';
+import { CartType, ProductType } from '@/types';
+
+const getProduct = async () => {
+   const data = await fetch('http://localhost:3000/api/products');
+
+   const product = await data.json();
+   return product;
+};
+
+const Cart = () => {
+   const { data: product, isSuccess } = useQuery({
+      queryKey: ['products'],
+      queryFn: getProduct,
+   });
+
+   const products: ProductType[] = product;
+
+   const { carts, totalPrice, sidebar } = useAppSelector(
+      (state) => state.cartReducer
+   );
 
    return (
       <>
-         <div
-            className="
-               w-[30px] 
-               h-[30px] 
-               flex 
-               flex-center 
-               rounded-full 
-               bg-gradient 
-               text-white 
-               text-p 
-               cursor-pointer
-               relative
-               "
-            onClick={() => setTriggerSidebar(true)}
-         />
+         <CartIcon />
 
-         <div>
-            <Sidebar
-               className="bg-secondary flex-col justify-between h-full"
-               triggerSidebar={triggerSidebar}
-               left
-            >
-               <div className=" overflow-y-auto overflow-x-hidden h-full flex flex-col justify-between">
-                  <div>
-                     <div className="p-[16px] w-full flex flex-between">
-                        <div className="flex flex-center gap-1">
-                           <div className="w-[25px] h-[25px] rounded-full flex flex-center bg-gradient ">
-                              <p className="text-[12px] text-white">0</p>
-                           </div>
-                           <p className="text-black text-[12px]">Your Cart</p>
-                        </div>
-
-                        <AiOutlineClose
-                           className="text-black text-[15px] cursor-pointer"
-                           onClick={() => setTriggerSidebar(false)}
-                        />
-                     </div>
-
-                     <div className="p-[16px] pt-0">
-                        <ProgressBar totalPrice={32} freeShipping={135} />
-                     </div>
-
-                     <div className="flex flex-col justify-between">
-                        <div className="grid grid-cols-1 gap-5 p-[16px]">
-                           {data.length > 0 ? (
-                              data.map((card, index) => (
-                                 <ProductInCart
-                                    key={index}
-                                    image="https://pillowtalkderm.com/cdn/shop/files/FlashMask.png?v=1689700581&width=352"
-                                    title="Major Fade Active Seal Moisturizer"
-                                    price={127}
-                                    totalPrice={127}
-                                    countProduct
-                                    remove
-                                 />
-                              ))
-                           ) : (
-                              <p className="text-black text-p text-center">
-                                 Your cart is empty (for now).
+         {isSuccess && (
+            <div>
+               <Sidebar
+                  triggerSidebar={sidebar}
+                  className="bg-secondary flex-col justify-between h-full"
+                  left
+               >
+                  <div className=" overflow-y-auto overflow-x-hidden h-full flex flex-col justify-between">
+                     <div>
+                        <div className="p-[16px] w-full flex flex-between">
+                           <div className="flex flex-center gap-1">
+                              <CartIcon />
+                              <p className="text-black text-[12px]">
+                                 Your Cart
                               </p>
-                           )}
+                           </div>
+
+                           <CloseSidebar />
+                        </div>
+
+                        <div className="p-[16px] pt-0">
+                           <ProgressBar
+                              totalPrice={totalPrice}
+                              freeShipping={135}
+                           />
+                        </div>
+
+                        <div className="flex flex-col justify-between">
+                           <div className="grid grid-cols-1 gap-5 p-[16px]">
+                              {carts.length > 0 ? (
+                                 carts.map((cart: CartType) => (
+                                    <ProductInCart
+                                       key={cart.id}
+                                       image={cart.image}
+                                       title={cart.title}
+                                       price={cart.price}
+                                       reviews={cart.reviews}
+                                       totalPrice={cart.totalPrice}
+                                       soldOut={cart.soldOut}
+                                       stars
+                                       countProduct
+                                       remove
+                                    />
+                                 ))
+                              ) : (
+                                 <p className="text-black text-p text-center">
+                                    Your cart is empty (for now).
+                                 </p>
+                              )}
+                           </div>
                         </div>
                      </div>
+
+                     <div className="p-[16px] pt-0 relative">
+                        <p className="text-p font-semibold">PAIR IT WITH</p>
+                        <CarouselCart carts={carts} products={products} />
+                     </div>
+
+                     {carts.length === 0 && (
+                        <Button
+                           text={'continue shopping'}
+                           size={'sm'}
+                           uppercase
+                           className="bg-purple p-[16px] m-[16px]"
+                        />
+                     )}
                   </div>
 
-                  <div className="p-[16px] pt-0 relative">
-                     <p className="text-p font-semibold">PAIR IT WITH</p>
-                     <CarouselCart data={data} />
-                  </div>
-
-                  {data.length === 0 && (
-                     <Button
-                        text={'continue shopping'}
-                        size={'sm'}
-                        uppercase
-                        className="bg-purple p-[16px]"
-                     />
+                  {carts.length > 0 && (
+                     <div className="w-full">
+                        <CheckOut totalPrice={totalPrice} />
+                     </div>
                   )}
-               </div>
-
-               {data.length > 0 && (
-                  <div className="w-full">
-                     <CheckOut totalPrice="127" />
-                  </div>
-               )}
-            </Sidebar>
-         </div>
+               </Sidebar>
+            </div>
+         )}
       </>
    );
 };
