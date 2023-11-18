@@ -1,11 +1,17 @@
-import { Children } from 'react';
-
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 import ProductInCart from '../productInCart/ProductInCart';
 
-const CarouselCart = ({ data }: { data: string[] }) => {
+import { CartType, ProductType } from '@/types';
+
+const CarouselCart = ({
+   carts,
+   products,
+}: {
+   carts?: CartType[];
+   products?: ProductType[];
+}) => {
    const responsive = {
       desktop: {
          breakpoint: { max: 3000, min: 0 },
@@ -47,23 +53,42 @@ const CarouselCart = ({ data }: { data: string[] }) => {
          itemClass="p-2"
          className="overflow-visible"
          customDot={
-            data.length > 1 ? (
+            carts!.length > 1 || products!.length > 1 ? (
                <CustomDot onClick={() => {}} active={false} />
             ) : (
                <></>
             )
          }
       >
-         {data.map((item, index) => (
-            <ProductInCart
-               key={index}
-               image="https://pillowtalkderm.com/cdn/shop/files/FlashMask.png?v=1689700581&width=352"
-               title="Major Fade Active Seal Moisturizer"
-               stars={data}
-               readme="More details"
-               button
-            />
-         ))}
+         {carts &&
+            carts.map((cart) => (
+               <ProductInCart
+                  key={cart.id}
+                  image={cart.image}
+                  title={cart.title}
+                  reviews={cart.reviews}
+                  soldOut={cart.soldOut}
+                  stars
+                  readme="More details"
+                  button
+                  buttonPrice={cart.price}
+               />
+            ))}
+
+         {products &&
+            products.map((product) => (
+               <ProductInCart
+                  key={product.id}
+                  image={product.images[0]}
+                  title={product.title}
+                  reviews={product.reviews}
+                  soldOut={product.soldOut}
+                  stars
+                  readme="More details"
+                  button
+                  buttonPrice={product.price}
+               />
+            ))}
       </Carousel>
    );
 };
