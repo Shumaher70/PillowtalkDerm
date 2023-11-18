@@ -41,6 +41,8 @@ model Cart {
   id         String   @id @default(uuid())
   title      String
   price      Float
+  image      String
+  rating     Int
   totalPrice Float
   quantity   Int
   productId  String
