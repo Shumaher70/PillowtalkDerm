@@ -6,7 +6,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import Sidebar from '../../Sidebar';
 import ButtonGroup from './components/ButtonGroup';
 import Card from '../../../card/Card';
-import Button from '../../../Button';
+import Button from '../../../button/Button';
 import { Review } from '@prisma/client';
 import BlogCard from '@/app/components/blogCard/BlogCard';
 import { BlogType, ProductType } from '@/types';
