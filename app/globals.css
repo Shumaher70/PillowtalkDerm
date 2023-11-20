@@ -52,18 +52,6 @@
    background-color: #f4f3ef;
 }
 
-.bg-purple {
-   background-color: #6a1ba6;
-}
-
-.bg-gradient {
-   background: linear-gradient(
-      99.66deg,
-      rgba(180, 46, 139, 1) 30.98%,
-      rgba(249, 38, 114, 0.96) 96.37%
-   );
-}
-
 .border-1 {
    border-width: 1px;
 }
