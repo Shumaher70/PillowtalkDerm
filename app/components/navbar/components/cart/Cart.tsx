@@ -3,7 +3,7 @@
 import Sidebar from '../../Sidebar';
 import ProgressBar from './components/ProgressBar';
 import ProductInCart from './components/productInCart/ProductInCart';
-import Button from '@/app/components/Button';
+import Button from '@/app/components/button/Button';
 import CheckOut from './components/checkOut/CheckOut';
 import CarouselCart from './components/carouselCart/CarouselCart';
 
@@ -70,12 +70,15 @@ const Cart = () => {
                                  carts.map((cart: CartType) => (
                                     <ProductInCart
                                        key={cart.id}
+                                       id={cart.id}
                                        image={cart.image}
                                        title={cart.title}
                                        price={cart.price}
                                        reviews={cart.reviews}
                                        totalPrice={cart.totalPrice}
                                        soldOut={cart.soldOut}
+                                       pair={cart.pair}
+                                       sold={cart.sold}
                                        stars
                                        countProduct
                                        remove
