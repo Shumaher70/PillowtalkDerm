@@ -25,6 +25,8 @@ interface CardProps {
       price: number;
       reviews: Review[];
       soldOut?: boolean;
+      sold: number;
+      pair: string[];
    };
    extra?: string;
    btn?: boolean;
@@ -39,7 +41,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
    const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
    const [load, setLoad] = useState(false);
 
-   const clickHandler = (event: React.MouseEvent) => {
+   const clickHandler = () => {
       dispatch(
          addCart({
             id: product.id,
@@ -50,13 +52,15 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
             totalPrice: product.price,
             soldOut: product.soldOut!,
             quantity: 1,
+            sold: product.sold,
+            pair: product.pair,
          })
       );
       setLoad(true);
       setTimeout(() => {
          setLoad(false);
+         dispatch(sidebar(true));
       }, 500);
-      dispatch(sidebar(true));
    };
 
    const spin = (
