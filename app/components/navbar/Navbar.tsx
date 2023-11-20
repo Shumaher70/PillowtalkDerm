@@ -16,6 +16,8 @@ const Navbar = async () => {
          price: true,
          reviews: true,
          soldOut: true,
+         sold: true,
+         pair: true,
       },
    });
 
