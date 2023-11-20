@@ -1,4 +1,4 @@
-import Button from '@/app/components/Button';
+import Button from '@/app/components/button/Button';
 
 interface ButtonGroupProps {
    shop: boolean;
@@ -18,20 +18,37 @@ const ButtonGroup = ({
          <Button
             text="shop"
             size="sm"
-            className={`${
-               shop ? 'text-white bg-gradient' : '!text-black bg-white'
+            className={`
+            capitalize
+            ${
+               shop
+                  ? 'text-white bg-gradient-to-r from-pink-400 to-pink-600'
+                  : '!text-black bg-white'
             }`}
             onClick={shopHandler}
+            load={false}
          />
          <Button
             text="skin nerd academy"
             size="sm"
-            className={`${
-               blog ? 'text-white bg-gradient' : '!text-black bg-white'
+            className={`
+            capitalize
+            ${
+               blog
+                  ? 'text-white bg-gradient-to-r from-pink-400 to-pink-600'
+                  : '!text-black bg-white'
             }`}
             onClick={blogHandler}
+            load={false}
          />
-         <Button text="about" size="sm" className="bg-white !text-black" />
+         <Button
+            text="about"
+            size="sm"
+            className="
+            capitalize
+            bg-white !text-black"
+            load={false}
+         />
       </>
    );
 };
