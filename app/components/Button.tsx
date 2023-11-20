@@ -12,8 +12,6 @@ interface ButtonProps {
 
 const Button = ({
    text = 'button',
-   uppercase,
-   bg,
    size = 'sm',
    className,
    onClick,
@@ -31,17 +29,15 @@ const Button = ({
          text-[14px]
          lg:text-[16px]
          rounded-full
+         cursor-pointer
          w-max
          h-max
          flex
          flex-center
          text-white
-         ${disabled ? 'opacity-50' : ''}
-         ${bg ? 'bg-gradient' : ''}
-         ${uppercase ? 'uppercase' : 'capitalize'}
-         ${soldOut && 'cursor-not-allowed'}
          ${disabled && 'cursor-not-allowed'}
-         ${className}   
+         ${soldOut ? '!cursor-not-allowed !bg-gray-300' : ''}
+         ${className}
          `}
       >
          {!soldOut ? text : 'sold out'}
