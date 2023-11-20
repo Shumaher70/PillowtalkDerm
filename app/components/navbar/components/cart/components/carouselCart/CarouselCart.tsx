@@ -4,13 +4,15 @@ import 'react-multi-carousel/lib/styles.css';
 import ProductInCart from '../productInCart/ProductInCart';
 
 import { CartType, ProductType } from '@/types';
+import bestSellers from '@/utils/bestSellers';
+import pairItWith from '@/utils/pairItWith';
 
 const CarouselCart = ({
    carts,
    products,
 }: {
-   carts?: CartType[];
-   products?: ProductType[];
+   carts: CartType[];
+   products: ProductType[];
 }) => {
    const responsive = {
       desktop: {
@@ -19,7 +21,6 @@ const CarouselCart = ({
          slidesToSlide: 1,
       },
    };
-
    const CustomDot = ({
       onClick,
       active,
@@ -55,42 +56,41 @@ const CarouselCart = ({
          itemClass="p-2"
          className="overflow-visible"
          customDot={
-            carts!.length > 1 || products!.length > 1 ? (
+            pairItWith(carts, products).length > 1 ||
+            pairItWith(carts, products).length === 0 ? (
                <CustomDot onClick={() => {}} active={false} />
             ) : (
                <></>
             )
          }
       >
-         {carts &&
-            carts.map((cart) => (
-               <ProductInCart
-                  key={cart.id}
-                  image={cart.image}
-                  title={cart.title}
-                  reviews={cart.reviews}
-                  soldOut={cart.soldOut}
-                  stars
-                  readme="More details"
-                  button
-                  buttonPrice={cart.price}
-               />
-            ))}
-
-         {products &&
-            products.map((product) => (
-               <ProductInCart
-                  key={product.id}
-                  image={product.images[0]}
-                  title={product.title}
-                  reviews={product.reviews}
-                  soldOut={product.soldOut}
-                  stars
-                  readme="More details"
-                  button
-                  buttonPrice={product.price}
-               />
-            ))}
+         {pairItWith(carts, products).length > 0
+            ? pairItWith(carts, products).map((cart) => (
+                 <ProductInCart
+                    key={cart.id}
+                    image={cart.images[0]}
+                    title={cart.title}
+                    reviews={cart.reviews}
+                    soldOut={cart.soldOut}
+                    stars
+                    readme="More details"
+                    button
+                    buttonPrice={cart.price}
+                 />
+              ))
+            : bestSellers(products).map((product) => (
+                 <ProductInCart
+                    key={product.id}
+                    image={product.images[0]}
+                    title={product.title}
+                    reviews={product.reviews}
+                    soldOut={product.soldOut}
+                    stars
+                    readme="More details"
+                    button
+                    buttonPrice={product.price}
+                 />
+              ))}
       </Carousel>
    );
 };
