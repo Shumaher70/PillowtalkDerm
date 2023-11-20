@@ -30,7 +30,9 @@ const CarouselCart = ({
       return (
          <button
             className={`${
-               active ? 'bg-gradient' : 'inactive'
+               active
+                  ? 'bg-gradient-to-t from-pink-400 to-pink-600'
+                  : 'inactive'
             } w-[8px] h-[8px] border-1 border-[#F32E79] rounded-full m-1`}
             onClick={() => onClick()}
          ></button>

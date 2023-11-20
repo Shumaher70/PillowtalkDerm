@@ -14,7 +14,7 @@ const CartIcon = () => {
       flex 
       flex-center 
       rounded-full 
-      bg-gradient 
+      bg-gradient-to-r from-pink-400 to-pink-600
       text-white 
       text-p 
       cursor-pointer

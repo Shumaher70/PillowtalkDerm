@@ -118,7 +118,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
                      disabled={load ? true : false}
                      size="sm"
                      uppercase
-                     className="bg-purple !w-full"
+                     className="bg-purple-800 !w-full uppercase active:bg-gradient-to-r from-pink-400 to-pink-600 "
                      soldOut={product.soldOut}
                      onClick={clickHandler}
                   />
