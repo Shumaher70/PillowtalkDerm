@@ -1,4 +1,4 @@
-import Button from '@/app/components/Button';
+import Button from '@/app/components/button/Button';
 
 interface CheckOutProps {
    totalPrice: number;
