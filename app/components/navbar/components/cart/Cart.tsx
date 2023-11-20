@@ -44,7 +44,7 @@ const Cart = () => {
                   className="bg-secondary flex-col justify-between h-full"
                   left
                >
-                  <div className=" overflow-y-auto overflow-x-hidden h-full flex flex-col justify-between">
+                  <div className="overflow-y-auto overflow-x-hidden h-full flex flex-col justify-between">
                      <div>
                         <div className="p-[16px] w-full flex flex-between">
                            <div className="flex flex-center gap-1">
@@ -90,19 +90,25 @@ const Cart = () => {
                         </div>
                      </div>
 
-                     <div className="p-[16px] pt-0 relative">
-                        <p className="text-p font-semibold">PAIR IT WITH</p>
-                        <CarouselCart carts={carts} products={products} />
-                     </div>
+                     <div>
+                        <div className="p-[16px] pt-0 relative">
+                           <p className="text-p font-semibold">
+                              {carts.length > 0
+                                 ? 'PAIR IT WITH'
+                                 : 'BEST SELLERS'}
+                           </p>
+                           <CarouselCart carts={carts} products={products} />
+                        </div>
 
-                     {carts.length === 0 && (
-                        <Button
-                           text={'continue shopping'}
-                           size={'sm'}
-                           uppercase
-                           className="bg-purple p-[16px] m-[16px]"
-                        />
-                     )}
+                        {carts.length === 0 && (
+                           <Button
+                              text={'continue shopping'}
+                              size={'sm'}
+                              uppercase
+                              className="bg-purple p-[16px] m-[16px] bg-purple-800 uppercase"
+                           />
+                        )}
+                     </div>
                   </div>
 
                   {carts.length > 0 && (

@@ -14,7 +14,7 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
                text="checkout"
                uppercase
                size="sm"
-               className="bg-purple mt-4"
+               className="bg-purple-800 uppercase mt-4"
             />
          </div>
 
