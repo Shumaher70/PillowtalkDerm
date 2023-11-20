@@ -76,6 +76,9 @@ const CarouselCart = ({
                     readme="More details"
                     button
                     buttonPrice={cart.price}
+                    pair={cart.pair}
+                    sold={cart.sold}
+                    id={cart.id}
                  />
               ))
             : bestSellers(products).map((product) => (
@@ -89,6 +92,9 @@ const CarouselCart = ({
                     readme="More details"
                     button
                     buttonPrice={product.price}
+                    pair={product.pair}
+                    sold={product.sold}
+                    id={product.id}
                  />
               ))}
       </Carousel>
