@@ -1,5 +1,4 @@
 import { CartType } from '@/types';
-import { Review } from '@prisma/client';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type CartState = {
