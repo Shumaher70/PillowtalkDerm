@@ -9,6 +9,8 @@ export type CartType = {
    totalPrice: number;
    quantity: number;
    soldOut: boolean;
+   sold: number;
+   pair: string[];
 };
 
 export type ProductType = {
@@ -18,6 +20,8 @@ export type ProductType = {
    price: number;
    reviews: Review[];
    soldOut: boolean;
+   sold: number;
+   pair: string[];
 };
 
 export type BlogType = {
