@@ -20,7 +20,7 @@ const ProgressBar = ({ totalPrice, freeShipping }: ProgressBarProps) => {
                style={{
                   width: `${progress}`,
                }}
-               className="bg-gradient-to-r from-pink-400 to-pink-600 transition-all h-full"
+               className="bg-gradient-to-r from-pink-400 to-pink-600  h-full transition-all !duration-1000"
             />
          </div>
       </div>
