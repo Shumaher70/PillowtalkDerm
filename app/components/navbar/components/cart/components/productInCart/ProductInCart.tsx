@@ -11,7 +11,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { Review } from '@prisma/client';
 import calcRatingStars from '@/utils/calcRatingStars';
 import { useAppDispatch } from '@/redux/hooks';
-import { addCart } from '@/redux/features/cartSlice';
+import { addCart, removeCart } from '@/redux/features/cartSlice';
 import { useState } from 'react';
 
 interface ProductInCartProps {
@@ -74,6 +74,10 @@ const ProductInCart = ({
       }, 500);
    };
 
+   const removeHandler = () => {
+      dispatch(removeCart(id));
+   };
+
    return (
       <div className="bg-white flex gap-2 flex-between h-full rounded-[8px] p-[16px] relative">
          <div className="flex gap-3 mr-[150px] items-center">
@@ -113,8 +117,11 @@ const ProductInCart = ({
             </div>
          )}
          {remove && (
-            <div className="bg-white absolute left-[-10px] top-[-10px] rounded-full p-2">
-               <AiOutlineClose className="text-[14px] cursor-pointer " />
+            <div
+               className="bg-white absolute left-[-10px] top-[-10px] rounded-full p-2"
+               onClick={removeHandler}
+            >
+               <AiOutlineClose className="text-[14px] cursor-pointer" />
             </div>
          )}
       </div>
