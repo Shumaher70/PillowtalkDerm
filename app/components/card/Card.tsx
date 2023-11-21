@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Review } from '@prisma/client';
 
-import { addCart, sidebar } from '@/redux/features/cartSlice';
+import { addCart, sidebarCart } from '@/redux/features/cartSlice';
 import { useAppDispatch } from '@/redux/hooks';
 
 import ImageCard from './components/ImageCard';
@@ -59,7 +59,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
       setLoad(true);
       setTimeout(() => {
          setLoad(false);
-         dispatch(sidebar(true));
+         dispatch(sidebarCart(true));
       }, 500);
    };
 

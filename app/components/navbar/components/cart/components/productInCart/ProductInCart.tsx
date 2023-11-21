@@ -102,7 +102,10 @@ const ProductInCart = ({
          )}
 
          {countProduct && (
-            <CountProduct className="absolute right-[20px] bottom-[20px]" />
+            <CountProduct
+               className="absolute right-[20px] bottom-[20px]"
+               cartId={id}
+            />
          )}
          {button && (
             <div className="absolute right-[20px] bottom-[20px]">
