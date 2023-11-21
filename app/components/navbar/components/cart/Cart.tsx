@@ -1,4 +1,8 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
+
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { sidebarCart } from '@/redux/features/cartSlice';
 
 import Sidebar from '../../Sidebar';
 import ProgressBar from './components/ProgressBar';
@@ -6,12 +10,8 @@ import ProductInCart from './components/productInCart/ProductInCart';
 import Button from '@/app/components/button/Button';
 import CheckOut from './components/checkOut/CheckOut';
 import CarouselCart from './components/carouselCart/CarouselCart';
-
-import { useAppSelector } from '@/redux/hooks';
-
 import CartIcon from './CartIcon';
 import CloseSidebar from './components/CloseSidebar';
-import { useQuery } from '@tanstack/react-query';
 import { CartType, ProductType } from '@/types';
 
 const getProduct = async () => {
@@ -29,6 +29,7 @@ const Cart = () => {
 
    const products: ProductType[] = product;
 
+   const dispatch = useAppDispatch();
    const { carts, totalPrice, sidebar } = useAppSelector(
       (state) => state.cartReducer
    );
@@ -105,6 +106,7 @@ const Cart = () => {
 
                         {carts.length === 0 && (
                            <Button
+                              onClick={() => dispatch(sidebarCart(false))}
                               text={'continue shopping'}
                               size={'sm'}
                               uppercase
