@@ -42,12 +42,27 @@ export const cart = createSlice({
             .map((cart) => cart.quantity)
             .reduce((sum, acc) => sum + acc, 0);
       },
+
+      removeCart: (state, action: PayloadAction<string>) => {
+         state.carts = state.carts.filter((cart) => {
+            return cart.id !== action.payload;
+         });
+
+         state.totalPrice = state.carts
+            .map((cart) => cart.totalPrice)
+            .reduce((sum, acc) => sum + acc, 0);
+
+         state.totalQuantity = state.carts
+            .map((cart) => cart.quantity)
+            .reduce((sum, acc) => sum + acc, 0);
+      },
+
       sidebar: (state, action: PayloadAction<boolean>) => {
          state.sidebar = action.payload;
       },
    },
 });
 
-export const { addCart, sidebar } = cart.actions;
+export const { addCart, sidebar, removeCart } = cart.actions;
 
 export default cart.reducer;
