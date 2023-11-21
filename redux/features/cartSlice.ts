@@ -57,12 +57,12 @@ export const cart = createSlice({
             .reduce((sum, acc) => sum + acc, 0);
       },
 
-      sidebar: (state, action: PayloadAction<boolean>) => {
+      sidebarCart: (state, action: PayloadAction<boolean>) => {
          state.sidebar = action.payload;
       },
    },
 });
 
-export const { addCart, sidebar, removeCart } = cart.actions;
+export const { addCart, sidebarCart, removeCart } = cart.actions;
 
 export default cart.reducer;
