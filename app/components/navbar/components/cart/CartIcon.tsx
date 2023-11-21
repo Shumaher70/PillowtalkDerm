@@ -1,4 +1,4 @@
-import { sidebar } from '@/redux/features/cartSlice';
+import { sidebarCart } from '@/redux/features/cartSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import React from 'react';
 
@@ -20,7 +20,7 @@ const CartIcon = () => {
       cursor-pointer
       relative
       "
-         onClick={() => dispatch(sidebar(true))}
+         onClick={() => dispatch(sidebarCart(true))}
       >
          {totalQuantity}
       </div>

@@ -1,4 +1,4 @@
-import { sidebar } from '@/redux/features/cartSlice';
+import { sidebarCart } from '@/redux/features/cartSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { AiOutlineClose } from 'react-icons/ai';
 
@@ -8,7 +8,7 @@ const CloseSidebar = () => {
    return (
       <AiOutlineClose
          className="text-black text-[15px] cursor-pointer"
-         onClick={() => dispatch(sidebar(false))}
+         onClick={() => dispatch(sidebarCart(false))}
       />
    );
 };
