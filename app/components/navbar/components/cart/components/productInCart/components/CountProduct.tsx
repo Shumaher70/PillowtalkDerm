@@ -1,18 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import {
+   decreaseCart,
+   increaseCart,
+   removeCart,
+} from '@/redux/features/cartSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useEffect, useState } from 'react';
 import { RxMinus, RxPlus } from 'react-icons/rx';
 
 interface CountProductProps {
    className?: string;
+   cartId: string;
 }
 
-const CountProduct = ({ className }: CountProductProps) => {
-   const [count, setCount] = useState(1);
+const CountProduct = ({ className, cartId }: CountProductProps) => {
+   const carts = useAppSelector((action) => action.cartReducer.carts);
+   const dispatch = useAppDispatch();
 
-   const decrease = () => setCount((previous) => (previous -= 1));
-   const increase = () => setCount((previous) => (previous += 1));
+   const quantity = carts.filter((cart) => cart.id === cartId)[0].quantity;
+
+   const [count, setCount] = useState(quantity);
+
+   useEffect(() => {
+      setCount(quantity);
+      dispatch(increaseCart({ id: cartId, quantity: count }));
+      if (count < 1) {
+         dispatch(removeCart(cartId));
+      }
+   }, [cartId, count, dispatch, quantity]);
+
+   const decrease = () => {
+      setCount((previous) => (previous -= 1));
+      dispatch(decreaseCart({ id: cartId, quantity: count }));
+   };
+
+   const increase = () => {
+      setCount((previous) => (previous += 1));
+      dispatch(increaseCart({ id: cartId, quantity: count }));
+   };
+
    const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(increaseCart({ id: cartId, quantity: count }));
+      dispatch(decreaseCart({ id: cartId, quantity: count }));
       setCount(+event.target.value);
    };
    return (
