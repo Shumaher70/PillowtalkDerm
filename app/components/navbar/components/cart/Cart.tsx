@@ -109,6 +109,7 @@ const Cart = () => {
                               size={'sm'}
                               uppercase
                               className="bg-purple p-[16px] m-[16px] bg-purple-800 uppercase"
+                              load={false}
                            />
                         )}
                      </div>
