@@ -1,4 +1,4 @@
-import { spin } from './Spin';
+import { spin } from './spin';
 
 interface ButtonProps {
    text: string;
@@ -44,18 +44,18 @@ const Button = ({
          `}
       >
          {soldOut ? (
-            'sold out'
+            <p className="text-[11px] lg:text-[16px]">sold out</p>
          ) : (
             <>
                <div
-                  className={`absolute left-2/4 top-2/4 -translate-x-1/4 -translate-y-2/4 opacity-0 ${
-                     load && 'opacity-100'
+                  className={`absolute left-2/4 top-2/4 -translate-x-1/4 -translate-y-2/4 hidden ${
+                     load && '!block'
                   }`}
                >
                   {spin}
                </div>
                <span
-                  className={`text-[14px] lg:text-[16px] opacity-100 ${
+                  className={`text-[11px] lg:text-[16px] opacity-100 ${
                      load && 'opacity-[0]'
                   }`}
                >
