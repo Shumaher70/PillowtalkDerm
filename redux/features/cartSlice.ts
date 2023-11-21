@@ -33,11 +33,9 @@ export const cart = createSlice({
                   : null;
             });
          }
-
          state.totalPrice = state.carts
             .map((cart) => cart.totalPrice)
             .reduce((sum, acc) => sum + acc, 0);
-
          state.totalQuantity = state.carts
             .map((cart) => cart.quantity)
             .reduce((sum, acc) => sum + acc, 0);
@@ -47,11 +45,9 @@ export const cart = createSlice({
          state.carts = state.carts.filter((cart) => {
             return cart.id !== action.payload;
          });
-
          state.totalPrice = state.carts
             .map((cart) => cart.totalPrice)
             .reduce((sum, acc) => sum + acc, 0);
-
          state.totalQuantity = state.carts
             .map((cart) => cart.quantity)
             .reduce((sum, acc) => sum + acc, 0);
@@ -60,9 +56,46 @@ export const cart = createSlice({
       sidebarCart: (state, action: PayloadAction<boolean>) => {
          state.sidebar = action.payload;
       },
+
+      increaseCart: (
+         state,
+         action: PayloadAction<{ id: string; quantity: number }>
+      ) => {
+         state.carts.map((cart) => {
+            if (cart.id === action.payload.id) {
+               cart.totalPrice = cart.price * action.payload.quantity;
+               cart.quantity = action.payload.quantity;
+            }
+         });
+         state.totalPrice = state.carts
+            .map((cart) => cart.totalPrice)
+            .reduce((sum, acc) => sum + acc, 0);
+         state.totalQuantity = state.carts
+            .map((cart) => cart.quantity)
+            .reduce((sum, acc) => sum + acc, 0);
+      },
+
+      decreaseCart: (
+         state,
+         action: PayloadAction<{ id: string; quantity: number }>
+      ) => {
+         state.carts.map((cart) => {
+            if (cart.id === action.payload.id) {
+               cart.totalPrice = cart.price / action.payload.quantity;
+               cart.quantity = action.payload.quantity;
+            }
+         });
+         state.totalPrice = state.carts
+            .map((cart) => cart.totalPrice)
+            .reduce((sum, acc) => sum + acc, 0);
+         state.totalQuantity = state.carts
+            .map((cart) => cart.quantity)
+            .reduce((sum, acc) => sum + acc, 0);
+      },
    },
 });
 
-export const { addCart, sidebarCart, removeCart } = cart.actions;
+export const { addCart, sidebarCart, removeCart, increaseCart, decreaseCart } =
+   cart.actions;
 
 export default cart.reducer;
