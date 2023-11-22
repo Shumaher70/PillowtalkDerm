@@ -19,12 +19,21 @@ const localStorageCart = () => {
          increaseCart,
          decreaseCart
       ),
-      effect: (action, listenerApi) =>
-         localStorage.setItem('cart', JSON.stringify(listenerApi.getState())),
+      effect: (action, listenerApi) => {
+         if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(
+               'cart',
+               JSON.stringify(listenerApi.getState())
+            );
+         }
+      },
    });
 
    const getLocalStorageCart = () => {
-      if (localStorage.getItem('cart') !== null) {
+      if (
+         typeof localStorage !== 'undefined' &&
+         localStorage.getItem('cart') !== null
+      ) {
          return JSON.parse(localStorage.getItem('cart') as string);
       }
    };
