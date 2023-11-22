@@ -1,11 +1,17 @@
+'use client';
 import { sidebarCart } from '@/redux/features/cartSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const CartIcon = () => {
    const dispatch = useAppDispatch();
 
-   const { totalQuantity } = useAppSelector((state) => state.cartReducer);
+   const [totalQuantity, setTotalQuantity] = useState(0);
+
+   const cartReducer = useAppSelector((state) => state.cartReducer);
+   useEffect(() => {
+      setTotalQuantity(cartReducer.totalQuantity);
+   }, [cartReducer.totalQuantity]);
    return (
       <div
          className="
