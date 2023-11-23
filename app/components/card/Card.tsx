@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 import { Review } from '@prisma/client';
 
-import { addCart, sidebarCart } from '@/redux/features/cartSlice';
+import { addCart } from '@/redux/features/cartSlice';
+import { sidebarCart } from '@/redux/features/cartSidebarSlice';
 import { useAppDispatch } from '@/redux/hooks';
 
 import ImageCard from './components/ImageCard';
@@ -97,7 +98,8 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
                      size="sm"
                      load={load}
                      uppercase
-                     className="bg-purple-800 uppercase active:bg-gradient-to-r from-pink-400 to-pink-600 "
+                     className="bg-purple-800 w-full uppercase active:bg-gradient-to-r from-pink-400 to-pink-600 "
+                     classText="text-p"
                      soldOut={product.soldOut}
                      onClick={clickHandler}
                   />
