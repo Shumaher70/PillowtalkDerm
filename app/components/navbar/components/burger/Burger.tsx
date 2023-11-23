@@ -7,7 +7,6 @@ import Sidebar from '../../Sidebar';
 import ButtonGroup from './components/ButtonGroup';
 import Card from '../../../card/Card';
 import Button from '../../../button/Button';
-import { Review } from '@prisma/client';
 import BlogCard from '@/app/components/blogCard/BlogCard';
 import { BlogType, ProductType } from '@/types';
 
@@ -78,7 +77,13 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                         <Card product={product} key={product.id} />
                      ))}
                      <div className="w-full h-full flex flex-center">
-                        <Button size="sm" uppercase bg text="shop all" />
+                        <Button
+                           size="sm"
+                           uppercase
+                           bg
+                           text="shop all"
+                           load={false}
+                        />
                      </div>
                   </>
                )}
@@ -96,6 +101,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                            bg
                            text="view all"
                            className="absolute bottom-2/4 right-0 translate-x-2/4 translate-y-2/4"
+                           load={false}
                         />
                      </div>
                      <div className="min-h-[100px] w-full" />
