@@ -56,16 +56,16 @@
    border-width: 1px;
 }
 
-input[type='number'] {
+input[type='text'] {
    -moz-appearance: textfield;
    -webkit-appearance: textfield;
    appearance: textfield;
 }
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
+input[type='text']::-webkit-outer-spin-button,
+input[type='text']::-webkit-inner-spin-button {
    display: none;
 }
 
-input[type='number']:focus {
+input[type='text']:focus {
    outline: 2px solid #f0e8f6;
 }
