@@ -10,6 +10,7 @@ interface ButtonProps {
    soldOut?: boolean;
    children?: React.ReactNode;
    load: boolean;
+   classText?: string;
 }
 
 const Button = ({
@@ -19,6 +20,7 @@ const Button = ({
    onClick,
    soldOut,
    load,
+   classText,
 }: ButtonProps) => {
    return (
       <button
@@ -28,11 +30,8 @@ const Button = ({
          ${size === 'lg' && 'lg:px-[24px] lg:py-[12px] px-[24px] py-[10px]'}
          ${size === 'sm' && 'px-[16px] py-[8px]'}
          relative
-         p-[10px]
          rounded-full
          cursor-pointer
-         w-max
-         h-max
          flex-center
          text-white
          ${
@@ -55,7 +54,7 @@ const Button = ({
                   {spin}
                </div>
                <span
-                  className={`text-[11px] lg:text-[16px] opacity-100 ${
+                  className={`opacity-100 text-[11px] lg:text-[16px] ${classText}  ${
                      load && 'opacity-[0]'
                   }`}
                >
