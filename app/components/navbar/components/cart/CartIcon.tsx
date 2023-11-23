@@ -1,5 +1,5 @@
 'use client';
-import { sidebarCart } from '@/redux/features/cartSlice';
+import { sidebarCart } from '@/redux/features/cartSidebarSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import React, { useEffect, useState } from 'react';
 

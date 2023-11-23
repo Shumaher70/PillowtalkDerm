@@ -1,4 +1,4 @@
-import { sidebarCart } from '@/redux/features/cartSlice';
+import { sidebarCart } from '@/redux/features/cartSidebarSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { AiOutlineClose } from 'react-icons/ai';
 
