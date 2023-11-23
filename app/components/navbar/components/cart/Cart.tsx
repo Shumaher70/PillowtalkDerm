@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { sidebarCart } from '@/redux/features/cartSlice';
+import { sidebarCart } from '@/redux/features/cartSidebarSlice';
 
 import Sidebar from '../../Sidebar';
 import ProgressBar from './components/ProgressBar';
@@ -16,7 +16,6 @@ import { CartType, ProductType } from '@/types';
 
 const getProduct = async () => {
    const data = await fetch('http://localhost:3000/api/products');
-
    const product = await data.json();
    return product;
 };
@@ -30,9 +29,8 @@ const Cart = () => {
    const products: ProductType[] = product;
 
    const dispatch = useAppDispatch();
-   const { carts, totalPrice, sidebar } = useAppSelector(
-      (state) => state.cartReducer
-   );
+   const { carts, totalPrice } = useAppSelector((state) => state.cartReducer);
+   const { sidebar } = useAppSelector((state) => state.sidebarCartReducer);
 
    return (
       <>
@@ -108,9 +106,10 @@ const Cart = () => {
                            <Button
                               onClick={() => dispatch(sidebarCart(false))}
                               text={'continue shopping'}
-                              size={'sm'}
+                              size={'lg'}
                               uppercase
-                              className="bg-purple p-[16px] m-[16px] bg-purple-800 uppercase"
+                              className="bg-purple m-[16px] bg-purple-800 uppercase"
+                              classText="text-p"
                               load={false}
                            />
                         )}
