@@ -22,7 +22,6 @@ interface ProductInCartProps {
    title: string;
    readme?: string;
    price?: number;
-   buttonPrice?: number;
    totalPrice?: number;
    countProduct?: boolean;
    button?: boolean;
@@ -45,7 +44,6 @@ const ProductInCart = ({
    remove,
    reviews,
    soldOut,
-   buttonPrice,
    pair,
    sold,
 }: ProductInCartProps) => {
@@ -62,9 +60,9 @@ const ProductInCart = ({
                id: id,
                title: title,
                image: image,
-               price: buttonPrice!,
+               price: price!,
                reviews: reviews,
-               totalPrice: buttonPrice!,
+               totalPrice: price!,
                soldOut: soldOut,
                quantity: 1,
                sold: sold,
@@ -95,11 +93,9 @@ const ProductInCart = ({
             </div>
          </div>
 
-         {totalPrice && (
-            <span className="absolute top-[20px] right-[20px] text-p font-sans font-bold">
-               ${totalPrice}
-            </span>
-         )}
+         <span className="absolute top-[20px] right-[20px] text-p font-sans font-bold">
+            ${totalPrice}
+         </span>
 
          {countProduct && (
             <CountProduct
@@ -110,12 +106,12 @@ const ProductInCart = ({
          {button && (
             <div className="absolute right-[20px] bottom-[20px]">
                <Button
+                  onClick={clickHandler}
                   soldOut={soldOut}
                   load={load}
-                  text={`add - $${buttonPrice}`}
+                  text={`add - $${price}`}
                   size={'sm'}
-                  className="text-[10px] uppercase  bg-gradient-to-r from-pink-400 to-pink-600 "
-                  onClick={clickHandler}
+                  className="text-[10px] w-full uppercase  bg-gradient-to-r from-pink-400 to-pink-600 "
                />
             </div>
          )}
