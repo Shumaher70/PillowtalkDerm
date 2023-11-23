@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './features/cartSlice';
+import sidebarCartReducer from './features/cartSidebarSlice';
 import cartStorage from './localStorages/cartStorage';
 export const store = configureStore({
    reducer: {
       cartReducer,
+      sidebarCartReducer,
    },
-   preloadedState: cartStorage().getLocalStorageCart(),
+   preloadedState: {
+      cartReducer: cartStorage().getLocalStorageCart(),
+   },
    middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().prepend(
          cartStorage().localStorageCartMiddleware.middleware

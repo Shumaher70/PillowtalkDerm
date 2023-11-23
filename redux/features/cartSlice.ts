@@ -5,14 +5,12 @@ type CartState = {
    carts: CartType[];
    totalPrice: number;
    totalQuantity: number;
-   sidebar: boolean;
 };
 
 const initialState = {
    carts: [],
    totalPrice: 0,
    totalQuantity: 0,
-   sidebar: false,
 } as CartState;
 
 export const cart = createSlice({
@@ -53,35 +51,13 @@ export const cart = createSlice({
             .reduce((sum, acc) => sum + acc, 0);
       },
 
-      sidebarCart: (state, action: PayloadAction<boolean>) => {
-         state.sidebar = action.payload;
-      },
-
-      increaseCart: (
+      updateCart: (
          state,
          action: PayloadAction<{ id: string; quantity: number }>
       ) => {
          state.carts.map((cart) => {
             if (cart.id === action.payload.id) {
-               cart.totalPrice = cart.price * action.payload.quantity;
-               cart.quantity = action.payload.quantity;
-            }
-         });
-         state.totalPrice = state.carts
-            .map((cart) => cart.totalPrice)
-            .reduce((sum, acc) => sum + acc, 0);
-         state.totalQuantity = state.carts
-            .map((cart) => cart.quantity)
-            .reduce((sum, acc) => sum + acc, 0);
-      },
-
-      decreaseCart: (
-         state,
-         action: PayloadAction<{ id: string; quantity: number }>
-      ) => {
-         state.carts.map((cart) => {
-            if (cart.id === action.payload.id) {
-               cart.totalPrice = cart.price / action.payload.quantity;
+               cart.totalPrice = cart.price * cart.quantity;
                cart.quantity = action.payload.quantity;
             }
          });
@@ -95,7 +71,6 @@ export const cart = createSlice({
    },
 });
 
-export const { addCart, sidebarCart, removeCart, increaseCart, decreaseCart } =
-   cart.actions;
+export const { addCart, removeCart, updateCart } = cart.actions;
 
 export default cart.reducer;

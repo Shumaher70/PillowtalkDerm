@@ -1,29 +1,17 @@
 import { createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
-
-import {
-   addCart,
-   sidebarCart,
-   removeCart,
-   increaseCart,
-   decreaseCart,
-} from '../features/cartSlice';
+import { RootState } from '../store';
+import { addCart, removeCart, updateCart } from '../features/cartSlice';
 
 const localStorageCart = () => {
    const localStorageCartMiddleware = createListenerMiddleware();
 
    localStorageCartMiddleware.startListening({
-      matcher: isAnyOf(
-         addCart,
-         sidebarCart,
-         removeCart,
-         increaseCart,
-         decreaseCart
-      ),
+      matcher: isAnyOf(addCart, removeCart, updateCart),
       effect: (action, listenerApi) => {
          if (typeof localStorage !== 'undefined') {
             localStorage.setItem(
                'cart',
-               JSON.stringify(listenerApi.getState())
+               JSON.stringify((listenerApi.getState() as RootState).cartReducer)
             );
          }
       },
