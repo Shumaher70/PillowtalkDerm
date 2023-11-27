@@ -2,8 +2,6 @@ import { spin } from './spin';
 
 interface ButtonProps {
    text: string;
-   uppercase?: boolean;
-   bg?: boolean;
    size: 'sm' | 'lg';
    onClick?: (e: React.MouseEvent) => void;
    className?: string;

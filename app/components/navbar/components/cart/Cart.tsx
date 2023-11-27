@@ -107,7 +107,6 @@ const Cart = () => {
                               onClick={() => dispatch(sidebarCart(false))}
                               text={'continue shopping'}
                               size={'lg'}
-                              uppercase
                               className="bg-purple m-[16px] bg-purple-800 uppercase"
                               classText="text-p"
                               load={false}
