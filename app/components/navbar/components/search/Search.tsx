@@ -112,10 +112,22 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                   ? blogs
                        .slice(0, 1)
                        .map((blog) => (
-                          <BlogCard key={blog.id} blog={blog} extra="Read Me" />
+                          <BlogCard
+                             key={blog.id}
+                             extra="Read Me"
+                             id={blog.id}
+                             images={blog.images}
+                             title={blog.title}
+                          />
                        ))
                   : filterBlogs.map((blog) => (
-                       <BlogCard key={blog.id} blog={blog} extra="Read Me" />
+                       <BlogCard
+                          key={blog.id}
+                          extra="Read Me"
+                          id={blog.id}
+                          images={blog.images}
+                          title={blog.title}
+                       />
                     ))}
             </div>
          </Sidebar>

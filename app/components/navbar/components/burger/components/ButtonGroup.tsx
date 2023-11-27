@@ -25,6 +25,7 @@ const ButtonGroup = ({
                   ? 'text-white bg-gradient-to-r from-pink-400 to-pink-600'
                   : '!text-black bg-white'
             }`}
+            classText="text-p"
             onClick={shopHandler}
             load={false}
          />
@@ -38,6 +39,7 @@ const ButtonGroup = ({
                   ? 'text-white bg-gradient-to-r from-pink-400 to-pink-600'
                   : '!text-black bg-white'
             }`}
+            classText="text-p"
             onClick={blogHandler}
             load={false}
          />
@@ -47,6 +49,7 @@ const ButtonGroup = ({
             className="
             capitalize
             bg-white !text-black"
+            classText="text-p"
             load={false}
          />
       </>

@@ -33,34 +33,35 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
    const triggerSideBarHandler = () =>
       setTriggerSideBar((previous) => !previous);
 
-   return (
-      <div>
-         <Sidebar triggerSidebar={triggerSideBar}>
-            <div
-               className="
+   if (blogs && products)
+      return (
+         <div>
+            <Sidebar triggerSidebar={triggerSideBar}>
+               <div
+                  className="
                p-[16px] 
                flex 
                justify-between 
                items-center 
                w-full
                "
-            >
-               <div className="flex flex-wrap gap-3 z-10">
-                  <ButtonGroup
-                     shop={shop}
-                     blog={blog}
-                     shopHandler={shopHandler}
-                     blogHandler={blogHandler}
+               >
+                  <div className="flex flex-wrap gap-3 z-10">
+                     <ButtonGroup
+                        shop={shop}
+                        blog={blog}
+                        shopHandler={shopHandler}
+                        blogHandler={blogHandler}
+                     />
+                  </div>
+
+                  <AiOutlineClose
+                     onClick={triggerSideBarHandler}
+                     className="w-[15px] h-[15px] cursor-pointer"
                   />
                </div>
-
-               <AiOutlineClose
-                  onClick={triggerSideBarHandler}
-                  className="w-[15px] h-[15px] cursor-pointer"
-               />
-            </div>
-            <div
-               className="
+               <div
+                  className="
                w-full 
                px-[16px] 
                pb-[16px] 
@@ -70,52 +71,59 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                md:grid-cols-3 
                overflow-auto
                "
-            >
-               {shop && (
-                  <>
-                     {products.slice(0, 5).map((product) => (
-                        <Card product={product} key={product.id} />
-                     ))}
-                     <div className="w-full h-full flex flex-center">
-                        <Button
-                           size="sm"
-                           uppercase
-                           bg
-                           text="shop all"
-                           load={false}
-                        />
-                     </div>
-                  </>
-               )}
+               >
+                  {shop && (
+                     <>
+                        {products.slice(0, 5).map((product) => (
+                           <Card product={product} key={product.id} />
+                        ))}
+                        <div className="w-full h-full flex flex-center">
+                           <Button
+                              size="lg"
+                              className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
+                              classText="text-p"
+                              text="shop all"
+                              load={false}
+                           />
+                        </div>
+                     </>
+                  )}
 
-               {blog && (
-                  <>
-                     {blogs.map((blog) => (
-                        <BlogCard blog={blog} extra={'Read me'} key={blog.id} />
-                     ))}
+                  {blogs && (
+                     <>
+                        {blogs.map(({ id, images, title }) => {
+                           return (
+                              <BlogCard
+                                 extra={'Read me'}
+                                 key={id}
+                                 id={id}
+                                 images={images}
+                                 title={title}
+                              />
+                           );
+                        })}
 
-                     <div className="min-h-[100px] w-full relative">
-                        <Button
-                           size="sm"
-                           uppercase
-                           bg
-                           text="view all"
-                           className="absolute bottom-2/4 right-0 translate-x-2/4 translate-y-2/4"
-                           load={false}
-                        />
-                     </div>
-                     <div className="min-h-[100px] w-full" />
-                  </>
-               )}
+                        <div className="min-h-[100px] flex justify-end items-center">
+                           <Button
+                              size="sm"
+                              text="view all"
+                              className="uppercase translate-x-2/4 bg-gradient-to-r from-pink-400 to-pink-600"
+                              classText="text-p"
+                              load={false}
+                           />
+                        </div>
+                        <div className="min-h-[100px]" />
+                     </>
+                  )}
+               </div>
+            </Sidebar>
+            <div onClick={triggerSideBarHandler}>
+               <RxHamburgerMenu
+                  className={`text-[30px] cursor-pointer ${className}`}
+               />
             </div>
-         </Sidebar>
-         <div onClick={triggerSideBarHandler}>
-            <RxHamburgerMenu
-               className={`text-[30px] cursor-pointer ${className}`}
-            />
          </div>
-      </div>
-   );
+      );
 };
 
 export default Burger;

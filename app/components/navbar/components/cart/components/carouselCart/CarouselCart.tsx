@@ -53,9 +53,9 @@ const CarouselCart = ({ carts, products }: CarouselCartProps) => {
                keyBoardControl={true}
                transitionDuration={10}
                containerClass="carousel-container"
-               dotListClass="block w-max h-[10px] absolute -top-[19px] left-[100%] -translate-x-full z-[0]"
+               dotListClass="block w-max h-[15px] absolute top-0 !left-[calc(100%-16px)]  -translate-x-full"
                itemClass="p-2"
-               className="overflow-visible select-none"
+               className="overflow-visible select-none !static"
                customDot={
                   pairItWith(carts, products).length > 1 ||
                   pairItWith(carts, products).length === 0 ? (
@@ -97,9 +97,9 @@ const CarouselCart = ({ carts, products }: CarouselCartProps) => {
                keyBoardControl={true}
                transitionDuration={10}
                containerClass="carousel-container"
-               dotListClass="block w-max h-[10px] absolute -top-[19px] left-[100%] -translate-x-full z-[0]"
+               dotListClass="block w-max h-[15px] absolute top-0 !left-[calc(100%-16px)]  -translate-x-full"
                itemClass="p-2"
-               className="overflow-visible select-none"
+               className="overflow-visible select-none !static"
                customDot={
                   pairItWith(carts, products).length > 1 ||
                   pairItWith(carts, products).length === 0 ? (
