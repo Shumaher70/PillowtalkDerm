@@ -65,7 +65,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
    };
 
    return (
-      <Link href={''} className="relative bg-white rounded-[8px] m-2">
+      <div className="relative bg-white rounded-[8px] m-2">
          <div className="m-[10px] rounded-[5px]">
             <ImageCard image={product.images[0]} title={product.title} />
 
@@ -97,7 +97,6 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
                      text={`add - $${product.price}`}
                      size="sm"
                      load={load}
-                     uppercase
                      className="bg-purple-800 w-full uppercase active:bg-gradient-to-r from-pink-400 to-pink-600 "
                      classText="text-p"
                      soldOut={product.soldOut}
@@ -112,7 +111,7 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
                <AwardWining />
             </div>
          )}
-      </Link>
+      </div>
    );
 };
 
