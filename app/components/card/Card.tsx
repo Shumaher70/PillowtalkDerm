@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Review } from '@prisma/client';
 
 import { addCart } from '@/redux/features/cartSlice';
-import { sidebarCart } from '@/redux/features/cartSidebarSlice';
+import { sidebarCart } from '@/redux/features/sidebarSlice';
 import { useAppDispatch } from '@/redux/hooks';
 
 import ImageCard from './components/ImageCard';
