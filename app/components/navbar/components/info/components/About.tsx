@@ -1,10 +1,16 @@
+import { slideShop, slideSkinNerdAcademy } from '@/redux/features/sidebarSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import React from 'react';
 
 const About = () => {
+   const dispatch = useAppDispatch();
    return (
-      <>
-         <p
-            className="
+      <p
+         onMouseEnter={() => {
+            dispatch(slideShop(false));
+            dispatch(slideSkinNerdAcademy(false));
+         }}
+         className="
            capitalize 
            text-p 
            cursor-pointer 
@@ -14,10 +20,9 @@ const About = () => {
            rounded-[20px]
            hover:bg-white
          "
-         >
-            about
-         </p>
-      </>
+      >
+         about
+      </p>
    );
 };
 

@@ -1,3 +1,5 @@
+import { slideShop, slideSkinNerdAcademy } from '@/redux/features/sidebarSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import Link from 'next/link';
 
 interface HomeProps {
@@ -6,8 +8,13 @@ interface HomeProps {
 }
 
 const Home = ({ href, className }: HomeProps) => {
+   const dispatch = useAppDispatch();
    return (
       <Link
+         onMouseEnter={() => {
+            dispatch(slideShop(false));
+            dispatch(slideSkinNerdAcademy(false));
+         }}
          href={href}
          className={`
             capitalize 

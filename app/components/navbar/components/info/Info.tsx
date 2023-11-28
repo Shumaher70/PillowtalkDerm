@@ -1,14 +1,18 @@
+'use client';
+
 import Home from './components/Home';
-import SkinNerdAcademy from './components/SkinNerdAcademy';
 import About from './components/About';
-import Shop from './components/Shop';
-import { BlogType, ProductType } from '@/types';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { slideShop, slideSkinNerdAcademy } from '@/redux/features/sidebarSlice';
 
 interface InfoProps {
    className?: string;
 }
 
 const Info = ({ className }: InfoProps) => {
+   const dispatch = useAppDispatch();
+   const sliderSlice = useAppSelector((state) => state.sidebarReducer);
+
    return (
       <div className={`flex gap-3 ${className}`}>
          <Home href="" />
@@ -21,8 +25,12 @@ const Info = ({ className }: InfoProps) => {
            px-[10px] 
            py-[5px]
            rounded-[20px]
-           hover:bg-white
+           ${sliderSlice.slideShop && 'bg-white'}
          `}
+            onMouseEnter={() => {
+               dispatch(slideShop(true));
+               dispatch(slideSkinNerdAcademy(false));
+            }}
          >
             shop
          </p>
@@ -36,8 +44,12 @@ const Info = ({ className }: InfoProps) => {
                px-[10px] 
                py-[5px]
                rounded-[20px]
-               hover:bg-white
+               ${sliderSlice.slideSkinNerdAcademy && 'bg-white'}
             `}
+            onMouseEnter={() => {
+               dispatch(slideSkinNerdAcademy(true));
+               dispatch(slideShop(false));
+            }}
          >
             SkinNerdAcademy
          </p>
