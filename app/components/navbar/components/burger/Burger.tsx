@@ -89,7 +89,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                      </>
                   )}
 
-                  {blogs && (
+                  {blog && (
                      <>
                         {blogs.map(({ id, images, title }) => {
                            return (
