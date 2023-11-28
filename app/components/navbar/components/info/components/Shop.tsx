@@ -8,7 +8,7 @@ interface ShopProps {
    className?: string;
 }
 
-const Shop = ({ className, products }: ShopProps) => {
+const Shop = ({ products }: ShopProps) => {
    return (
       <div className="py-[30px]">
          <div className="grid grid-cols-6">
