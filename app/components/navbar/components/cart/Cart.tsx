@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { sidebarCart } from '@/redux/features/cartSidebarSlice';
+import { sidebarCart } from '@/redux/features/sidebarSlice';
 
 import Sidebar from '../../Sidebar';
 import ProgressBar from './components/ProgressBar';
@@ -30,7 +30,7 @@ const Cart = () => {
 
    const dispatch = useAppDispatch();
    const { carts, totalPrice } = useAppSelector((state) => state.cartReducer);
-   const { sidebar } = useAppSelector((state) => state.sidebarCartReducer);
+   const cartSlice = useAppSelector((state) => state.sidebarReducer);
 
    return (
       <>
@@ -39,7 +39,7 @@ const Cart = () => {
          {isSuccess && (
             <div>
                <Sidebar
-                  triggerSidebar={sidebar}
+                  triggerSidebar={cartSlice.sidebarCart}
                   className="bg-secondary flex-col justify-between h-full"
                   left
                >
