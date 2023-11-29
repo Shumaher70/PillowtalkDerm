@@ -1,6 +1,7 @@
 import './globals.css';
 
 import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer/Footer';
 
 import localFont from 'next/font/local';
 import QueryProvider from './QueryProvider';
@@ -24,6 +25,7 @@ export default function RootLayout({
                <Providers>
                   <Navbar />
                   {children}
+                  <Footer />
                </Providers>
             </QueryProvider>
          </body>
