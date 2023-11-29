@@ -115,12 +115,9 @@ const Navbar = () => {
                animate={height()}
                className={`
                w-full
-               md:px-[40px]  
-               lg:px-[80px] 
-               px-[16px] 
+               container-px
                py-[8px] 
-               rounded-b-[10px] 
-               lg:rounded-b-[30px] 
+               container-rounded-b
                bg-accent
                fixed 
                top-0
