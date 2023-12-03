@@ -54,6 +54,7 @@ const Navbar = () => {
                   dispatch(slideSkinNerdAcademy(false));
                }}
                className={`
+               z-10
                w-full
                container-px
                py-[8px] 
