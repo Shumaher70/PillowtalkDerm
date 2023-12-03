@@ -3,7 +3,11 @@
 import Home from './components/Home';
 import About from './components/About';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { slideShop, slideSkinNerdAcademy } from '@/redux/features/sidebarSlice';
+import {
+   slideSearch,
+   slideShop,
+   slideSkinNerdAcademy,
+} from '@/redux/features/sidebarSlice';
 
 interface InfoProps {
    className?: string;
@@ -30,6 +34,7 @@ const Info = ({ className }: InfoProps) => {
             onMouseEnter={() => {
                dispatch(slideShop(true));
                dispatch(slideSkinNerdAcademy(false));
+               dispatch(slideSearch(false));
             }}
          >
             shop
@@ -49,6 +54,7 @@ const Info = ({ className }: InfoProps) => {
             onMouseEnter={() => {
                dispatch(slideSkinNerdAcademy(true));
                dispatch(slideShop(false));
+               dispatch(slideSearch(false));
             }}
          >
             SkinNerdAcademy
