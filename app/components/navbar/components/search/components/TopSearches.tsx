@@ -15,14 +15,14 @@ const TopSearches = ({ className, getTopSearch }: TopSearchesProps) => {
    };
 
    return (
-      <div className={`${className}`}>
+      <>
          <h4
             className={`${schnyderMlightFont.className} text-title !font-[300]`}
          >
             Top Searches
          </h4>
 
-         <div className="grid grid-cols-2 space-y-2 mt-3">
+         <div className={`grid grid-cols-2 gap-2 mt-3 ${className}`}>
             {topSearches.map((search, index) => (
                <p
                   key={index}
@@ -33,7 +33,7 @@ const TopSearches = ({ className, getTopSearch }: TopSearchesProps) => {
                </p>
             ))}
          </div>
-      </div>
+      </>
    );
 };
 
