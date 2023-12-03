@@ -1,4 +1,5 @@
 'use client';
+import { MotionDiv } from '@/motion/MotionDiv';
 import { useAppSelector } from '@/redux/hooks';
 import React, { useEffect, useState } from 'react';
 
@@ -17,7 +18,10 @@ const Overflow = () => {
             sidebarSlice.slideSkinNerdAcademy
          ) {
             setOverflow(false);
+         } else {
+            setOverflow(true);
          }
+
       document.body.style.overflow = overflow ? 'visible' : 'hidden';
    }, [
       overflow,
@@ -29,7 +33,14 @@ const Overflow = () => {
       sidebarSlice.slideSkinNerdAcademy,
    ]);
 
-   return <></>;
+   return (
+      <MotionDiv
+         initial={{ y: '-100%' }}
+         transition={{ duration: 0 }}
+         animate={{ y: `${overflow ? '-100%' : 0}` }}
+         className="w-full bg-black/30 h-full absolute top-0"
+      ></MotionDiv>
+   );
 };
 
 export default Overflow;
