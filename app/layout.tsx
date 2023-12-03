@@ -7,7 +7,7 @@ import localFont from 'next/font/local';
 import QueryProvider from './QueryProvider';
 import { Providers } from '@/redux/provider';
 import SlideInfo from './components/slideInfo/SlideInfo';
-import Overflow from '../utils/Overflow';
+import Overflow from './Overflow';
 
 export const schnyderMlightFont = localFont({
    src: '../public/fonts/SchnyderMLight.woff2',
