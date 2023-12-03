@@ -91,6 +91,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                              stars
                              rating
                              product={product}
+                             imageAnimated
                           />
                        );
                     })
@@ -103,6 +104,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                              stars
                              rating
                              product={product}
+                             imageAnimated
                           />
                        );
                     })}

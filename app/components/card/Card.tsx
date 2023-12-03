@@ -34,9 +34,18 @@ interface CardProps {
    win?: boolean;
    stars?: boolean;
    rating?: boolean;
+   imageAnimated?: boolean;
 }
 
-const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
+const Card = ({
+   btn,
+   win,
+   product,
+   extra,
+   stars,
+   rating,
+   imageAnimated,
+}: CardProps) => {
    const dispatch = useAppDispatch();
 
    const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
@@ -65,9 +74,13 @@ const Card = ({ btn, win, product, extra, stars, rating }: CardProps) => {
    };
 
    return (
-      <div className="relative bg-white rounded-[8px] m-2">
+      <div className="relative bg-white rounded-[8px] m-2 cursor-pointer">
          <div className="m-[10px] rounded-[5px]">
-            <ImageCard image={product.images[0]} title={product.title} />
+            <ImageCard
+               image={product.images[0]}
+               title={product.title}
+               imageAnimated={imageAnimated}
+            />
 
             {stars && (
                <div className="flex flex-center gap-1">

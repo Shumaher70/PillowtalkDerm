@@ -145,6 +145,7 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
                                       stars
                                       rating
                                       product={product}
+                                      imageAnimated
                                    />
                                 );
                              })
@@ -157,6 +158,7 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
                                       stars
                                       rating
                                       product={product}
+                                      imageAnimated
                                    />
                                 );
                              })}
