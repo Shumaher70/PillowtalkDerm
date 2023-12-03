@@ -6,6 +6,8 @@ import Footer from './components/footer/Footer';
 import localFont from 'next/font/local';
 import QueryProvider from './QueryProvider';
 import { Providers } from '@/redux/provider';
+import SlideInfo from './components/slideInfo/SlideInfo';
+import Overflow from '../utils/Overflow';
 
 export const schnyderMlightFont = localFont({
    src: '../public/fonts/SchnyderMLight.woff2',
@@ -23,6 +25,8 @@ export default function RootLayout({
          <body>
             <QueryProvider>
                <Providers>
+                  <Overflow />
+                  <SlideInfo />
                   <Navbar />
                   {children}
                   <Footer />
