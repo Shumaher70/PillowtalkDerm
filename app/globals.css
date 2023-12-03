@@ -114,7 +114,3 @@ input[type='text']::-webkit-outer-spin-button,
 input[type='text']::-webkit-inner-spin-button {
    display: none;
 }
-
-input[type='text']:focus {
-   outline: 2px solid #f0e8f6;
-}
