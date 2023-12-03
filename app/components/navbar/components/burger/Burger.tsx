@@ -9,6 +9,8 @@ import Card from '../../../card/Card';
 import Button from '../../../button/Button';
 import BlogCard from '@/app/components/blogCard/BlogCard';
 import { BlogType, ProductType } from '@/types';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { sidebarBurger } from '@/redux/features/sidebarSlice';
 
 interface BurgerProps {
    className?: string;
@@ -17,9 +19,11 @@ interface BurgerProps {
 }
 
 const Burger = ({ className, products, blogs }: BurgerProps) => {
-   const [triggerSideBar, setTriggerSideBar] = useState(false);
    const [shop, setShop] = useState(true);
    const [blog, setBlog] = useState(false);
+
+   const dispatch = useAppDispatch();
+   const sidebarSlice = useAppSelector((state) => state.sidebarReducer);
 
    const shopHandler = () => {
       setShop(true);
@@ -30,13 +34,10 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
       setShop(false);
    };
 
-   const triggerSideBarHandler = () =>
-      setTriggerSideBar((previous) => !previous);
-
    if (blogs && products)
       return (
          <div>
-            <Sidebar triggerSidebar={triggerSideBar}>
+            <Sidebar triggerSidebar={sidebarSlice.sidebarBurger}>
                <div
                   className="
                p-[16px] 
@@ -56,7 +57,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                   </div>
 
                   <AiOutlineClose
-                     onClick={triggerSideBarHandler}
+                     onClick={() => dispatch(sidebarBurger(false))}
                      className="w-[15px] h-[15px] cursor-pointer"
                   />
                </div>
@@ -117,7 +118,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                   )}
                </div>
             </Sidebar>
-            <div onClick={triggerSideBarHandler}>
+            <div onClick={() => dispatch(sidebarBurger(true))}>
                <RxHamburgerMenu
                   className={`text-[30px] cursor-pointer ${className}`}
                />
