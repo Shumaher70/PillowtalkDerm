@@ -4,7 +4,7 @@ const Subscribe = () => {
    return (
       <form onSubmit={(e) => e.preventDefault()} className="flex flex-col">
          <p className="text-p text-bold">Stay up to date</p>
-         <p className="text-p lg:whitespace-nowrap">
+         <p className="text-p ">
             Subscribe for nerdy news, exclusive access and more from Dr. Idriss!
          </p>
 

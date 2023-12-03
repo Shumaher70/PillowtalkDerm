@@ -5,7 +5,7 @@ import Subscribe from './subscribe/Subscribe';
 
 const Footer = () => {
    return (
-      <footer className="z-10 w-full container-rounded-t container-px bg-secondary flex flex-col">
+      <footer className="z-[10] w-full container-rounded-t container-p bg-secondary flex flex-col">
          <div className="flex flex-col items-center justify-between lg:flex-row gap-10 bg-white container-rounded w-full p-[20px] pb-[40px] lg:p-[40px]">
             <div className="max-w-[250px]">
                <ImageFooter />
@@ -22,12 +22,12 @@ const Footer = () => {
             </div>
          </div>
 
-         <div className="w-full flex flex-col items-center p-[20px] pb-[40px]">
+         <div className="w-full flex flex-col items-center p-[20px] pb-[40px] gap-8 lg:flex-row lg:justify-between">
             <p className="text-[12px]">
                © Copyright 2023 Dr. Shereene Idriss / PillowtalkDerm
             </p>
 
-            <div className="pt-8">
+            <div>
                <LegalSection />
             </div>
          </div>
