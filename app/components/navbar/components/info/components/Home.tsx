@@ -1,4 +1,8 @@
-import { slideShop, slideSkinNerdAcademy } from '@/redux/features/sidebarSlice';
+import {
+   slideSearch,
+   slideShop,
+   slideSkinNerdAcademy,
+} from '@/redux/features/sidebarSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import Link from 'next/link';
 
@@ -14,6 +18,7 @@ const Home = ({ href, className }: HomeProps) => {
          onMouseEnter={() => {
             dispatch(slideShop(false));
             dispatch(slideSkinNerdAcademy(false));
+            dispatch(slideSearch(false));
          }}
          href={href}
          className={`

@@ -1,4 +1,8 @@
-import { slideShop, slideSkinNerdAcademy } from '@/redux/features/sidebarSlice';
+import {
+   slideSearch,
+   slideShop,
+   slideSkinNerdAcademy,
+} from '@/redux/features/sidebarSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import React from 'react';
 
@@ -9,6 +13,7 @@ const About = () => {
          onMouseEnter={() => {
             dispatch(slideShop(false));
             dispatch(slideSkinNerdAcademy(false));
+            dispatch(slideSearch(false));
          }}
          className="
            capitalize 
