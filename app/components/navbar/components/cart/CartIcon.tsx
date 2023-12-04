@@ -15,8 +15,8 @@ const CartIcon = () => {
    return (
       <div
          className="
-      w-[30px] 
-      h-[30px] 
+      p-[4px] 
+      px-[11px]
       flex 
       flex-center 
       rounded-full 
