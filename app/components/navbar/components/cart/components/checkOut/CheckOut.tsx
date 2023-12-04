@@ -12,9 +12,9 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
             <p>Taxes and shipping calculated at checkout</p>
             <Button
                text="checkout"
-               uppercase
                size="sm"
                className="bg-purple-800 uppercase mt-4"
+               load={false}
             />
          </div>
 
