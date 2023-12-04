@@ -1,6 +1,5 @@
 'use client';
 
-import { useQueries } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 
 import { useDispatch } from 'react-redux';
@@ -19,35 +18,39 @@ import {
 } from '@/redux/features/sidebarSlice';
 
 import { CiSearch } from 'react-icons/ci';
-
-const getProduct = async () => {
-   const data = await fetch('http://localhost:3000/api/products');
-   const product = await data.json();
-   return product;
-};
-
-const getBlog = async () => {
-   const data = await fetch('http://localhost:3000/api/blog');
-   const blog = await data.json();
-   return blog;
-};
+import { useEffect, useState } from 'react';
+import { BlogType, ProductType } from '@/types';
 
 const Navbar = () => {
    const dispatch = useDispatch();
+   const [products, setProducts] = useState<ProductType[]>([]);
+   const [blogs, setBlogs] = useState<BlogType[]>([]);
 
-   const [products, blogs] = useQueries({
-      queries: [
-         { queryKey: ['product'], queryFn: getProduct },
-         {
-            queryKey: ['blog'],
-            queryFn: getBlog,
-         },
-      ],
-   });
+   const getProduct = async () => {
+      const products = await fetch('http://localhost:3000/api/products');
+      if (products.ok) {
+         const data = await products.json();
+         return setProducts(data);
+      }
+      throw new Error('blogs data did not respond');
+   };
 
+   const getBlog = async () => {
+      const blogs = await fetch('http://localhost:3000/api/blog');
+      if (blogs.ok) {
+         const data = await blogs.json();
+         return setBlogs(data);
+      }
+      throw new Error('blogs data did not respond');
+   };
+
+   useEffect(() => {
+      getProduct();
+      getBlog();
+   }, []);
    return (
       <>
-         {products.isSuccess && blogs.isSuccess && (
+         {
             <motion.header
                onMouseLeave={() => {
                   dispatch(slideShop(false));
@@ -70,13 +73,13 @@ const Navbar = () => {
                      <Info className="hidden lg:flex" />
                      <Burger
                         className="lg:hidden"
-                        products={products.data}
-                        blogs={blogs.data}
+                        products={products}
+                        blogs={blogs}
                      />
                      <SearchMobile
                         className="block lg:hidden"
-                        products={products.data}
-                        blogs={blogs.data}
+                        products={products}
+                        blogs={blogs}
                      />
                   </div>
 
@@ -100,7 +103,7 @@ const Navbar = () => {
                   </div>
                </nav>
             </motion.header>
-         )}
+         }
       </>
    );
 };

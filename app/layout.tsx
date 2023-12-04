@@ -4,7 +4,6 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 
 import localFont from 'next/font/local';
-import QueryProvider from './QueryProvider';
 import { Providers } from '@/redux/provider';
 import SlideInfo from './components/slideInfo/SlideInfo';
 import Overflow from './Overflow';
@@ -23,15 +22,13 @@ export default function RootLayout({
    return (
       <html lang="en">
          <body>
-            <QueryProvider>
-               <Providers>
-                  <Overflow />
-                  <SlideInfo />
-                  <Navbar />
-                  {children}
-                  <Footer />
-               </Providers>
-            </QueryProvider>
+            <Providers>
+               <Overflow />
+               <SlideInfo />
+               <Navbar />
+               {children}
+               <Footer />
+            </Providers>
          </body>
       </html>
    );

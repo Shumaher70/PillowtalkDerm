@@ -1,6 +1,5 @@
 'use client';
 
-import { useQueries } from '@tanstack/react-query';
 import SearchDesktop from '../navbar/components/search/SearchDesktop';
 import Shop from '../navbar/components/info/components/Shop';
 import SkinNerdAcademy from '../navbar/components/info/components/SkinNerdAcademy';
@@ -8,29 +7,34 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { motion } from 'framer-motion';
 import { slideShop, slideSkinNerdAcademy } from '@/redux/features/sidebarSlice';
 import { useEffect, useState } from 'react';
-
-const getProduct = async () => {
-   const data = await fetch('http://localhost:3000/api/products');
-   const product = await data.json();
-   return product;
-};
-
-const getBlog = async () => {
-   const data = await fetch('http://localhost:3000/api/blog');
-   const blog = await data.json();
-   return blog;
-};
+import { BlogType, ProductType } from '@/types';
 
 const SlideInfo = () => {
-   const [products, blogs] = useQueries({
-      queries: [
-         { queryKey: ['product'], queryFn: getProduct },
-         {
-            queryKey: ['blog'],
-            queryFn: getBlog,
-         },
-      ],
-   });
+   const [products, setProducts] = useState<ProductType[]>([]);
+   const [blogs, setBlogs] = useState<BlogType[]>([]);
+
+   const getProduct = async () => {
+      const products = await fetch('http://localhost:3000/api/products');
+      if (products.ok) {
+         const data = await products.json();
+         return setProducts(data);
+      }
+      throw new Error('blogs data did not respond');
+   };
+
+   const getBlog = async () => {
+      const blogs = await fetch('http://localhost:3000/api/blog');
+      if (blogs.ok) {
+         const data = await blogs.json();
+         return setBlogs(data);
+      }
+      throw new Error('blogs data did not respond');
+   };
+
+   useEffect(() => {
+      getProduct();
+      getBlog();
+   }, []);
 
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer);
    const dispatch = useAppDispatch();
@@ -118,65 +122,58 @@ const SlideInfo = () => {
 
    return (
       <>
-         {blogs.isSuccess && products.isSuccess && (
-            <>
-               {screenLg && (
-                  <div
-                     onMouseEnter={moveHandler}
-                     onMouseLeave={blurHandler}
-                     className="w-full z-10"
+         {screenLg && (
+            <div
+               onMouseEnter={moveHandler}
+               onMouseLeave={blurHandler}
+               className="w-full z-10"
+            >
+               <motion.div
+                  className="absolute bg-accent container-rounded-b container-px h-full w-full"
+                  variants={displaySearch}
+                  initial={{ y: '-100%' }}
+                  animate={'trigger'}
+               >
+                  <motion.div
+                     className="w-full"
+                     variants={displaySearch}
+                     initial={{ opacity: 0 }}
+                     animate={'opacity'}
                   >
-                     <motion.div
-                        className="absolute bg-accent container-rounded-b container-px h-full w-full"
-                        variants={displaySearch}
-                        initial={{ y: '-100%' }}
-                        animate={'trigger'}
-                     >
-                        <motion.div
-                           className="w-full"
-                           variants={displaySearch}
-                           initial={{ opacity: 0 }}
-                           animate={'opacity'}
-                        >
-                           <SearchDesktop
-                              products={products.data}
-                              blogs={blogs.data}
-                           />
-                        </motion.div>
-                     </motion.div>
+                     <SearchDesktop products={products} blogs={blogs} />
+                  </motion.div>
+               </motion.div>
 
-                     <motion.div
-                        className="absolute top-[60px] bg-accent container-rounded-b container-px w-full"
-                        variants={displayShop}
-                        initial={{ y: '-100%' }}
-                        animate={'trigger'}
-                     >
-                        <motion.div
-                           variants={displayShop}
-                           initial={{ opacity: 1 }}
-                           animate="opacity"
-                        >
-                           <Shop products={products.data} />
-                        </motion.div>
-                     </motion.div>
+               <motion.div
+                  className="absolute top-[60px] bg-accent container-rounded-b container-px w-full"
+                  variants={displayShop}
+                  initial={{ y: '-100%' }}
+                  animate={'trigger'}
+               >
+                  <motion.div
+                     variants={displayShop}
+                     initial={{ opacity: 1 }}
+                     animate="opacity"
+                  >
+                     <Shop products={products} />
+                  </motion.div>
+               </motion.div>
 
-                     <motion.div
-                        className="absolute top-[60px] bg-accent container-rounded-b container-px w-full"
-                        variants={displaySkin}
-                        initial={{ y: '-100%' }}
-                        animate={'trigger'}
-                     >
-                        <motion.div
-                           variants={displaySkin}
-                           initial={{ opacity: 1 }}
-                           animate="opacity"
-                        >
-                           <SkinNerdAcademy blogs={blogs.data} />
-                        </motion.div>
-                     </motion.div>
-                  </div>
-               )}
-            </>
+               <motion.div
+                  className="absolute top-[60px] bg-accent container-rounded-b container-px w-full"
+                  variants={displaySkin}
+                  initial={{ y: '-100%' }}
+                  animate={'trigger'}
+               >
+                  <motion.div
+                     variants={displaySkin}
+                     initial={{ opacity: 1 }}
+                     animate="opacity"
+                  >
+                     <SkinNerdAcademy blogs={blogs} />
+                  </motion.div>
+               </motion.div>
+            </div>
          )}
       </>
    );
