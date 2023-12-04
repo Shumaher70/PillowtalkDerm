@@ -1,3 +1,7 @@
+'use client';
+
+import { sidebarCart } from '@/redux/features/sidebarSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 
 interface SidebarProps {
@@ -18,6 +22,9 @@ const Sidebar = ({
       closed: { x: '0' },
    };
 
+   const sidebarSlice = useAppSelector((state) => state.sidebarReducer);
+   const dispatch = useAppDispatch();
+
    return (
       <LazyMotion features={domAnimation}>
          <m.div
@@ -31,7 +38,7 @@ const Sidebar = ({
             flex
             flex-col
             bg-accent 
-            z-10
+            z-[10]
             fixed
             top-0
             ${left ? 'left-[100%]' : 'right-[100%]'}
@@ -41,6 +48,12 @@ const Sidebar = ({
          >
             {children}
          </m.div>
+         {sidebarSlice.sidebarCart && (
+            <div
+               className="w-full h-full top-0 right-0 fixed z-[9] bg-black/20 cursor-pointer"
+               onClick={() => dispatch(sidebarCart(false))}
+            />
+         )}
       </LazyMotion>
    );
 };
