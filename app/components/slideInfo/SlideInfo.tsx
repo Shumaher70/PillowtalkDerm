@@ -129,7 +129,7 @@ const SlideInfo = () => {
                className="w-full z-10"
             >
                <motion.div
-                  className="absolute bg-accent container-rounded-b container-px h-full w-full"
+                  className="fixed z-10 bg-accent container-rounded-b container-px h-full w-full"
                   variants={displaySearch}
                   initial={{ y: '-100%' }}
                   animate={'trigger'}
@@ -145,7 +145,7 @@ const SlideInfo = () => {
                </motion.div>
 
                <motion.div
-                  className="absolute top-[60px] bg-accent container-rounded-b container-px w-full"
+                  className="fixed z-10 top-[60px] bg-accent container-rounded-b container-px w-full"
                   variants={displayShop}
                   initial={{ y: '-100%' }}
                   animate={'trigger'}
@@ -160,7 +160,7 @@ const SlideInfo = () => {
                </motion.div>
 
                <motion.div
-                  className="absolute top-[60px] bg-accent container-rounded-b container-px w-full"
+                  className="fixed z-10 top-[60px] bg-accent container-rounded-b container-px w-full"
                   variants={displaySkin}
                   initial={{ y: '-100%' }}
                   animate={'trigger'}
