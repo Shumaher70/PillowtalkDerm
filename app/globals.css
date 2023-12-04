@@ -2,16 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-   font-size: 10px;
-}
-
-.text-hero-lg {
-   font-size: 80px;
-}
-
 .text-hero {
-   font-size: 50px;
+   font-size: 49px;
 }
 
 .text-section-lg {
@@ -81,6 +73,10 @@
 }
 
 @media (min-width: 768px) {
+   .text-hero {
+      font-size: 80px;
+   }
+
    .container-px {
       padding-left: 40px;
       padding-right: 40px;
