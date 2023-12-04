@@ -6,10 +6,6 @@
    font-size: 49px;
 }
 
-.text-section-lg {
-   font-size: 56px;
-}
-
 .text-section {
    font-size: 40px;
 }
@@ -75,6 +71,10 @@
 @media (min-width: 768px) {
    .text-hero {
       font-size: 80px;
+   }
+
+   .text-section {
+      font-size: 56px;
    }
 
    .container-px {
