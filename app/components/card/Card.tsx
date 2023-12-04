@@ -35,6 +35,7 @@ interface CardProps {
    stars?: boolean;
    rating?: boolean;
    imageAnimated?: boolean;
+   className?: string;
 }
 
 const Card = ({
@@ -45,6 +46,7 @@ const Card = ({
    stars,
    rating,
    imageAnimated,
+   className,
 }: CardProps) => {
    const dispatch = useAppDispatch();
 
@@ -74,7 +76,9 @@ const Card = ({
    };
 
    return (
-      <div className="relative bg-white rounded-[8px] m-2 cursor-pointer">
+      <div
+         className={`relative bg-white rounded-[8px] m-2 cursor-pointer ${className}`}
+      >
          <div className="m-[10px] rounded-[5px]">
             <ImageCard
                image={product.images[0]}
@@ -110,7 +114,8 @@ const Card = ({
                      text={`add - $${product.price}`}
                      size="sm"
                      load={load}
-                     className="bg-purple-800 w-full uppercase active:bg-gradient-to-r from-pink-400 to-pink-600 "
+                     className="bg-purple-800 w-full uppercase 
+                     "
                      classText="text-p"
                      soldOut={product.soldOut}
                      onClick={clickHandler}
