@@ -79,7 +79,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                )}
             </div>
 
-            <div className="grid grid-cols-2 px-[16px] pb-[16px] overflow-auto">
+            <div className="grid grid-cols-2 px-[16px] pb-[16px] gap-4 overflow-auto">
                {(filterProducts.length === 0 && filterBlogs.length === 0) ||
                input.length === 0
                   ? products.slice(0, 3).map((product) => {
@@ -92,6 +92,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                              rating
                              product={product}
                              imageAnimated
+                             className="bg-white"
                           />
                        );
                     })
@@ -105,6 +106,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                              rating
                              product={product}
                              imageAnimated
+                             className="bg-white"
                           />
                        );
                     })}
