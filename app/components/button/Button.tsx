@@ -41,7 +41,7 @@ const Button = ({
          `}
       >
          {soldOut ? (
-            <p className="text-[11px] lg:text-[16px]">sold out</p>
+            <p className="text-[11px] md:text-[16px]">sold out</p>
          ) : (
             <>
                <div
@@ -51,9 +51,10 @@ const Button = ({
                >
                   {spin}
                </div>
+
                <span
-                  className={`opacity-100 text-[11px] lg:text-[16px] ${classText}  ${
-                     load && 'opacity-[0]'
+                  className={`opacity-100 text-[11px] md:text-[16px] ${classText} ${
+                     load && 'opacity-0'
                   }`}
                >
                   {text}
