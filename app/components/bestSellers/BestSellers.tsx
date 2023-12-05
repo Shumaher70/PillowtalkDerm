@@ -1,6 +1,6 @@
 import { schnyderMlightFont } from '@/app/layout';
 import { prisma } from '@/lib/prisma';
-import ViewportMotion from '@/motion/ViewportMotion';
+import ViewportMotion from '@/motion/ViewportMotionSection';
 import { ProductType } from '@/types';
 import bestSellers from '@/utils/bestSellers';
 import React from 'react';
