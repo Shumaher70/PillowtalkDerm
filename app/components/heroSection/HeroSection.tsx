@@ -1,11 +1,11 @@
 import { schnyderMlightFont } from '@/app/layout';
 import Button from '../button/Button';
 import Image from 'next/image';
-import ViewportMotion from '@/motion/ViewportMotionSection';
+import ViewportMotionSection from '@/motion/ViewportMotionSection';
 
 const HeroSection = () => {
    return (
-      <ViewportMotion>
+      <ViewportMotionSection>
          <div
             className={`w-full h-[80vh] container-rounded-b container-p relative overflow-hidden`}
          >
@@ -34,7 +34,7 @@ const HeroSection = () => {
                lazy"
             />
          </div>
-      </ViewportMotion>
+      </ViewportMotionSection>
    );
 };
 

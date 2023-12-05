@@ -1,17 +1,29 @@
 import React from 'react';
 import { MotionSection } from './MotionSection';
 
-const ViewportMotion = ({ children }: { children: React.ReactNode }) => {
+const ViewportMotionSection = ({ children }: { children: React.ReactNode }) => {
+   const container = {
+      hidden: { opacity: 0, y: 100 },
+      visible: {
+         opacity: 1,
+         y: 0,
+         transition: {
+            delayChildren: 0.3,
+            staggerChildren: 0.2,
+         },
+      },
+   };
+
    return (
       <MotionSection
-         initial={{ opacity: 0, y: 100 }}
-         whileInView={{ opacity: 1, y: 0 }}
+         variants={container}
+         initial={'hidden'}
+         whileInView={'visible'}
          viewport={{ once: true }}
-         transition={{ duration: 0.3 }}
       >
          {children}
       </MotionSection>
    );
 };
 
-export default ViewportMotion;
+export default ViewportMotionSection;

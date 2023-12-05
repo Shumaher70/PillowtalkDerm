@@ -1,10 +1,12 @@
 import { schnyderMlightFont } from '@/app/layout';
 import { prisma } from '@/lib/prisma';
-import ViewportMotion from '@/motion/ViewportMotionSection';
+import ViewportMotionSection from '@/motion/ViewportMotionSection';
 import { ProductType } from '@/types';
 import bestSellers from '@/utils/bestSellers';
 import React from 'react';
 import Card from '../card/Card';
+import ViewportMotionDiv from '@/motion/ViewPortMotionDiv';
+import ViewportMotionDivArr from '@/motion/ViewPortMotionDivArr';
 
 const BestSellers = async () => {
    const products: ProductType[] = await prisma.product.findMany({
@@ -16,24 +18,23 @@ const BestSellers = async () => {
    const bestSellersFilter = bestSellers(products);
 
    return (
-      <>
-         <ViewportMotion>
-            <div
-               className={`w-full h-[80%] container-px py-[16px] relative overflow-hidden`}
-            >
-               <div className="container-rounded bg-secondary container-px w-full flex flex-col items-center py-[16px]">
-                  <h2
-                     className={`text-section ${schnyderMlightFont.className}`}
-                  >
-                     Best Sellers
-                  </h2>
-                  <h3>{`Skin is complex. Skincare doesn't have to be.`}</h3>
-               </div>
+      <section
+         className={`w-full h-[80%] container-px py-[16px] relative overflow-hidden`}
+      >
+         <ViewportMotionDiv>
+            <div className="container-rounded bg-secondary container-px w-full flex flex-col items-center py-[16px]">
+               <h2 className={`text-section ${schnyderMlightFont.className}`}>
+                  Best Sellers
+               </h2>
+               <h3>{`Skin is complex. Skincare doesn't have to be.`}</h3>
+            </div>
+         </ViewportMotionDiv>
 
-               <div className="grid py-[16px] grid-cols-2 lg:grid-cols-4 lg:gap-5 gap-4">
-                  {bestSellersFilter.map((card) => (
+         <ViewportMotionDiv>
+            <div className="grid py-[16px] grid-cols-2 lg:grid-cols-4 lg:gap-5 gap-4">
+               {bestSellersFilter.map((card) => (
+                  <ViewportMotionDivArr key={card.id}>
                      <Card
-                        key={card.id}
                         product={{
                            id: card.id,
                            images: card.images,
@@ -51,11 +52,11 @@ const BestSellers = async () => {
                         win
                         className="bg-[#f4f3ef] container-rounded m-0 hover:bg-[#f0e8f6] !transition-all "
                      />
-                  ))}
-               </div>
+                  </ViewportMotionDivArr>
+               ))}
             </div>
-         </ViewportMotion>
-      </>
+         </ViewportMotionDiv>
+      </section>
    );
 };
 
