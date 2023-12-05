@@ -70,19 +70,23 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                grid 
                grid-cols-2 
                md:grid-cols-3 
+               gap-4
                overflow-auto
                "
                >
                   {shop && (
                      <>
                         {products.slice(0, 5).map((product) => (
-                           <Card product={product} key={product.id} />
+                           <Card
+                              product={product}
+                              key={product.id}
+                              className="bg-white !p-[16px]"
+                           />
                         ))}
                         <div className="w-full h-full flex flex-center">
                            <Button
                               size="lg"
                               className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
-                              classText="text-p"
                               text="shop all"
                               load={false}
                            />
@@ -109,7 +113,6 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                               size="sm"
                               text="view all"
                               className="uppercase translate-x-2/4 bg-gradient-to-r from-pink-400 to-pink-600"
-                              classText="text-p"
                               load={false}
                            />
                         </div>
