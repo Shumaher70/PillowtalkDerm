@@ -30,7 +30,7 @@ const BestSellers = async () => {
                   <h3>{`Skin is complex. Skincare doesn't have to be.`}</h3>
                </div>
 
-               <div className="grid py-[16px] grid-cols-2 lg:grid-cols-4 gap-5">
+               <div className="grid py-[16px] grid-cols-2 lg:grid-cols-4 lg:gap-5 gap-4">
                   {bestSellersFilter.map((card) => (
                      <Card
                         key={card.id}
@@ -48,7 +48,8 @@ const BestSellers = async () => {
                         stars
                         rating
                         imageAnimated
-                        className="bg-[#f4f3ef] container-rounded px-[16px] py-[8px] m-0 hover:bg-[#f0e8f6] !transition-all "
+                        win
+                        className="bg-[#f4f3ef] container-rounded m-0 hover:bg-[#f0e8f6] !transition-all "
                      />
                   ))}
                </div>
