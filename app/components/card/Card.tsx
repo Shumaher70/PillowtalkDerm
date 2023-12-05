@@ -77,9 +77,9 @@ const Card = ({
 
    return (
       <div
-         className={`relative bg-white rounded-[8px] m-2 cursor-pointer ${className}`}
+         className={`relative rounded-[8px] md:p-[16px] px-[8px] py-[4px] cursor-pointer ${className}`}
       >
-         <div className="m-[10px] rounded-[5px]">
+         <div className="lg:m-[10px] rounded-[5px]">
             <ImageCard
                image={product.images[0]}
                title={product.title}
@@ -116,7 +116,6 @@ const Card = ({
                      load={load}
                      className="bg-purple-800 w-full uppercase 
                      "
-                     classText="text-p"
                      soldOut={product.soldOut}
                      onClick={clickHandler}
                   />
