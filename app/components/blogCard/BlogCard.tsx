@@ -12,7 +12,7 @@ interface BlogCardProps {
 const BlogCard = ({ id, images, title, extra }: BlogCardProps) => {
    if (images)
       return (
-         <div className="bg-white rounded-[8px] m-2 flex flex-col justify-between">
+         <div className="bg-white rounded-[8px] flex flex-col justify-between">
             <div className="m-[10px] rounded-[5px] ">
                <ImageCard image={images[0]} title={title} />
                <div className="pt-[8px] text-center">
