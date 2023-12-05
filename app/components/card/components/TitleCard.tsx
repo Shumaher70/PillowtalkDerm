@@ -3,7 +3,8 @@ const TitleCard = ({ title }: { title: string }) => {
       <p
          className="
             text-black 
-            text-p 
+            md:text-[16px]
+            text-[13px]
             font-[500] 
             font-sans
             capitalize 
