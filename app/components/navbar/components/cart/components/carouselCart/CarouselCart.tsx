@@ -33,7 +33,7 @@ const CarouselCart = ({ carts, products }: CarouselCartProps) => {
                active
                   ? 'bg-gradient-to-t from-pink-400 to-pink-600 border-pink-600'
                   : 'inactive'
-            } w-[8px] h-[8px] border-1 border-purple-300 rounded-full m-1 mr-3`}
+            } w-[8px] h-[8px] border-1 border-purple-300 rounded-full mr-2`}
             onClick={() => onClick()}
          ></button>
       );
