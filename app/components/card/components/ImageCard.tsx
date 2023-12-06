@@ -10,7 +10,7 @@ const ImageCard = ({
    imageAnimated?: boolean;
 }) => {
    return (
-      <div className="relative pt-[100%] rounded-[10px] overflow-hidden">
+      <div className="relative pt-[100%] overflow-hidden">
          <Image
             src={image}
             alt={title}
