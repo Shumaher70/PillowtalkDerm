@@ -11,7 +11,7 @@ interface ShopProps {
 const Shop = ({ products }: ShopProps) => {
    return (
       <div className="py-[30px]">
-         <div className="grid grid-cols-6">
+         <div className="grid grid-cols-6 gap-2">
             {products
                .slice(0, 6)
                .map(
@@ -27,6 +27,7 @@ const Shop = ({ products }: ShopProps) => {
                   }) => (
                      <Card
                         key={id}
+                        className="bg-white"
                         product={{
                            id: id,
                            images: images,

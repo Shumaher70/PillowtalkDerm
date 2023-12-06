@@ -56,10 +56,12 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                      />
                   </div>
 
-                  <AiOutlineClose
-                     onClick={() => dispatch(sidebarBurger(false))}
-                     className="w-[15px] h-[15px] cursor-pointer"
-                  />
+                  <div className="flex h-full">
+                     <AiOutlineClose
+                        onClick={() => dispatch(sidebarBurger(false))}
+                        className="w-[15px] h-[15px] cursor-pointer"
+                     />
+                  </div>
                </div>
                <div
                   className="

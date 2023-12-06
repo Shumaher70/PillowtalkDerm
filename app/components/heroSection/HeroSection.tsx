@@ -9,12 +9,16 @@ const HeroSection = () => {
          <div
             className={`w-full h-[80vh] container-rounded-b container-p relative overflow-hidden`}
          >
-            <div className="w-full h-full flex flex-col gap-5 justify-end md:items-start items-center md:pt-[250px]">
-               <h1 className={`text-hero ${schnyderMlightFont.className}`}>
-                  The Depuffer
-               </h1>
+            <div className="w-full h-full flex flex-col justify-end md:items-start items-center text-center md:text-start md:pt-[250px] gap-5">
+               <div>
+                  <h1 className={`text-hero ${schnyderMlightFont.className}`}>
+                     The Depuffer
+                  </h1>
 
-               <h3 className="">The Award-Winning Depuffer is Back in Stock</h3>
+                  <h3 className="">
+                     The Award-Winning Depuffer is Back in Stock
+                  </h3>
+               </div>
 
                <Button
                   text={'shop now'}

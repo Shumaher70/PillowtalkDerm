@@ -21,7 +21,7 @@ const legalControl = [
 
 const LegalSection = () => {
    return (
-      <div className="flex gap-5">
+      <div className="flex gap-2 flex-wrap md:justify-start justify-center">
          {legalControl.map(({ title, link }) => (
             <Link
                key={title}
