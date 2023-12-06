@@ -12,6 +12,8 @@ import Login from './components/Login';
 import Logo from './components/Logo';
 
 import {
+   sidebarBurger,
+   sidebarSearch,
    slideSearch,
    slideShop,
    slideSkinNerdAcademy,
@@ -45,6 +47,19 @@ const Navbar = () => {
    };
 
    useEffect(() => {
+      const widthHandler = () => {
+         if (window.innerWidth > 1024) {
+            dispatch(sidebarBurger(false));
+            dispatch(sidebarSearch(false));
+         }
+      };
+      widthHandler();
+      window.addEventListener('resize', widthHandler);
+
+      return () => window.removeEventListener('resize', widthHandler);
+   }, [dispatch]);
+
+   useEffect(() => {
       getProduct();
       getBlog();
    }, []);
@@ -60,6 +75,7 @@ const Navbar = () => {
                z-10
                w-full
                container-px
+               md:!px-[40px]
                py-[8px] 
                container-rounded-b
                bg-accent

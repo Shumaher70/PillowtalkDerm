@@ -10,6 +10,8 @@ import Input from './components/Input';
 import TopSearches from './components/TopSearches';
 import Card from '@/app/components/card/Card';
 import BlogCard from '@/app/components/blogCard/BlogCard';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { sidebarSearch } from '@/redux/features/sidebarSlice';
 interface SearchProps {
    className?: string;
    products: ProductType[];
@@ -17,7 +19,9 @@ interface SearchProps {
 }
 
 const Search = ({ className, products, blogs }: SearchProps) => {
-   const [triggerSidebar, setTriggerSidebar] = useState(false);
+   const dispatch = useAppDispatch();
+   const sidebarSlice = useAppSelector((state) => state.sidebarReducer);
+
    const [input, setInput] = useState('');
    const [postInput, setPostInput] = useState('');
 
@@ -39,12 +43,12 @@ const Search = ({ className, products, blogs }: SearchProps) => {
 
    return (
       <>
-         <Sidebar triggerSidebar={triggerSidebar}>
+         <Sidebar triggerSidebar={sidebarSlice.sidebarSearch}>
             <div className="flex flex-col p-[16px] gap-3">
                <div className="flex flex-center gap-3 w-full">
                   <Input getInput={getInput} postInput={postInput} />
                   <AiOutlineClose
-                     onClick={() => setTriggerSidebar(false)}
+                     onClick={() => dispatch(sidebarSearch(false))}
                      className="w-[15px] h-[15px] cursor-pointer"
                   />
                </div>
@@ -137,7 +141,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
          </Sidebar>
 
          <CiSearch
-            onClick={setTriggerSidebar}
+            onClick={() => dispatch(sidebarSearch(true))}
             className={`text-[30px] cursor-pointer ${className}`}
          />
       </>
