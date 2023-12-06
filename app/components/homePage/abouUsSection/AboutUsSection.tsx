@@ -1,5 +1,5 @@
 import ViewportMotionSection from '@/motion/ViewportMotionSection';
-import Button from '../button/Button';
+import Button from '../../button/Button';
 import { schnyderMlightFont } from '@/app/layout';
 
 const AboutUsSection = () => {
