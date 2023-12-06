@@ -68,6 +68,13 @@
    border-radius: 10px;
 }
 
+.running-py {
+   padding-top: 16px;
+   padding-bottom: 16px;
+   margin-top: 24px;
+   margin-bottom: 24px;
+}
+
 @media (min-width: 768px) {
    .text-hero {
       font-size: 80px;
@@ -99,6 +106,13 @@
    .container-rounded {
       border-radius: 30px;
       border-radius: 30px;
+   }
+
+   .running-py {
+      padding-top: 24px;
+      padding-bottom: 24px;
+      margin-top: 48px;
+      margin-bottom: 48px;
    }
 }
 
