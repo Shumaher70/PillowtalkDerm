@@ -33,7 +33,6 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
       setBlog(true);
       setShop(false);
    };
-
    if (blogs && products)
       return (
          <div>
@@ -98,7 +97,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
 
                   {blog && (
                      <>
-                        {blogs.map(({ id, images, title }) => {
+                        {blogs.slice(3).map(({ id, images, title, tags }) => {
                            return (
                               <BlogCard
                                  extra={'Read me'}
@@ -110,15 +109,16 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                            );
                         })}
 
-                        <div className="min-h-[100px] flex justify-end items-center">
-                           <Button
-                              size="sm"
-                              text="view all"
-                              className="uppercase translate-x-2/4 bg-gradient-to-r from-pink-400 to-pink-600"
-                              load={false}
-                           />
+                        <div className="w-full h-full flex flex-center">
+                           <div>
+                              <Button
+                                 size="sm"
+                                 text="view all"
+                                 className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
+                                 load={false}
+                              />
+                           </div>
                         </div>
-                        <div className="min-h-[100px]" />
                      </>
                   )}
                </div>
