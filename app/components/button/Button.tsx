@@ -25,8 +25,8 @@ const Button = ({
          onClick={onClick}
          disabled={soldOut || load ? true : false}
          className={`
-         ${size === 'lg' && 'lg:px-[24px] lg:py-[12px] px-[24px] py-[10px]'}
-         ${size === 'sm' && 'px-[16px] py-[8px]'}
+         ${size === 'lg' && 'lg:px-[24px] lg:py-[12px] px-[24px] py-[14px]'}
+         ${size === 'sm' && 'px-[16px] py-[10px]'}
          relative
          rounded-full
          cursor-pointer
@@ -53,7 +53,7 @@ const Button = ({
                </div>
 
                <span
-                  className={`opacity-100 text-[11px] md:text-[16px] ${classText} ${
+                  className={`opacity-100 flex items-center justify-center text-[11px] md:text-[16px] ${classText} ${
                      load && 'opacity-0'
                   }`}
                >
