@@ -28,4 +28,5 @@ export type BlogType = {
    id: string;
    images: string[];
    title: string;
+   tags: string[];
 };
