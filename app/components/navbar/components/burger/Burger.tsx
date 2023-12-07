@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
 
@@ -21,9 +21,23 @@ interface BurgerProps {
 const Burger = ({ className, products, blogs }: BurgerProps) => {
    const [shop, setShop] = useState(true);
    const [blog, setBlog] = useState(false);
+   const [load, setLoad] = useState(false);
 
    const dispatch = useAppDispatch();
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer);
+
+   useEffect(() => {
+      const loadHandler = () => {
+         if (window.innerWidth < 1024) {
+            setLoad(true);
+         } else {
+            setLoad(false);
+         }
+      };
+      loadHandler();
+      window.addEventListener('resize', loadHandler);
+      return () => window.removeEventListener('resize', loadHandler);
+   }, []);
 
    const shopHandler = () => {
       setShop(true);
@@ -35,35 +49,37 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
    };
    if (blogs && products)
       return (
-         <div>
-            <Sidebar triggerSidebar={sidebarSlice.sidebarBurger}>
-               <div
-                  className="
+         <>
+            {load && (
+               <div>
+                  <Sidebar triggerSidebar={sidebarSlice.sidebarBurger}>
+                     <div
+                        className="
                p-[16px] 
                flex 
                justify-between 
                items-center 
                w-full
                "
-               >
-                  <div className="flex flex-wrap gap-3 z-10">
-                     <ButtonGroup
-                        shop={shop}
-                        blog={blog}
-                        shopHandler={shopHandler}
-                        blogHandler={blogHandler}
-                     />
-                  </div>
+                     >
+                        <div className="flex flex-wrap gap-3 z-10">
+                           <ButtonGroup
+                              shop={shop}
+                              blog={blog}
+                              shopHandler={shopHandler}
+                              blogHandler={blogHandler}
+                           />
+                        </div>
 
-                  <div className="flex h-full">
-                     <AiOutlineClose
-                        onClick={() => dispatch(sidebarBurger(false))}
-                        className="w-[15px] h-[15px] cursor-pointer"
-                     />
-                  </div>
-               </div>
-               <div
-                  className="
+                        <div className="flex h-full">
+                           <AiOutlineClose
+                              onClick={() => dispatch(sidebarBurger(false))}
+                              className="w-[15px] h-[15px] cursor-pointer"
+                           />
+                        </div>
+                     </div>
+                     <div
+                        className="
                w-full 
                px-[16px] 
                pb-[16px] 
@@ -74,61 +90,65 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                gap-4
                overflow-auto
                "
-               >
-                  {shop && (
-                     <>
-                        {products.slice(0, 5).map((product) => (
-                           <Card
-                              product={product}
-                              key={product.id}
-                              className="bg-white !p-[16px]"
-                           />
-                        ))}
-                        <div className="w-full h-full flex flex-center">
-                           <Button
-                              size="lg"
-                              className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
-                              text="shop all"
-                              load={false}
-                           />
-                        </div>
-                     </>
-                  )}
+                     >
+                        {shop && (
+                           <>
+                              {products.slice(0, 5).map((product) => (
+                                 <Card
+                                    product={product}
+                                    key={product.id}
+                                    className="bg-white !p-[16px]"
+                                 />
+                              ))}
+                              <div className="w-full h-full flex flex-center">
+                                 <Button
+                                    size="lg"
+                                    className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
+                                    text="shop all"
+                                    load={false}
+                                 />
+                              </div>
+                           </>
+                        )}
 
-                  {blog && (
-                     <>
-                        {blogs.slice(3).map(({ id, images, title, tags }) => {
-                           return (
-                              <BlogCard
-                                 extra={'Read me'}
-                                 key={id}
-                                 id={id}
-                                 images={images}
-                                 title={title}
-                              />
-                           );
-                        })}
+                        {blog && (
+                           <>
+                              {blogs
+                                 .slice(3)
+                                 .map(({ id, images, title, tags }) => {
+                                    return (
+                                       <BlogCard
+                                          extra={'Read me'}
+                                          key={id}
+                                          id={id}
+                                          images={images}
+                                          title={title}
+                                       />
+                                    );
+                                 })}
 
-                        <div className="w-full h-full flex flex-center">
-                           <div>
-                              <Button
-                                 size="sm"
-                                 text="view all"
-                                 className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
-                                 load={false}
-                              />
-                           </div>
-                        </div>
-                     </>
-                  )}
+                              <div className="w-full h-full flex flex-center">
+                                 <div>
+                                    <Button
+                                       size="sm"
+                                       text="view all"
+                                       className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
+                                       load={false}
+                                    />
+                                 </div>
+                              </div>
+                           </>
+                        )}
+                     </div>
+                  </Sidebar>
+                  <div onClick={() => dispatch(sidebarBurger(true))}>
+                     <RxHamburgerMenu
+                        className={`text-[30px] cursor-pointer ${className}`}
+                     />
+                  </div>
                </div>
-            </Sidebar>
-            <div onClick={() => dispatch(sidebarBurger(true))}>
-               <RxHamburgerMenu
-                  className={`text-[30px] cursor-pointer ${className}`}
-               />
-            </div>
-         </div>
+            )}
+         </>
       );
 };
 
