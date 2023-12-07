@@ -4,13 +4,15 @@ const ImageCard = ({
    image,
    title,
    imageAnimated,
+   size = 100,
 }: {
    image: string;
    title: string;
    imageAnimated?: boolean;
+   size?: number;
 }) => {
    return (
-      <div className="relative pt-[100%] overflow-hidden">
+      <div className={`relative pt-[${size}%] overflow-hidden`}>
          <Image
             src={image}
             alt={title}
