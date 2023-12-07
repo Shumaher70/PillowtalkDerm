@@ -9,6 +9,8 @@ interface BlogCardProps {
    extra?: string;
    tags?: String[];
    classText?: string;
+   rounded?: string;
+   sizeImage?: number;
 }
 
 const BlogCard = ({
@@ -18,26 +20,23 @@ const BlogCard = ({
    extra,
    tags,
    classText,
+   rounded = 'rounded-[8px]',
+   sizeImage,
 }: BlogCardProps) => {
    if (images)
       return (
-         <div className="flex flex-col gap-2 bg-white p-[8px] md:p-[16px] rounded-[8px]">
-            <div className="rounded-[8px] overflow-hidden">
-               <ImageCard image={images[0]} title={title} />
+         <div
+            className={`flex h-full flex-col gap-2 bg-white p-[8px] md:p-[16px] ${rounded}`}
+         >
+            <div className={`${rounded} overflow-hidden`}>
+               <ImageCard size={sizeImage} image={images[0]} title={title} />
             </div>
 
             <div className="flex flex-col flex-grow items-center text-center">
                {tags && (
-                  <div className="flex flex-center gap-2 my-[10px]">
+                  <div className="flex flex-center flex-wrap gap-2 my-[10px]">
                      {tags?.map((t) => {
                         let bg;
-                        const tags = {
-                           all: 'bg-purple-700',
-                           ingredients: 'bg-pink-700',
-                           lifestyle: 'bg-pink-500',
-                           products: 'bg-green-700',
-                           routines: 'bg-yellow-700',
-                        };
                         const tag = t.trim().toLocaleLowerCase();
 
                         if (tag === 'ingredients') {
@@ -55,7 +54,7 @@ const BlogCard = ({
                         return (
                            <div
                               key={id}
-                              className={`flex rounded-full text-[11px] text-white flex-wrap items-center px-[10px] py-[5px] uppercase ${bg}`}
+                              className={`flex rounded-full text-[11px] text-white items-center px-[10px] py-[5px] uppercase ${bg}`}
                            >
                               <span>{tag}</span>
                            </div>
