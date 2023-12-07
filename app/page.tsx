@@ -5,6 +5,7 @@ import DoctorOrderSection from './components/homePage/doctorOrderSection/DoctorO
 import AboutUsSection from './components/homePage/abouUsSection/AboutUsSection';
 import SkinNerdAcademySection from './components/homePage/skinNerdAcademySection/SkinNerdAcademySection';
 import BestSellersSection from './components/homePage/bestSellersSection/BestSellersSection';
+import GetNerdyWithUsSection from './components/homePage/getNerdyWithUsSection/GetNerdyWithUsSection';
 
 export const metadata: Metadata = {
    title: 'PillowTalkDerm',
@@ -20,6 +21,7 @@ export default function Home() {
          <DoctorOrderSection />
          <AboutUsSection />
          <SkinNerdAcademySection />
+         <GetNerdyWithUsSection />
       </main>
    );
 }
