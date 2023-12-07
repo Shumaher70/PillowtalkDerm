@@ -8,7 +8,10 @@ const ReadMe = ({
    src: string;
 }) => {
    return (
-      <Link href={src} className="text-[12px] underline hover:no-underline">
+      <Link
+         href={src}
+         className="text-[12px] md:text-[16px] underline hover:no-underline"
+      >
          {text}
       </Link>
    );
