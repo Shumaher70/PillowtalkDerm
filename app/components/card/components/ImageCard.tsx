@@ -12,7 +12,10 @@ const ImageCard = ({
    size?: number;
 }) => {
    return (
-      <div className={`relative pt-[${size}%] overflow-hidden`}>
+      <div
+         style={{ paddingTop: `${size}%` }}
+         className={`relative overflow-hidden`}
+      >
          <Image
             src={image}
             alt={title}
