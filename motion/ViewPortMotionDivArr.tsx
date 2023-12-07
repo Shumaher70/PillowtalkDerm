@@ -11,7 +11,7 @@ const ViewportMotionDivArr = ({ children }: { children: React.ReactNode }) => {
    };
 
    return (
-      <MotionDiv variants={item} viewport={{ once: true }}>
+      <MotionDiv className="h-full" variants={item} viewport={{ once: true }}>
          {children}
       </MotionDiv>
    );
