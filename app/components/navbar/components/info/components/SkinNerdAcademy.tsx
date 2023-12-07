@@ -8,7 +8,7 @@ const SkinNerdAcademy = ({ blogs }: SkinNerdAcademyProps) => {
    return (
       <div className="py-[30px]">
          <div className="grid grid-cols-4 gap-2">
-            {blogs.slice(0, 6).map(({ id, images, title }) => (
+            {blogs.slice(3).map(({ id, images, title }) => (
                <BlogCard key={id} id={id} images={images} title={title} />
             ))}
          </div>
