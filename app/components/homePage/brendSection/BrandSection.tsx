@@ -6,11 +6,11 @@ import { nanoid } from '@reduxjs/toolkit';
 import Image from 'next/image';
 
 const images = [
-   '/imagesBrandSection/vogue.webp',
-   '/imagesBrandSection/byrdie.webp',
-   '/imagesBrandSection/allure.webp',
-   '/imagesBrandSection/bazaar.webp',
-   '/imagesBrandSection/newYorkTimes.webp',
+   '/imagesHomePage/imagesBrandSection/vogue.webp',
+   '/imagesHomePage/imagesBrandSection/byrdie.webp',
+   '/imagesHomePage/imagesBrandSection/allure.webp',
+   '/imagesHomePage/imagesBrandSection/bazaar.webp',
+   '/imagesHomePage/imagesBrandSection/newYorkTimes.webp',
 ];
 
 const BrandSection = () => {

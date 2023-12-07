@@ -29,7 +29,7 @@ const HeroSection = () => {
             </div>
 
             <Image
-               src="/imagesHome/heroSection.webp"
+               src="/imagesHomePage/imagesHome/heroSection.webp"
                alt="home"
                width={0}
                height={0}
