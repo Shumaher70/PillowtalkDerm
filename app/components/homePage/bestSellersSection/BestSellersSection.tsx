@@ -31,7 +31,7 @@ const BestSellersSection = async () => {
          </ViewportMotionDiv>
 
          <ViewportMotionDiv>
-            <div className="grid py-[16px] grid-cols-2 lg:grid-cols-4 lg:gap-5 gap-4">
+            <div className="grid py-[16px] grid-cols-2 lg:grid-cols-4 lg:gap-5 gap-2">
                {bestSellersFilter.map((card) => (
                   <ViewportMotionDivArr key={card.id}>
                      <Card
@@ -50,7 +50,7 @@ const BestSellersSection = async () => {
                         rating
                         imageAnimated
                         win
-                        className="bg-[#f4f3ef] container-rounded m-0 hover:bg-[#f0e8f6] !transition-all "
+                        className="bg-[#f4f3ef] container-rounded m-0 hover:bg-[#f0e8f6] !transition-all h-full "
                      />
                   </ViewportMotionDivArr>
                ))}

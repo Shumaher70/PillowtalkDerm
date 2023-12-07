@@ -46,7 +46,7 @@ const Input = ({ getInput, postInput }: InputProps) => {
          py-[6px] 
          pr-[6px] 
          pl-[16px] 
-         gap-4 
+         gap-2
          relative
          "
       >

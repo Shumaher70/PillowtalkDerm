@@ -5,7 +5,7 @@ import Subscribe from './subscribe/Subscribe';
 
 const Footer = () => {
    return (
-      <footer className="z-[10] w-full container-rounded-t container-p !pt-[48px] !pb-0 bg-secondary flex flex-col">
+      <footer className="z-[10] w-full container-rounded-t container-p !pt-[48px] !pb-0 bg-secondary flex flex-col relative">
          <div className="flex flex-col items-center justify-between lg:flex-row gap-10 bg-white container-rounded w-full p-[20px] pb-[40px] lg:p-[40px]">
             <div className="max-w-[250px]">
                <ImageFooter />
