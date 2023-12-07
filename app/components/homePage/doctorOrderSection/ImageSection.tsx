@@ -31,7 +31,7 @@ const ImageSection = () => {
          height={0}
          sizes="100vw"
          className="absolute w-full object-cover h-full right-0 top-0 z-[-1]
-   lazy"
+   "
       />
    );
 };
