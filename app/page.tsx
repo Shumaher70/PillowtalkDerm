@@ -4,7 +4,7 @@ import BrandSection from './components/homePage/brendSection/BrandSection';
 import DoctorOrderSection from './components/homePage/doctorOrderSection/DoctorOrderSection';
 import AboutUsSection from './components/homePage/abouUsSection/AboutUsSection';
 import SkinNerdAcademySection from './components/homePage/skinNerdAcademySection/SkinNerdAcademySection';
-import BestSellersSection from './components/bestSellersSection/BestSellersSection';
+import BestSellersSection from './components/homePage/bestSellersSection/BestSellersSection';
 
 export const metadata: Metadata = {
    title: 'PillowTalkDerm',
