@@ -32,6 +32,9 @@ const Button = ({
          cursor-pointer
          flex-center
          text-white
+         hover:bg-pink-600
+         transition-all
+         !duration-250
          ${
             load &&
             '!cursor-not-allowed !bg-gradient-to-r from-pink-400 to-pink-600 '
@@ -53,7 +56,7 @@ const Button = ({
                </div>
 
                <span
-                  className={`opacity-100 flex items-center justify-center text-[11px] md:text-[16px] ${classText} ${
+                  className={`opacity-100 flex items-center  justify-center text-[11px] md:text-[16px] ${classText} ${
                      load && 'opacity-0'
                   }`}
                >
