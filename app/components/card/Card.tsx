@@ -79,7 +79,7 @@ const Card = ({
       <div
          className={`relative rounded-[8px] md:p-[16px] p-[8px] cursor-pointer ${className} `}
       >
-         <div className="lg:m-[10px] h-full rounded-[5px] ">
+         <div className="h-full rounded-[5px] ">
             <div className="flex flex-col h-full justify-between">
                <ImageCard
                   image={product.images[0]}
