@@ -36,7 +36,7 @@ const Cart = () => {
    return (
       <>
          <CartIcon />
-         {products.length && (
+         {products.length > 0 && (
             <div>
                <Sidebar
                   triggerSidebar={cartSlice.sidebarCart}
