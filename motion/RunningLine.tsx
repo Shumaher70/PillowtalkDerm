@@ -20,7 +20,7 @@ const RunningLine = ({ children, baseVelocity = 100 }: ParallaxProps) => {
 
    useEffect(() => {
       const screenHandler = () => {
-         if (window.innerWidth > 768) {
+         if (window.innerWidth >= 768) {
             setWidthSmScreen(1100);
          } else {
             setWidthSmScreen(650);

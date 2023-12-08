@@ -48,7 +48,7 @@ const Navbar = () => {
 
    useEffect(() => {
       const widthHandler = () => {
-         if (window.innerWidth > 1024) {
+         if (window.innerWidth >= 1024) {
             dispatch(sidebarBurger(false));
             dispatch(sidebarSearch(false));
          }

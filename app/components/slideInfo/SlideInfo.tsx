@@ -43,7 +43,7 @@ const SlideInfo = () => {
 
    useEffect(() => {
       const screen = () => {
-         if (window.innerWidth > 1024) {
+         if (window.innerWidth >= 1024) {
             setScreenLg(true);
          } else {
             setScreenLg(false);

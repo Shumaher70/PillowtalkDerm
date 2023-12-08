@@ -12,7 +12,7 @@ const CarouseSection = ({ blogs }: { blogs: BlogType[] }) => {
 
    useEffect(() => {
       const widthHandler = () => {
-         if (window.innerWidth > 1024) {
+         if (window.innerWidth >= 1024) {
             setDots(false);
          } else {
             setDots(true);

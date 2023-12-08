@@ -7,7 +7,7 @@ const ImageSection = () => {
 
    useEffect(() => {
       const imageHandler = () => {
-         if (window.innerWidth > 768) {
+         if (window.innerWidth >= 768) {
             setImageSize(true);
          } else {
             setImageSize(false);
