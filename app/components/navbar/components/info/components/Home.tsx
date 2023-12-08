@@ -7,11 +7,10 @@ import { useAppDispatch } from '@/redux/hooks';
 import Link from 'next/link';
 
 interface HomeProps {
-   href: string;
    className?: string;
 }
 
-const Home = ({ href, className }: HomeProps) => {
+const Home = ({ className }: HomeProps) => {
    const dispatch = useAppDispatch();
    return (
       <Link
@@ -20,7 +19,7 @@ const Home = ({ href, className }: HomeProps) => {
             dispatch(slideSkinNerdAcademy(false));
             dispatch(slideSearch(false));
          }}
-         href={href}
+         href="/"
          className={`
             capitalize 
             text-p 
