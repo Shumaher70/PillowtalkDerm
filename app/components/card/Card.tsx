@@ -17,6 +17,7 @@ import Button from '@/app/components/button/Button';
 import AwardWining from './components/AwardWinning';
 import calcRatingStars from '@/utils/calcRatingStars';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface CardProps {
    product: {
@@ -52,6 +53,7 @@ const Card = ({
 
    const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
    const [load, setLoad] = useState(false);
+   const route = useRouter();
 
    const clickHandler = () => {
       dispatch(
@@ -77,6 +79,7 @@ const Card = ({
 
    return (
       <div
+         onClick={() => route.push(`/products/${product.id}`)}
          className={`relative rounded-[8px] md:p-[16px] p-[8px] cursor-pointer ${className} `}
       >
          <div className="h-full rounded-[5px] ">
