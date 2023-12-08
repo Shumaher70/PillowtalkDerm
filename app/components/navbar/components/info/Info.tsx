@@ -19,7 +19,7 @@ const Info = ({ className }: InfoProps) => {
 
    return (
       <div className={`flex gap-3 ${className}`}>
-         <Home href="" />
+         <Home />
          <p
             className={`
            capitalize 
