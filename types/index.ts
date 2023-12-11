@@ -16,6 +16,7 @@ export type CartType = {
 export type ProductType = {
    id: string;
    images: string[];
+   video: string;
    title: string;
    price: number;
    reviews: Review[];
