@@ -1,18 +1,23 @@
-import Button from '@/app/components/button/Button';
-import Card from '@/app/components/card/Card';
-import { ProductType } from '@/types';
+"use client"
+
+import Button from "@/app/components/button/Button"
+import Card from "@/app/components/card/Card"
+import { ProductType } from "@/types"
+import { useMemo } from "react"
 
 interface ShopProps {
-   products: ProductType[];
+   products: ProductType[]
 
-   className?: string;
+   className?: string
 }
 
 const Shop = ({ products }: ShopProps) => {
+   const productMemo = useMemo(() => products, [products])
+
    return (
       <div className="py-[30px]">
          <div className="grid grid-cols-6 gap-2">
-            {products
+            {productMemo
                .slice(0, 6)
                .map(
                   ({
@@ -42,16 +47,16 @@ const Shop = ({ products }: ShopProps) => {
                   )
                )}
          </div>
-         <div className="w-full flex flex-center mt-10">
+         <div className="flex-center mt-10 flex w-full">
             <Button
                text="shop all"
-               className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
-               size={'lg'}
+               className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
+               size={"lg"}
                load={false}
             />
          </div>
       </div>
-   );
-};
+   )
+}
 
-export default Shop;
+export default Shop

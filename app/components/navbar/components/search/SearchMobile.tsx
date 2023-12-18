@@ -1,71 +1,79 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { CiSearch } from 'react-icons/ci';
+"use client"
+import { useEffect, useMemo, useState } from "react"
+import { AiOutlineClose } from "react-icons/ai"
+import { CiSearch } from "react-icons/ci"
 
-import { BlogType, ProductType } from '@/types';
+import { BlogType, ProductType } from "@/types"
 
-import Sidebar from '../../Sidebar';
-import Input from './components/Input';
-import TopSearches from './components/TopSearches';
-import Card from '@/app/components/card/Card';
-import BlogCard from '@/app/components/blogCard/BlogCard';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { sidebarSearch } from '@/redux/features/sidebarSlice';
+import Sidebar from "../../Sidebar"
+import Input from "./components/Input"
+import TopSearches from "./components/TopSearches"
+import Card from "@/app/components/card/Card"
+import BlogCard from "@/app/components/blogCard/BlogCard"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { sidebarSearch } from "@/redux/features/sidebarSlice"
 interface SearchProps {
-   className?: string;
-   products: ProductType[];
-   blogs: BlogType[];
+   className?: string
+   products: ProductType[]
+   blogs: BlogType[]
 }
 
 const Search = ({ className, products, blogs }: SearchProps) => {
-   const dispatch = useAppDispatch();
-   const sidebarSlice = useAppSelector((state) => state.sidebarReducer);
+   const dispatch = useAppDispatch()
+   const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
 
-   const [input, setInput] = useState('');
-   const [postInput, setPostInput] = useState('');
-   const [load, setLoad] = useState(false);
+   const [input, setInput] = useState("")
+   const [postInput, setPostInput] = useState("")
+   const [load, setLoad] = useState(false)
 
    useEffect(() => {
       const loadHandler = () => {
          if (window.innerWidth < 1024) {
-            setLoad(true);
+            setLoad(true)
          } else {
-            setLoad(false);
+            setLoad(false)
          }
-      };
-      loadHandler();
-      window.addEventListener('resize', loadHandler);
-      return () => window.removeEventListener('resize', loadHandler);
-   }, []);
+      }
+      loadHandler()
+      window.addEventListener("resize", loadHandler)
+      return () => window.removeEventListener("resize", loadHandler)
+   }, [])
 
    const getInput = (event: string) => {
-      setInput(event);
-   };
+      setInput(event)
+   }
 
    const getTopSearch = (event: string) => {
-      setPostInput(event);
-   };
+      setPostInput(event)
+   }
 
-   const filterBlogs = blogs.filter((blog) =>
-      blog.title.trim().includes(input)
-   );
+   const filterBlogs = useMemo(
+      () =>
+         blogs.filter((blog) => {
+            blog.title.trim().toLowerCase().includes(input)
+         }),
+      [blogs, input]
+   )
 
-   const filterProducts = products.filter((product) =>
-      product.title.trim().includes(input)
-   );
+   const filterProducts = useMemo(
+      () =>
+         products.filter((product) =>
+            product.title.trim().toLowerCase().includes(input)
+         ),
+      [input, products]
+   )
 
    return (
       <>
          {load && (
             <>
                <Sidebar triggerSidebar={sidebarSlice.sidebarSearch}>
-                  <div className="flex flex-col p-[16px] gap-3">
-                     <div className="flex flex-center gap-3 w-full">
+                  <div className="flex flex-col gap-3 p-[16px]">
+                     <div className="flex-center flex w-full gap-3">
                         <Input getInput={getInput} postInput={postInput} />
                         <AiOutlineClose
                            onClick={() => dispatch(sidebarSearch(false))}
-                           className="w-[15px] h-[15px] cursor-pointer"
+                           className="h-[15px] w-[15px] cursor-pointer"
                         />
                      </div>
 
@@ -83,11 +91,11 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                            {input.length > 0 &&
                            (filterProducts.length || filterBlogs.length) ? (
                               <p className="text-p">
-                                 {filterBlogs.length + filterProducts.length}{' '}
+                                 {filterBlogs.length + filterProducts.length}{" "}
                                  result
                                  {filterBlogs.length + filterProducts.length > 1
-                                    ? 's'
-                                    : ''}
+                                    ? "s"
+                                    : ""}
                                  {` "${input}"`}
                               </p>
                            ) : (
@@ -100,7 +108,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                      )}
                   </div>
 
-                  <div className="grid grid-cols-2 px-[16px] pb-[16px] gap-4 overflow-auto">
+                  <div className="grid grid-cols-2 gap-4 overflow-auto px-[16px] pb-[16px]">
                      {(filterProducts.length === 0 &&
                         filterBlogs.length === 0) ||
                      input.length === 0
@@ -116,7 +124,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                                    imageAnimated
                                    className="bg-white"
                                 />
-                             );
+                             )
                           })
                         : filterProducts.map((product) => {
                              return (
@@ -130,7 +138,7 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                                    imageAnimated
                                    className="bg-white"
                                 />
-                             );
+                             )
                           })}
 
                      {(filterProducts.length === 0 &&
@@ -161,12 +169,12 @@ const Search = ({ className, products, blogs }: SearchProps) => {
 
                <CiSearch
                   onClick={() => dispatch(sidebarSearch(true))}
-                  className={`text-[30px] cursor-pointer ${className}`}
+                  className={`cursor-pointer text-[30px] ${className}`}
                />
             </>
          )}
       </>
-   );
-};
+   )
+}
 
-export default Search;
+export default Search

@@ -1,53 +1,61 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { RxHamburgerMenu } from 'react-icons/rx';
-import { AiOutlineClose } from 'react-icons/ai';
+"use client"
+import { useEffect, useMemo, useState } from "react"
+import { RxHamburgerMenu } from "react-icons/rx"
+import { AiOutlineClose } from "react-icons/ai"
 
-import Sidebar from '../../Sidebar';
-import ButtonGroup from './components/ButtonGroup';
-import Card from '../../../card/Card';
-import Button from '../../../button/Button';
-import BlogCard from '@/app/components/blogCard/BlogCard';
-import { BlogType, ProductType } from '@/types';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { sidebarBurger } from '@/redux/features/sidebarSlice';
+import Sidebar from "../../Sidebar"
+import ButtonGroup from "./components/ButtonGroup"
+import Card from "../../../card/Card"
+import Button from "../../../button/Button"
+import BlogCard from "@/app/components/blogCard/BlogCard"
+import { BlogType, ProductType } from "@/types"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { sidebarBurger } from "@/redux/features/sidebarSlice"
 
 interface BurgerProps {
-   className?: string;
-   products: ProductType[];
-   blogs: BlogType[];
+   className?: string
+   products: ProductType[]
+   blogs: BlogType[]
 }
 
 const Burger = ({ className, products, blogs }: BurgerProps) => {
-   const [shop, setShop] = useState(true);
-   const [blog, setBlog] = useState(false);
-   const [load, setLoad] = useState(false);
+   const dispatch = useAppDispatch()
+   const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
 
-   const dispatch = useAppDispatch();
-   const sidebarSlice = useAppSelector((state) => state.sidebarReducer);
+   const [shop, setShop] = useState(true)
+   const [blog, setBlog] = useState(false)
+   const [load, setLoad] = useState(false)
+
+   const productsMemo = useMemo(() => {
+      return products
+   }, [products])
+
+   const blogsMemo = useMemo(() => {
+      return blogs
+   }, [blogs])
 
    useEffect(() => {
       const loadHandler = () => {
          if (window.innerWidth < 1024) {
-            setLoad(true);
+            setLoad(true)
          } else {
-            setLoad(false);
+            setLoad(false)
          }
-      };
-      loadHandler();
-      window.addEventListener('resize', loadHandler);
-      return () => window.removeEventListener('resize', loadHandler);
-   }, []);
+      }
+      loadHandler()
+      window.addEventListener("resize", loadHandler)
+      return () => window.removeEventListener("resize", loadHandler)
+   }, [])
 
    const shopHandler = () => {
-      setShop(true);
-      setBlog(false);
-   };
+      setShop(true)
+      setBlog(false)
+   }
    const blogHandler = () => {
-      setBlog(true);
-      setShop(false);
-   };
-   if (blogs && products)
+      setBlog(true)
+      setShop(false)
+   }
+   if (blogsMemo && productsMemo)
       return (
          <>
             {load && (
@@ -55,14 +63,14 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                   <Sidebar triggerSidebar={sidebarSlice.sidebarBurger}>
                      <div
                         className="
-               p-[16px] 
                flex 
-               justify-between 
+               w-full 
                items-center 
-               w-full
+               justify-between 
+               p-[16px]
                "
                      >
-                        <div className="flex flex-wrap gap-3 z-10">
+                        <div className="z-10 flex flex-wrap gap-3">
                            <ButtonGroup
                               shop={shop}
                               blog={blog}
@@ -74,36 +82,36 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                         <div className="flex h-full">
                            <AiOutlineClose
                               onClick={() => dispatch(sidebarBurger(false))}
-                              className="w-[15px] h-[15px] cursor-pointer"
+                              className="h-[15px] w-[15px] cursor-pointer"
                            />
                         </div>
                      </div>
                      <div
                         className="
+               grid 
                w-full 
+               grid-cols-2 
+               gap-4 
+               overflow-auto 
                px-[16px] 
                pb-[16px] 
-               pt-0 
-               grid 
-               grid-cols-2 
-               md:grid-cols-3 
-               gap-4
-               overflow-auto
+               pt-0
+               md:grid-cols-3
                "
                      >
                         {shop && (
                            <>
-                              {products.slice(0, 5).map((product) => (
+                              {productsMemo.slice(0, 5).map((product) => (
                                  <Card
                                     product={product}
                                     key={product.id}
                                     className="bg-white !p-[16px]"
                                  />
                               ))}
-                              <div className="w-full h-full flex flex-center">
+                              <div className="flex-center flex h-full w-full">
                                  <Button
                                     size="lg"
-                                    className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
+                                    className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
                                     text="shop all"
                                     load={false}
                                  />
@@ -113,26 +121,26 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
 
                         {blog && (
                            <>
-                              {blogs
+                              {blogsMemo
                                  .slice(3)
                                  .map(({ id, images, title, tags }) => {
                                     return (
                                        <BlogCard
-                                          extra={'Read me'}
+                                          extra={"Read me"}
                                           key={id}
                                           id={id}
                                           images={images}
                                           title={title}
                                        />
-                                    );
+                                    )
                                  })}
 
-                              <div className="w-full h-full flex flex-center">
+                              <div className="flex-center flex h-full w-full">
                                  <div>
                                     <Button
                                        size="sm"
                                        text="view all"
-                                       className="uppercase bg-gradient-to-r from-pink-400 to-pink-600"
+                                       className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
                                        load={false}
                                     />
                                  </div>
@@ -143,13 +151,13 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                   </Sidebar>
                   <div onClick={() => dispatch(sidebarBurger(true))}>
                      <RxHamburgerMenu
-                        className={`text-[30px] cursor-pointer ${className}`}
+                        className={`cursor-pointer text-[30px] ${className}`}
                      />
                   </div>
                </div>
             )}
          </>
-      );
-};
+      )
+}
 
-export default Burger;
+export default Burger
