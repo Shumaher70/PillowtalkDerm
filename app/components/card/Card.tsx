@@ -1,42 +1,42 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
+import Link from "next/link"
 
-import { Review } from '@prisma/client';
+import { Review } from "@prisma/client"
 
-import { addCart } from '@/redux/features/cartSlice';
-import { sidebarCart } from '@/redux/features/sidebarSlice';
-import { useAppDispatch } from '@/redux/hooks';
+import { addCart } from "@/redux/features/cartSlice"
+import { sidebarCart } from "@/redux/features/sidebarSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
-import ImageCard from './components/ImageCard';
-import TitleCard from './components/TitleCard';
-import ReadMe from './components/ReadMe';
-import Stars from './components/Stars';
-import Rating from './components/Rating';
-import Button from '@/app/components/button/Button';
-import AwardWining from './components/AwardWinning';
-import calcRatingStars from '@/utils/calcRatingStars';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import ImageCard from "./components/ImageCard"
+import TitleCard from "./components/TitleCard"
+import ReadMe from "./components/ReadMe"
+import Stars from "./components/Stars"
+import Rating from "./components/Rating"
+import Button from "@/app/components/button/Button"
+import AwardWining from "./components/AwardWinning"
+import calcRatingStars from "@/utils/calcRatingStars"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 interface CardProps {
    product: {
-      id: string;
-      images: string[];
-      title: string;
-      price: number;
-      reviews: Review[];
-      soldOut?: boolean;
-      sold: number;
-      pair: string[];
-   };
-   extra?: string;
-   btn?: boolean;
-   win?: boolean;
-   stars?: boolean;
-   rating?: boolean;
-   imageAnimated?: boolean;
-   className?: string;
+      id: string
+      images: string[]
+      title: string
+      price: number
+      reviews: Review[]
+      soldOut?: boolean
+      sold: number
+      pair: string[]
+   }
+   extra?: string
+   btn?: boolean
+   win?: boolean
+   stars?: boolean
+   rating?: boolean
+   imageAnimated?: boolean
+   className?: string
 }
 
 const Card = ({
@@ -49,11 +49,11 @@ const Card = ({
    imageAnimated,
    className,
 }: CardProps) => {
-   const dispatch = useAppDispatch();
+   const dispatch = useAppDispatch()
 
-   const ratingStars = calcRatingStars(product.reviews.length, product.reviews);
-   const [load, setLoad] = useState(false);
-   const route = useRouter();
+   const ratingStars = calcRatingStars(product.reviews.length, product.reviews)
+   const [load, setLoad] = useState(false)
+   const route = useRouter()
 
    const clickHandler = () => {
       dispatch(
@@ -69,33 +69,41 @@ const Card = ({
             sold: product.sold,
             pair: product.pair,
          })
-      );
-      setLoad(true);
+      )
+      setLoad(true)
       setTimeout(() => {
-         setLoad(false);
-         dispatch(sidebarCart(true));
-      }, 500);
-   };
+         setLoad(false)
+         dispatch(sidebarCart(true))
+      }, 500)
+   }
 
    return (
       <div
-         onClick={() => route.push(`/products/${product.id}`)}
-         className={`relative rounded-[8px] md:p-[16px] p-[8px] cursor-pointer ${className} `}
+         onClick={() =>
+            route.push(
+               `/products/${product.title
+                  .split("")
+                  .map((item) => item.replace(" ", "-"))
+                  .join("")
+                  .toLowerCase()}`
+            )
+         }
+         className={`relative cursor-pointer rounded-[8px] p-[8px] md:p-[16px] ${className}`}
       >
          <div className="h-full rounded-[5px] ">
-            <div className="flex flex-col h-full justify-between">
+            <div className="flex h-full flex-col justify-between">
                <ImageCard
                   image={product.images[0]}
                   title={product.title}
                   imageAnimated={imageAnimated}
                />
                {stars && (
-                  <div className="flex flex-center gap-1">
+                  <div className="flex-center flex gap-1">
                      <Stars stars={ratingStars} />
                   </div>
                )}
                {rating && (
-                  <div className="flex flex-center">
+                  <div className="flex-center flex">
                      <Rating rating={product.reviews.length} />
                   </div>
                )}
@@ -103,17 +111,17 @@ const Card = ({
                   <TitleCard title={product.title} />
                </div>
                {extra && (
-                  <div className="text-center pt-[8px]">
+                  <div className="pt-[8px] text-center">
                      <ReadMe text={extra} src="" />
                   </div>
                )}
                {btn && (
-                  <div className="flex w-full flex-center pt-[8px]">
+                  <div className="flex-center flex w-full pt-[8px]">
                      <Button
                         text={`add - $${product.price}`}
                         size="sm"
                         load={load}
-                        className="bg-purple-800 w-full uppercase 
+                        className="w-full bg-purple-800 uppercase 
                      "
                         soldOut={product.soldOut}
                         onClick={clickHandler}
@@ -124,12 +132,12 @@ const Card = ({
          </div>
 
          {win && (
-            <div className="absolute top-3 left-3">
+            <div className="absolute left-3 top-3">
                <AwardWining />
             </div>
          )}
       </div>
-   );
-};
+   )
+}
 
-export default Card;
+export default Card
