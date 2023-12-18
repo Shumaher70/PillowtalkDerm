@@ -10,12 +10,9 @@
    font-size: 40px;
 }
 
-.text-title-lg {
-   font-size: 40px;
-}
-
 .text-title {
    font-size: 28px;
+   line-height: 35px;
 }
 
 .text-p {
@@ -75,9 +72,66 @@
    margin-bottom: 24px;
 }
 
+.box-p {
+   padding: 16px;
+}
+
+.different p {
+   font-size: 14px;
+   padding-bottom: 8px;
+}
+
+.refills p {
+   font-size: 14px;
+   padding-bottom: 8px;
+}
+
+.howToUse ul {
+   list-style-type: disc;
+   padding-left: 40px;
+}
+
+.howToUse ul li {
+   font-size: 14px;
+   padding-bottom: 8px;
+}
+
+.howToUse ul li a {
+   font-size: 14px;
+   text-decoration: underline;
+}
+.howToUse ul li a:hover {
+   text-decoration: none;
+}
+
+.awards ul {
+   list-style-type: disc;
+   padding-left: 40px;
+}
+
+.awards ul li {
+   font-size: 14px;
+   padding-bottom: 8px;
+}
+
+.refills ul {
+   list-style-type: disc;
+   padding-left: 40px;
+}
+
+.refills ul li {
+   font-size: 14px;
+   padding-bottom: 8px;
+}
+
 @media (min-width: 768px) {
    .text-hero {
       font-size: 80px;
+   }
+
+   .text-title {
+      font-size: 40px;
+      line-height: 35px;
    }
 
    .text-section {
@@ -114,6 +168,46 @@
       margin-top: 48px;
       margin-bottom: 48px;
    }
+
+   .different p {
+      font-size: 16px;
+      padding-bottom: 8px;
+   }
+
+   .refills p {
+      font-size: 16px;
+      padding-bottom: 8px;
+   }
+
+   .howToUse ul {
+      list-style-type: disc;
+      padding-left: 40px;
+   }
+
+   .howToUse ul li {
+      font-size: 16px;
+      padding-bottom: 8px;
+   }
+
+   .awards ul {
+      list-style-type: disc;
+      padding-left: 40px;
+   }
+
+   .awards ul li {
+      font-size: 16px;
+      padding-bottom: 8px;
+   }
+
+   .refills ul {
+      list-style-type: disc;
+      padding-left: 40px;
+   }
+
+   .refills ul li {
+      font-size: 16px;
+      padding-bottom: 8px;
+   }
 }
 
 @media (min-width: 1024px) {
@@ -125,14 +219,18 @@
    .container-p {
       padding: 80px;
    }
+
+   .box-p {
+      padding: 24px;
+   }
 }
 
-input[type='text'] {
+input[type="text"] {
    -moz-appearance: textfield;
    -webkit-appearance: textfield;
    appearance: textfield;
 }
-input[type='text']::-webkit-outer-spin-button,
-input[type='text']::-webkit-inner-spin-button {
+input[type="text"]::-webkit-outer-spin-button,
+input[type="text"]::-webkit-inner-spin-button {
    display: none;
 }
