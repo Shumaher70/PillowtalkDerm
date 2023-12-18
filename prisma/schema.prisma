@@ -11,51 +11,52 @@ model Product {
   id          String   @id @default(uuid())
   images      String[]
   title       String
-  subTitle    String
+  subTitle    String?
   price       Float
-  discount    String?
-  different   String?
-  howToUse    String[]
-  awards      String[]
+  discount    Float?
   pair        String[]
-  options     String?
+  options     Int?
   soldOut     Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  video       String
+  video       String?
   description Json[]
   refills     String?
-  reviews     Review[]
-  carts       Cart[]
   sold        Int      @default(0)
+  different   String?
+  howToUse    String?
+  awards      String?
+  carts       Cart[]
+  reviews     Review[]
+  steps       String?
 }
 
 model Blog {
   id        String   @id @default(uuid())
   title     String
-  images    String[]
-  tags      String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  images    String[]
+  tags      String[]
 }
 
 model Cart {
   id         String   @id @default(uuid())
   title      String
   price      Float
-  image      String
-  rating     Int
   totalPrice Float
   quantity   Int
   productId  String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  image      String
+  rating     Int
   product    Product  @relation(fields: [productId], references: [id])
 }
 
 model Review {
   id        String   @id @default(uuid())
-  rating    Float
+  rating    Float    @default(0)
   title     String
   comment   String
   images    String[]
