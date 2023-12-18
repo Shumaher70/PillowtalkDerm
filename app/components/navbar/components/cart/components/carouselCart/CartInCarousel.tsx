@@ -1,31 +1,34 @@
-import { useState } from 'react';
+"use client"
 
-import { useAppDispatch } from '@/redux/hooks';
-import { addCart } from '@/redux/features/cartSlice';
+import { useState } from "react"
 
-import calcRatingStars from '@/utils/calcRatingStars';
+import { useAppDispatch } from "@/redux/hooks"
+import { addCart } from "@/redux/features/cartSlice"
 
-import { Review } from '@prisma/client';
+import calcRatingStars from "@/utils/calcRatingStars"
 
-import ImageCard from '@/app/components/card/components/ImageCard';
-import Stars from '@/app/components/card/components/Stars';
-import TitleCart from '../productInCart/components/TitleCart';
-import ReadMe from '@/app/components/card/components/ReadMe';
-import Button from '@/app/components/button/Button';
+import { Review } from "@prisma/client"
+
+import ImageCard from "@/app/components/card/components/ImageCard"
+import Stars from "@/app/components/card/components/Stars"
+import TitleCart from "../productInCart/components/TitleCart"
+import ReadMe from "@/app/components/card/components/ReadMe"
+import Button from "@/app/components/button/Button"
+import { sidebarCart } from "@/redux/features/sidebarSlice"
 
 interface CartInCarouselProps {
-   id: string;
-   stars?: boolean;
-   image: string;
-   reviews: Review[];
-   title: string;
-   readme?: string;
-   price?: number;
-   button?: boolean;
-   remove?: boolean;
-   soldOut: boolean;
-   pair: string[];
-   sold: number;
+   id: string
+   stars?: boolean
+   image: string
+   reviews: Review[]
+   title: string
+   readme?: string
+   price?: number
+   button?: boolean
+   remove?: boolean
+   soldOut: boolean
+   pair: string[]
+   sold: number
 }
 
 const CartInCarousel = ({
@@ -41,14 +44,15 @@ const CartInCarousel = ({
    pair,
    sold,
 }: CartInCarouselProps) => {
-   const [load, setLoad] = useState(false);
+   const [load, setLoad] = useState(false)
 
-   const dispatch = useAppDispatch();
+   const dispatch = useAppDispatch()
 
    const clickHandler = () => {
-      setLoad(true);
+      setLoad(true)
       setTimeout(() => {
-         setLoad(false);
+         dispatch(sidebarCart(true))
+         setLoad(false)
          dispatch(
             addCart({
                id: id,
@@ -62,40 +66,40 @@ const CartInCarousel = ({
                sold: sold,
                pair: pair,
             })
-         );
-      }, 500);
-   };
+         )
+      }, 500)
+   }
 
    return (
-      <div className="bg-white flex gap-2 flex-between h-full rounded-[8px] p-[16px] relative">
-         <div className="flex gap-3 mr-[150px] items-center">
+      <div className="flex-between relative flex h-full gap-2 rounded-[8px] bg-white p-[16px]">
+         <div className="mr-[150px] flex items-center gap-3">
             <div className="min-w-[65px]">
                <ImageCard image={image} title={title} />
             </div>
 
-            <div className="flex flex-col h-full justify-between gap-2">
+            <div className="flex h-full flex-col justify-between gap-2">
                {stars && (
                   <Stars stars={calcRatingStars(reviews.length, reviews)} />
                )}
                <TitleCart title={title} />
-               {readme && <ReadMe text={readme} src={''} />}
+               {readme && <ReadMe text={readme} src={""} />}
             </div>
          </div>
 
          {button && (
-            <div className="absolute right-[20px] bottom-[20px]">
+            <div className="absolute bottom-[20px] right-[20px]">
                <Button
                   onClick={clickHandler}
                   soldOut={soldOut}
                   load={load}
                   text={`add - $${price}`}
-                  size={'sm'}
-                  className="text-[10px] w-full uppercase  bg-gradient-to-r from-pink-400 to-pink-600 "
+                  size={"sm"}
+                  className="w-full bg-gradient-to-r from-pink-400  to-pink-600 text-[10px] uppercase "
                />
             </div>
          )}
       </div>
-   );
-};
+   )
+}
 
-export default CartInCarousel;
+export default CartInCarousel

@@ -1,20 +1,20 @@
-import { CartType } from '@/types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartType } from "@/types"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 type CartState = {
-   carts: CartType[];
-   totalPrice: number;
-   totalQuantity: number;
-};
+   carts: CartType[]
+   totalPrice: number
+   totalQuantity: number
+}
 
 const initialState = {
    carts: [],
    totalPrice: 0,
    totalQuantity: 0,
-} as CartState;
+} as CartState
 
 export const cart = createSlice({
-   name: 'cart',
+   name: "cart",
    initialState,
    reducers: {
       addCart: (state, action: PayloadAction<CartType>) => {
@@ -22,33 +22,33 @@ export const cart = createSlice({
             state.carts.filter((cart) => cart.id.includes(action.payload.id))
                .length === 0
          ) {
-            state.carts.push(action.payload);
+            state.carts.push(action.payload)
          } else {
             state.carts.map((cart) => {
-               cart.id === action.payload.id ? (cart.quantity += 1) : null;
+               cart.id === action.payload.id ? (cart.quantity += 1) : null
                cart.id === action.payload.id
                   ? (cart.totalPrice = cart.price * cart.quantity)
-                  : null;
-            });
+                  : null
+            })
          }
          state.totalPrice = state.carts
             .map((cart) => cart.totalPrice)
-            .reduce((sum, acc) => sum + acc, 0);
+            .reduce((sum, acc) => sum + acc, 0)
          state.totalQuantity = state.carts
             .map((cart) => cart.quantity)
-            .reduce((sum, acc) => sum + acc, 0);
+            .reduce((sum, acc) => sum + acc, 0)
       },
 
       removeCart: (state, action: PayloadAction<string>) => {
          state.carts = state.carts.filter((cart) => {
-            return cart.id !== action.payload;
-         });
+            return cart.id !== action.payload
+         })
          state.totalPrice = state.carts
             .map((cart) => cart.totalPrice)
-            .reduce((sum, acc) => sum + acc, 0);
+            .reduce((sum, acc) => sum + acc, 0)
          state.totalQuantity = state.carts
             .map((cart) => cart.quantity)
-            .reduce((sum, acc) => sum + acc, 0);
+            .reduce((sum, acc) => sum + acc, 0)
       },
 
       updateCart: (
@@ -57,20 +57,38 @@ export const cart = createSlice({
       ) => {
          state.carts.map((cart) => {
             if (cart.id === action.payload.id) {
-               cart.totalPrice = cart.price * cart.quantity;
-               cart.quantity = action.payload.quantity;
+               cart.totalPrice = cart.price * cart.quantity
+               cart.quantity = action.payload.quantity
             }
-         });
+         })
          state.totalPrice = state.carts
             .map((cart) => cart.totalPrice)
-            .reduce((sum, acc) => sum + acc, 0);
+            .reduce((sum, acc) => sum + acc, 0)
          state.totalQuantity = state.carts
             .map((cart) => cart.quantity)
-            .reduce((sum, acc) => sum + acc, 0);
+            .reduce((sum, acc) => sum + acc, 0)
+      },
+
+      addOrder: (
+         state,
+         action: PayloadAction<{ id: string; quantity: number }>
+      ) => {
+         state.carts.map((cart) => {
+            if (cart.id === action.payload.id) {
+               cart.totalPrice = cart.price * cart.quantity
+               cart.quantity = cart.quantity + action.payload.quantity
+            }
+         })
+         state.totalPrice = state.carts
+            .map((cart) => cart.totalPrice)
+            .reduce((sum, acc) => sum + acc, 0)
+         state.totalQuantity = state.carts
+            .map((cart) => cart.quantity)
+            .reduce((sum, acc) => sum + acc, 0)
       },
    },
-});
+})
 
-export const { addCart, removeCart, updateCart } = cart.actions;
+export const { addCart, removeCart, updateCart, addOrder } = cart.actions
 
-export default cart.reducer;
+export default cart.reducer

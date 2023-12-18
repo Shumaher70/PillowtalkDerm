@@ -1,89 +1,89 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { CiSearch } from 'react-icons/ci';
+"use client"
+import { useEffect, useState } from "react"
+import { CiSearch } from "react-icons/ci"
 
 interface InputProps {
-   getInput?: (event: string) => void;
-   postInput?: string;
+   getInput?: (event: string) => void
+   postInput?: string
 }
 
 const Input = ({ getInput, postInput }: InputProps) => {
-   const post = postInput || '';
+   const post = postInput || ""
 
-   const [outline, setOutline] = useState(false);
-   const [input, setInput] = useState(post);
+   const [outline, setOutline] = useState(false)
+   const [input, setInput] = useState(post)
 
    const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setInput(event.target.value);
-   };
+      setInput(event.target.value)
+   }
 
    useEffect(() => {
       if (getInput) {
          const timer = setTimeout(() => {
-            getInput(input.toLowerCase().trim());
-         }, 300);
-         return () => clearTimeout(timer);
+            getInput(input.toLowerCase().trim())
+         }, 300)
+         return () => clearTimeout(timer)
       }
-   }, [getInput, input]);
+   }, [getInput, input])
 
    useEffect(() => {
-      if (post) return setInput(post);
-   }, [post]);
+      if (post) return setInput(post)
+   }, [post])
 
-   const onFocus = () => setOutline(true);
-   const onBlur = () => setOutline(false);
+   const onFocus = () => setOutline(true)
+   const onBlur = () => setOutline(false)
 
    return (
       <div
          className="
-         w-full 
-         flex 
          flex-center 
-         rounded-full 
-         bg-white 
          border-1 
+         relative 
+         flex 
+         w-full 
+         gap-2 
+         rounded-full 
          border-[#cfb6e2] 
+         bg-white 
          py-[6px] 
-         pr-[6px] 
-         pl-[16px] 
-         gap-2
-         relative
+         pl-[16px]
+         pr-[6px]
          "
       >
          {outline && (
             <div
                className="
+               pointer-events-none 
                absolute 
-               top-[-7] 
                right-[-7px]
-               w-[calc(100%_+_14px)] 
+               top-[-7] 
                h-[calc(100%_+_14px)] 
-               rounded-full
-               border-2 
+               w-[calc(100%_+_14px)]
+               rounded-full 
+               border-2
                border-[#cfb6e2]
-               pointer-events-none
                "
             />
          )}
 
-         <CiSearch className={`text-[20px] cursor-pointer `} />
+         <CiSearch className={`cursor-pointer text-[20px] `} />
          <input
             value={input}
             type="text"
             placeholder="Search"
-            className="w-full bg-inherit outline-none text-[12px]"
+            className="w-full bg-inherit text-[12px] outline-none"
             onFocus={onFocus}
             onBlur={onBlur}
             onChange={inputHandler}
          />
 
          {input.length > 0 && (
-            <p className="mr-[7px] cursor-pointer" onClick={() => setInput('')}>
+            <p className="mr-[7px] cursor-pointer" onClick={() => setInput("")}>
                Clear
             </p>
          )}
       </div>
-   );
-};
+   )
+}
 
-export default Input;
+export default Input

@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 const Subscribe = () => {
    return (
@@ -8,16 +8,16 @@ const Subscribe = () => {
             Subscribe for nerdy news, exclusive access and more from Dr. Idriss!
          </p>
 
-         <div className="flex py-5 w-full border-b-[1px] border-red-500">
+         <div className="flex w-full border-b-[1px] border-red-500 py-5">
             <input
                type="email"
                placeholder="Email*"
-               className="bg-transparent w-full outline-none text-p placeholder:text-gray-700"
+               className="text-p w-full bg-transparent outline-none placeholder:text-gray-700"
             />
-            <button className="uppercase text-p font-bold ">Subscribe</button>
+            <button className="text-p font-bold uppercase ">Subscribe</button>
          </div>
       </form>
-   );
-};
+   )
+}
 
-export default Subscribe;
+export default Subscribe

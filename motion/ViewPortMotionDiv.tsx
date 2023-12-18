@@ -1,5 +1,5 @@
-import React from 'react';
-import { MotionDiv } from './MotionDiv';
+import React from "react"
+import { MotionDiv } from "./MotionDiv"
 
 const ViewportMotionDiv = ({ children }: { children: React.ReactNode }) => {
    const container = {
@@ -12,18 +12,18 @@ const ViewportMotionDiv = ({ children }: { children: React.ReactNode }) => {
             staggerChildren: 0.2,
          },
       },
-   };
+   }
 
    return (
       <MotionDiv
          variants={container}
-         initial={'hidden'}
-         whileInView={'visible'}
+         initial={"hidden"}
+         whileInView={"visible"}
          viewport={{ once: true }}
       >
          {children}
       </MotionDiv>
-   );
-};
+   )
+}
 
-export default ViewportMotionDiv;
+export default ViewportMotionDiv

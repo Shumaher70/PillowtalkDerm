@@ -2,24 +2,24 @@ const TitleCard = ({
    title,
    className,
 }: {
-   title: string;
-   className?: string;
+   title: string
+   className?: string
 }) => {
    return (
       <p
          className={`
-         text-black 
-            md:text-[16px]
+         font-sans 
             text-[13px]
-            font-[500] 
-            font-sans
-            leading-[16px]
+            font-[500]
+            leading-[16px] 
+            text-black
+            md:text-[16px]
             ${className}
          `}
       >
          {title}
       </p>
-   );
-};
+   )
+}
 
-export default TitleCard;
+export default TitleCard

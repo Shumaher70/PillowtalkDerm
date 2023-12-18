@@ -1,28 +1,28 @@
-import ImageFooter from './image/imageFooter';
-import LegalSection from './legal/LegalSection';
-import Menu from './menu/Menu';
-import Subscribe from './subscribe/Subscribe';
+import ImageFooter from "./image/imageFooter"
+import LegalSection from "./legal/LegalSection"
+import Menu from "./menu/Menu"
+import Subscribe from "./subscribe/Subscribe"
 
 const Footer = () => {
    return (
-      <footer className="z-[10] w-full container-rounded-t container-p !pt-[48px] !pb-0 bg-secondary flex flex-col relative">
-         <div className="flex flex-col items-center justify-between lg:flex-row gap-10 bg-white container-rounded w-full p-[20px] pb-[40px] lg:p-[40px]">
+      <footer className="container-rounded-t container-p bg-secondary relative flex w-full flex-col !pb-0 !pt-[48px]">
+         <div className="container-rounded flex w-full flex-col items-center justify-between gap-10 bg-white p-[20px] pb-[40px] lg:flex-row lg:p-[40px]">
             <div className="max-w-[250px]">
                <ImageFooter />
             </div>
 
-            <div className="flex flex-col lg:flex-row lg:justify-between gap-10">
-               <div className="pt-10 lg:pt-0 w-full lg:order-1">
+            <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
+               <div className="w-full pt-10 lg:order-1 lg:pt-0">
                   <Subscribe />
                </div>
 
-               <div className="pt-10 lg:pt-0 w-full lg:max-w-[300px]">
+               <div className="w-full pt-10 lg:max-w-[300px] lg:pt-0">
                   <Menu />
                </div>
             </div>
          </div>
 
-         <div className="w-full flex flex-col items-center p-[20px] pb-[40px] gap-2 lg:flex-row lg:justify-between md:text-start text-center">
+         <div className="flex w-full flex-col items-center gap-2 p-[20px] pb-[40px] text-center md:text-start lg:flex-row lg:justify-between">
             <p className="text-[12px]">
                © Copyright 2023 Dr. Shereene Idriss / PillowtalkDerm
             </p>
@@ -30,7 +30,7 @@ const Footer = () => {
             <LegalSection />
          </div>
       </footer>
-   );
-};
+   )
+}
 
-export default Footer;
+export default Footer

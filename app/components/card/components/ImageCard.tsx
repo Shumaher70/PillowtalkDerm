@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image"
 
 const ImageCard = ({
    image,
@@ -6,10 +6,10 @@ const ImageCard = ({
    imageAnimated,
    size = 100,
 }: {
-   image: string;
-   title: string;
-   imageAnimated?: boolean;
-   size?: number;
+   image: string
+   title: string
+   imageAnimated?: boolean
+   size?: number
 }) => {
    return (
       <div
@@ -19,8 +19,8 @@ const ImageCard = ({
          <Image
             src={image}
             alt={title}
-            className={`w-full h-full object-cover top-0 absolute transition-all ${
-               imageAnimated && 'hover:-translate-y-[20px]'
+            className={`absolute top-0 h-full w-full object-cover transition-all ${
+               imageAnimated && "hover:-translate-y-[20px]"
             }`}
             sizes="100vw"
             width={0}
@@ -29,7 +29,7 @@ const ImageCard = ({
             draggable="false"
          />
       </div>
-   );
-};
+   )
+}
 
-export default ImageCard;
+export default ImageCard

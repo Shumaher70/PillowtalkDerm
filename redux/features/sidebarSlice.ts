@@ -1,13 +1,13 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 interface sidebar {
-   sidebarCart: boolean;
-   sidebarBurger: boolean;
-   sidebarSearch: boolean;
+   sidebarCart: boolean
+   sidebarBurger: boolean
+   sidebarSearch: boolean
 
-   slideShop: boolean;
-   slideSkinNerdAcademy: boolean;
-   slideSearch: boolean;
+   slideShop: boolean
+   slideSkinNerdAcademy: boolean
+   slideSearch: boolean
 }
 
 const initialState = {
@@ -18,33 +18,33 @@ const initialState = {
    slideShop: false,
    slideSkinNerdAcademy: false,
    slideSearch: false,
-} as sidebar;
+} as sidebar
 
 export const sidebar = createSlice({
-   name: 'sidebar',
+   name: "sidebar",
    initialState,
    reducers: {
       sidebarCart: (state, action: PayloadAction<boolean>) => {
-         state.sidebarCart = action.payload;
+         state.sidebarCart = action.payload
       },
       sidebarBurger: (state, action: PayloadAction<boolean>) => {
-         state.sidebarBurger = action.payload;
+         state.sidebarBurger = action.payload
       },
       sidebarSearch: (state, action: PayloadAction<boolean>) => {
-         state.sidebarSearch = action.payload;
+         state.sidebarSearch = action.payload
       },
 
       slideShop: (state, action: PayloadAction<boolean>) => {
-         state.slideShop = action.payload;
+         state.slideShop = action.payload
       },
       slideSkinNerdAcademy: (state, action: PayloadAction<boolean>) => {
-         state.slideSkinNerdAcademy = action.payload;
+         state.slideSkinNerdAcademy = action.payload
       },
       slideSearch: (state, action: PayloadAction<boolean>) => {
-         state.slideSearch = action.payload;
+         state.slideSearch = action.payload
       },
    },
-});
+})
 
 export const {
    sidebarCart,
@@ -54,6 +54,6 @@ export const {
    sidebarBurger,
    sidebarSearch,
    slideSearch,
-} = sidebar.actions;
+} = sidebar.actions
 
-export default sidebar.reducer;
+export default sidebar.reducer

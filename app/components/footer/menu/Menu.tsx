@@ -1,45 +1,45 @@
-import Link from 'next/link';
+import Link from "next/link"
 
 const helpControl = [
    {
-      title: 'Shipping & Returns',
-      link: '',
+      title: "Shipping & Returns",
+      link: "",
    },
    {
-      title: 'FAQ',
-      link: '',
+      title: "FAQ",
+      link: "",
    },
    {
-      title: 'Contact Us',
-      link: '',
+      title: "Contact Us",
+      link: "",
    },
-];
+]
 
 const learnControl = [
    {
-      title: 'Skin Nerd Academy',
-      link: '',
+      title: "Skin Nerd Academy",
+      link: "",
    },
    {
-      title: 'Ingredients Glossary',
-      link: '',
+      title: "Ingredients Glossary",
+      link: "",
    },
-];
+]
 
 const DrIdrissControl = [
    {
-      title: 'About',
-      link: '',
+      title: "About",
+      link: "",
    },
    {
-      title: 'ShopMy',
-      link: '',
+      title: "ShopMy",
+      link: "",
    },
    {
-      title: 'Idriss Derm',
-      link: '',
+      title: "Idriss Derm",
+      link: "",
    },
-];
+]
 const Menu = () => {
    return (
       <div className="grid grid-cols-2 gap-5">
@@ -70,7 +70,7 @@ const Menu = () => {
             ))}
          </div>
       </div>
-   );
-};
+   )
+}
 
-export default Menu;
+export default Menu

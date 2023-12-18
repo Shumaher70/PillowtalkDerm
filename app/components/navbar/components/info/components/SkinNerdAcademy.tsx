@@ -1,8 +1,8 @@
-import BlogCard from '@/app/components/blogCard/BlogCard';
-import Button from '@/app/components/button/Button';
-import { BlogType } from '@/types';
+import BlogCard from "@/app/components/blogCard/BlogCard"
+import Button from "@/app/components/button/Button"
+import { BlogType } from "@/types"
 interface SkinNerdAcademyProps {
-   blogs: BlogType[];
+   blogs: BlogType[]
 }
 const SkinNerdAcademy = ({ blogs }: SkinNerdAcademyProps) => {
    return (
@@ -12,16 +12,16 @@ const SkinNerdAcademy = ({ blogs }: SkinNerdAcademyProps) => {
                <BlogCard key={id} id={id} images={images} title={title} />
             ))}
          </div>
-         <div className="w-full flex flex-center mt-10">
+         <div className="flex-center mt-10 flex w-full">
             <Button
                text="view all"
-               className="uppercase bg-purple-700"
-               size={'lg'}
+               className="bg-purple-700 uppercase"
+               size={"lg"}
                load={false}
             />
          </div>
       </div>
-   );
-};
+   )
+}
 
-export default SkinNerdAcademy;
+export default SkinNerdAcademy

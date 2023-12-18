@@ -2,39 +2,39 @@ import {
    slideSearch,
    slideShop,
    slideSkinNerdAcademy,
-} from '@/redux/features/sidebarSlice';
-import { useAppDispatch } from '@/redux/hooks';
-import Link from 'next/link';
+} from "@/redux/features/sidebarSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import Link from "next/link"
 
 interface HomeProps {
-   className?: string;
+   className?: string
 }
 
 const Home = ({ className }: HomeProps) => {
-   const dispatch = useAppDispatch();
+   const dispatch = useAppDispatch()
    return (
       <Link
          onMouseEnter={() => {
-            dispatch(slideShop(false));
-            dispatch(slideSkinNerdAcademy(false));
-            dispatch(slideSearch(false));
+            dispatch(slideShop(false))
+            dispatch(slideSkinNerdAcademy(false))
+            dispatch(slideSearch(false))
          }}
          href="/"
          className={`
-            capitalize 
             text-p 
             cursor-pointer 
             whitespace-nowrap 
+            rounded-[20px] 
             px-[10px] 
             py-[5px]
-            rounded-[20px]
+            capitalize
             hover:bg-white
             ${className}
             `}
       >
          Home
       </Link>
-   );
-};
+   )
+}
 
-export default Home;
+export default Home

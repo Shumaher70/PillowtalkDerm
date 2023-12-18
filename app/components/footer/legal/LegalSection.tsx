@@ -1,38 +1,38 @@
-import Link from 'next/link';
+import Link from "next/link"
 
 const legalControl = [
    {
-      title: 'Privacy Policy',
-      link: '',
+      title: "Privacy Policy",
+      link: "",
    },
    {
-      title: 'Terms & Conditions',
-      link: '',
+      title: "Terms & Conditions",
+      link: "",
    },
    {
-      title: 'Accessibility',
-      link: '',
+      title: "Accessibility",
+      link: "",
    },
    {
-      title: 'Do Not Sell',
-      link: '',
+      title: "Do Not Sell",
+      link: "",
    },
-];
+]
 
 const LegalSection = () => {
    return (
-      <div className="flex gap-2 flex-wrap md:justify-start justify-center">
+      <div className="flex flex-wrap justify-center gap-2 md:justify-start">
          {legalControl.map(({ title, link }) => (
             <Link
                key={title}
                href={link}
-               className="text-[14px] cursor-pointer"
+               className="cursor-pointer text-[14px]"
             >
                {title}
             </Link>
          ))}
       </div>
-   );
-};
+   )
+}
 
-export default LegalSection;
+export default LegalSection

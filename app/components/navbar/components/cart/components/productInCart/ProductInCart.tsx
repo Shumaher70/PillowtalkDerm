@@ -1,34 +1,34 @@
-'use client';
+"use client"
 
-import Stars from '@/app/components/card/components/Stars';
+import Stars from "@/app/components/card/components/Stars"
 
-import TitleCart from './components/TitleCart';
-import ReadMe from '@/app/components/card/components/ReadMe';
-import ImageCard from '@/app/components/card/components/ImageCard';
-import CountProduct from './components/CountProduct';
-import Button from '@/app/components/button/Button';
-import { AiOutlineClose } from 'react-icons/ai';
-import { Review } from '@prisma/client';
-import calcRatingStars from '@/utils/calcRatingStars';
-import { useAppDispatch } from '@/redux/hooks';
-import { addCart, removeCart } from '@/redux/features/cartSlice';
-import { useState } from 'react';
+import TitleCart from "./components/TitleCart"
+import ReadMe from "@/app/components/card/components/ReadMe"
+import ImageCard from "@/app/components/card/components/ImageCard"
+import CountProduct from "./components/CountProduct"
+import Button from "@/app/components/button/Button"
+import { AiOutlineClose } from "react-icons/ai"
+import { Review } from "@prisma/client"
+import calcRatingStars from "@/utils/calcRatingStars"
+import { useAppDispatch } from "@/redux/hooks"
+import { addCart, removeCart } from "@/redux/features/cartSlice"
+import { useState } from "react"
 
 interface ProductInCartProps {
-   id: string;
-   stars?: boolean;
-   image: string;
-   reviews: Review[];
-   title: string;
-   readme?: string;
-   price?: number;
-   totalPrice?: number;
-   countProduct?: boolean;
-   button?: boolean;
-   remove?: boolean;
-   soldOut: boolean;
-   pair: string[];
-   sold: number;
+   id: string
+   stars?: boolean
+   image: string
+   reviews: Review[]
+   title: string
+   readme?: string
+   price?: number
+   totalPrice?: number
+   countProduct?: boolean
+   button?: boolean
+   remove?: boolean
+   soldOut: boolean
+   pair: string[]
+   sold: number
 }
 
 const ProductInCart = ({
@@ -47,14 +47,14 @@ const ProductInCart = ({
    pair,
    sold,
 }: ProductInCartProps) => {
-   const [load, setLoad] = useState(false);
+   const [load, setLoad] = useState(false)
 
-   const dispatch = useAppDispatch();
+   const dispatch = useAppDispatch()
 
    const clickHandler = () => {
-      setLoad(true);
+      setLoad(true)
       setTimeout(() => {
-         setLoad(false);
+         setLoad(false)
          dispatch(
             addCart({
                id: id,
@@ -68,63 +68,63 @@ const ProductInCart = ({
                sold: sold,
                pair: pair,
             })
-         );
-      }, 500);
-   };
+         )
+      }, 500)
+   }
 
    const removeHandler = () => {
-      dispatch(removeCart(id));
-   };
+      dispatch(removeCart(id))
+   }
 
    return (
-      <div className="bg-white flex gap-2 flex-between h-full rounded-[8px] p-[16px] relative">
-         <div className="flex gap-3 mr-[150px] items-center">
+      <div className="flex-between relative flex h-full gap-2 rounded-[8px] bg-white p-[16px]">
+         <div className="mr-[150px] flex items-center gap-3">
             <div className="min-w-[65px]">
                <ImageCard image={image} title={title} />
             </div>
 
-            <div className="flex flex-col h-full justify-between gap-2">
+            <div className="flex h-full flex-col justify-between gap-2">
                {stars && (
                   <Stars stars={calcRatingStars(reviews.length, reviews)} />
                )}
                <TitleCart title={title} />
-               {readme && <ReadMe text={readme} src={''} />}
+               {readme && <ReadMe text={readme} src={""} />}
                {price && <p>${price}</p>}
             </div>
          </div>
 
-         <span className="absolute top-[20px] right-[20px] text-p font-sans font-bold">
+         <span className="text-p absolute right-[20px] top-[20px] font-sans font-bold">
             ${totalPrice}
          </span>
 
          {countProduct && (
             <CountProduct
-               className="absolute right-[20px] bottom-[20px]"
+               className="absolute bottom-[20px] right-[20px]"
                cartId={id}
             />
          )}
          {button && (
-            <div className="absolute right-[20px] bottom-[20px]">
+            <div className="absolute bottom-[20px] right-[20px]">
                <Button
                   onClick={clickHandler}
                   soldOut={soldOut}
                   load={load}
                   text={`add - $${price}`}
-                  size={'sm'}
-                  className="text-[10px] w-full uppercase  bg-gradient-to-r from-pink-400 to-pink-600 "
+                  size={"sm"}
+                  className="w-full bg-gradient-to-r from-pink-400  to-pink-600 text-[10px] uppercase "
                />
             </div>
          )}
          {remove && (
             <div
-               className="bg-white absolute left-[-10px] top-[-10px] rounded-full p-2"
+               className="absolute left-[-10px] top-[-10px] rounded-full bg-white p-2"
                onClick={removeHandler}
             >
-               <AiOutlineClose className="text-[14px] cursor-pointer" />
+               <AiOutlineClose className="cursor-pointer text-[14px]" />
             </div>
          )}
       </div>
-   );
-};
+   )
+}
 
-export default ProductInCart;
+export default ProductInCart

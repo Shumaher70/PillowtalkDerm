@@ -1,16 +1,16 @@
-import ImageCard from '../card/components/ImageCard';
-import TitleCard from '../card/components/TitleCard';
-import ReadMe from '../card/components/ReadMe';
+import ImageCard from "../card/components/ImageCard"
+import TitleCard from "../card/components/TitleCard"
+import ReadMe from "../card/components/ReadMe"
 
 interface BlogCardProps {
-   id: string;
-   images: string[];
-   title: string;
-   extra?: string;
-   tags?: String[];
-   classText?: string;
-   rounded?: string;
-   sizeImage?: number;
+   id: string
+   images: string[]
+   title: string
+   extra?: string
+   tags?: String[]
+   classText?: string
+   rounded?: string
+   sizeImage?: number
 }
 
 const BlogCard = ({
@@ -20,7 +20,7 @@ const BlogCard = ({
    extra,
    tags,
    classText,
-   rounded = 'rounded-[8px]',
+   rounded = "rounded-[8px]",
    sizeImage,
 }: BlogCardProps) => {
    if (images)
@@ -32,33 +32,33 @@ const BlogCard = ({
                <ImageCard size={sizeImage} image={images[0]} title={title} />
             </div>
 
-            <div className="flex flex-col flex-grow items-center text-center">
+            <div className="flex flex-grow flex-col items-center text-center">
                {tags && (
-                  <div className="flex flex-center flex-wrap gap-2 my-[10px]">
+                  <div className="flex-center my-[10px] flex flex-wrap gap-2">
                      {tags?.map((t) => {
-                        let bg;
-                        const tag = t.trim().toLocaleLowerCase();
+                        let bg
+                        const tag = t.trim().toLocaleLowerCase()
 
-                        if (tag === 'ingredients') {
-                           bg = 'bg-pink-500';
-                        } else if (tag === 'products') {
-                           bg = 'bg-green-700';
-                        } else if (tag === 'lifestyle') {
-                           bg = 'bg-pink-400';
-                        } else if (tag === 'skin concerns') {
-                           bg = 'bg-purple-700';
-                        } else if (tag === 'routines') {
-                           bg = 'bg-yellow-500';
+                        if (tag === "ingredients") {
+                           bg = "bg-pink-500"
+                        } else if (tag === "products") {
+                           bg = "bg-green-700"
+                        } else if (tag === "lifestyle") {
+                           bg = "bg-pink-400"
+                        } else if (tag === "skin concerns") {
+                           bg = "bg-purple-700"
+                        } else if (tag === "routines") {
+                           bg = "bg-yellow-500"
                         }
 
                         return (
                            <div
                               key={id}
-                              className={`flex rounded-full text-[11px] text-white items-center px-[10px] py-[5px] uppercase ${bg}`}
+                              className={`flex items-center rounded-full px-[10px] py-[5px] text-[11px] uppercase text-white ${bg}`}
                            >
                               <span>{tag}</span>
                            </div>
-                        );
+                        )
                      })}
                   </div>
                )}
@@ -69,7 +69,7 @@ const BlogCard = ({
                <ReadMe text={extra} src="" />
             </div>
          </div>
-      );
-};
+      )
+}
 
-export default BlogCard;
+export default BlogCard

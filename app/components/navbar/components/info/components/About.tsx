@@ -2,33 +2,33 @@ import {
    slideSearch,
    slideShop,
    slideSkinNerdAcademy,
-} from '@/redux/features/sidebarSlice';
-import { useAppDispatch } from '@/redux/hooks';
-import React from 'react';
+} from "@/redux/features/sidebarSlice"
+import { useAppDispatch } from "@/redux/hooks"
+import React from "react"
 
 const About = () => {
-   const dispatch = useAppDispatch();
+   const dispatch = useAppDispatch()
    return (
       <p
          onMouseEnter={() => {
-            dispatch(slideShop(false));
-            dispatch(slideSkinNerdAcademy(false));
-            dispatch(slideSearch(false));
+            dispatch(slideShop(false))
+            dispatch(slideSkinNerdAcademy(false))
+            dispatch(slideSearch(false))
          }}
          className="
-           capitalize 
            text-p 
            cursor-pointer 
            whitespace-nowrap 
+           rounded-[20px] 
            px-[10px] 
            py-[5px]
-           rounded-[20px]
+           capitalize
            hover:bg-white
          "
       >
          about
       </p>
-   );
-};
+   )
+}
 
-export default About;
+export default About

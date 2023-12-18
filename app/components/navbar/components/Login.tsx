@@ -1,11 +1,11 @@
-import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser } from "react-icons/ai"
 
 const Login = () => {
    return (
       <>
-         <AiOutlineUser className="text-[30px] cursor-pointer" />
+         <AiOutlineUser className="cursor-pointer text-[30px]" />
       </>
-   );
-};
+   )
+}
 
-export default Login;
+export default Login

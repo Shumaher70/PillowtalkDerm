@@ -1,28 +1,29 @@
-import { schnyderMlightFont } from '@/app/layout';
-import { prisma } from '@/lib/prisma';
-import ViewportMotionSection from '@/motion/ViewportMotionSection';
-import { ProductType } from '@/types';
-import bestSellers from '@/utils/bestSellers';
-import React from 'react';
-import Card from '../../card/Card';
-import ViewportMotionDiv from '@/motion/ViewPortMotionDiv';
-import ViewportMotionDivArr from '@/motion/ViewPortMotionDivArr';
+import { schnyderMlightFont } from "@/app/layout"
+import { prisma } from "@/lib/prisma"
+import ViewportMotionSection from "@/motion/ViewportMotionSection"
+import { ProductType } from "@/types"
+import bestSellers from "@/utils/bestSellers"
+import React from "react"
+import Card from "../../card/Card"
+import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
 
 const BestSellersSection = async () => {
    const products: ProductType[] = await prisma.product.findMany({
       include: {
          reviews: true,
+         carts: true,
       },
-   });
+   })
 
-   const bestSellersFilter = bestSellers(products);
+   const bestSellersFilter = bestSellers(products)
 
    return (
       <section
-         className={`w-full h-[80%] container-px py-[16px] relative overflow-hidden`}
+         className={`container-px relative h-[80%] w-full overflow-hidden py-[16px]`}
       >
          <ViewportMotionDiv>
-            <div className="container-rounded bg-secondary container-px w-full flex flex-col items-center py-[16px]">
+            <div className="container-rounded bg-secondary container-px flex w-full flex-col items-center py-[16px]">
                <h2 className={`text-section ${schnyderMlightFont.className}`}>
                   Best Sellers
                </h2>
@@ -31,7 +32,7 @@ const BestSellersSection = async () => {
          </ViewportMotionDiv>
 
          <ViewportMotionDiv>
-            <div className="grid py-[16px] grid-cols-2 lg:grid-cols-4 lg:gap-5 gap-2">
+            <div className="grid grid-cols-2 gap-2 py-[16px] lg:grid-cols-4 lg:gap-5">
                {bestSellersFilter.map((card) => (
                   <ViewportMotionDivArr key={card.id}>
                      <Card
@@ -50,14 +51,14 @@ const BestSellersSection = async () => {
                         rating
                         imageAnimated
                         win
-                        className="bg-[#f4f3ef] container-rounded m-0 hover:bg-[#f0e8f6] !transition-all h-full "
+                        className="container-rounded m-0 h-full bg-[#f4f3ef] !transition-all hover:bg-[#f0e8f6] "
                      />
                   </ViewportMotionDivArr>
                ))}
             </div>
          </ViewportMotionDiv>
       </section>
-   );
-};
+   )
+}
 
-export default BestSellersSection;
+export default BestSellersSection

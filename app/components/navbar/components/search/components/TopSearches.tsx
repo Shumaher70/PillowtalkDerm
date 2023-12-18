@@ -1,18 +1,18 @@
-'use client';
+"use client"
 
-import { schnyderMlightFont } from '@/app/layout';
+import { schnyderMlightFont } from "@/app/layout"
 
 interface TopSearchesProps {
-   className?: string;
-   getTopSearch?: (event: string) => void;
+   className?: string
+   getTopSearch?: (event: string) => void
 }
 
-const topSearches = ['major fade', 'ingredients', 'skincare', 'lightweight'];
+const topSearches = ["major fade", "ingredients", "skincare", "lightweight"]
 
 const TopSearches = ({ className, getTopSearch }: TopSearchesProps) => {
    const clickHandler = (event: React.MouseEvent<HTMLParagraphElement>) => {
-      getTopSearch?.(event.currentTarget.innerText);
-   };
+      getTopSearch?.(event.currentTarget.innerText)
+   }
 
    return (
       <>
@@ -22,7 +22,7 @@ const TopSearches = ({ className, getTopSearch }: TopSearchesProps) => {
             Top Searches
          </h4>
 
-         <div className={`grid grid-cols-2 gap-2 mt-3 ${className}`}>
+         <div className={`mt-3 grid grid-cols-2 gap-2 ${className}`}>
             {topSearches.map((search, index) => (
                <p
                   key={index}
@@ -34,7 +34,7 @@ const TopSearches = ({ className, getTopSearch }: TopSearchesProps) => {
             ))}
          </div>
       </>
-   );
-};
+   )
+}
 
-export default TopSearches;
+export default TopSearches

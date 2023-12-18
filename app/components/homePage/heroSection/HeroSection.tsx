@@ -1,15 +1,15 @@
-import { schnyderMlightFont } from '@/app/layout';
-import Button from '../../button/Button';
-import Image from 'next/image';
-import ViewportMotionSection from '@/motion/ViewportMotionSection';
+import { schnyderMlightFont } from "@/app/layout"
+import Button from "../../button/Button"
+import Image from "next/image"
+import ViewportMotionSection from "@/motion/ViewportMotionSection"
 
 const HeroSection = () => {
    return (
       <ViewportMotionSection>
          <div
-            className={`w-full h-[80vh] container-rounded-b container-p relative overflow-hidden`}
+            className={`container-rounded-b container-p relative h-[80vh] w-full overflow-hidden`}
          >
-            <div className="w-full h-full flex flex-col justify-end md:items-start items-center text-center md:text-start md:pt-[250px] gap-5">
+            <div className="flex h-full w-full flex-col items-center justify-end gap-5 text-center md:items-start md:pt-[250px] md:text-start">
                <div>
                   <h1 className={`text-hero ${schnyderMlightFont.className}`}>
                      The Depuffer
@@ -21,9 +21,9 @@ const HeroSection = () => {
                </div>
 
                <Button
-                  text={'shop now'}
-                  className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase  w-max"
-                  size={'lg'}
+                  text={"shop now"}
+                  className="w-max bg-gradient-to-r from-pink-400 to-pink-600  uppercase"
+                  size={"lg"}
                   load={false}
                />
             </div>
@@ -34,12 +34,12 @@ const HeroSection = () => {
                width={0}
                height={0}
                sizes="100vw"
-               className="absolute w-full object-cover h-full right-0 top-0 z-[-1]
+               className="absolute right-0 top-0 z-[-1] h-full w-full object-cover
                "
             />
          </div>
       </ViewportMotionSection>
-   );
-};
+   )
+}
 
-export default HeroSection;
+export default HeroSection

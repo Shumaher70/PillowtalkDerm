@@ -1,14 +1,14 @@
-import ViewportMotionSection from '@/motion/ViewportMotionSection';
-import Button from '../../button/Button';
-import { schnyderMlightFont } from '@/app/layout';
+import ViewportMotionSection from "@/motion/ViewportMotionSection"
+import Button from "../../button/Button"
+import { schnyderMlightFont } from "@/app/layout"
 
 const AboutUsSection = () => {
    return (
       <ViewportMotionSection>
-         <div className="h-[80%] container-px py-[16px] my-[16px] md:my-0 ">
-            <div className="flex flex-col gap-10 w-full h-full p-[16px] md:p-[24px] bg-accent container-rounded">
+         <div className="container-px my-[16px] h-[80%] py-[16px] md:my-0 ">
+            <div className="bg-accent container-rounded flex h-full w-full flex-col gap-10 p-[16px] md:p-[24px]">
                <h1
-                  className={`text-[40px] md:text-[50px] md:leading-[60px] leading-[45px] ${schnyderMlightFont.className}`}
+                  className={`text-[40px] leading-[45px] md:text-[50px] md:leading-[60px] ${schnyderMlightFont.className}`}
                >
                   PillowtalkDerm is on a mission to stop the B.S. and
                   misinformation surrounding skincare. Our science-backed
@@ -18,16 +18,16 @@ const AboutUsSection = () => {
 
                <div>
                   <Button
-                     className="uppercase bg-purple-700 "
-                     text={'about us'}
-                     size={'lg'}
+                     className="bg-purple-700 uppercase "
+                     text={"about us"}
+                     size={"lg"}
                      load={false}
                   />
                </div>
             </div>
          </div>
       </ViewportMotionSection>
-   );
-};
+   )
+}
 
-export default AboutUsSection;
+export default AboutUsSection

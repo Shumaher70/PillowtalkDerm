@@ -1,10 +1,10 @@
-import Button from '@/app/components/button/Button';
+import Button from "@/app/components/button/Button"
 
 interface ButtonGroupProps {
-   shop: boolean;
-   blog: boolean;
-   shopHandler: () => void;
-   blogHandler: () => void;
+   shop: boolean
+   blog: boolean
+   shopHandler: () => void
+   blogHandler: () => void
 }
 
 const ButtonGroup = ({
@@ -22,8 +22,8 @@ const ButtonGroup = ({
             capitalize
             ${
                shop
-                  ? 'text-white bg-gradient-to-r from-pink-400 to-pink-600'
-                  : '!text-black bg-white'
+                  ? "bg-gradient-to-r from-pink-400 to-pink-600 text-white"
+                  : "bg-white !text-black"
             }`}
             classText="text-p"
             onClick={shopHandler}
@@ -36,8 +36,8 @@ const ButtonGroup = ({
             capitalize
             ${
                blog
-                  ? 'text-white bg-gradient-to-r from-pink-400 to-pink-600'
-                  : '!text-black bg-white'
+                  ? "bg-gradient-to-r from-pink-400 to-pink-600 text-white"
+                  : "bg-white !text-black"
             }`}
             classText="text-p"
             onClick={blogHandler}
@@ -47,13 +47,13 @@ const ButtonGroup = ({
             text="about"
             size="sm"
             className="
-            capitalize
-            bg-white !text-black"
+            bg-white
+            capitalize !text-black"
             classText="text-p"
             load={false}
          />
       </>
-   );
-};
+   )
+}
 
-export default ButtonGroup;
+export default ButtonGroup
