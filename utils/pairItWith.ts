@@ -1,24 +1,25 @@
-import { CartType, ProductType } from '@/types';
+import { CartType, ProductType } from "@/types"
 
 const pairItWith = (carts: CartType[], products: ProductType[]) => {
-   const pairs = carts.map((item) => item.pair).flatMap((pair) => pair);
+   const pairs = carts.map((item) => item.pair).flatMap((pair) => pair)
 
-   let pairItWithArr: ProductType[] = [];
+   let pairItWithArr: ProductType[] = []
+
+   const sortPair = Array.from(new Set(pairs.map((obj) => obj)))
 
    for (let i = 0; i < products.length; i++) {
-      for (let j = 0; j < pairs.length; j++) {
-         if (products[i].id === pairs[j]) {
-            pairItWithArr.push(products[i]);
+      for (let j = 0; j < sortPair.length; j++) {
+         if (products[i].title === sortPair[j]) {
+            pairItWithArr.push(products[i])
          }
       }
    }
 
-   const cartIp = Array.from(new Set(carts.map((obj) => obj.id)));
-   pairItWithArr = Array.from(
-      new Set(pairItWithArr.filter((obj) => !cartIp.includes(obj.id)))
-   );
+   pairItWithArr = pairItWithArr.filter(
+      (obj) => !carts.some((item) => item.title.includes(obj.title))
+   )
 
-   return pairItWithArr;
-};
+   return pairItWithArr
+}
 
-export default pairItWith;
+export default pairItWith
