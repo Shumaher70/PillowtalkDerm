@@ -1,8 +1,8 @@
 import { ProductType } from "@/types"
-import CarouselProduct from "./components/carousel/CarouselProduct"
-import Order from "./components/order/Order"
-import CardAccordion from "./components/cardAccordion/CardAccordion"
-import Pair from "./components/pair/Pair"
+import CarouselProduct from "./carousel/CarouselProduct"
+import Order from "./order/Order"
+import CardAccordion from "./cardAccordion/CardAccordion"
+import Pair from "./pair/Pair"
 
 const Card = ({ product }: { product: ProductType }) => {
    return (
