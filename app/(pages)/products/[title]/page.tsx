@@ -3,6 +3,7 @@ import Card from "./components/card/Card"
 import { ProductType } from "@/types"
 import Results from "./components/Results"
 import Tips from "./components/tips/Tips"
+import Description from "./components/description/Description"
 
 const Product = async ({ params }: { params: { title: string } }) => {
    const { title } = params
@@ -23,6 +24,7 @@ const Product = async ({ params }: { params: { title: string } }) => {
       include: {
          reviews: true,
          carts: true,
+         productDescription: true,
       },
    })
 
@@ -36,6 +38,13 @@ const Product = async ({ params }: { params: { title: string } }) => {
                </div>
                <div className="mt-5 lg:mt-10">
                   <Tips tips={products[0].tips} />
+               </div>
+               <div className="mt-5 lg:mt-10">
+                  <Description
+                     description={products[0].productDescription}
+                     title={products[0].title}
+                     pair={products[0].pair}
+                  />
                </div>
             </>
          )}

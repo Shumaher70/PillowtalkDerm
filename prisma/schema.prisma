@@ -8,28 +8,39 @@ datasource db {
 }
 
 model Product {
+  id                 String               @id @default(uuid())
+  images             String[]
+  title              String
+  subTitle           String?
+  price              Float
+  discount           Float?
+  pair               String[]
+  options            Int?
+  soldOut            Boolean              @default(false)
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  video              String?
+  refills            String?
+  sold               Int                  @default(0)
+  different          String?
+  howToUse           String?
+  awards             String?
+  carts              Cart[]
+  reviews            Review[]
+  steps              String?
+  tips               String[]
+  productDescription ProductDescription[]
+}
+
+model ProductDescription {
   id          String   @id @default(uuid())
-  images      String[]
-  title       String
-  subTitle    String?
-  price       Float
-  discount    Float?
-  pair        String[]
-  options     Int?
-  soldOut     Boolean  @default(false)
+  image       String
+  title       String[]
+  discription String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  video       String?
-  description Json[]
-  refills     String?
-  sold        Int      @default(0)
-  different   String?
-  howToUse    String?
-  awards      String?
-  carts       Cart[]
-  reviews     Review[]
-  steps       String?
-  tips        String[]
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
 }
 
 model Blog {

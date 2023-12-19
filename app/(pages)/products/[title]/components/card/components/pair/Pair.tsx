@@ -7,6 +7,7 @@ const Pair = async ({ pair }: { pair: string[] }) => {
       include: {
          reviews: true,
          carts: true,
+         productDescription: true,
       },
    })
    let pairArr: ProductType[] = []
@@ -45,6 +46,7 @@ const Pair = async ({ pair }: { pair: string[] }) => {
                   pair={pair.pair}
                   sold={pair.sold}
                   id={pair.id}
+                  classButton="bg-gradient-to-r from-purple-700 to-purple-700"
                />
             ))}
          </div>

@@ -13,6 +13,7 @@ const BestSellersSection = async () => {
       include: {
          reviews: true,
          carts: true,
+         productDescription: true,
       },
    })
 

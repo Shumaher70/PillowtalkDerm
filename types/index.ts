@@ -1,4 +1,4 @@
-import { Cart, Review } from "@prisma/client"
+import { Cart, ProductDescription, Review } from "@prisma/client"
 
 export type CartType = {
    id: string
@@ -29,10 +29,10 @@ export type ProductType = {
    createdAt: Date
    updatedAt: Date
    video: string | null
-   description: any
    refills?: string | null
    reviews: Review[]
    carts: Cart[]
+   productDescription: ProductDescription[]
    sold: number
    steps: string | null
    tips: string[]

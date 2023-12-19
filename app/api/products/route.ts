@@ -7,6 +7,7 @@ export async function GET(request: Request) {
       include: {
          reviews: true,
          carts: true,
+         productDescription: true,
       },
    })
 

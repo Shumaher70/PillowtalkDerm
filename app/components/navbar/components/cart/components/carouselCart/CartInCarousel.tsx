@@ -29,6 +29,7 @@ interface CartInCarouselProps {
    soldOut: boolean
    pair: string[]
    sold: number
+   classButton?: string
 }
 
 const CartInCarousel = ({
@@ -43,6 +44,7 @@ const CartInCarousel = ({
    soldOut,
    pair,
    sold,
+   classButton,
 }: CartInCarouselProps) => {
    const [load, setLoad] = useState(false)
 
@@ -94,7 +96,7 @@ const CartInCarousel = ({
                   load={load}
                   text={`add - $${price}`}
                   size={"sm"}
-                  className="w-full bg-gradient-to-r from-pink-400  to-pink-600 text-[10px] uppercase "
+                  className={`w-full bg-gradient-to-r from-pink-400  to-pink-600 text-[10px] uppercase ${classButton}`}
                />
             </div>
          )}

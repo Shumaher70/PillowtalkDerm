@@ -6,7 +6,7 @@ const AccordionTip = ({ tips }: { tips: string[] }) => {
    const [elementIndex, setElementIndex] = useState(1)
 
    return (
-      <div className="flex h-full flex-col justify-between gap-5 p-[16px]">
+      <div className="flex h-full flex-col justify-between gap-5 p-[16px] md:p-[24px]">
          <h1 className={`${schnyderMlightFont.className} text-title`}>
             Tips from Dr. Idriss
          </h1>
