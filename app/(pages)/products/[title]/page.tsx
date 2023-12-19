@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma"
 import Card from "./components/card/Card"
 import { ProductType } from "@/types"
-import Results from "./components/card/Results"
+import Results from "./components/Results"
+import Tips from "./components/tips/Tips"
 
 const Product = async ({ params }: { params: { title: string } }) => {
    const { title } = params
@@ -32,6 +33,9 @@ const Product = async ({ params }: { params: { title: string } }) => {
                <Card product={products[0]} />
                <div className="mt-5 lg:mt-10">
                   <Results />
+               </div>
+               <div className="mt-5 lg:mt-10">
+                  <Tips tips={products[0].tips} />
                </div>
             </>
          )}

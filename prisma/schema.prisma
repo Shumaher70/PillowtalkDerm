@@ -29,6 +29,7 @@ model Product {
   carts       Cart[]
   reviews     Review[]
   steps       String?
+  tips        String[]
 }
 
 model Blog {

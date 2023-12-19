@@ -35,6 +35,7 @@ export type ProductType = {
    carts: Cart[]
    sold: number
    steps: string | null
+   tips: string[]
 }
 
 export type BlogType = {
