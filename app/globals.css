@@ -72,6 +72,11 @@
    margin-bottom: 24px;
 }
 
+.filter {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+}
+
 .box-p {
    padding: 16px;
 }
@@ -122,6 +127,10 @@
 .refills ul li {
    font-size: 14px;
    padding-bottom: 8px;
+}
+
+.checkShadow {
+   box-shadow: 0px 0px 1px 3px rgba(0, 0, 0, 0.44);
 }
 
 @media (min-width: 768px) {
@@ -222,6 +231,11 @@
 
    .box-p {
       padding: 24px;
+   }
+
+   .filter {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
    }
 }
 
