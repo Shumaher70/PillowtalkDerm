@@ -1,13 +1,13 @@
 import { IoIosStarHalf, IoIosStarOutline, IoMdStar } from "react-icons/io"
 
 interface StarsProps {
-   stars: number
+   stars: string
 }
 
 const Stars = ({ stars }: StarsProps) => {
    const starts = []
    for (let i = 0; i < 5; i++) {
-      const difference = parseFloat((stars - i).toFixed(1))
+      const difference = parseFloat((+stars - i).toFixed(1))
       if (difference >= 1)
          starts.push(
             <IoMdStar className="h-3 w-3 text-pink-700 md:h-5 md:w-5" />
