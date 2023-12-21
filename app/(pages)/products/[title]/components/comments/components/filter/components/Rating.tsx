@@ -13,7 +13,7 @@ const Rating = () => {
       <div className="relative w-full">
          <select
             onChange={changeHandler}
-            className="relative w-full rounded-[10px] p-1 pt-[20px]"
+            className="relative w-full rounded-[10px] bg-white p-1 pt-[20px]"
          >
             <option value="All">All</option>
             <option value="1 star">1 star</option>
