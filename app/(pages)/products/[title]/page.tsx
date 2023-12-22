@@ -49,8 +49,9 @@ const Product = async ({ params }: { params: { title: string } }) => {
                      pair={products[0].pair}
                   />
                </div>
-
-               <Comments product={products[0]} />
+               <div className="mt-5 lg:mt-10">
+                  <Comments product={products[0]} />
+               </div>
             </>
          )}
       </>

@@ -8,7 +8,7 @@ import Burger from "./components/burger/Burger"
 import SearchMobile from "./components/search/SearchMobile"
 import Cart from "./components/cart/Cart"
 import Info from "./components/info/Info"
-import Login from "./components/Login"
+import Login from "./components/login/Login"
 import Logo from "./components/Logo"
 
 import {

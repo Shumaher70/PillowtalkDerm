@@ -1,6 +1,7 @@
 import ImageCard from "../card/components/ImageCard"
 import TitleCard from "../card/components/TitleCard"
 import ReadMe from "../card/components/ReadMe"
+import { nanoid } from "@reduxjs/toolkit"
 
 interface BlogCardProps {
    id: string
@@ -53,7 +54,7 @@ const BlogCard = ({
 
                         return (
                            <div
-                              key={id}
+                              key={nanoid()}
                               className={`flex items-center rounded-full px-[10px] py-[5px] text-[11px] uppercase text-white ${bg}`}
                            >
                               <span>{tag}</span>

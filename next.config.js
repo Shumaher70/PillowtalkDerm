@@ -3,10 +3,13 @@ const nextConfig = {
    images: {
       remotePatterns: [
          {
-            hostname: 'pillowtalkderm.com',
+            hostname: "pillowtalkderm.com",
+         },
+         {
+            hostname: "img.clerk.com",
          },
       ],
    },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
