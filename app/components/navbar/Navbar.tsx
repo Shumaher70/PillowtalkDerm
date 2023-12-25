@@ -29,7 +29,7 @@ const Navbar = () => {
    const [blogs, setBlogs] = useState<BlogType[]>([])
 
    const getProduct = async () => {
-      const products = await fetch("http://localhost:3000/api/products")
+      const products = await fetch("/api/products")
       if (products.ok) {
          const data = await products.json()
          return setProducts(data)
@@ -38,7 +38,7 @@ const Navbar = () => {
    }
 
    const getBlog = async () => {
-      const blogs = await fetch("http://localhost:3000/api/blog")
+      const blogs = await fetch("/api/blog")
       if (blogs.ok) {
          const data = await blogs.json()
          return setBlogs(data)
