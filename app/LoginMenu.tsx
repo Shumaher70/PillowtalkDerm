@@ -2,7 +2,7 @@
 import { loginMenu } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { SignOutButton } from "@clerk/nextjs"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 import { CiLogout } from "react-icons/ci"
 import { MdManageAccounts } from "react-icons/md"
@@ -11,6 +11,7 @@ const LoginMenu = () => {
    const menuSelector = useAppSelector(
       (state) => state.sidebarReducer.loginMenu
    )
+   const route = useRouter()
    const dispatch = useAppDispatch()
 
    return (
@@ -20,14 +21,17 @@ const LoginMenu = () => {
          }`}
       >
          <div
-            className="flex-center flex cursor-pointer gap-2 rounded-full bg-white px-[16px] py-[4px]"
-            onClick={() => dispatch(loginMenu(false))}
+            className="flex-center flex h-[36px] cursor-pointer gap-2 rounded-full bg-white px-[16px]"
+            onClick={() => {
+               dispatch(loginMenu(false))
+               route.push("/account")
+            }}
          >
             <MdManageAccounts />
-            <Link href={"/account"}>Account</Link>
+            Account
          </div>
          <div
-            className="flex-center flex cursor-pointer gap-2 rounded-full bg-white px-[16px] py-[4px] pb-2"
+            className="flex-center flex h-[36px] cursor-pointer gap-2 rounded-full bg-white  px-[16px]"
             onClick={() => dispatch(loginMenu(false))}
          >
             <CiLogout />
