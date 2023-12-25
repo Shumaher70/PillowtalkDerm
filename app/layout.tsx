@@ -2,6 +2,7 @@ import "./globals.css"
 
 import localFont from "next/font/local"
 import { ClerkProvider } from "@clerk/nextjs"
+import { Providers } from "@/redux/provider"
 
 export const schnyderMlightFont = localFont({
    src: "../public/fonts/SchnyderMLight.woff2",
@@ -16,9 +17,11 @@ export default function RootLayout({
 }) {
    return (
       <ClerkProvider>
-         <html lang="en">
-            <body>{children}</body>
-         </html>
+         <Providers>
+            <html lang="en">
+               <body>{children}</body>
+            </html>
+         </Providers>
       </ClerkProvider>
    )
 }

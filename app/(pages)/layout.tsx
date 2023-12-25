@@ -20,17 +20,13 @@ export default function RootLayout({
    children: React.ReactNode
 }) {
    return (
-      <html lang="en">
-         <Providers>
-            <body>
-               <Overflow />
-               <SlideInfo />
-               <LoginMenu />
-               <Navbar />
-               {children}
-               <Footer />
-            </body>
-         </Providers>
-      </html>
+      <>
+         <Overflow />
+         <SlideInfo />
+         <LoginMenu />
+         <Navbar />
+         {children}
+         <Footer />
+      </>
    )
 }
