@@ -8,7 +8,10 @@ interface sidebar {
    slideShop: boolean
    slideSkinNerdAcademy: boolean
    slideSearch: boolean
+
    loginMenu: boolean
+
+   reviewForm: boolean
 }
 
 const initialState = {
@@ -19,7 +22,10 @@ const initialState = {
    slideShop: false,
    slideSkinNerdAcademy: false,
    slideSearch: false,
+
    loginMenu: false,
+
+   reviewForm: false,
 } as sidebar
 
 export const sidebar = createSlice({
@@ -48,6 +54,9 @@ export const sidebar = createSlice({
       loginMenu: (state, action: PayloadAction<boolean>) => {
          state.loginMenu = action.payload
       },
+      reviewForm: (state, action: PayloadAction<boolean>) => {
+         state.reviewForm = action.payload
+      },
    },
 })
 
@@ -61,6 +70,8 @@ export const {
    slideSearch,
 
    loginMenu,
+
+   reviewForm,
 } = sidebar.actions
 
 export default sidebar.reducer

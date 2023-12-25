@@ -7,6 +7,7 @@ import SlideInfo from "../components/slideInfo/SlideInfo"
 import "../globals.css"
 
 import localFont from "next/font/local"
+import Form from "./products/[title]/components/comments/components/review/components/reviewForm/components/form/Form"
 
 export const schnyderMlightFont = localFont({
    src: "../../public/fonts/SchnyderMLight.woff2",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <>
          <Overflow />
          <SlideInfo />
+         <Form />
          <LoginMenu />
          <Navbar />
          {children}

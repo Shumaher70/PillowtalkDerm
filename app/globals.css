@@ -255,3 +255,16 @@ input[type="text"]::-webkit-outer-spin-button,
 input[type="text"]::-webkit-inner-spin-button {
    display: none;
 }
+
+.stars-pulse {
+   animation: 200ms linear infinite alternate stars-pulse;
+}
+
+@keyframes stars-pulse {
+   from {
+      opacity: 1;
+   }
+   to {
+      opacity: 0;
+   }
+}

@@ -15,7 +15,8 @@ const Overflow = () => {
             sidebarSlice.sidebarSearch ||
             sidebarSlice.slideSearch ||
             sidebarSlice.slideShop ||
-            sidebarSlice.slideSkinNerdAcademy
+            sidebarSlice.slideSkinNerdAcademy ||
+            sidebarSlice.reviewForm
          ) {
             setOverflow(false)
          } else {
@@ -25,6 +26,7 @@ const Overflow = () => {
       document.body.style.overflow = overflow ? "visible" : "hidden"
    }, [
       overflow,
+      sidebarSlice.reviewForm,
       sidebarSlice.sidebarBurger,
       sidebarSlice.sidebarCart,
       sidebarSlice.sidebarSearch,
