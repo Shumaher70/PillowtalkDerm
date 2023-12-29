@@ -8,7 +8,6 @@ import ButtonClose from "./components/button/ButtonClose"
 import ButtonPrevious from "./components/button/ButtonPrevious"
 import ReviewTitle from "./components/ReviewTitle"
 import Multimedia from "./components/Multimedia"
-import Email from "./components/Email"
 import Recommend from "./components/Recommend"
 
 const Form = () => {
@@ -25,7 +24,6 @@ const Form = () => {
                      <Review />
                      <ReviewTitle />
                      <Multimedia />
-                     <Email />
                      <Recommend />
                   </div>
 

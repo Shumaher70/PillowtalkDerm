@@ -29,10 +29,10 @@ const Recommend = () => {
             right: "-600%",
          }}
          animate={{
-            opacity: stepSlice === 6 ? 1 : 0,
-            right: `${stepSlice * 100 - 600}%`,
+            opacity: stepSlice === 5 ? 1 : 0,
+            right: `${stepSlice * 100 - 500}%`,
          }}
-         transition={{ delay: stepSlice === 7 ? 2 : 0, duration: 0.5 }}
+         transition={{ delay: stepSlice === 6 ? 2 : 0, duration: 0.5 }}
          className="flex-center absolute  top-2/4 flex  min-w-full -translate-y-2/4 flex-col"
       >
          <div
