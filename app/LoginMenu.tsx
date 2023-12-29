@@ -1,11 +1,13 @@
 "use client"
 import { loginMenu } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { SignOutButton } from "@clerk/nextjs"
+
 import { useRouter } from "next/navigation"
 
 import { CiLogout } from "react-icons/ci"
 import { MdManageAccounts } from "react-icons/md"
+
+import dynamic from "next/dynamic"
 
 const LoginMenu = () => {
    const menuSelector = useAppSelector(
@@ -13,6 +15,13 @@ const LoginMenu = () => {
    )
    const route = useRouter()
    const dispatch = useAppDispatch()
+
+   const SignOutButton = dynamic(
+      () => import("@clerk/nextjs").then((mod) => mod.SignOutButton),
+      {
+         ssr: false,
+      }
+   )
 
    return (
       <div
