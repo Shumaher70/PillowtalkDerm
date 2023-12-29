@@ -56,7 +56,7 @@ const Recommend = () => {
          </div>
          <Button
             onClick={() => {
-               dispatch(stepAction(7))
+               dispatch(stepAction(6))
                dispatch(recommendAction(checked))
             }}
          >
