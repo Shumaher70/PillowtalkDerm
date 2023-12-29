@@ -28,7 +28,7 @@ const ReviewTitle = () => {
          transition={{ duration: 0.5 }}
          className="absolute top-2/4  min-w-full -translate-y-2/4"
       >
-         <h1 className="mb-[10px] text-[26px] font-bold">
+         <h1 className="mb-[10px] text-[22px] font-bold">
             Enter a title for your review:
          </h1>
          <div>

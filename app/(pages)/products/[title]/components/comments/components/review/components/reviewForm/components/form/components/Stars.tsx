@@ -33,7 +33,7 @@ const Stars = () => {
          transition={{ delay: 0.5, duration: 0.5 }}
          className="absolute right-0 top-2/4  min-w-full -translate-y-2/4"
       >
-         <h1 className="mb-[10px] text-[26px] font-bold">Select a rating:</h1>
+         <h1 className="mb-[10px] text-[22px] font-bold">Select a rating:</h1>
          <div className="flex h-full w-full justify-between">
             {stars.map((star, index) => (
                <div
@@ -42,7 +42,7 @@ const Stars = () => {
                      dispatch(stepAction(2))
                   }}
                   key={index}
-                  className={`flex w-full max-w-[80px] flex-col items-center gap-2 ${
+                  className={`flex w-full max-w-[80px] cursor-pointer flex-col items-center gap-2 ${
                      index < starsSlice && stepSlice > 1 ? "stars-pulse" : ""
                   } ${
                      index + 1 === starsSlice && stepSlice! > 1

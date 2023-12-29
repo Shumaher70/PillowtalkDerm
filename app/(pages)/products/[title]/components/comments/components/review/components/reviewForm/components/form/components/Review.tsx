@@ -28,7 +28,7 @@ const Review = () => {
          transition={{ delay: stepSlice === 2 ? 0.5 : 0, duration: 0.5 }}
          className="absolute top-2/4  min-w-full -translate-y-2/4"
       >
-         <h1 className="mb-[10px] text-[26px] font-bold">Enter your review:</h1>
+         <h1 className="mb-[10px] text-[22px] font-bold">Enter your review:</h1>
          <div>
             <textarea
                className="h-[150px] w-full border-b-[1px] border-gray-300 bg-transparent p-3"
