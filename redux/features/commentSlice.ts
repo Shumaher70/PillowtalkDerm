@@ -9,6 +9,7 @@ interface comment {
       multiMedia?: { file: File; preview: string }[]
       name?: string
       email?: string
+      recommend?: boolean
    }
 }
 
@@ -21,6 +22,7 @@ const initialState = {
       multiMedia: [],
       name: "",
       email: "",
+      recommend: true,
    },
 } as comment
 
@@ -52,6 +54,9 @@ export const comment = createSlice({
       emailAction: (state, action: PayloadAction<string>) => {
          state.review.email = action.payload
       },
+      recommendAction: (state, action: PayloadAction<boolean>) => {
+         state.review.recommend = action.payload
+      },
       refreshAction: (state) => {
          state.review.step = 1
          state.review.stars = 0
@@ -72,6 +77,7 @@ export const {
    nameAction,
    emailAction,
    refreshAction,
+   recommendAction,
 } = comment.actions
 
 export default comment.reducer
