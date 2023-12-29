@@ -8,6 +8,7 @@ import ButtonClose from "./components/button/ButtonClose"
 import ButtonPrevious from "./components/button/ButtonPrevious"
 import ReviewTitle from "./components/ReviewTitle"
 import Multimedia from "./components/Multimedia"
+import Email from "./components/Email"
 
 const Form = () => {
    const formSlice = useAppSelector((state) => state.sidebarReducer.reviewForm)
@@ -23,6 +24,7 @@ const Form = () => {
                      <Review />
                      <ReviewTitle />
                      <Multimedia />
+                     <Email />
                   </div>
 
                   <ButtonClose />
