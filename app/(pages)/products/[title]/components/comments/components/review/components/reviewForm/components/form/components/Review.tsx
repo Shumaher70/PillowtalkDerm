@@ -10,6 +10,7 @@ const Review = () => {
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
    const dispatch = useAppDispatch()
    const [value, setValue] = useState("")
+   const [valid, setValid] = useState(false)
 
    const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setValue(e.currentTarget.value)
@@ -31,7 +32,9 @@ const Review = () => {
          <h1 className="mb-[10px] text-[22px] font-bold">Enter your review:</h1>
          <div>
             <textarea
-               className="h-[150px] w-full border-b-[1px] border-gray-300 bg-transparent p-3"
+               className={`h-[150px] w-full border-b-[1px] border-gray-300 bg-transparent p-3 outline-none ${
+                  valid && "border-[1px] border-red-500"
+               }`}
                placeholder="Type your review here..."
                onChange={changeHandler}
                value={value}
@@ -39,8 +42,11 @@ const Review = () => {
          </div>
          <Button
             onClick={() => {
-               dispatch(stepAction(3))
-               dispatch(reviewAction(value))
+               if (value.trim().length > 0) {
+                  dispatch(stepAction(3))
+                  dispatch(reviewAction(value.trim()))
+               }
+               setValid(value.trim().length === 0 ? true : false)
             }}
          >
             Continue

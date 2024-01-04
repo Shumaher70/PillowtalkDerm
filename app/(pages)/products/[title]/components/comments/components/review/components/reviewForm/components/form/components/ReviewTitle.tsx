@@ -10,6 +10,7 @@ const ReviewTitle = () => {
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
    const dispatch = useAppDispatch()
    const [value, setValue] = useState("")
+   const [valid, setValid] = useState(false)
 
    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value)
@@ -34,7 +35,9 @@ const ReviewTitle = () => {
          <div>
             <input
                type="text"
-               className=" w-full border-b-[1px] border-gray-300 bg-transparent p-3"
+               className={`w-full border-b-[1px] border-gray-300 bg-transparent p-3 outline-none ${
+                  valid && "border-[1px] border-red-500"
+               }`}
                placeholder="Type your title here..."
                onChange={changeHandler}
                value={value}
@@ -42,8 +45,11 @@ const ReviewTitle = () => {
          </div>
          <Button
             onClick={() => {
-               dispatch(stepAction(4))
-               dispatch(titleReviewAction(value))
+               if (value.trim().length > 0) {
+                  dispatch(stepAction(4))
+                  dispatch(titleReviewAction(value.trim()))
+               }
+               setValid(value.trim().length === 0 ? true : false)
             }}
          >
             Continue
