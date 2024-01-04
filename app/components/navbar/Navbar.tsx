@@ -22,6 +22,9 @@ import {
 import { CiSearch } from "react-icons/ci"
 import { useEffect, useState } from "react"
 import { BlogType, ProductType } from "@/types"
+import LoginMenu from "../LoginMenu"
+import Overflow from "../Overflow"
+import SlideInfo from "../slideInfo/SlideInfo"
 
 const Navbar = () => {
    const dispatch = useDispatch()
@@ -65,6 +68,9 @@ const Navbar = () => {
    }, [])
    return (
       <>
+         <Overflow />
+         <SlideInfo />
+         <LoginMenu />
          {
             <motion.header
                onMouseLeave={() => {
