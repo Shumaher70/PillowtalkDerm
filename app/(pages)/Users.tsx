@@ -20,13 +20,14 @@ const Users = () => {
    }
 
    const [usersPrisma, setUsersPrisma] = useState<UserType[]>([])
+
    const { isSignedIn, user } = useUser()
 
    useEffect(() => {
-      const getUserHandler = async () => {
+      const handlerGet = async () => {
          await getUser()
       }
-      getUserHandler()
+      handlerGet()
    }, [])
 
    useEffect(() => {

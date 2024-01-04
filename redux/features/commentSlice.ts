@@ -10,6 +10,8 @@ interface comment {
       name?: string
       email?: string
       recommend?: boolean
+      productId: string
+      userId: string
    }
 }
 
@@ -17,12 +19,14 @@ const initialState = {
    review: {
       step: 1,
       stars: 0,
-      review: "",
       titleReview: "",
-      multiMedia: [],
       name: "",
       email: "",
+      review: "",
+      multiMedia: [],
       recommend: true,
+      productId: "",
+      userId: "",
    },
 } as comment
 
@@ -57,6 +61,12 @@ export const comment = createSlice({
       recommendAction: (state, action: PayloadAction<boolean>) => {
          state.review.recommend = action.payload
       },
+      productIdAction: (state, action: PayloadAction<string>) => {
+         state.review.productId = action.payload
+      },
+      userIdAction: (state, action: PayloadAction<string>) => {
+         state.review.userId = action.payload
+      },
       refreshAction: (state) => {
          state.review.step = 1
          state.review.stars = 0
@@ -78,6 +88,8 @@ export const {
    emailAction,
    refreshAction,
    recommendAction,
+   productIdAction,
+   userIdAction,
 } = comment.actions
 
 export default comment.reducer

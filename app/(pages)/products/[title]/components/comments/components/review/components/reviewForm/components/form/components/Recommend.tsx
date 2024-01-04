@@ -12,6 +12,7 @@ const Recommend = () => {
    const [checkedEnter, setCheckedEnter] = useState(false)
 
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
+   const commentSlice = useAppSelector((state) => state.commentSlice.review)
    const dispatch = useAppDispatch()
 
    const leaveHandler = () => {
@@ -58,6 +59,22 @@ const Recommend = () => {
             onClick={() => {
                dispatch(stepAction(6))
                dispatch(recommendAction(checked))
+               fetch("/api/reviews", {
+                  method: "POST",
+                  body: JSON.stringify({
+                     rating: commentSlice.stars,
+                     title: commentSlice.titleReview,
+                     comment: commentSlice.review,
+                     images: commentSlice.multiMedia,
+                     name: commentSlice.name,
+                     productId: commentSlice.productId,
+                     userId: commentSlice.userId,
+                     recommend: commentSlice.recommend,
+                  }),
+                  headers: {
+                     "Content-type": "application/json; charset=UTF-8",
+                  },
+               })
             }}
          >
             submit

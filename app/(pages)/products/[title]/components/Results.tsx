@@ -1,4 +1,3 @@
-import ImageCard from "@/app/components/card/components/ImageCard"
 import { schnyderMlightFont } from "@/app/layout"
 import { nanoid } from "@reduxjs/toolkit"
 import Image from "next/image"
