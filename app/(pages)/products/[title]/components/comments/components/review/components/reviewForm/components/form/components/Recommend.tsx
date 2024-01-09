@@ -8,6 +8,7 @@ import { useState } from "react"
 import { FaCheck } from "react-icons/fa6"
 
 const Recommend = () => {
+   const [text, setText] = useState("submit")
    const [checked, setChecked] = useState(true)
    const [checkedEnter, setCheckedEnter] = useState(false)
 
@@ -21,6 +22,18 @@ const Recommend = () => {
    const handlerCheck = () => {
       setChecked((previous) => !previous)
       setCheckedEnter(true)
+   }
+
+   const handlerTextSubmit = () => {
+      setText("loading...")
+
+      setTimeout(() => {
+         setText("success!")
+      }, 1900)
+
+      setTimeout(() => {
+         setText("submit")
+      }, 2100)
    }
 
    return (
@@ -57,9 +70,10 @@ const Recommend = () => {
          </div>
          <button
             onClick={async () => {
-               "log"
                dispatch(stepAction(7))
                dispatch(recommendAction(checked))
+               handlerTextSubmit()
+
                fetch("/api/reviews", {
                   method: "POST",
                   body: JSON.stringify({
@@ -80,7 +94,7 @@ const Recommend = () => {
             }}
             className="mt-5 cursor-pointer rounded-full bg-purple-700 px-[16px] py-[8px] uppercase text-white"
          >
-            submit
+            {text}
          </button>
 
          <div className="absolute -bottom-[20px] mt-10 w-full max-w-[470px] text-center text-[13px] text-gray-700">
