@@ -9,6 +9,7 @@ import ButtonPrevious from "./components/button/ButtonPrevious"
 import ReviewTitle from "./components/ReviewTitle"
 import Multimedia from "./components/Multimedia"
 import Recommend from "./components/Recommend"
+import Name from "./components/Name"
 
 const Form = () => {
    const formSlice = useAppSelector((state) => state.sidebarReducer.reviewForm)
@@ -29,6 +30,7 @@ const Form = () => {
                   <Review />
                   <ReviewTitle />
                   <Multimedia />
+                  <Name />
                   <Recommend />
                </div>
 
