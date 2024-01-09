@@ -8,7 +8,12 @@ export const { GET, POST } = createNextRouteHandler({
 
 export async function DELETE(request: Request) {
    const data = await request.json()
-   const newUrl = data.url.substring(data.url.lastIndexOf("/") + 1)
+
+   const newUrl = Array.isArray(data.url)
+      ? data.url.map((url: string) =>
+           url.substring(data.url.lastIndexOf("/") + 1)
+        )
+      : data.url.substring(data.url.lastIndexOf("/") + 1)
    const utapi = new UTApi()
    await utapi.deleteFiles(newUrl)
    return Response.json({ message: "ok" })
