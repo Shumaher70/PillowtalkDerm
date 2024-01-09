@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { motion } from "framer-motion"
-import Button from "./button/Button"
+
 import { recommendAction, stepAction } from "@/redux/features/commentSlice"
 import { useState } from "react"
 import { FaCheck } from "react-icons/fa6"
@@ -30,11 +30,11 @@ const Recommend = () => {
             right: "-600%",
          }}
          animate={{
-            opacity: stepSlice === 5 ? 1 : 0,
-            right: `${stepSlice * 100 - 500}%`,
+            opacity: stepSlice === 6 ? 1 : 0,
+            right: `${stepSlice * 100 - 600}%`,
          }}
-         transition={{ delay: stepSlice === 6 ? 2 : 0, duration: 0.5 }}
-         className="flex-center absolute  top-2/4 flex  min-w-full -translate-y-2/4 flex-col"
+         transition={{ delay: stepSlice === 7 ? 2 : 0, duration: 0.5 }}
+         className=" flex-center absolute top-2/4 flex h-[170px] min-w-full -translate-y-2/4 flex-col"
       >
          <div
             className="flex min-w-max cursor-pointer items-center justify-center gap-2"
@@ -55,9 +55,10 @@ const Recommend = () => {
             </div>
             <p>i recommend this product</p>
          </div>
-         <Button
-            onClick={() => {
-               dispatch(stepAction(6))
+         <button
+            onClick={async () => {
+               "log"
+               dispatch(stepAction(7))
                dispatch(recommendAction(checked))
                fetch("/api/reviews", {
                   method: "POST",
@@ -65,7 +66,8 @@ const Recommend = () => {
                      rating: commentSlice.stars,
                      title: commentSlice.titleReview,
                      comment: commentSlice.review,
-                     images: commentSlice.multiMedia,
+                     images: commentSlice.imageUrl,
+                     imagesKey: commentSlice.imageKey,
                      name: commentSlice.name,
                      productId: commentSlice.productId,
                      userId: commentSlice.userId,
@@ -76,11 +78,12 @@ const Recommend = () => {
                   },
                })
             }}
+            className="mt-5 cursor-pointer rounded-full bg-purple-700 px-[16px] py-[8px] uppercase text-white"
          >
             submit
-         </Button>
+         </button>
 
-         <div className="mt-5 text-center text-[13px] text-gray-700">
+         <div className="absolute -bottom-[20px] mt-10 w-full max-w-[470px] text-center text-[13px] text-gray-700">
             This site is protected by reCAPTCHA and the Google{" "}
             <a
                onClick={() =>

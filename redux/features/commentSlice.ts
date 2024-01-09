@@ -6,7 +6,8 @@ interface comment {
       stars?: number
       review?: string
       titleReview?: string
-      multiMedia?: { file: File; preview: string }[]
+      imageUrl?: string[]
+      imageKey?: string[]
       name?: string
       email?: string
       recommend?: boolean
@@ -23,7 +24,8 @@ const initialState = {
       name: "",
       email: "",
       review: "",
-      multiMedia: [],
+      imageUrl: [],
+      imageKey: [],
       recommend: true,
       productId: "",
       userId: "",
@@ -46,11 +48,11 @@ export const comment = createSlice({
       titleReviewAction: (state, action: PayloadAction<string>) => {
          state.review.titleReview = action.payload
       },
-      multiMediaAction: (
-         state,
-         action: PayloadAction<{ file: File; preview: string }[]>
-      ) => {
-         state.review.multiMedia = action.payload
+      imageUrlAction: (state, action: PayloadAction<string[]>) => {
+         state.review.imageUrl = action.payload
+      },
+      imageKeyAction: (state, action: PayloadAction<string[]>) => {
+         state.review.imageKey = action.payload
       },
       nameAction: (state, action: PayloadAction<string>) => {
          state.review.name = action.payload
@@ -71,7 +73,8 @@ export const comment = createSlice({
          state.review.step = 1
          state.review.stars = 0
          state.review.review = ""
-         state.review.multiMedia = []
+         state.review.imageUrl = []
+         state.review.imageKey = []
          state.review.name = ""
          state.review.email = ""
       },
@@ -83,7 +86,8 @@ export const {
    starsAction,
    reviewAction,
    titleReviewAction,
-   multiMediaAction,
+   imageUrlAction,
+   imageKeyAction,
    nameAction,
    emailAction,
    refreshAction,

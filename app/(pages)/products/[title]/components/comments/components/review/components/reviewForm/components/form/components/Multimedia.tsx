@@ -1,80 +1,51 @@
 "use client"
 
 import { useEffect, useState } from "react"
-
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { multiMediaAction, stepAction } from "@/redux/features/commentSlice"
-
 import Image from "next/image"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import {
+   imageKeyAction,
+   imageUrlAction,
+   stepAction,
+} from "@/redux/features/commentSlice"
 
-import { MdOutlinePermMedia } from "react-icons/md"
-import { IoCloseCircle } from "react-icons/io5"
-import { BiPlus } from "react-icons/bi"
+import axios from "axios"
 
 import { motion } from "framer-motion"
+
+import { ImSpinner8 } from "react-icons/im"
+import { IoMdCloseCircle } from "react-icons/io"
+import { PiPlusThin } from "react-icons/pi"
+
+import { UploadDropzone } from "@/utils/uploadthing"
+import { UploadFileResponse } from "uploadthing/client"
 
 import Button from "./button/Button"
 
 const Multimedia = () => {
    const dispatch = useAppDispatch()
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
-   const [styleDragOver, setStyleDragOver] = useState(false)
-   const [selectedFiles, setSelectedFiles] = useState<
-      { file: File; preview: string }[]
+
+   const [uploaded, setUploaded] = useState(false)
+   const [progress, setProgress] = useState(0)
+   const [images, setImages] = useState<
+      UploadFileResponse<{
+         uploadedBy: string
+      }>[]
    >([])
 
-   const multiMediaSlice = useAppSelector(
-      (state) => state.commentSlice.review.multiMedia!
+   useEffect(() => {
+      dispatch(imageUrlAction(images.map((image) => image.url)))
+
+      dispatch(imageKeyAction(images.map((image) => image.key)))
+   }, [dispatch, images])
+
+   const imageUrlSlice = useAppSelector(
+      (state) => state.commentSlice.review.imageUrl as string[]
    )
 
-   useEffect(() => {
-      dispatch(multiMediaAction(selectedFiles))
-   }, [dispatch, selectedFiles])
-
-   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-      event.preventDefault()
-
-      const files = Array.from(event.dataTransfer.files)
-
-      const mediaFiles = files.filter(
-         (file) =>
-            file.type.startsWith("image/") || file.type.startsWith("video/")
-      )
-
-      const filesWithPreviews = mediaFiles.map((file) => ({
-         file,
-         preview: URL.createObjectURL(file),
-      }))
-
-      setSelectedFiles((prevFiles) =>
-         [...prevFiles, ...filesWithPreviews].slice(0, 5)
-      )
-   }
-
-   const handleFileInputChange = (
-      event: React.ChangeEvent<HTMLInputElement>
-   ) => {
-      const files = Array.from(event.target.files || [])
-
-      const mediaFiles = files.filter(
-         (file) =>
-            file.type.startsWith("image/") || file.type.startsWith("video/")
-      )
-
-      const filesWithPreviews = mediaFiles.map((file) => ({
-         file,
-         preview: URL.createObjectURL(file),
-      }))
-
-      setSelectedFiles((prevFiles) =>
-         [...prevFiles, ...filesWithPreviews].slice(0, 5)
-      )
-   }
-
-   const removeFile = (index: number) => {
-      const newFiles = [...selectedFiles]
-      newFiles.splice(index, 1)
-      setSelectedFiles(newFiles)
+   const filterRemoveMedia = (urlForRemove: string) => {
+      setImages(images.filter((image) => image.url !== urlForRemove))
    }
 
    return (
@@ -91,99 +62,123 @@ const Multimedia = () => {
          </h1>
 
          <div
-            className={`relative flex h-[150px] w-full ${
-               multiMediaSlice.length === 0
-                  ? "flex-col items-center justify-center border-2 border-dashed border-gray-300"
-                  : "flex-row border-2 border-gray-300 bg-gray-100"
-            } gap-2 overflow-hidden overflow-y-scroll ${
-               styleDragOver && multiMediaSlice.length === 0
-                  ? "!bg-gray-100"
-                  : "!bg-white"
-            }`}
-            onDrop={(e) => {
-               if (multiMediaSlice.length === 0) {
-                  handleDrop(e)
-               }
-            }}
-            onDragOver={(e) => {
-               e.preventDefault()
-               setStyleDragOver(true)
-            }}
-            onMouseLeave={() => setStyleDragOver(false)}
+            className={`relative flex h-[170px] w-full overflow-x-hidden overflow-y-scroll rounded-none border border-dashed border-gray-900/25 p-2`}
          >
-            {multiMediaSlice.length === 0 && (
-               <>
-                  <MdOutlinePermMedia className="text-[40px] text-gray-300" />
-                  <button className="cursor-pointer rounded-full bg-purple-700 px-[16px] py-[8px] uppercase text-white">
-                     add media
-                  </button>
-               </>
+            {!uploaded && (
+               <div
+                  style={{
+                     width: `${progress}%`,
+                  }}
+                  className={`w-[${progress}%] absolute 
+                  left-0 top-0 h-[170px] bg-[#F92672] transition-all`}
+               />
             )}
 
-            {multiMediaSlice.length === 0 && (
-               <div className={`absolute h-full w-full`}>
-                  <label
-                     htmlFor="fileInput"
-                     className="block h-full w-full cursor-pointer"
-                  ></label>
-                  <input
-                     type="file"
-                     className={`hidden`}
-                     onChange={handleFileInputChange}
-                     accept="image/*,video/*"
-                     multiple
-                     id="fileInput"
-                  />
-               </div>
+            {!uploaded && progress !== 0 && (
+               <p
+                  className={`absolute right-2/4 top-2/4 flex -translate-y-2/4 translate-x-2/4 items-center gap-1 text-[20px] ${
+                     progress === 100 ? "text-white" : "text-black"
+                  }`}
+               >
+                  {progress === 100 ? (
+                     <>
+                        Uploading <ImSpinner8 className="animate-spin" />{" "}
+                     </>
+                  ) : (
+                     `progress ${progress}%`
+                  )}
+               </p>
             )}
 
-            {multiMediaSlice.length > 0 && (
+            {!uploaded && progress === 0 && (
                <div className="h-full w-full">
-                  <div className="grid w-full grid-cols-3 gap-2 p-3 md:grid-cols-4 md:gap-3 md:p-5">
-                     <div
-                        className={`relative block min-h-[75px] rounded-[10px] border-2 border-dashed border-black/50 md:h-[100px]`}
-                        onDrop={handleDrop}
-                        onDragOver={(e) => {
-                           e.preventDefault()
-                           setStyleDragOver(true)
-                        }}
-                        onMouseLeave={() => setStyleDragOver(false)}
-                     >
-                        <BiPlus className="absolute right-2/4 top-2/4 h-full w-full -translate-y-2/4 translate-x-2/4 text-black/50" />
-                        <input
-                           type="file"
-                           className={`hidden`}
-                           accept="image/*,video/*"
-                           onChange={handleFileInputChange}
-                           multiple
-                           id="fileInput"
-                        />
+                  <div
+                     className={`${
+                        images.length > 0
+                           ? "grid w-full grid-cols-3 gap-2 p-3 md:grid-cols-4 md:gap-3 md:p-5"
+                           : "h-full w-full"
+                     }`}
+                  >
+                     <div className="relative h-full w-full">
+                        <UploadDropzone
+                           endpoint="mediaPost"
+                           onUploadProgress={(res) => setProgress(res)}
+                           onClientUploadComplete={(res) => {
+                              setUploaded(true)
+                              setTimeout(() => {
+                                 setUploaded(false)
+                                 setProgress(0)
+                              }, 100)
 
-                        <label
-                           htmlFor="fileInput"
-                           className="relative z-10 block h-full w-full cursor-pointer"
-                        ></label>
+                              setImages((prev: any) => [
+                                 ...prev,
+                                 ...(Array.isArray(res) ? res : [res]),
+                              ])
+                           }}
+                           onUploadError={(error: Error) => {
+                              alert(`ERROR! ${error.message}`)
+                           }}
+                           config={{
+                              mode: "auto",
+                           }}
+                           appearance={{
+                              container: `p-0 m-0 cursor-pointer ${
+                                 images.length === 0
+                                    ? "rounded-none min-w-full border-none h-full relative"
+                                    : "relative block min-h-[75px] w-full rounded-[10px] border-2 border-dashed border-black/50 md:h-[100px]"
+                              }`,
+                              uploadIcon: `w-[100px] h-[100px] ${
+                                 images.length > 0 || progress > 0
+                                    ? "hidden"
+                                    : ""
+                              }`,
+                              label: "hidden",
+                              allowedContent: `text-[16px] ${
+                                 images.length > 0 || progress > 0
+                                    ? "hidden"
+                                    : ""
+                              }`,
+                              button: "hidden",
+                           }}
+                        />
+                        {images.length > 0 && (
+                           <PiPlusThin className="absolute right-2/4 top-2/4 h-10 w-10 -translate-y-2/4 translate-x-2/4 text-black/50" />
+                        )}
                      </div>
 
-                     {multiMediaSlice.map((file, index) => (
-                        <div className="relative" key={index}>
-                           <Image
-                              loading="lazy"
-                              width={0}
-                              height={0}
-                              sizes="100vw"
-                              src={file.preview}
-                              alt="image"
-                              className="min-h-[75px] w-full rounded-[10px] object-cover md:h-[100px]"
-                           />
-                           <div
-                              className="absolute right-[-10px] top-[-10px] md:right-[-17px] md:top-[-17px]"
-                              onClick={() => removeFile(index)}
-                           >
-                              <IoCloseCircle className="h-[20px] w-[20px] cursor-pointer text-black/50 md:h-[30px] md:w-[30px]" />
-                           </div>
-                        </div>
-                     ))}
+                     {images.length > 0 &&
+                        images.map((item) => {
+                           return (
+                              <div className="relative" key={item.key}>
+                                 <Image
+                                    id={item.key}
+                                    width={0}
+                                    height={0}
+                                    sizes="100vw"
+                                    src={item.url}
+                                    alt={item.name}
+                                    className="min-h-[75px] w-full rounded-[10px] object-cover md:h-[100px]"
+                                 />
+
+                                 <div
+                                    className="absolute right-[-10px] top-[-10px] md:right-[-17px] md:top-[-17px]"
+                                    onClick={async () => {
+                                       filterRemoveMedia(item.url)
+                                       await axios.delete(
+                                          "http://localhost:3000/api/uploadthing",
+                                          {
+                                             data: {
+                                                url: item.url,
+                                             },
+                                          }
+                                       )
+                                    }}
+                                 >
+                                    <IoMdCloseCircle className="h-[20px] w-[20px] cursor-pointer text-black/50 md:h-[30px] md:w-[30px]" />
+                                 </div>
+                              </div>
+                           )
+                        })}
                   </div>
                </div>
             )}
@@ -191,10 +186,10 @@ const Multimedia = () => {
 
          <div
             className={`${
-               multiMediaSlice.length === 0 ? "flex-center" : "flex-start"
-            } mt-5 flex w-full`}
+               imageUrlSlice.length > 0 ? "flex-start" : "flex-center"
+            } mt-3 flex w-full`}
          >
-            {multiMediaSlice.length === 0 && (
+            {imageUrlSlice.length === 0 && (
                <span
                   onClick={() => {
                      dispatch(stepAction(5))
@@ -204,7 +199,8 @@ const Multimedia = () => {
                   Skip
                </span>
             )}
-            {multiMediaSlice.length > 0 && (
+
+            {imageUrlSlice.length > 0 && (
                <Button
                   onClick={() => dispatch(stepAction(5))}
                   className="!mt-0"

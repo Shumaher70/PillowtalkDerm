@@ -72,6 +72,7 @@ model Review {
   title     String
   comment   String
   images    String[]
+  imagesKey String[]
   name      String
   productId String
   userId    String
