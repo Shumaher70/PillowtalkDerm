@@ -3,9 +3,14 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { motion } from "framer-motion"
 
-import { recommendAction, stepAction } from "@/redux/features/commentSlice"
+import {
+   recommendAction,
+   refreshAction,
+   stepAction,
+} from "@/redux/features/commentSlice"
 import { useState } from "react"
 import { FaCheck } from "react-icons/fa6"
+import { reviewForm } from "@/redux/features/sidebarSlice"
 
 const Recommend = () => {
    const [text, setText] = useState("submit")
@@ -30,10 +35,10 @@ const Recommend = () => {
       setTimeout(() => {
          setText("success!")
       }, 1900)
-
       setTimeout(() => {
-         setText("submit")
-      }, 2100)
+         dispatch(reviewForm(false))
+         dispatch(refreshAction())
+      }, 2000)
    }
 
    return (
@@ -46,7 +51,6 @@ const Recommend = () => {
             opacity: stepSlice === 6 ? 1 : 0,
             right: `${stepSlice * 100 - 600}%`,
          }}
-         transition={{ delay: stepSlice === 7 ? 2 : 0, duration: 0.5 }}
          className=" flex-center absolute top-2/4 flex h-[170px] min-w-full -translate-y-2/4 flex-col"
       >
          <div
@@ -70,11 +74,10 @@ const Recommend = () => {
          </div>
          <button
             onClick={async () => {
-               dispatch(stepAction(7))
                dispatch(recommendAction(checked))
-               handlerTextSubmit()
 
-               fetch("/api/reviews", {
+               handlerTextSubmit()
+               await fetch("/api/reviews", {
                   method: "POST",
                   body: JSON.stringify({
                      rating: commentSlice.stars,

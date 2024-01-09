@@ -28,11 +28,18 @@ const Multimedia = () => {
 
    const [uploaded, setUploaded] = useState(false)
    const [progress, setProgress] = useState(0)
+   const closeFormSlice = useAppSelector(
+      (state) => state.sidebarReducer.reviewForm
+   )
    const [images, setImages] = useState<
       UploadFileResponse<{
          uploadedBy: string
       }>[]
    >([])
+
+   useEffect(() => {
+      if (!closeFormSlice) setImages([])
+   }, [closeFormSlice])
 
    useEffect(() => {
       dispatch(imageUrlAction(images.map((image) => image.url)))
@@ -189,7 +196,7 @@ const Multimedia = () => {
                imageUrlSlice.length > 0 ? "flex-start" : "flex-center"
             } mt-3 flex w-full`}
          >
-            {imageUrlSlice.length === 0 && (
+            {imageUrlSlice.length === 0 && progress === 0 && (
                <span
                   onClick={() => {
                      dispatch(stepAction(5))

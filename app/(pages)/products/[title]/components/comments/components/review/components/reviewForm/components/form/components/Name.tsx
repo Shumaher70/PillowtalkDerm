@@ -4,13 +4,20 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { motion } from "framer-motion"
 import Button from "./button/Button"
 import { nameAction, stepAction } from "@/redux/features/commentSlice"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Name = () => {
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
    const dispatch = useAppDispatch()
    const [value, setValue] = useState("")
    const [valid, setValid] = useState(false)
+   const closeFormSlice = useAppSelector(
+      (state) => state.sidebarReducer.reviewForm
+   )
+
+   useEffect(() => {
+      if (!closeFormSlice) setValue("")
+   }, [closeFormSlice])
 
    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value)
