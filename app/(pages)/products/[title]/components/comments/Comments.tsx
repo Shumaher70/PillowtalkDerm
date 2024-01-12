@@ -3,8 +3,18 @@ import { ProductType } from "@/types"
 import Review from "./components/review/Review"
 import Filter from "./components/filter/Filter"
 import Comment from "./components/comment/Comment"
+import { prisma } from "@/lib/prisma"
 
-const Comments = ({ product }: { product: ProductType }) => {
+const Comments = async ({ product }: { product: ProductType }) => {
+   const review = await prisma.review.findMany({
+      where: {
+         productId: product.id,
+      },
+      include: {
+         user: true,
+      },
+   })
+
    return (
       <div className="bg-accent flex w-full flex-col px-[16px] py-[32px] pb-[46px] md:px-[80px] lg:px-[200px]">
          <Review reviews={product.reviews} />
@@ -12,9 +22,15 @@ const Comments = ({ product }: { product: ProductType }) => {
             <Filter />
          </div>
 
-         <div className="mt-5">
-            <Comment />
-         </div>
+         {review.length > 0 && (
+            <div className="mt-5 flex flex-col gap-5">
+               {review.map((comment) => (
+                  <div key={comment.id}>
+                     <Comment review={comment} user={comment.user} />
+                  </div>
+               ))}
+            </div>
+         )}
       </div>
    )
 }

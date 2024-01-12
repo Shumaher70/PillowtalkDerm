@@ -53,4 +53,5 @@ export type UserType = {
    createdAt: Date
    updatedAt: Date
    img: string | null
+   verified: boolean
 }

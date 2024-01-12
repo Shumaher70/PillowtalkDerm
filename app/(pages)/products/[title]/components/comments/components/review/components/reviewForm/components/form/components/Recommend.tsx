@@ -3,12 +3,8 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { motion } from "framer-motion"
 
-import {
-   recommendAction,
-   refreshAction,
-   stepAction,
-} from "@/redux/features/commentSlice"
-import { useState } from "react"
+import { recommendAction, refreshAction } from "@/redux/features/commentSlice"
+import { useEffect, useState } from "react"
 import { FaCheck } from "react-icons/fa6"
 import { reviewForm } from "@/redux/features/sidebarSlice"
 
@@ -28,6 +24,10 @@ const Recommend = () => {
       setChecked((previous) => !previous)
       setCheckedEnter(true)
    }
+
+   useEffect(() => {
+      dispatch(recommendAction(checked))
+   }, [checked, dispatch])
 
    const handlerTextSubmit = () => {
       setText("loading...")

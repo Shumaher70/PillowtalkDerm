@@ -23,3 +23,26 @@ export const POST = async (request: Request) => {
       return new NextResponse(error.message, { status: 500 })
    }
 }
+
+export const PUT = async (request: Request) => {
+   try {
+      const json = await request.json()
+
+      const reviews = await prisma.review.update({
+         where: {
+            id: json.id,
+         },
+         data: {
+            like: json.like,
+            dislike: json.dislike,
+         },
+      })
+
+      return new NextResponse(JSON.stringify(reviews), {
+         status: 201,
+         headers: { "Content-Type": "application/json" },
+      })
+   } catch (error: any) {
+      return new NextResponse(error.message, { status: 500 })
+   }
+}
