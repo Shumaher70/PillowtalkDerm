@@ -6,6 +6,7 @@ import Tips from "./components/tips/Tips"
 import Description from "./components/description/Description"
 import Comments from "./components/comments/Comments"
 import Form from "./components/comments/components/review/components/reviewForm/components/form/Form"
+import ViewPortMotionDiv from "@/motion/ViewPortMotionDiv"
 
 const Product = async ({ params }: { params: { title: string } }) => {
    const { title } = params
@@ -35,33 +36,43 @@ const Product = async ({ params }: { params: { title: string } }) => {
          {products.length > 0 && (
             <>
                <Form />
-               <Card product={products[0]} />
+               <ViewPortMotionDiv>
+                  <Card product={products[0]} />
+               </ViewPortMotionDiv>
 
                {products[0].productDescription.length > 0 && (
-                  <div className="mt-5 lg:mt-10">
-                     <Results />
-                  </div>
+                  <ViewPortMotionDiv>
+                     <div className="mt-5 lg:mt-10">
+                        <Results />
+                     </div>
+                  </ViewPortMotionDiv>
                )}
 
                {products[0].tips.length > 0 && (
-                  <div className="mt-5 lg:mt-10">
-                     <Tips tips={products[0].tips} />
-                  </div>
+                  <ViewPortMotionDiv>
+                     <div className="mt-5 lg:mt-10">
+                        <Tips tips={products[0].tips} />
+                     </div>
+                  </ViewPortMotionDiv>
                )}
 
                {products[0].productDescription.length > 0 && (
-                  <div className="mt-5 lg:mt-10">
-                     <Description
-                        description={products[0].productDescription}
-                        title={products[0].title}
-                        pair={products[0].pair}
-                     />
-                  </div>
+                  <ViewPortMotionDiv>
+                     <div className="mt-5 lg:mt-10">
+                        <Description
+                           description={products[0].productDescription}
+                           title={products[0].title}
+                           pair={products[0].pair}
+                        />
+                     </div>
+                  </ViewPortMotionDiv>
                )}
 
-               <div className="mt-5 lg:mt-10">
-                  <Comments product={products[0]} />
-               </div>
+               <ViewPortMotionDiv>
+                  <div className="mt-5 lg:mt-10">
+                     <Comments product={products[0]} />
+                  </div>
+               </ViewPortMotionDiv>
             </>
          )}
       </>
