@@ -11,11 +11,22 @@ export const POST = async (request: Request) => {
    try {
       const json = await request.json()
 
-      const user = await prisma.user.create({
-         data: json,
+      const uniqueEmail = await prisma.user.findUnique({
+         where: {
+            email: json.email,
+         },
       })
 
-      return new NextResponse(JSON.stringify(user), {
+      if (!uniqueEmail) {
+         const user = await prisma.user.create({
+            data: json,
+         })
+         return new NextResponse(JSON.stringify(user), {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+         })
+      }
+      return new NextResponse(JSON.stringify(""), {
          status: 201,
          headers: { "Content-Type": "application/json" },
       })

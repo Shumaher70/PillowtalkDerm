@@ -4,17 +4,16 @@ import UserComment from "./components/userComment/UserComment"
 
 interface CommentProps {
    review: Review
-   user: userType
 }
 
-const Comment = ({ review, user }: CommentProps) => {
+const Comment = ({ review }: CommentProps) => {
    return (
       <div className="flex w-full flex-col md:flex-row lg:gap-5">
          <div className="container-rounded-t md:rounded-l-[10px w-full overflow-hidden bg-white p-[16px] pb-0 md:rounded-[0px] lg:max-w-[250px] lg:rounded-[30px]">
             <User
                name={review.name}
                recommend={review.recommend}
-               verified={user.verified}
+               email={review.email}
             />
          </div>
 

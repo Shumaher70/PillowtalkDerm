@@ -7,6 +7,7 @@ import { recommendAction, refreshAction } from "@/redux/features/commentSlice"
 import { useEffect, useState } from "react"
 import { FaCheck } from "react-icons/fa6"
 import { reviewForm } from "@/redux/features/sidebarSlice"
+import axios from "axios"
 
 const Recommend = () => {
    const [text, setText] = useState("submit")
@@ -45,11 +46,11 @@ const Recommend = () => {
       <motion.div
          initial={{
             opacity: 0,
-            right: "-600%",
+            right: "-700%",
          }}
          animate={{
-            opacity: stepSlice === 6 ? 1 : 0,
-            right: `${stepSlice * 100 - 600}%`,
+            opacity: stepSlice === 7 ? 1 : 0,
+            right: `${stepSlice * 100 - 700}%`,
          }}
          className=" flex-center absolute top-2/4 flex h-[170px] min-w-full -translate-y-2/4 flex-col"
       >
@@ -77,22 +78,24 @@ const Recommend = () => {
                dispatch(recommendAction(checked))
 
                handlerTextSubmit()
-               await fetch("/api/reviews", {
-                  method: "POST",
-                  body: JSON.stringify({
-                     rating: commentSlice.stars,
-                     title: commentSlice.titleReview,
-                     comment: commentSlice.review,
-                     images: commentSlice.imageUrl,
-                     imagesKey: commentSlice.imageKey,
-                     name: commentSlice.name,
-                     productId: commentSlice.productId,
-                     userId: commentSlice.userId,
-                     recommend: commentSlice.recommend,
-                  }),
-                  headers: {
-                     "Content-type": "application/json; charset=UTF-8",
-                  },
+
+               await axios.post("/api/user", {
+                  first_name: commentSlice.name,
+                  last_name: commentSlice.name,
+                  email: commentSlice.email,
+                  img: "",
+               })
+
+               await axios.post("/api/reviews", {
+                  rating: commentSlice.stars,
+                  title: commentSlice.titleReview,
+                  comment: commentSlice.review,
+                  images: commentSlice.imageUrl,
+                  imagesKey: commentSlice.imageKey,
+                  name: commentSlice.name,
+                  productId: commentSlice.productId,
+                  recommend: commentSlice.recommend,
+                  email: commentSlice.email,
                })
             }}
             className="mt-5 cursor-pointer rounded-full bg-purple-700 px-[16px] py-[8px] uppercase text-white"

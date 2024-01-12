@@ -1,12 +1,19 @@
+import { prisma } from "@/lib/prisma"
 import { IoCheckmarkCircle } from "react-icons/io5"
 
-const Customer = ({
+const Customer = async ({
    name: nameProps,
-   verified,
+   email,
 }: {
    name: string
-   verified: boolean
+   email: string
 }) => {
+   const emailUsers = await prisma.user.findUnique({
+      where: {
+         email: email,
+      },
+   })
+
    const nameIcon = (name: string) => {
       if (name.split(" ").length === 1) {
          const first = name.slice(0, 1).toUpperCase()
@@ -56,7 +63,7 @@ const Customer = ({
          <div className="flex flex-col">
             <span className="text-[16px] capitalize">{name(nameProps)}</span>
 
-            {verified && (
+            {emailUsers?.img && (
                <div className="flex items-center gap-[2px]">
                   <IoCheckmarkCircle className="text-[20px] text-[#F92672]" />
                   <span className="text-[16px]">Verified Buyer</span>
