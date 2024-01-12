@@ -12,7 +12,6 @@ interface comment {
       email?: string
       recommend?: boolean
       productId: string
-      userId: string
    }
 }
 
@@ -28,7 +27,6 @@ const initialState = {
       imageKey: [],
       recommend: true,
       productId: "",
-      userId: "",
    },
 } as comment
 
@@ -66,9 +64,7 @@ export const comment = createSlice({
       productIdAction: (state, action: PayloadAction<string>) => {
          state.review.productId = action.payload
       },
-      userIdAction: (state, action: PayloadAction<string>) => {
-         state.review.userId = action.payload
-      },
+
       refreshAction: (state) => {
          state.review.step = 1
          state.review.stars = 0
@@ -93,7 +89,6 @@ export const {
    refreshAction,
    recommendAction,
    productIdAction,
-   userIdAction,
 } = comment.actions
 
 export default comment.reducer

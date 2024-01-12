@@ -75,14 +75,13 @@ model Review {
   imagesKey String[]
   name      String
   productId String
-  userId    String
   recommend Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
   like      Int      @default(0)
   dislike   Int      @default(0)
+  email     String
 }
 
 model User {
@@ -93,6 +92,5 @@ model User {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   img        String?
-  Review     Review[]
   verified   Boolean  @default(false)
 }

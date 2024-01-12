@@ -10,9 +10,6 @@ const Comments = async ({ product }: { product: ProductType }) => {
       where: {
          productId: product.id,
       },
-      include: {
-         user: true,
-      },
    })
 
    return (
@@ -26,7 +23,7 @@ const Comments = async ({ product }: { product: ProductType }) => {
             <div className="mt-5 flex flex-col gap-5">
                {review.map((comment) => (
                   <div key={comment.id}>
-                     <Comment review={comment} user={comment.user} />
+                     <Comment review={comment} />
                   </div>
                ))}
             </div>

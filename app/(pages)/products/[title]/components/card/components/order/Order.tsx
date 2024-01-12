@@ -10,7 +10,7 @@ import OrderCount from "./components/OrderCount"
 import { useUser } from "@clerk/nextjs"
 import { useAppDispatch } from "@/redux/hooks"
 import { useEffect } from "react"
-import { productIdAction, userIdAction } from "@/redux/features/commentSlice"
+import { productIdAction } from "@/redux/features/commentSlice"
 
 const Order = ({ product }: { product: ProductType }) => {
    const ratingStars = calcRatingStars(product.reviews.length, product.reviews)
@@ -18,10 +18,7 @@ const Order = ({ product }: { product: ProductType }) => {
    const { user } = useUser()
 
    useEffect(() => {
-      if (user) {
-         dispatch(userIdAction(user.id))
-         dispatch(productIdAction(product.id))
-      }
+      dispatch(productIdAction(product.id))
    })
 
    return (
