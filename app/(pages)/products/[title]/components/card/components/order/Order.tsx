@@ -19,7 +19,7 @@ const Order = ({ product }: { product: ProductType }) => {
 
    useEffect(() => {
       dispatch(productIdAction(product.id))
-   })
+   }, [dispatch, product.id])
 
    return (
       <div className="box-p bg-secondary container-rounded flex w-full flex-col gap-3">
