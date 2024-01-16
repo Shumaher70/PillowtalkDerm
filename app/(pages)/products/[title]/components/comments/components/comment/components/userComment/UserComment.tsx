@@ -15,11 +15,7 @@ const UserComment = ({ comment }: UserCommentProps) => {
          </div>
 
          <div className="h-full w-full">
-            <Comment
-               title={comment.title}
-               comment={comment.comment}
-               media={comment.images}
-            />
+            <Comment comment={comment} />
          </div>
 
          <div className="h-full w-full pt-10">
