@@ -140,7 +140,9 @@ const SlideInfo = () => {
                      initial={{ opacity: 0 }}
                      animate={"opacity"}
                   >
-                     <SearchDesktop products={products} blogs={blogs} />
+                     {sidebarSlice.slideSearch && (
+                        <SearchDesktop products={products} blogs={blogs} />
+                     )}
                   </motion.div>
                </motion.div>
 
@@ -155,7 +157,7 @@ const SlideInfo = () => {
                      initial={{ opacity: 1 }}
                      animate="opacity"
                   >
-                     <Shop products={products} />
+                     {sidebarSlice.slideShop && <Shop products={products} />}
                   </motion.div>
                </motion.div>
 
@@ -170,7 +172,9 @@ const SlideInfo = () => {
                      initial={{ opacity: 1 }}
                      animate="opacity"
                   >
-                     <SkinNerdAcademy blogs={blogs} />
+                     {sidebarSlice.slideSkinNerdAcademy && (
+                        <SkinNerdAcademy blogs={blogs} />
+                     )}
                   </motion.div>
                </motion.div>
             </div>

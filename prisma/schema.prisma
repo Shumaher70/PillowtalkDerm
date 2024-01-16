@@ -82,6 +82,7 @@ model Review {
   like      Int      @default(0)
   dislike   Int      @default(0)
   email     String
+  verified  Boolean  @default(false)
 }
 
 model User {

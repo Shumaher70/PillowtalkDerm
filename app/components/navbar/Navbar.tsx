@@ -25,6 +25,7 @@ import { BlogType, ProductType } from "@/types"
 import LoginMenu from "../LoginMenu"
 import Overflow from "../Overflow"
 import SlideInfo from "../slideInfo/SlideInfo"
+import CommentImage from "../commentImage/CommentImage"
 
 const Navbar = () => {
    const dispatch = useDispatch()
@@ -69,6 +70,7 @@ const Navbar = () => {
    return (
       <>
          <Overflow />
+         <CommentImage />
          <SlideInfo />
          <LoginMenu />
          {

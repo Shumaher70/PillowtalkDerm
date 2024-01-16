@@ -6,6 +6,9 @@ import React, { useEffect, useState } from "react"
 const Overflow = () => {
    const [overflow, setOverflow] = useState(true)
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
+   const commentImagesSlice = useAppSelector(
+      (state) => state.commentImagesReducer.commentImages
+   )
 
    useEffect(() => {
       if (typeof document !== "undefined")
@@ -16,7 +19,8 @@ const Overflow = () => {
             sidebarSlice.slideSearch ||
             sidebarSlice.slideShop ||
             sidebarSlice.slideSkinNerdAcademy ||
-            sidebarSlice.reviewForm
+            sidebarSlice.reviewForm ||
+            commentImagesSlice
          ) {
             setOverflow(false)
          } else {
@@ -33,6 +37,7 @@ const Overflow = () => {
       sidebarSlice.slideSearch,
       sidebarSlice.slideShop,
       sidebarSlice.slideSkinNerdAcademy,
+      commentImagesSlice,
    ])
 
    return (
