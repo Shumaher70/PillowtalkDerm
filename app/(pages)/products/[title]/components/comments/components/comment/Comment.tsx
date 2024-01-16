@@ -14,6 +14,7 @@ const Comment = ({ review }: CommentProps) => {
                name={review.name}
                recommend={review.recommend}
                email={review.email}
+               verified={review.verified}
             />
          </div>
 
