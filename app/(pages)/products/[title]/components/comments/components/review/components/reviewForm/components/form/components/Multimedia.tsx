@@ -179,6 +179,7 @@ const Multimedia = () => {
                            return (
                               <div className="relative" key={item.key}>
                                  <Image
+                                    loading="eager"
                                     id={item.key}
                                     width={0}
                                     height={0}
