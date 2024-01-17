@@ -2,17 +2,17 @@
 
 import { UserType } from "@/types"
 import { useUser } from "@clerk/nextjs"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 const Users = () => {
    const [usersPrisma, setUsersPrisma] = useState<UserType[]>([])
    const { isSignedIn, user } = useUser()
 
-   const fetchUsers: () => void = async () => {
+   const fetchUsers = useCallback(async () => {
       try {
-         const user = await fetch("/api/user")
-         if (user.ok) {
-            const data = await user.json()
+         const response = await fetch("/api/user")
+         if (response.ok) {
+            const data = await response.json()
             setUsersPrisma(data)
          } else {
             throw new Error("user data did not respond")
@@ -20,19 +20,15 @@ const Users = () => {
       } catch (error) {
          console.error("Error fetching user data:", error)
       }
-   }
-
-   useEffect(() => {
-      fetchUsers()
    }, [])
 
    useEffect(() => {
       const createUserIfNotExist = async () => {
          if (usersPrisma.length > 0 && isSignedIn) {
-            const userExist =
-               usersPrisma.filter(
-                  (item) => item.email === user?.emailAddresses[0].emailAddress
-               ).length > 0
+            const userExist = usersPrisma.some(
+               (item) => item.email === user?.emailAddresses[0].emailAddress
+            )
+
             if (!userExist) {
                await fetch("/api/user", {
                   method: "POST",
@@ -56,9 +52,10 @@ const Users = () => {
             }
          }
       }
-
+      fetchUsers()
       createUserIfNotExist()
    }, [
+      fetchUsers,
       isSignedIn,
       user?.emailAddresses,
       user?.firstName,
