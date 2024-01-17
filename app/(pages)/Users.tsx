@@ -5,7 +5,10 @@ import { useUser } from "@clerk/nextjs"
 import { useEffect, useState } from "react"
 
 const Users = () => {
-   const getUser = async () => {
+   const [usersPrisma, setUsersPrisma] = useState<UserType[]>([])
+   const { isSignedIn, user } = useUser()
+
+   const fetchUsers: () => void = async () => {
       try {
          const user = await fetch("/api/user")
          if (user.ok) {
@@ -19,53 +22,42 @@ const Users = () => {
       }
    }
 
-   const [usersPrisma, setUsersPrisma] = useState<UserType[]>([])
-
-   const { isSignedIn, user } = useUser()
-
    useEffect(() => {
-      const handlerGet = async () => {
-         await getUser()
-      }
-      handlerGet()
+      fetchUsers()
    }, [])
 
    useEffect(() => {
-      const userPost = async () => {
-         await fetch("/api/user", {
-            method: "POST",
-            body: JSON.stringify({
-               id: user?.id,
-               first_name:
-                  user?.firstName === null
-                     ? "without a first name"
-                     : user?.firstName,
-               last_name:
-                  user?.lastName === null
-                     ? "without a last name"
-                     : user?.lastName,
-               email: user?.emailAddresses[0].emailAddress,
-               img: user?.imageUrl,
-            }),
-            headers: {
-               "Content-type": "application/json; charset=UTF-8",
-            },
-         })
-      }
-
-      const handler = async () => {
+      const createUserIfNotExist = async () => {
          if (usersPrisma.length > 0 && isSignedIn) {
             const userExist =
                usersPrisma.filter(
                   (item) => item.email === user?.emailAddresses[0].emailAddress
                ).length > 0
-
             if (!userExist) {
-               await userPost()
+               await fetch("/api/user", {
+                  method: "POST",
+                  body: JSON.stringify({
+                     id: user?.id,
+                     first_name:
+                        user?.firstName === null
+                           ? "without a first name"
+                           : user?.firstName,
+                     last_name:
+                        user?.lastName === null
+                           ? "without a last name"
+                           : user?.lastName,
+                     email: user?.emailAddresses[0].emailAddress,
+                     img: user?.imageUrl,
+                  }),
+                  headers: {
+                     "Content-type": "application/json; charset=UTF-8",
+                  },
+               })
             }
          }
       }
-      handler()
+
+      createUserIfNotExist()
    }, [
       isSignedIn,
       user?.emailAddresses,
@@ -76,7 +68,7 @@ const Users = () => {
       usersPrisma,
    ])
 
-   return <></>
+   return null
 }
 
 export default Users
