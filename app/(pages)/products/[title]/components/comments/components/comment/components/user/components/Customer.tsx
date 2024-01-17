@@ -33,18 +33,10 @@ const Customer = ({ name: nameProps, email, verified }: CustomerProps) => {
    }
 
    const name = (name: string) => {
-      if (name.split(" ").length === 1) {
-         return name
+      if (name.length > 20) {
+         return name.substr(0, 20) + "..."
       } else {
-         const first = name.split(" ").slice(0, 1)
-
-         const last = name
-            .split(" ")
-            .slice(-1)
-            .map((latter) => latter.slice(0, 1))
-            .join("")
-            .toUpperCase()
-         return first + " " + last
+         return name
       }
    }
 
