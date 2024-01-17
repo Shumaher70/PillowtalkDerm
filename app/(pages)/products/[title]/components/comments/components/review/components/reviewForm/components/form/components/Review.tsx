@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { motion } from "framer-motion"
 import Button from "./button/Button"
 import { reviewAction, stepAction } from "@/redux/features/commentSlice"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 const Review = () => {
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
@@ -14,10 +14,46 @@ const Review = () => {
    )
    const [value, setValue] = useState("")
    const [valid, setValid] = useState(false)
+   const refInput = useRef<HTMLTextAreaElement>(null)
 
    const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setValue(e.currentTarget.value)
    }
+
+   useEffect(() => {
+      const timeout = setTimeout(() => {
+         if (stepSlice === 2) {
+            refInput.current!.focus()
+         }
+      }, 600)
+
+      return () => clearTimeout(timeout)
+   }, [stepSlice])
+
+   const handleUserKeyPress = useCallback(
+      (event: { key: any; keyCode: any }) => {
+         const { key } = event
+
+         if (key === "Enter" && stepSlice === 2) {
+            if (value.trim().length > 0) {
+               dispatch(stepAction(3))
+               dispatch(reviewAction(value.trim()))
+            }
+            setValid(value.trim().length === 0 ? true : false)
+         }
+         if (key === "Escape" && stepSlice === 2) {
+            dispatch(stepAction(1))
+         }
+      },
+      [dispatch, stepSlice, value]
+   )
+
+   useEffect(() => {
+      window.addEventListener("keydown", handleUserKeyPress)
+      return () => {
+         window.removeEventListener("keydown", handleUserKeyPress)
+      }
+   }, [handleUserKeyPress])
 
    useEffect(() => {
       if (!closeFormSlice) setValue("")
@@ -39,12 +75,14 @@ const Review = () => {
          <h1 className="mb-[10px] text-[22px] font-bold">Enter your review:</h1>
          <div>
             <textarea
+               ref={refInput}
                className={`h-[150px] w-full border-b-[1px] border-gray-300 bg-transparent p-3 outline-none ${
                   valid && "border-[1px] border-red-500"
                }`}
                placeholder="Type your review here..."
                onChange={changeHandler}
                value={value}
+               maxLength={500}
             />
          </div>
          <Button
@@ -53,6 +91,7 @@ const Review = () => {
                   dispatch(stepAction(3))
                   dispatch(reviewAction(value.trim()))
                }
+
                setValid(value.trim().length === 0 ? true : false)
             }}
          >

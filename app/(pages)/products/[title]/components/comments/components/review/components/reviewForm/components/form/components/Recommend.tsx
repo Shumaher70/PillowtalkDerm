@@ -3,8 +3,12 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { motion } from "framer-motion"
 
-import { recommendAction, refreshAction } from "@/redux/features/commentSlice"
-import { useEffect, useState } from "react"
+import {
+   recommendAction,
+   refreshAction,
+   stepAction,
+} from "@/redux/features/commentSlice"
+import { useCallback, useEffect, useState } from "react"
 import { FaCheck } from "react-icons/fa6"
 import { reviewForm } from "@/redux/features/sidebarSlice"
 import axios from "axios"
@@ -13,6 +17,7 @@ const Recommend = () => {
    const [text, setText] = useState("submit")
    const [checked, setChecked] = useState(true)
    const [checkedEnter, setCheckedEnter] = useState(false)
+   const [isSubmitting, setIsSubmitting] = useState(false)
 
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
    const commentSlice = useAppSelector((state) => state.commentSlice.review)
@@ -26,21 +31,80 @@ const Recommend = () => {
       setCheckedEnter(true)
    }
 
+   const handlerTextSubmit = useCallback(() => {
+      setIsSubmitting(true)
+      setText("loading...")
+
+      const postTimeout = setTimeout(async () => {
+         setText("success!")
+         await axios.post("/api/user", {
+            first_name: commentSlice.name,
+            last_name: commentSlice.name,
+            email: commentSlice.email,
+            img: "",
+         })
+
+         await axios.post("/api/reviews", {
+            rating: commentSlice.stars,
+            title: commentSlice.titleReview,
+            comment: commentSlice.review,
+            images: commentSlice.imageUrl,
+            imagesKey: commentSlice.imageKey,
+            name: commentSlice.name,
+            productId: commentSlice.productId,
+            recommend: commentSlice.recommend,
+            email: commentSlice.email,
+         })
+      }, 1900)
+      const refreshActionTimeout = setTimeout(() => {
+         dispatch(reviewForm(false))
+         dispatch(refreshAction())
+         setText("submit")
+         setIsSubmitting(false)
+      }, 2000)
+
+      return () => {
+         clearTimeout(postTimeout)
+         clearTimeout(refreshActionTimeout)
+      }
+   }, [
+      commentSlice.email,
+      commentSlice.imageKey,
+      commentSlice.imageUrl,
+      commentSlice.name,
+      commentSlice.productId,
+      commentSlice.recommend,
+      commentSlice.review,
+      commentSlice.stars,
+      commentSlice.titleReview,
+      dispatch,
+   ])
+
+   const handleUserKeyPress = useCallback(
+      async (event: { key: any; keyCode: any }) => {
+         const { key } = event
+
+         if (key === "Enter" && stepSlice === 7 && !isSubmitting) {
+            dispatch(recommendAction(checked))
+            handlerTextSubmit()
+         }
+         if (key === "Escape" && stepSlice === 7) {
+            dispatch(stepAction(6))
+         }
+      },
+      [checked, dispatch, handlerTextSubmit, isSubmitting, stepSlice]
+   )
+
+   useEffect(() => {
+      window.addEventListener("keydown", handleUserKeyPress)
+      return () => {
+         window.removeEventListener("keydown", handleUserKeyPress)
+      }
+   }, [handleUserKeyPress])
+
    useEffect(() => {
       dispatch(recommendAction(checked))
    }, [checked, dispatch])
-
-   const handlerTextSubmit = () => {
-      setText("loading...")
-
-      setTimeout(() => {
-         setText("success!")
-      }, 1900)
-      setTimeout(() => {
-         dispatch(reviewForm(false))
-         dispatch(refreshAction())
-      }, 2000)
-   }
 
    return (
       <motion.div
@@ -74,29 +138,10 @@ const Recommend = () => {
             <p>i recommend this product</p>
          </div>
          <button
-            onClick={async () => {
+            disabled={text !== "submit" ? true : false}
+            onClick={() => {
                dispatch(recommendAction(checked))
-
                handlerTextSubmit()
-
-               await axios.post("/api/user", {
-                  first_name: commentSlice.name,
-                  last_name: commentSlice.name,
-                  email: commentSlice.email,
-                  img: "",
-               })
-
-               await axios.post("/api/reviews", {
-                  rating: commentSlice.stars,
-                  title: commentSlice.titleReview,
-                  comment: commentSlice.review,
-                  images: commentSlice.imageUrl,
-                  imagesKey: commentSlice.imageKey,
-                  name: commentSlice.name,
-                  productId: commentSlice.productId,
-                  recommend: commentSlice.recommend,
-                  email: commentSlice.email,
-               })
             }}
             className="mt-5 cursor-pointer rounded-full bg-purple-700 px-[16px] py-[8px] uppercase text-white"
          >

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import {
@@ -36,6 +36,27 @@ const Multimedia = () => {
          uploadedBy: string
       }>[]
    >([])
+
+   const handleUserKeyPress = useCallback(
+      (event: { key: any; keyCode: any }) => {
+         const { key } = event
+
+         if (key === "Enter" && stepSlice === 4) {
+            dispatch(stepAction(5))
+         }
+         if (key === "Escape" && stepSlice === 4) {
+            dispatch(stepAction(3))
+         }
+      },
+      [dispatch, stepSlice]
+   )
+
+   useEffect(() => {
+      window.addEventListener("keydown", handleUserKeyPress)
+      return () => {
+         window.removeEventListener("keydown", handleUserKeyPress)
+      }
+   }, [handleUserKeyPress])
 
    useEffect(() => {
       if (!closeFormSlice) setImages([])

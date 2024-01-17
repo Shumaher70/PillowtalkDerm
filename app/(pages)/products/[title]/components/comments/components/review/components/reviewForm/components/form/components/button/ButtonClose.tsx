@@ -4,6 +4,7 @@ import { refreshAction } from "@/redux/features/commentSlice"
 import { reviewForm } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import axios from "axios"
+import { useCallback, useEffect } from "react"
 import { IoCloseCircle } from "react-icons/io5"
 
 const ButtonClose = () => {
@@ -11,6 +12,33 @@ const ButtonClose = () => {
    const imagesKeySlice = useAppSelector(
       (state) => state.commentSlice.review.imageKey as string[]
    )
+
+   const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
+   const handleUserKeyPress = useCallback(
+      async (event: { key: any; keyCode: any }) => {
+         const { key } = event
+
+         if (key === "Escape" && stepSlice === 1) {
+            dispatch(reviewForm(false))
+            dispatch(refreshAction())
+            if (imagesKeySlice.length > 0) {
+               await axios.delete("http://localhost:3000/api/uploadthing", {
+                  data: {
+                     url: imagesKeySlice,
+                  },
+               })
+            }
+         }
+      },
+      [dispatch, imagesKeySlice, stepSlice]
+   )
+
+   useEffect(() => {
+      window.addEventListener("keydown", handleUserKeyPress)
+      return () => {
+         window.removeEventListener("keydown", handleUserKeyPress)
+      }
+   }, [handleUserKeyPress])
 
    return (
       <div
