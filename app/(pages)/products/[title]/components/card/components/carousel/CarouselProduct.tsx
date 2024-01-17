@@ -1,7 +1,6 @@
 "use client"
 
 import ImageCard from "@/app/components/card/components/ImageCard"
-import { nanoid } from "@reduxjs/toolkit"
 import Image from "next/image"
 import React from "react"
 import { useEffect, useState } from "react"
@@ -97,10 +96,10 @@ const CarouselProduct = ({
                   <CustomDot onClick={() => {}} active={false} index={0} />
                }
             >
-               {imagesCarousel.map((item) => (
+               {imagesCarousel.map((item, index) => (
                   <div
                      className="bg-accent container-rounded overflow-hidden"
-                     key={nanoid()}
+                     key={index}
                   >
                      <ImageCard image={item} title={item} />
                   </div>
@@ -176,10 +175,10 @@ const CarouselProduct = ({
                   <CustomDot onClick={() => {}} active={false} index={0} />
                }
             >
-               {imagesCarousel.map((item) => (
+               {imagesCarousel.map((item, index) => (
                   <div
                      className="bg-accent container-rounded overflow-hidden"
-                     key={nanoid()}
+                     key={index}
                   >
                      <ImageCard image={item} title={item} />
                   </div>
