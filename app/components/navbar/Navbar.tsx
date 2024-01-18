@@ -32,23 +32,30 @@ const Navbar = () => {
    const [products, setProducts] = useState<ProductType[]>([])
    const [blogs, setBlogs] = useState<BlogType[]>([])
 
-   const getProduct = async () => {
-      const products = await fetch("/api/products")
-      if (products.ok) {
-         const data = await products.json()
-         return setProducts(data)
-      }
-      throw new Error("blogs data did not respond")
-   }
+   useEffect(() => {
+      const fetchData = async () => {
+         try {
+            const [productsRes, blogsRes] = await Promise.all([
+               fetch("/api/products"),
+               fetch("/api/blog"),
+            ])
 
-   const getBlog = async () => {
-      const blogs = await fetch("/api/blog")
-      if (blogs.ok) {
-         const data = await blogs.json()
-         return setBlogs(data)
+            if (productsRes.ok) {
+               const productsData = await productsRes.json()
+               setProducts(productsData)
+            }
+
+            if (blogsRes.ok) {
+               const blogsData = await blogsRes.json()
+               setBlogs(blogsData)
+            }
+         } catch (error) {
+            console.error("Error fetching data:", error)
+         }
       }
-      throw new Error("blogs data did not respond")
-   }
+
+      fetchData()
+   }, [])
 
    useEffect(() => {
       const widthHandler = () => {
@@ -63,10 +70,6 @@ const Navbar = () => {
       return () => window.removeEventListener("resize", widthHandler)
    }, [dispatch])
 
-   useEffect(() => {
-      getProduct()
-      getBlog()
-   }, [])
    return (
       <>
          <Overflow />
