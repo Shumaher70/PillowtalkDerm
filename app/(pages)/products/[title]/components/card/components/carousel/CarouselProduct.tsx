@@ -2,7 +2,7 @@
 
 import ImageCard from "@/app/components/card/components/ImageCard"
 import Image from "next/image"
-import React from "react"
+import React, { useMemo } from "react"
 import { useEffect, useState } from "react"
 import Carousel from "react-multi-carousel"
 import ReactPlayer from "react-player"
@@ -31,7 +31,7 @@ const CarouselProduct = ({
       window.addEventListener("resize", widthHandler)
 
       return () => window.removeEventListener("resize", widthHandler)
-   })
+   }, [])
 
    const responsive = {
       desktop: {
@@ -41,39 +41,44 @@ const CarouselProduct = ({
       },
    }
 
-   const imagesCarouselDots =
-      images.length > 1
+   const imagesCarouselDots = useMemo(() => {
+      return images.length > 1
          ? images.slice(0, images.length).map((item) => item)
          : images.map((item) => item)
+   }, [images])
 
-   const imagesCarousel =
-      images.length > 1
+   const imagesCarousel = useMemo(() => {
+      return images.length > 1
          ? images.slice(0, images.length - 1).map((item) => item)
          : images.map((item) => item)
+   }, [images])
 
-   const CustomDot = ({
-      onClick,
-      active,
-      index,
-   }: {
-      onClick: () => void
-      active: boolean
-      index: number
-   }) => {
-      return (
-         <Image
-            width={0}
-            height={0}
-            sizes="100vw"
-            src={imagesCarouselDots[index]}
-            alt={imagesCarouselDots[index]}
-            className={`${
-               active ? "border-2 border-[#f0e8f6]" : "inactive"
-            } h-[58px] w-[58px] cursor-pointer rounded-full object-cover object-center`}
-            onClick={() => onClick()}
-         />
-      )
-   }
+   const CustomDot = useMemo(() => {
+      const CustomDot = ({
+         onClick,
+         active,
+         index,
+      }: {
+         onClick: () => void
+         active: boolean
+         index: number
+      }) => {
+         return (
+            <Image
+               width={0}
+               height={0}
+               sizes="100vw"
+               src={imagesCarouselDots[index]}
+               alt={imagesCarouselDots[index]}
+               className={`${
+                  active ? "border-2 border-[#f0e8f6]" : "inactive"
+               } h-[58px] w-[58px] cursor-pointer rounded-full object-cover object-center`}
+               onClick={() => onClick()}
+            />
+         )
+      }
+      return CustomDot
+   }, [imagesCarouselDots])
 
    return (
       <div className="relative !overflow-hidden">
