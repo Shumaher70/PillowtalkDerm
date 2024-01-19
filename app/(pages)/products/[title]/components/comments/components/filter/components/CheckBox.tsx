@@ -2,10 +2,13 @@
 import { FaCheck } from "react-icons/fa6"
 
 import { useState } from "react"
+import { useAppDispatch } from "@/redux/hooks"
+import { mediaAction } from "@/redux/features/commentFilterSlice"
 
 const CheckBox = () => {
    const [showCheck, setShowCheck] = useState(false)
    const [checkEnter, setCheckEnter] = useState(false)
+   const dispatch = useAppDispatch()
 
    const leaveHandler = () => {
       setCheckEnter(false)
@@ -13,6 +16,7 @@ const CheckBox = () => {
    const clickHandler = () => {
       setShowCheck((previous) => !previous)
       setCheckEnter(true)
+      dispatch(mediaAction(showCheck))
    }
 
    return (

@@ -1,3 +1,5 @@
+"use client"
+
 import { Review, User as userType } from "@prisma/client"
 import User from "./components/user/User"
 import UserComment from "./components/userComment/UserComment"

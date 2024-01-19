@@ -1,33 +1,17 @@
-import { prisma } from "@/lib/prisma"
-;("react-icons/io5")
+"use client"
 
-const Verified = async ({ email }: { email: string }) => {
-   const unique = await prisma.user.findUnique({
-      where: {
-         email: email,
-      },
-   })
+import axios from "axios"
+import { useEffect } from "react"
 
-   if (unique!.img?.length! > 0) {
-      await prisma.review.updateMany({
-         where: {
-            email: email,
-         },
-         data: {
-            verified: true,
-         },
-      })
-   } else {
-      await prisma.review.updateMany({
-         where: {
-            email: email,
-         },
-         data: {
-            verified: false,
-         },
-      })
-   }
-
+const Verified = ({ email }: { email: string }) => {
+   useEffect(() => {
+      const fetchVerified = async () => {
+         await axios.put("/api/reviewsVerified", {
+            email,
+         })
+      }
+      fetchVerified()
+   }, [email])
    return null
 }
 

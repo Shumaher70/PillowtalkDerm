@@ -1,12 +1,36 @@
 "use client"
 
-import { useState } from "react"
+import {
+   highestRecentAction,
+   lowestRecentAction,
+   mostHelpfulAction,
+   mostRecentAction,
+   oldestAction,
+} from "@/redux/features/commentFilterSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
 const Sort = () => {
-   const [select, setSelect] = useState("Most recent")
-
+   const dispatch = useAppDispatch()
    const changeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      setSelect(event.currentTarget.value)
+      switch (event.currentTarget.value) {
+         case "Most recent":
+            dispatch(mostRecentAction(true))
+            break
+         case "Oldest":
+            dispatch(oldestAction(true))
+            break
+         case "Highest rated":
+            dispatch(highestRecentAction(true))
+            break
+         case "Lowest rated":
+            dispatch(lowestRecentAction(true))
+            break
+         case "Most helpful":
+            dispatch(mostHelpfulAction(true))
+            break
+         default:
+            dispatch(mostRecentAction(true))
+      }
    }
 
    return (
