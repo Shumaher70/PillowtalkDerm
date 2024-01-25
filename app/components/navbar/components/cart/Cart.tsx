@@ -14,27 +14,13 @@ import CloseSidebar from "./components/CloseSidebar"
 import { CartType, ProductType } from "@/types"
 import { useEffect, useRef, useState } from "react"
 
-const Cart = () => {
-   const getProduct = async () => {
-      const products = await fetch("http://localhost:3000/api/products")
-      if (products.ok) {
-         const data = await products.json()
-         return setProducts(data)
-      }
-      throw new Error("blogs data did not respond")
-   }
-
+const Cart = ({ products }: { products: ProductType[] }) => {
    const dispatch = useAppDispatch()
    const { carts, totalPrice } = useAppSelector((state) => state.cartReducer)
    const cartSlice = useAppSelector((state) => state.sidebarReducer)
 
-   const [products, setProducts] = useState<ProductType[]>([])
    const [heightCheckOut, setHeightCheckOut] = useState(0)
    const checkOutRef = useRef<HTMLDivElement>(null)
-
-   useEffect(() => {
-      getProduct()
-   }, [])
 
    useEffect(() => {
       const heightCheckOutHandler = () => {
