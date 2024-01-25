@@ -1,13 +1,11 @@
 import { IoCheckmarkCircle } from "react-icons/io5"
-import Verified from "./Verified"
 
 interface CustomerProps {
    name: string
-   email: string
    verified: boolean
 }
 
-const Customer = ({ name: nameProps, email, verified }: CustomerProps) => {
+const Customer = ({ name: nameProps, verified }: CustomerProps) => {
    const nameIcon = (name: string) => {
       if (name.split(" ").length === 1) {
          const first = name.slice(0, 1).toUpperCase()
@@ -55,8 +53,6 @@ const Customer = ({ name: nameProps, email, verified }: CustomerProps) => {
                </div>
             )}
          </div>
-
-         <Verified email={email} />
       </div>
    )
 }
