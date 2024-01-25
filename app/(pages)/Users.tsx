@@ -2,25 +2,23 @@
 
 import { UserType } from "@/types"
 import { useUser } from "@clerk/nextjs"
+import axios from "axios"
 import { useCallback, useEffect, useState } from "react"
 
 const Users = () => {
    const [usersPrisma, setUsersPrisma] = useState<UserType[]>([])
    const { isSignedIn, user } = useUser()
 
-   const fetchUsers = useCallback(async () => {
-      try {
-         const response = await fetch("/api/user")
-         if (response.ok) {
-            const data = await response.json()
-            setUsersPrisma(data)
-         } else {
-            throw new Error("user data did not respond")
-         }
-      } catch (error) {
-         console.error("Error fetching user data:", error)
+   useEffect(() => {
+      const getUser = async () => {
+         await axios
+            .get("/api/user")
+            .then((response) => setUsersPrisma(response.data))
       }
-   }, [])
+      if (isSignedIn) {
+         getUser()
+      }
+   }, [isSignedIn])
 
    useEffect(() => {
       const createUserIfNotExist = async () => {
@@ -52,18 +50,9 @@ const Users = () => {
             }
          }
       }
-      fetchUsers()
+
       createUserIfNotExist()
-   }, [
-      fetchUsers,
-      isSignedIn,
-      user?.emailAddresses,
-      user?.firstName,
-      user?.id,
-      user?.imageUrl,
-      user?.lastName,
-      usersPrisma,
-   ])
+   }, [usersPrisma])
 
    return null
 }
