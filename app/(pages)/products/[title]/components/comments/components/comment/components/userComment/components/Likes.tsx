@@ -1,6 +1,6 @@
 "use client"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { BiSolidLike } from "react-icons/bi"
 import { BiSolidDislike } from "react-icons/bi"
 
@@ -18,6 +18,11 @@ const Likes = ({ like, dislike, id }: LikesProps) => {
       voteDown: 0,
    })
 
+   const refPreviousClick = useRef({
+      voteUpStyle: false,
+      voteDownStyle: false,
+   })
+
    useEffect(() => {
       const getLocalStorage = localStorage.getItem(id)
 
@@ -33,64 +38,104 @@ const Likes = ({ like, dislike, id }: LikesProps) => {
    }, [id])
 
    useEffect(() => {
-      const putVote = async () => {
-         await axios.put("/api/reviews", {
-            id: id,
-            like: like + vote.voteUp,
-            dislike: dislike + vote.voteDown,
-         })
-      }
-
-      if (!vote.voteDown && !vote.voteUp) {
-         putVote()
-      }
-   }, [dislike, id, like, vote.voteDown, vote.voteUp])
-
-   useEffect(() => {
       if (vote.voteUpStyle || vote.voteDownStyle) {
-         localStorage.setItem(id, JSON.stringify(vote))
+         localStorage.setItem(
+            id,
+            JSON.stringify({
+               voteUpStyle: vote.voteUpStyle,
+               voteDownStyle: vote.voteDownStyle,
+               voteUp: 0,
+               voteDown: 0,
+            })
+         )
       }
    }, [id, vote])
+
+   useEffect(() => {
+      refPreviousClick.current = vote
+   }, [vote])
+
+   const putLike = async () => {
+      await axios.put("/api/like", {
+         id: id,
+         like: 1,
+         dislike:
+            !refPreviousClick.current.voteUpStyle &&
+            !refPreviousClick.current.voteDownStyle
+               ? 0
+               : 1,
+      })
+   }
+
+   const putDislike = async () => {
+      await axios.put("/api/dislike", {
+         id: id,
+         like:
+            !refPreviousClick.current.voteUpStyle &&
+            !refPreviousClick.current.voteDownStyle
+               ? 0
+               : 1,
+         dislike: 1,
+      })
+   }
 
    return (
       <div className="flex w-full items-center gap-2">
          <span className="text-[14px]">Was this review helpful?</span>
 
          <div className="flex items-center gap-1">
-            <BiSolidLike
-               className={`cursor-pointer ${
-                  vote.voteUpStyle ? "text-[#F92672]" : "text-black"
-               } transition-all duration-1000`}
+            <button
+               disabled={vote.voteUpStyle}
                onClick={() => {
-                  localStorage.setItem(id, JSON.stringify(vote))
-                  {
-                     setVote({
+                  putLike()
+                  setVote((priv) => {
+                     return {
                         voteUpStyle: true,
                         voteDownStyle: false,
-                        voteUp: 1,
-                        voteDown: 0,
-                     })
-                  }
+                        voteUp: priv.voteUp + 1,
+                        voteDown:
+                           !refPreviousClick.current.voteDownStyle &&
+                           !refPreviousClick.current.voteUpStyle
+                              ? 0
+                              : priv.voteDown - 1,
+                     }
+                  })
                }}
-            />
+            >
+               <BiSolidLike
+                  className={`cursor-pointer ${
+                     vote.voteUpStyle ? "text-[#F92672]" : "text-black"
+                  } transition-all duration-1000`}
+               />
+            </button>
             <span className="text-[14px]">{like + vote.voteUp}</span>
          </div>
 
          <div className="flex items-center gap-1">
-            <BiSolidDislike
-               className={`cursor-pointer ${
-                  vote.voteDownStyle ? "text-[#F92672]" : "text-black"
-               } transition-all duration-500`}
+            <button
+               disabled={vote.voteDownStyle}
                onClick={() => {
-                  localStorage.setItem(id, JSON.stringify(vote))
-                  setVote({
-                     voteUpStyle: false,
-                     voteDownStyle: true,
-                     voteUp: 0,
-                     voteDown: 1,
+                  putDislike()
+                  setVote((priv) => {
+                     return {
+                        voteUpStyle: false,
+                        voteDownStyle: true,
+                        voteUp:
+                           !refPreviousClick.current.voteDownStyle &&
+                           !refPreviousClick.current.voteUpStyle
+                              ? 0
+                              : priv.voteUp - 1,
+                        voteDown: priv.voteDown + 1,
+                     }
                   })
                }}
-            />
+            >
+               <BiSolidDislike
+                  className={`cursor-pointer ${
+                     vote.voteDownStyle ? "text-[#F92672]" : "text-black"
+                  } transition-all duration-500`}
+               />
+            </button>
             <span className="text-[14px]">{dislike + vote.voteDown}</span>
          </div>
       </div>
