@@ -9,33 +9,13 @@ import { slideShop, slideSkinNerdAcademy } from "@/redux/features/sidebarSlice"
 import { useEffect, useState } from "react"
 import { BlogType, ProductType } from "@/types"
 
-const SlideInfo = () => {
-   const [products, setProducts] = useState<ProductType[]>([])
-   const [blogs, setBlogs] = useState<BlogType[]>([])
-
-   const getProduct = async () => {
-      const products = await fetch("http://localhost:3000/api/products")
-      if (products.ok) {
-         const data = await products.json()
-         return setProducts(data)
-      }
-      throw new Error("blogs data did not respond")
-   }
-
-   const getBlog = async () => {
-      const blogs = await fetch("http://localhost:3000/api/blog")
-      if (blogs.ok) {
-         const data = await blogs.json()
-         return setBlogs(data)
-      }
-      throw new Error("blogs data did not respond")
-   }
-
-   useEffect(() => {
-      getProduct()
-      getBlog()
-   }, [])
-
+const SlideInfo = ({
+   products,
+   blogs,
+}: {
+   products: ProductType[]
+   blogs: BlogType[]
+}) => {
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
    const dispatch = useAppDispatch()
 
