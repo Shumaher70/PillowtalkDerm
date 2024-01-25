@@ -47,7 +47,7 @@ const Filter = ({ review }: { review: Review[] }) => {
       } else if (filterSlice.lowestRecent) {
          filteredReviews.sort((a, b) => a.rating - b.rating)
       } else if (filterSlice.mostHelpful) {
-         filteredReviews.sort((a, b) => a.like - b.like)
+         filteredReviews.sort((a, b) => b.like - a.like)
       }
 
       setFilterStars(filteredReviews)
