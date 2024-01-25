@@ -33,6 +33,7 @@ const Navbar = () => {
    const [blogs, setBlogs] = useState<BlogType[]>([])
 
    useEffect(() => {
+      let subscribe = true
       const fetchData = async () => {
          try {
             const [productsRes, blogsRes] = await Promise.all([
@@ -54,7 +55,12 @@ const Navbar = () => {
          }
       }
 
-      fetchData()
+      if (subscribe) {
+         fetchData()
+      }
+      return () => {
+         subscribe = false
+      }
    }, [])
 
    useEffect(() => {
@@ -68,13 +74,13 @@ const Navbar = () => {
       window.addEventListener("resize", widthHandler)
 
       return () => window.removeEventListener("resize", widthHandler)
-   }, [dispatch])
+   }, [])
 
    return (
       <>
          <Overflow />
          <CommentImage />
-         <SlideInfo />
+         <SlideInfo products={products} blogs={blogs} />
          <LoginMenu />
          {
             <motion.header
@@ -126,7 +132,7 @@ const Navbar = () => {
                         />
                      </div>
                      <Login />
-                     <Cart />
+                     <Cart products={products} />
                   </div>
                </nav>
             </motion.header>
