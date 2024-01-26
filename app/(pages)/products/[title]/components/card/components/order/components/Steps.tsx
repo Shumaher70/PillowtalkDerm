@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 interface StepsProps {
    steps: string | null
@@ -9,34 +9,11 @@ interface StepsProps {
 
 const Steps = ({ steps }: StepsProps) => {
    const [active, setActive] = useState({
-      one: false,
-      two: false,
-      three: false,
+      one: steps === "1",
+      two: steps === "2",
+      three: steps === "3",
    })
-
    const route = useRouter()
-   const step = steps ?? ""
-   useEffect(() => {
-      if (step === "1") {
-         setActive({
-            one: true,
-            two: false,
-            three: false,
-         })
-      } else if (step === "2") {
-         setActive({
-            one: false,
-            two: true,
-            three: false,
-         })
-      } else if (step === "3") {
-         setActive({
-            one: false,
-            two: false,
-            three: true,
-         })
-      }
-   }, [step])
 
    return (
       <div className="flex w-full gap-2">
