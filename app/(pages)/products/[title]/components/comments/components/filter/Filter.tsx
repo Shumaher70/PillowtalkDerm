@@ -16,6 +16,14 @@ const Filter = ({ review }: { review: Review[] }) => {
 
    let filteredReviews = [...review]
 
+   if (filterSlice.media) {
+      filteredReviews = filteredReviews.filter(
+         (media) => media.images.length > 0
+      )
+   } else {
+      filteredReviews = filteredReviews.filter((media) => media.images)
+   }
+
    switch (filterSlice.stars) {
       case 1:
       case 2:
