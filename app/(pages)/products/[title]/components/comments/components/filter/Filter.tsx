@@ -1,7 +1,7 @@
 "use client"
 import { IoIosArrowUp } from "react-icons/io"
 
-import { useCallback, useEffect, useState } from "react"
+import { useState } from "react"
 import Sort from "./components/Sort"
 import Rating from "./components/Rating"
 import CheckBox from "./components/CheckBox"
@@ -13,45 +13,42 @@ import { useAppSelector } from "@/redux/hooks"
 const Filter = ({ review }: { review: Review[] }) => {
    const [show, setShow] = useState(true)
    const filterSlice = useAppSelector((state) => state.commentFilterReducer)
-   const [filterStars, setFilterStars] = useState<Review[]>([])
 
-   useEffect(() => {
-      let filteredReviews = [...review]
+   console.count("hello")
 
-      switch (filterSlice.stars) {
-         case 1:
-         case 2:
-         case 3:
-         case 4:
-         case 5:
-            filteredReviews = filteredReviews.filter(
-               (stars) => stars.rating === filterSlice.stars
-            )
-            break
-         default:
-            filteredReviews = filteredReviews.filter((stars) => stars.rating)
-      }
+   let filteredReviews = [...review]
 
-      if (filterSlice.mostRecent) {
-         filteredReviews.sort(
-            (a, b) =>
-               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+   switch (filterSlice.stars) {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+         filteredReviews = filteredReviews.filter(
+            (stars) => stars.rating === filterSlice.stars
          )
-      } else if (filterSlice.oldest) {
-         filteredReviews.sort(
-            (a, b) =>
-               new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-         )
-      } else if (filterSlice.highestRecent) {
-         filteredReviews.sort((a, b) => b.rating - a.rating)
-      } else if (filterSlice.lowestRecent) {
-         filteredReviews.sort((a, b) => a.rating - b.rating)
-      } else if (filterSlice.mostHelpful) {
-         filteredReviews.sort((a, b) => b.like - a.like)
-      }
+         break
+      default:
+         filteredReviews = filteredReviews.filter((stars) => stars.rating)
+   }
 
-      setFilterStars(filteredReviews)
-   }, [filterSlice, review])
+   if (filterSlice.mostRecent) {
+      filteredReviews.sort(
+         (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+   } else if (filterSlice.oldest) {
+      filteredReviews.sort(
+         (a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      )
+   } else if (filterSlice.highestRecent) {
+      filteredReviews.sort((a, b) => b.rating - a.rating)
+   } else if (filterSlice.lowestRecent) {
+      filteredReviews.sort((a, b) => a.rating - b.rating)
+   } else if (filterSlice.mostHelpful) {
+      filteredReviews.sort((a, b) => b.like - a.like)
+   }
 
    return (
       <>
@@ -73,9 +70,9 @@ const Filter = ({ review }: { review: Review[] }) => {
             </div>
          </div>
 
-         {filterStars.length > 0 && (
+         {filteredReviews.length > 0 && (
             <div className="mt-5 flex flex-col gap-5">
-               {filterStars.map((comment) => (
+               {filteredReviews.map((comment) => (
                   <div key={comment.id}>
                      <Comment review={comment} />
                   </div>
