@@ -37,6 +37,10 @@ const Multimedia = () => {
       }>[]
    >([])
 
+   const imageUrlSlice = useAppSelector(
+      (state) => state.commentSlice.review.imageUrl as string[]
+   )
+
    const handleUserKeyPress = useCallback(
       (event: { key: any; keyCode: any }) => {
          const { key } = event
@@ -64,13 +68,8 @@ const Multimedia = () => {
 
    useEffect(() => {
       dispatch(imageUrlAction(images.map((image) => image.url)))
-
       dispatch(imageKeyAction(images.map((image) => image.key)))
    }, [dispatch, images])
-
-   const imageUrlSlice = useAppSelector(
-      (state) => state.commentSlice.review.imageUrl as string[]
-   )
 
    const filterRemoveMedia = (urlForRemove: string) => {
       setImages(images.filter((image) => image.url !== urlForRemove))

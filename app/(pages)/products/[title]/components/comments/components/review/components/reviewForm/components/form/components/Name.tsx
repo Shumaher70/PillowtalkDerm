@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import Button from "./button/Button"
 import { nameAction, stepAction } from "@/redux/features/commentSlice"
 import { useCallback, useEffect, useRef, useState } from "react"
+import useStepFocus from "@/app/hooks/useStepFocus"
 
 const Name = () => {
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
@@ -41,15 +42,7 @@ const Name = () => {
       }
    }, [handleUserKeyPress])
 
-   useEffect(() => {
-      const timeout = setTimeout(() => {
-         if (stepSlice === 5) {
-            refInput.current!.focus()
-         }
-      }, 600)
-
-      return () => clearTimeout(timeout)
-   }, [stepSlice])
+   useStepFocus(stepSlice, 5, refInput, 600)
 
    useEffect(() => {
       if (!closeFormSlice) setValue("")

@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import Button from "./button/Button"
 import { emailAction, stepAction } from "@/redux/features/commentSlice"
 import { useCallback, useEffect, useRef, useState } from "react"
+import useStepFocus from "@/app/hooks/useStepFocus"
 
 const Email = () => {
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
@@ -34,15 +35,7 @@ const Email = () => {
       [dispatch, stepSlice, value]
    )
 
-   useEffect(() => {
-      const timeout = setTimeout(() => {
-         if (stepSlice === 6) {
-            refInput.current!.focus()
-         }
-      }, 600)
-
-      return () => clearTimeout(timeout)
-   }, [stepSlice])
+   useStepFocus(stepSlice, 6, refInput, 600)
 
    useEffect(() => {
       window.addEventListener("keydown", handleUserKeyPress)
