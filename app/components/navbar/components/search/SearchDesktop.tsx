@@ -19,10 +19,9 @@ interface SearchProps {
 
 const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
    const dispatch = useAppDispatch()
-
    const [input, setInput] = useState("")
    const [postInput, setPostInput] = useState("")
-   const [heightCard, setHeightCart] = useState(0)
+   const [heightCard, setHeightCard] = useState(0)
    const [changeColumns, setChangeColumns] = useState(false)
 
    const searchRef = useRef<HTMLDivElement>(null)
@@ -30,27 +29,16 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
 
    useEffect(() => {
       const heightCardHandler = () => {
-         if (
-            searchRef.current?.offsetHeight &&
-            trendingRef.current?.offsetHeight
-         ) {
-            return setHeightCart(
-               searchRef.current?.offsetHeight +
-                  trendingRef.current?.offsetHeight
-            )
-         } else if (
-            searchRef.current?.offsetHeight &&
-            !trendingRef.current?.offsetHeight
-         ) {
-            return setHeightCart(searchRef.current?.offsetHeight)
-         }
+         const searchHeight = searchRef.current?.offsetHeight || 0
+         const trendingHeight = trendingRef.current?.offsetHeight || 0
+         setHeightCard(searchHeight + trendingHeight)
       }
 
       heightCardHandler()
    }, [])
 
    useEffect(() => {
-      input.length > 0 ? setChangeColumns(true) : setChangeColumns(false)
+      setChangeColumns(input.length > 0)
    }, [input.length])
 
    const getInput = (event: string) => {
@@ -63,9 +51,9 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
 
    const filterBlogs = useMemo(
       () =>
-         blogs.filter((blog) => {
+         blogs.filter((blog) =>
             blog.title.trim().toLowerCase().includes(input)
-         }),
+         ),
       [blogs, input]
    )
 
@@ -140,8 +128,9 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
                         {(filterProducts.length === 0 &&
                            filterBlogs.length === 0) ||
                         input.length === 0
-                           ? products.slice(0, 3).map((product) => {
-                                return (
+                           ? products
+                                .slice(0, 3)
+                                .map((product) => (
                                    <Card
                                       key={product.id}
                                       btn
@@ -152,22 +141,19 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
                                       imageAnimated
                                       className={"bg-white"}
                                    />
-                                )
-                             })
-                           : filterProducts.map((product) => {
-                                return (
-                                   <Card
-                                      key={product.id}
-                                      btn
-                                      win
-                                      stars
-                                      rating
-                                      product={product}
-                                      imageAnimated
-                                      className={"bg-white"}
-                                   />
-                                )
-                             })}
+                                ))
+                           : filterProducts.map((product) => (
+                                <Card
+                                   key={product.id}
+                                   btn
+                                   win
+                                   stars
+                                   rating
+                                   product={product}
+                                   imageAnimated
+                                   className={"bg-white"}
+                                />
+                             ))}
 
                         {(filterProducts.length === 0 &&
                            filterBlogs.length === 0) ||

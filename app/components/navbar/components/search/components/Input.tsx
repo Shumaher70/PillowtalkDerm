@@ -9,7 +9,6 @@ interface InputProps {
 
 const Input = ({ getInput, postInput }: InputProps) => {
    const post = postInput || ""
-
    const [outline, setOutline] = useState(false)
    const [input, setInput] = useState(post)
 
@@ -18,16 +17,17 @@ const Input = ({ getInput, postInput }: InputProps) => {
    }
 
    useEffect(() => {
-      if (getInput) {
-         const timer = setTimeout(() => {
+      const timer = setTimeout(() => {
+         if (getInput) {
             getInput(input.toLowerCase().trim())
-         }, 300)
-         return () => clearTimeout(timer)
-      }
+         }
+      }, 300)
+
+      return () => clearTimeout(timer)
    }, [getInput, input])
 
    useEffect(() => {
-      if (post) return setInput(post)
+      if (post) setInput(post)
    }, [post])
 
    const onFocus = () => setOutline(true)
@@ -35,7 +35,7 @@ const Input = ({ getInput, postInput }: InputProps) => {
 
    return (
       <div
-         className="
+         className={`
          flex-center 
          border-1 
          relative 
@@ -48,11 +48,11 @@ const Input = ({ getInput, postInput }: InputProps) => {
          py-[6px] 
          pl-[16px]
          pr-[6px]
-         "
+      `}
       >
          {outline && (
             <div
-               className="
+               className={`
                pointer-events-none 
                absolute 
                right-[-7px]
@@ -62,11 +62,11 @@ const Input = ({ getInput, postInput }: InputProps) => {
                rounded-full 
                border-2
                border-[#cfb6e2]
-               "
+            `}
             />
          )}
 
-         <CiSearch className={`cursor-pointer text-[20px] `} />
+         <CiSearch className={`cursor-pointer text-[20px]`} />
          <input
             value={input}
             type="text"
