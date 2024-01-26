@@ -14,8 +14,6 @@ const Filter = ({ review }: { review: Review[] }) => {
    const [show, setShow] = useState(true)
    const filterSlice = useAppSelector((state) => state.commentFilterReducer)
 
-   console.count("hello")
-
    let filteredReviews = [...review]
 
    switch (filterSlice.stars) {
