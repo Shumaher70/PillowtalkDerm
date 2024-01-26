@@ -1,7 +1,7 @@
 "use client"
 import { FaCheck } from "react-icons/fa6"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppDispatch } from "@/redux/hooks"
 import { mediaAction } from "@/redux/features/commentFilterSlice"
 
@@ -16,8 +16,11 @@ const CheckBox = () => {
    const clickHandler = () => {
       setShowCheck((previous) => !previous)
       setCheckEnter(true)
-      dispatch(mediaAction(showCheck))
    }
+
+   useEffect(() => {
+      dispatch(mediaAction(showCheck))
+   }, [dispatch, showCheck])
 
    return (
       <div
