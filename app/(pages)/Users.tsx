@@ -3,7 +3,7 @@
 import { UserType } from "@/types"
 import { useUser } from "@clerk/nextjs"
 import axios from "axios"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 const Users = () => {
    const [usersPrisma, setUsersPrisma] = useState<UserType[]>([])
