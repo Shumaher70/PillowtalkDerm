@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 export interface commentImages {
    commentImages?: boolean
    indexImage?: number | null
-   createdAt: Date | null
+   createdAt: string | null
    titleReview?: string
    verified: boolean
    imageUrl?: string[]

@@ -1,8 +1,11 @@
+"use client"
 interface DataProps {
-   date: Date
+   date: string
 }
 
 const Data = ({ date }: DataProps) => {
+   const d = new Date(Date.parse(date))
+
    const time = (date: Date) => {
       const timeDifference = Math.abs(new Date().getTime() - date.getTime())
 
@@ -39,7 +42,7 @@ const Data = ({ date }: DataProps) => {
          return `${years > 1 ? `${years} years ago` : `${years} year ago`}`
       }
    }
-   return <div className="whitespace-nowrap text-[14px]">{time(date)}</div>
+   return <div className="whitespace-nowrap text-[14px]">{time(d)}</div>
 }
 
 export default Data

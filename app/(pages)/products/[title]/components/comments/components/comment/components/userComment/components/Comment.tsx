@@ -46,7 +46,7 @@ const Comment = ({ comment }: CommentProps) => {
                               dispatch(
                                  commentAction({
                                     recommend: comment.recommend,
-                                    createdAt: comment.createdAt,
+                                    createdAt: comment.createdAt.toISOString(),
                                     titleReview: comment.title,
                                     verified: comment.verified,
                                     dislike: comment.dislike,
@@ -100,7 +100,7 @@ const Comment = ({ comment }: CommentProps) => {
                               dispatch(
                                  commentAction({
                                     recommend: comment.recommend,
-                                    createdAt: comment.createdAt,
+                                    createdAt: comment.createdAt.toISOString(),
                                     titleReview: comment.title,
                                     verified: comment.verified,
                                     dislike: comment.dislike,
