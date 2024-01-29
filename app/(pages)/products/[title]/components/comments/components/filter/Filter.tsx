@@ -1,60 +1,59 @@
 "use client"
 import { IoIosArrowUp } from "react-icons/io"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Sort from "./components/Sort"
 import Rating from "./components/Rating"
 import CheckBox from "./components/CheckBox"
 
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import axios from "axios"
 import Comment from "../comment/Comment"
-import { Review } from "@prisma/client"
-import { useAppSelector } from "@/redux/hooks"
+import {
+   dataReviewAction,
+   takeAction,
+} from "@/redux/features/commentFilterSlice"
 
-const Filter = ({ review }: { review: Review[] }) => {
-   const [show, setShow] = useState(true)
+import { ImSpinner8 } from "react-icons/im"
+
+const Filter = ({ id }: { id: string }) => {
    const filterSlice = useAppSelector((state) => state.commentFilterReducer)
+   const [isLoading, setIsLoading] = useState(false)
+   const [show, setShow] = useState(true)
+   const dispatch = useAppDispatch()
 
-   let filteredReviews = [...review]
-
-   if (filterSlice.media) {
-      filteredReviews = filteredReviews.filter(
-         (media) => media.images.length > 0
-      )
-   } else {
-      filteredReviews = filteredReviews.filter((media) => media.images)
-   }
-
-   switch (filterSlice.stars) {
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-         filteredReviews = filteredReviews.filter(
-            (stars) => stars.rating === filterSlice.stars
-         )
-         break
-      default:
-         filteredReviews = filteredReviews.filter((stars) => stars.rating)
-   }
-
-   if (filterSlice.mostRecent) {
-      filteredReviews.sort(
-         (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-   } else if (filterSlice.oldest) {
-      filteredReviews.sort(
-         (a, b) =>
-            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      )
-   } else if (filterSlice.highestRecent) {
-      filteredReviews.sort((a, b) => b.rating - a.rating)
-   } else if (filterSlice.lowestRecent) {
-      filteredReviews.sort((a, b) => a.rating - b.rating)
-   } else if (filterSlice.mostHelpful) {
-      filteredReviews.sort((a, b) => b.like - a.like)
-   }
+   useEffect(() => {
+      let subscribe = true
+      const getFilter = async () => {
+         setIsLoading(true)
+         await axios
+            .get(
+               `http://localhost:3000/api/reviewsFilter?sort=${filterSlice.sort}&media=${filterSlice.media}&stars=${filterSlice.stars}&take=${filterSlice.take}&id=${id}`
+            )
+            .then((response) => {
+               dispatch(dataReviewAction(response.data))
+            })
+            .catch(() => {
+               throw new Error(
+                  "something wrong with fetching data filter review"
+               )
+            })
+            .finally(() => setIsLoading(false))
+      }
+      if (subscribe) {
+         getFilter()
+      }
+      return () => {
+         subscribe = false
+      }
+   }, [
+      dispatch,
+      filterSlice.media,
+      filterSlice.sort,
+      filterSlice.stars,
+      filterSlice.take,
+      id,
+   ])
 
    return (
       <>
@@ -76,13 +75,33 @@ const Filter = ({ review }: { review: Review[] }) => {
             </div>
          </div>
 
-         {filteredReviews.length > 0 && (
+         {filterSlice.review?.length! > 0 && (
             <div className="mt-5 flex flex-col gap-5">
-               {filteredReviews.map((comment) => (
-                  <div key={comment.id}>
-                     <Comment review={comment} />
+               {!isLoading && (
+                  <>
+                     {filterSlice.review?.map((comment) => (
+                        <div key={comment.id}>
+                           <Comment review={comment} />
+                        </div>
+                     ))}
+                  </>
+               )}
+               {isLoading && (
+                  <div className="flex-center flex w-full">
+                     <div className="flex-center flex gap-x-2 bg-black/40 p-2 px-5">
+                        <p className="text-[20px] text-white">Loading...</p>
+                        <ImSpinner8 className="h-[20px] w-[20px] animate-spin text-white" />
+                     </div>
                   </div>
-               ))}
+               )}
+               <div className="flex-center flex w-full">
+                  <button
+                     className="rounded-full bg-purple-700 px-[20px] py-[5px] uppercase text-white"
+                     onClick={() => dispatch(takeAction())}
+                  >
+                     see more reviews
+                  </button>
+               </div>
             </div>
          )}
       </>

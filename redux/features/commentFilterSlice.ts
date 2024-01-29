@@ -1,63 +1,28 @@
+import { Review } from "@prisma/client"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface filter {
-   mostRecent: boolean
-   oldest: boolean
-   highestRecent: boolean
-   lowestRecent: boolean
-   mostHelpful: boolean
+   sort: string
    stars: number
    media: boolean
+   take: number
+   review: Review[]
 }
 
 const initialSate = {
-   mostRecent: true,
-   oldest: false,
-   highestRecent: false,
-   lowestRecent: false,
-   mostHelpful: false,
+   sort: "most-recent",
    stars: 0,
    media: false,
+   take: 5,
+   review: [],
 } as filter
 
 const filter = createSlice({
    name: "filter",
    initialState: initialSate,
    reducers: {
-      mostRecentAction: (state, action: PayloadAction<boolean>) => {
-         state.mostRecent = action.payload
-         state.oldest = false
-         state.highestRecent = false
-         state.lowestRecent = false
-         state.mostHelpful = false
-      },
-      oldestAction: (state, action: PayloadAction<boolean>) => {
-         state.mostRecent = false
-         state.oldest = action.payload
-         state.highestRecent = false
-         state.lowestRecent = false
-         state.mostHelpful = false
-      },
-      highestRecentAction: (state, action: PayloadAction<boolean>) => {
-         state.mostRecent = false
-         state.oldest = false
-         state.highestRecent = action.payload
-         state.lowestRecent = false
-         state.mostHelpful = false
-      },
-      lowestRecentAction: (state, action: PayloadAction<boolean>) => {
-         state.mostRecent = false
-         state.oldest = false
-         state.highestRecent = false
-         state.lowestRecent = action.payload
-         state.mostHelpful = false
-      },
-      mostHelpfulAction: (state, action: PayloadAction<boolean>) => {
-         state.mostRecent = false
-         state.oldest = false
-         state.highestRecent = false
-         state.lowestRecent = false
-         state.mostHelpful = action.payload
+      sortAction: (state, action: PayloadAction<string>) => {
+         state.sort = action.payload
       },
       starsAction: (state, action: PayloadAction<number>) => {
          state.stars = action.payload
@@ -65,17 +30,21 @@ const filter = createSlice({
       mediaAction: (state, action: PayloadAction<boolean>) => {
          state.media = action.payload
       },
+      dataReviewAction: (state, action: PayloadAction<Review[]>) => {
+         state.review = action.payload
+      },
+      takeAction: (state) => {
+         state.take += 5
+      },
    },
 })
 
 export const {
-   mostRecentAction,
-   oldestAction,
-   highestRecentAction,
-   lowestRecentAction,
-   mostHelpfulAction,
-   starsAction,
    mediaAction,
+   starsAction,
+   takeAction,
+   sortAction,
+   dataReviewAction,
 } = filter.actions
 
 export default filter.reducer

@@ -7,7 +7,9 @@ interface StarsProps {
 
 const Stars = ({ stars, date }: StarsProps) => {
    const time = (date: Date) => {
-      const timeDifference = Math.abs(new Date().getTime() - date.getTime())
+      const timeDifference = Math.abs(
+         new Date().getTime() - new Date(date).getTime()
+      )
 
       const millisecondsInSecond = 1000
       const millisecondsInMinute = millisecondsInSecond * 60
