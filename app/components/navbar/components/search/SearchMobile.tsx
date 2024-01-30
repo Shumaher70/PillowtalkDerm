@@ -166,13 +166,12 @@ const Search = ({ className, products, blogs }: SearchProps) => {
                           ))}
                   </div>
                </Sidebar>
-
-               <CiSearch
-                  onClick={() => dispatch(sidebarSearch(true))}
-                  className={`cursor-pointer text-[30px] ${className}`}
-               />
             </>
          )}
+         <CiSearch
+            onClick={() => dispatch(sidebarSearch(true))}
+            className={`cursor-pointer text-[30px] ${className}`}
+         />
       </>
    )
 }

@@ -149,13 +149,13 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                         )}
                      </div>
                   </Sidebar>
-                  <div onClick={() => dispatch(sidebarBurger(true))}>
-                     <RxHamburgerMenu
-                        className={`cursor-pointer text-[30px] ${className}`}
-                     />
-                  </div>
                </div>
             )}
+            <div onClick={() => dispatch(sidebarBurger(true))}>
+               <RxHamburgerMenu
+                  className={`cursor-pointer text-[30px] ${className}`}
+               />
+            </div>
          </>
       )
 }
