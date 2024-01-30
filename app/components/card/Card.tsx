@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Review } from "@prisma/client"
 
 import { addCart } from "@/redux/features/cartSlice"
-import { sidebarCart } from "@/redux/features/sidebarSlice"
+import { sidebarBurger, sidebarCart } from "@/redux/features/sidebarSlice"
 import { useAppDispatch } from "@/redux/hooks"
 
 import ImageCard from "./components/ImageCard"
@@ -79,7 +79,8 @@ const Card = ({
 
    return (
       <div
-         onClick={() =>
+         onClick={() => {
+            dispatch(sidebarBurger(false))
             route.push(
                `/products/${product.title
                   .split("")
@@ -87,7 +88,7 @@ const Card = ({
                   .join("")
                   .toLowerCase()}`
             )
-         }
+         }}
          className={`relative cursor-pointer rounded-[8px] p-[8px] md:p-[16px] ${className}`}
       >
          <div className="h-full rounded-[5px] ">
