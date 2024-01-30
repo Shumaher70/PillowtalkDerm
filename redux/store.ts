@@ -5,9 +5,11 @@ import cartStorage from "./localStorages/cartStorage"
 import commentSlice from "./features/commentSlice"
 import commentImagesReducer from "./features/commentImagesSlice"
 import commentFilterReducer from "./features/commentFilterSlice"
+import cartMotionReducer from "./features/cartMotionSlice"
 export const store = configureStore({
    reducer: {
       cartReducer,
+      cartMotionReducer,
       sidebarReducer,
       commentSlice,
       commentImagesReducer,

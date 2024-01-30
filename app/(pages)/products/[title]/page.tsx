@@ -7,6 +7,7 @@ import Description from "./components/description/Description"
 import Comments from "./components/comments/Comments"
 import Form from "./components/comments/components/review/components/reviewForm/components/form/Form"
 import ViewPortMotionDiv from "@/motion/ViewPortMotionDiv"
+import CardMotion from "./components/cardMotion/CardMotion"
 
 const Product = async ({ params }: { params: { title: string } }) => {
    const { title } = params
@@ -75,6 +76,7 @@ const Product = async ({ params }: { params: { title: string } }) => {
                </ViewPortMotionDiv>
             </>
          )}
+         <CardMotion product={products[0]} />
       </>
    )
 }

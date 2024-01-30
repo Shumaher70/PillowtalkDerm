@@ -8,19 +8,31 @@ import calcRatingStars from "@/utils/calcRatingStars"
 import Subtitle from "./components/Subtitle"
 import OrderCount from "./components/OrderCount"
 import { useAppDispatch } from "@/redux/hooks"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { productIdAction } from "@/redux/features/commentSlice"
+import useIsInViewport from "@/app/hooks/useIsInViewport"
+import { visibilityAction } from "@/redux/features/cartMotionSlice"
 
 const Order = ({ product }: { product: ProductType }) => {
    const ratingStars = calcRatingStars(product.reviews.length, product.reviews)
    const dispatch = useAppDispatch()
+
+   const refPage = useRef<HTMLDivElement>(null)
+   const page = useIsInViewport(refPage)
+
+   useEffect(() => {
+      dispatch(visibilityAction(page))
+   }, [page])
 
    useEffect(() => {
       dispatch(productIdAction(product.id))
    }, [dispatch, product.id])
 
    return (
-      <div className="box-p bg-secondary container-rounded flex w-full flex-col gap-3">
+      <div
+         className="box-p bg-secondary container-rounded flex w-full flex-col gap-3"
+         ref={refPage}
+      >
          {product.steps && <Steps steps={product.steps} />}
 
          <div>
