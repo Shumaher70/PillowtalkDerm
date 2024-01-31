@@ -1,7 +1,5 @@
 "use client"
 
-import Link from "next/link"
-
 import { Review } from "@prisma/client"
 
 import { addCart } from "@/redux/features/cartSlice"
@@ -79,7 +77,7 @@ const Card = ({
 
    return (
       <div
-         onClick={() => {
+         onClick={(e) => {
             dispatch(sidebarBurger(false))
             route.push(
                `/products/${product.title
@@ -89,7 +87,7 @@ const Card = ({
                   .toLowerCase()}`
             )
          }}
-         className={`relative cursor-pointer rounded-[8px] p-[8px] md:p-[16px] ${className}`}
+         className={`cursor-pointer rounded-[8px] p-[8px] md:p-[16px] ${className}`}
       >
          <div className="h-full rounded-[5px] ">
             <div className="flex h-full flex-col justify-between">
@@ -117,7 +115,10 @@ const Card = ({
                   </div>
                )}
                {btn && (
-                  <div className="flex-center flex w-full pt-[8px]">
+                  <div
+                     className="flex-center flex w-full pt-[8px]"
+                     onClick={(e) => e.stopPropagation()}
+                  >
                      <Button
                         text={`add - $${product.price}`}
                         size="sm"

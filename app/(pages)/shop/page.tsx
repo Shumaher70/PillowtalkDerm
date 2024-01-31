@@ -1,13 +1,12 @@
-import { schnyderMlightFont } from "@/app/layout"
-import { prisma } from "@/lib/prisma"
-import { ProductType } from "@/types"
-import bestSellers from "@/utils/bestSellers"
-import React from "react"
-import Card from "../../card/Card"
 import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
 import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
 
-const BestSellersSection = async () => {
+import { schnyderMlightFont } from "@/app/layout"
+import { prisma } from "@/lib/prisma"
+import { ProductType } from "@/types"
+import Card from "@/app/components/card/Card"
+
+const ShopPage = async () => {
    const products: ProductType[] = await prisma.product.findMany({
       include: {
          reviews: true,
@@ -15,25 +14,21 @@ const BestSellersSection = async () => {
          productDescription: true,
       },
    })
-
-   const bestSellersFilter = bestSellers(products)
-
    return (
       <section
-         className={`container-px relative h-[80%] w-full overflow-hidden py-[16px]`}
+         className={`container-px relative  w-full overflow-hidden py-[16px]`}
       >
          <ViewportMotionDiv>
-            <div className="container-rounded bg-secondary container-px flex w-full flex-col items-center py-[16px]">
+            <div className="container-rounded bg-secondary container-px mt-[50px] flex w-full flex-col items-center py-[16px] md:mt-[100px]">
                <h2 className={`text-section ${schnyderMlightFont.className}`}>
-                  Best Sellers
+                  Shop
                </h2>
-               <h3>{`Skin is complex. Skincare doesn't have to be.`}</h3>
             </div>
          </ViewportMotionDiv>
 
          <ViewportMotionDiv>
-            <div className="grid grid-cols-2 gap-2 py-[16px] lg:grid-cols-4 lg:gap-5">
-               {bestSellersFilter.map((card) => (
+            <div className="grid grid-cols-2 gap-2 py-[16px] lg:grid-cols-3 lg:gap-5">
+               {products.map((card) => (
                   <ViewportMotionDivArr key={card.id}>
                      <Card
                         product={{
@@ -61,4 +56,4 @@ const BestSellersSection = async () => {
    )
 }
 
-export default BestSellersSection
+export default ShopPage
