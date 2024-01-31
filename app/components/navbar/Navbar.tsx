@@ -109,11 +109,7 @@ const Navbar = () => {
                         products={products}
                         blogs={blogs}
                      />
-                     <SearchMobile
-                        className="block lg:hidden"
-                        products={products}
-                        blogs={blogs}
-                     />
+                     <SearchMobile className="block lg:hidden" />
                   </div>
 
                   <div className="flex-center flex w-full">

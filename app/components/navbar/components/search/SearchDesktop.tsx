@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 
 import { BlogType, ProductType } from "@/types"
@@ -11,18 +11,24 @@ import BlogCard from "@/app/components/blogCard/BlogCard"
 import { useAppDispatch } from "@/redux/hooks"
 import { slideSearch } from "@/redux/features/sidebarSlice"
 import { schnyderMlightFont } from "@/app/layout"
+import axios from "axios"
 interface SearchProps {
    className?: string
-   products: ProductType[]
-   blogs: BlogType[]
 }
 
-const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
+const SearchDesktop = ({ className }: SearchProps) => {
    const dispatch = useAppDispatch()
    const [input, setInput] = useState("")
    const [postInput, setPostInput] = useState("")
    const [heightCard, setHeightCard] = useState(0)
    const [changeColumns, setChangeColumns] = useState(false)
+
+   const [data, setData] = useState<{
+      products: ProductType[]
+      blogs: BlogType[]
+   }>()
+
+   const { products, blogs } = data || { products: [], blogs: [] }
 
    const searchRef = useRef<HTMLDivElement>(null)
    const trendingRef = useRef<HTMLDivElement>(null)
@@ -33,7 +39,6 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
          const trendingHeight = trendingRef.current?.offsetHeight || 0
          setHeightCard(searchHeight + trendingHeight)
       }
-
       heightCardHandler()
    }, [])
 
@@ -41,30 +46,35 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
       setChangeColumns(input.length > 0)
    }, [input.length])
 
-   const getInput = (event: string) => {
+   useEffect(() => {
+      let subscribe = true
+      const fetchData = () => {
+         axios
+            .get(
+               `http://localhost:3000/api/productsFilter?filter=${
+                  input || postInput
+               }`
+            )
+            .then((data) => {
+               setData(data.data)
+            })
+      }
+
+      if (subscribe) {
+         fetchData()
+      }
+      return () => {
+         subscribe = false
+      }
+   }, [input, postInput])
+
+   const getInput = useCallback((event: string) => {
       setInput(event)
-   }
+   }, [])
 
-   const getTopSearch = (event: string) => {
+   const getTopSearch = useCallback((event: string) => {
       setPostInput(event)
-   }
-
-   const filterBlogs = useMemo(
-      () =>
-         blogs.filter((blog) =>
-            blog.title.trim().toLowerCase().includes(input)
-         ),
-      [blogs, input]
-   )
-
-   const filterProducts = useMemo(
-      () =>
-         products.filter((product) =>
-            product.title.trim().toLowerCase().includes(input)
-         ),
-      [input, products]
-   )
-
+   }, [])
    return (
       <div className="pt-[98px]">
          <div className="col-span-2">
@@ -81,13 +91,10 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
 
                {input.length > 0 && (
                   <div className="w-full">
-                     {input.length > 0 &&
-                     (filterProducts.length || filterBlogs.length) ? (
+                     {input.length > 0 && (products.length || blogs.length) ? (
                         <p className="text-p">
-                           {filterBlogs.length + filterProducts.length} result
-                           {filterBlogs.length + filterProducts.length > 1
-                              ? "s"
-                              : ""}
+                           {blogs.length + products.length} result
+                           {blogs.length + products.length > 1 ? "s" : ""}
                            {` "${input}"`}
                         </p>
                      ) : (
@@ -125,59 +132,28 @@ const SearchDesktop = ({ className, products, blogs }: SearchProps) => {
                      className={`mt-3 overflow-auto`}
                   >
                      <div className="grid grid-cols-4 gap-2">
-                        {(filterProducts.length === 0 &&
-                           filterBlogs.length === 0) ||
-                        input.length === 0
-                           ? products
-                                .slice(0, 3)
-                                .map((product) => (
-                                   <Card
-                                      key={product.id}
-                                      btn
-                                      win
-                                      stars
-                                      rating
-                                      product={product}
-                                      imageAnimated
-                                      className={"bg-white"}
-                                   />
-                                ))
-                           : filterProducts.map((product) => (
-                                <Card
-                                   key={product.id}
-                                   btn
-                                   win
-                                   stars
-                                   rating
-                                   product={product}
-                                   imageAnimated
-                                   className={"bg-white"}
-                                />
-                             ))}
+                        {products.map((product) => (
+                           <Card
+                              key={product.id}
+                              btn
+                              win
+                              stars
+                              rating
+                              product={product}
+                              imageAnimated
+                              className={"bg-white"}
+                           />
+                        ))}
 
-                        {(filterProducts.length === 0 &&
-                           filterBlogs.length === 0) ||
-                        input.length === 0
-                           ? blogs
-                                .slice(0, 1)
-                                .map((blog) => (
-                                   <BlogCard
-                                      key={blog.id}
-                                      extra="Read Me"
-                                      id={blog.id}
-                                      images={blog.images}
-                                      title={blog.title}
-                                   />
-                                ))
-                           : filterBlogs.map((blog) => (
-                                <BlogCard
-                                   key={blog.id}
-                                   extra="Read Me"
-                                   id={blog.id}
-                                   images={blog.images}
-                                   title={blog.title}
-                                />
-                             ))}
+                        {blogs.map((blog) => (
+                           <BlogCard
+                              key={blog.id}
+                              extra="Read Me"
+                              id={blog.id}
+                              images={blog.images}
+                              title={blog.title}
+                           />
+                        ))}
                      </div>
                   </div>
                </div>
