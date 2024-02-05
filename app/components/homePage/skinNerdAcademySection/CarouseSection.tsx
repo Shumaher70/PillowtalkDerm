@@ -1,28 +1,28 @@
-'use client';
+"use client"
 
-import { BlogType } from '@/types';
-import Carousel from 'react-multi-carousel';
-import BlogCard from '../../blogCard/BlogCard';
-import { schnyderMlightFont } from '@/app/layout';
-import { useEffect, useState } from 'react';
-import ViewportMotionDivArr from '@/motion/ViewPortMotionDivArr';
+import { BlogType } from "@/types"
+import Carousel from "react-multi-carousel"
+import BlogCard from "../../blogCard/BlogCard"
+import { schnyderMlightFont } from "@/app/layout"
+import { useEffect, useState } from "react"
+import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
 
 const CarouseSection = ({ blogs }: { blogs: BlogType[] }) => {
-   const [dots, setDots] = useState(true);
+   const [dots, setDots] = useState(true)
 
    useEffect(() => {
       const widthHandler = () => {
          if (window.innerWidth >= 1024) {
-            setDots(false);
+            setDots(false)
          } else {
-            setDots(true);
+            setDots(true)
          }
-      };
-      widthHandler();
-      window.addEventListener('resize', widthHandler);
+      }
+      widthHandler()
+      window.addEventListener("resize", widthHandler)
 
-      return () => window.removeEventListener('resize', widthHandler);
-   });
+      return () => window.removeEventListener("resize", widthHandler)
+   })
 
    const responsive = {
       mobile: {
@@ -40,29 +40,29 @@ const CarouseSection = ({ blogs }: { blogs: BlogType[] }) => {
          items: 3,
          slidesToSlide: 3,
       },
-   };
+   }
 
    const CustomDot = ({
       onClick,
       active,
    }: {
-      onClick: () => void;
-      active: boolean;
+      onClick: () => void
+      active: boolean
    }) => {
       return (
          <button
             className={`${
                active
-                  ? 'bg-gradient-to-t from-pink-400 to-pink-600 border-pink-600'
-                  : 'inactive'
-            } w-[8px] h-[8px] border-1 border-purple-300 rounded-full mr-2`}
+                  ? "border-pink-600 bg-gradient-to-t from-pink-400 to-pink-600"
+                  : "inactive"
+            } border-1 mr-2 h-[8px] w-[8px] rounded-full border-purple-300`}
             onClick={() => onClick()}
          ></button>
-      );
-   };
+      )
+   }
 
    return (
-      <div className="relative mt-[10px] md:mt-[20px] !overflow-hidden">
+      <div className="relative mt-[10px] !overflow-hidden md:mt-[20px]">
          <Carousel
             swipeable={true}
             arrows={false}
@@ -76,7 +76,7 @@ const CarouseSection = ({ blogs }: { blogs: BlogType[] }) => {
             containerClass="carousel-container"
             dotListClass=""
             itemClass="p-1 "
-            className="select-none mx-[20px] mr-[10%] lg:mx-[80px] !overflow-visible pb-[20px] "
+            className="mx-[20px] mr-[10%] select-none !overflow-visible pb-[20px] lg:mx-[80px] "
             customDot={<CustomDot onClick={() => {}} active={false} />}
          >
             {blogs
@@ -97,7 +97,7 @@ const CarouseSection = ({ blogs }: { blogs: BlogType[] }) => {
                ))}
          </Carousel>
       </div>
-   );
-};
+   )
+}
 
-export default CarouseSection;
+export default CarouseSection
