@@ -87,7 +87,7 @@ const Card = ({
                   .toLowerCase()}`
             )
          }}
-         className={`cursor-pointer rounded-[8px] p-[8px] md:p-[16px] ${className}`}
+         className={`relative cursor-pointer rounded-[8px] p-[8px] md:p-[16px] ${className}`}
       >
          <div className="h-full rounded-[5px] ">
             <div className="flex h-full flex-col justify-between">
