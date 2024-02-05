@@ -6,6 +6,7 @@ export default authMiddleware({
       "/api/productsFilter",
       "/api/reviewsFilter",
       "/api/uploadthing",
+      "/blogs/news/(.*)",
       "/products/(.*)",
       "/api/products",
       "/api/reviews",
