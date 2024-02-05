@@ -3,6 +3,7 @@
 import Button from "@/app/components/button/Button"
 import Card from "@/app/components/card/Card"
 import { ProductType } from "@/types"
+import { useRouter } from "next/navigation"
 import { useMemo } from "react"
 
 interface ShopProps {
@@ -13,6 +14,7 @@ interface ShopProps {
 
 const Shop = ({ products }: ShopProps) => {
    const productMemo = useMemo(() => products, [products])
+   const route = useRouter()
 
    return (
       <div className="py-[30px]">
@@ -53,6 +55,7 @@ const Shop = ({ products }: ShopProps) => {
                className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
                size={"lg"}
                load={false}
+               onClick={() => route.push("/shop")}
             />
          </div>
       </div>
