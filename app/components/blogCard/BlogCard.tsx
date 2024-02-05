@@ -2,6 +2,7 @@ import ImageCard from "../card/components/ImageCard"
 import TitleCard from "../card/components/TitleCard"
 import ReadMe from "../card/components/ReadMe"
 import { nanoid } from "@reduxjs/toolkit"
+import Link from "next/link"
 
 interface BlogCardProps {
    id: string
@@ -27,8 +28,19 @@ const BlogCard = ({
    if (images)
       return (
          <div
-            className={`flex h-full flex-col gap-2 bg-white p-[8px] md:p-[16px] ${rounded}`}
+            className={`relative flex h-full cursor-pointer flex-col gap-2 bg-white p-[8px] md:p-[16px] ${rounded}`}
          >
+            <Link
+               draggable={false}
+               className="absolute right-0 top-0 z-10 h-full w-full"
+               href={`/blogs/news/${title
+                  .split("")
+                  .map((item) =>
+                     item.replace(/[:.,+'"?]/g, "").replace(/\s/g, "-")
+                  )
+                  .join("")
+                  .toLowerCase()}`}
+            />
             <div className={`${rounded} overflow-hidden`}>
                <ImageCard size={sizeImage} image={images[0]} title={title} />
             </div>
@@ -66,7 +78,7 @@ const BlogCard = ({
                <TitleCard title={title} className={classText} />
             </div>
 
-            <div className="text-center">
+            <div className="z-10 text-center">
                <ReadMe text={extra} src="" />
             </div>
          </div>
