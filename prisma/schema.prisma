@@ -50,6 +50,7 @@ model Blog {
   updatedAt DateTime @updatedAt
   images    String[]
   tags      String[]
+  content   Json?
 }
 
 model Cart {
