@@ -11,6 +11,7 @@ import BlogCard from "@/app/components/blogCard/BlogCard"
 import { BlogType, ProductType } from "@/types"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { sidebarBurger } from "@/redux/features/sidebarSlice"
+import { useRouter } from "next/navigation"
 
 interface BurgerProps {
    className?: string
@@ -21,6 +22,7 @@ interface BurgerProps {
 const Burger = ({ className, products, blogs }: BurgerProps) => {
    const dispatch = useAppDispatch()
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
+   const route = useRouter()
 
    const [shop, setShop] = useState(true)
    const [blog, setBlog] = useState(false)
@@ -114,6 +116,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                                     className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
                                     text="shop all"
                                     load={false}
+                                    onClick={() => route.push("/shop")}
                                  />
                               </div>
                            </>
