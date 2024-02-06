@@ -4,6 +4,7 @@ import { NextResponse } from "next/server"
 
 export async function GET(request: Request) {
    const products: ProductType[] = await prisma.product.findMany({
+      take: 6,
       include: {
          reviews: true,
          carts: true,
