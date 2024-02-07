@@ -7,6 +7,9 @@ interface NerdAcademyProps {
    params?: {
       slug: string
    }
+   searchParams?: {
+      page: string
+   }
 }
 
 const tags = [
@@ -45,15 +48,13 @@ const tagColors: { [key: string]: { bg: string; activeBg: string } } = {
    },
 }
 
-const NerdAcademy = (params: NerdAcademyProps) => {
-   console.log(params.params)
-
+const NerdAcademy = ({ params, searchParams }: NerdAcademyProps) => {
    const query = () => {
-      if (params.params === undefined) {
+      if (params === undefined) {
          return []
       }
 
-      const slug = params.params.slug || ""
+      const slug = params.slug || ""
       if (slug.includes("%")) {
          return slug
             .replace(/%|2|B|0/g, " ")
@@ -69,14 +70,18 @@ const NerdAcademy = (params: NerdAcademyProps) => {
    const route = useRouter()
 
    useEffect(() => {
-      console.log(tag)
-      if (tag.length > 0 && tag !== null) {
+      if (tag.length > 0 && searchParams?.page !== undefined) {
+         const query = tag.join("+")
+         route.push(`/blogs/news/tagged/${query}?page=${searchParams.page}`)
+      } else if (tag.length > 0 && searchParams?.page === undefined) {
          const query = tag.join("+")
          route.push(`/blogs/news/tagged/${query}`)
-      } else {
+      } else if (tag.length === 0 && searchParams?.page === undefined) {
          route.push(`/blogs/news`)
+      } else if (tag.length === 0 && searchParams?.page !== undefined) {
+         route.push(`/blogs/news?page=${searchParams?.page}`)
       }
-   }, [route, tag])
+   }, [route, searchParams?.page, tag])
 
    const handleTagClick = (clickedTag: string) => {
       if (clickedTag === "all") {
