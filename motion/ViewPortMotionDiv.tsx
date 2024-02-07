@@ -1,7 +1,13 @@
 import React from "react"
 import { MotionDiv } from "./MotionDiv"
 
-const ViewportMotionDiv = ({ children }: { children: React.ReactNode }) => {
+const ViewportMotionDiv = ({
+   children,
+   className,
+}: {
+   children: React.ReactNode
+   className?: string
+}) => {
    const container = {
       hidden: { opacity: 0, y: 100 },
       visible: {
@@ -16,6 +22,7 @@ const ViewportMotionDiv = ({ children }: { children: React.ReactNode }) => {
 
    return (
       <MotionDiv
+         className={`${className}`}
          variants={container}
          initial={"hidden"}
          whileInView={"visible"}
