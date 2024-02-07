@@ -141,6 +141,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                               <div className="flex-center flex h-full w-full">
                                  <div>
                                     <Button
+                                       onClick={() => route.push("/blogs/news")}
                                        size="sm"
                                        text="view all"
                                        className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
