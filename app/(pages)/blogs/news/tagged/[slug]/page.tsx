@@ -4,9 +4,15 @@ import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
 import { schnyderMlightFont } from "@/app/layout"
 import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
 import NerdAcademy from "../../components/NerdAcademy"
+import Pages from "../../components/Pages"
 
-const page = async ({ params }: { params: { slug: string } }) => {
-   const query = params.slug.includes("-")
+const page = async (query: {
+   params: { slug: string }
+   searchParams: { page: string }
+}) => {
+   const { params, searchParams } = query
+
+   const q = params.slug.includes("-")
       ? params.slug
            .replace(/%|2|B|0/g, " ")
            .split(" ")
@@ -24,14 +30,14 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
    const blogs = await prisma.blog.findMany({
       where: {
-         OR: query.map((tag) => ({ tags: { hasSome: [tag.toUpperCase()] } })),
+         OR: q.map((tag) => ({ tags: { hasSome: [tag.toUpperCase()] } })),
       },
    })
 
    return (
       <main className="w-full">
          <section className="container-px bg-secondary mt-[45px] w-full md:mt-[80px]">
-            <NerdAcademy params={params} />
+            <NerdAcademy searchParams={searchParams} params={params} />
 
             <ViewportMotionDiv className="mt-5 grid h-full w-full grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
                {blogs.map((b, i) => (
@@ -47,6 +53,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
                      />
                   </ViewportMotionDivArr>
                ))}
+               <Pages />
             </ViewportMotionDiv>
          </section>
          <section></section>
