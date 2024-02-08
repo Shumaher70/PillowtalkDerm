@@ -1,5 +1,6 @@
 "use client"
 
+import { schnyderMlightFont } from "@/app/layout"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -103,9 +104,11 @@ const NerdAcademy = ({ params, searchParams }: NerdAcademyProps) => {
 
    return (
       <>
-         <h1 className="text-section">Nerd Academy</h1>
+         <h1 className={`${schnyderMlightFont.className} text-section`}>
+            Nerd Academy
+         </h1>
          {
-            <div className="w-content flex flex-wrap items-center gap-2">
+            <div className="w-content mt-2 flex flex-wrap items-center gap-2">
                {tags.map((t, i) => {
                   const tagLowerCase = t
                      .trim()
