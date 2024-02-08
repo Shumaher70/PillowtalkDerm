@@ -5,6 +5,7 @@ import { schnyderMlightFont } from "@/app/layout"
 import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
 import NerdAcademy from "./components/NerdAcademy"
 import Pages from "./components/Pages"
+import IngredientsCarousel from "./ingredients-glossary/components/IngredientsCarousel"
 
 const page = async (query: {
    params: { slug: string }
@@ -24,7 +25,7 @@ const page = async (query: {
    )
 
    return (
-      <main className="w-full">
+      <main className="w-full overflow-hidden">
          <section className="container-px bg-secondary mt-[45px] w-full md:mt-[80px]">
             <NerdAcademy searchParams={searchParams} />
 
@@ -51,7 +52,9 @@ const page = async (query: {
                />
             </div>
          </section>
-         <section></section>
+         <section className="container-px mt-[45px] w-full md:mt-[80px]">
+            <IngredientsCarousel />
+         </section>
       </main>
    )
 }
