@@ -52,7 +52,7 @@ const page = async (query: {
                />
             </div>
          </section>
-         <section className="container-px mt-[45px] w-full md:mt-[80px]">
+         <section className="container-px mt-[45px] w-full pb-10 md:mt-[80px]">
             <IngredientsCarousel />
          </section>
       </main>
