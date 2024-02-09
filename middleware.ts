@@ -2,6 +2,7 @@ import { authMiddleware } from "@clerk/nextjs"
 
 export default authMiddleware({
    publicRoutes: [
+      "/blogs/news/ingredients-glossary",
       "/blogs/news/tagged/(.*)",
       "/api/reviewsVerified",
       "/api/productsFilter",
