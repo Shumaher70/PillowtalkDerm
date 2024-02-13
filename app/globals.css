@@ -53,6 +53,10 @@ body {
    padding-right: 16px;
 }
 
+.section-pt {
+   padding-top: 45px;
+}
+
 .container-p {
    padding: 16px;
 }
@@ -157,6 +161,9 @@ body {
    .container-px {
       padding-left: 80px;
       padding-right: 80px;
+   }
+   .section-pt {
+      padding-top: 100px;
    }
 
    .container-p {
