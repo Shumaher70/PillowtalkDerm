@@ -5,6 +5,7 @@ import { schnyderMlightFont } from "@/app/layout"
 import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
 import NerdAcademy from "../../components/NerdAcademy"
 import Pages from "../../components/Pages"
+import IngredientsCarousel from "../../ingredients-glossary/components/IngredientsCarousel"
 
 const page = async (query: {
    params: { slug: string }
@@ -45,8 +46,10 @@ const page = async (query: {
 
    return (
       <main className="w-full">
-         <section className="container-px bg-secondary mt-[45px] w-full md:mt-[80px]">
-            <NerdAcademy searchParams={searchParams} params={params} />
+         <section className="container-px bg-secondary w-full">
+            <div className="section-pt">
+               <NerdAcademy searchParams={searchParams} params={params} />
+            </div>
 
             <ViewportMotionDiv className="mt-5 grid h-full w-full grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
                {blogs.map((b, i) => (
@@ -71,7 +74,9 @@ const page = async (query: {
                />
             </div>
          </section>
-         <section></section>
+         <section className="container-px section-pt w-full pb-10">
+            <IngredientsCarousel />
+         </section>
       </main>
    )
 }
