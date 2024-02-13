@@ -12,6 +12,9 @@ const IngredientsCarousel = () => {
       showSlide: 0,
       currentSlide: 0,
    })
+
+   const [moving, setMoving] = useState(false)
+
    const responsive = {
       desktop: {
          breakpoint: { max: 3000, min: 1024 },
@@ -110,12 +113,14 @@ const IngredientsCarousel = () => {
          </div>
          <div className="relative mt-5">
             <Carousel
-               beforeChange={(slide, ref) =>
+               beforeChange={(slide, ref) => {
+                  setMoving(true)
                   setSlide({
                      showSlide: ref.slidesToShow,
                      currentSlide: slide,
                   })
-               }
+               }}
+               afterChange={() => setMoving(false)}
                rewindWithAnimation={false}
                rtl={false}
                rewind={false}
@@ -136,14 +141,16 @@ const IngredientsCarousel = () => {
                infinite={false}
                keyBoardControl={true}
                transitionDuration={10}
-               dotListClass="w-full "
+               dotListClass="w-full"
                customDot={<CustomDot onClick={() => {}} active={false} />}
             >
                {IngredientsCarouselDummy.map((i, index) => (
                   <div
-                     onClick={() =>
-                        route.push("/blogs/news/ingredients-glossary")
-                     }
+                     onClick={() => {
+                        if (!moving) {
+                           route.push("/blogs/news/ingredients-glossary")
+                        }
+                     }}
                      key={index}
                      className={`flex h-full cursor-pointer flex-col ${handlerOpacityElementStyle(
                         index
