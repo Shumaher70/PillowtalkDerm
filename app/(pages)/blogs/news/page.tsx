@@ -26,8 +26,10 @@ const page = async (query: {
 
    return (
       <main className="w-full overflow-hidden">
-         <section className="container-px bg-secondary mt-[45px] w-full md:mt-[80px]">
-            <NerdAcademy searchParams={searchParams} />
+         <section className="container-px bg-secondary w-full">
+            <div className="section-pt">
+               <NerdAcademy searchParams={searchParams} />
+            </div>
 
             <ViewportMotionDiv className="mt-5 grid h-full w-full grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
                {blogs.map((b) => (
@@ -52,7 +54,7 @@ const page = async (query: {
                />
             </div>
          </section>
-         <section className="container-px mt-[45px] w-full pb-10 md:mt-[80px]">
+         <section className="container-px section-pt w-full pb-10">
             <IngredientsCarousel />
          </section>
       </main>
