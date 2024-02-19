@@ -23,21 +23,19 @@ const OurPhilosophySection = () => {
 
                <div className="flex flex-col gap-4">
                   {OurPhilosophySectionDummyData.map(
-                     ({ image, title, subtitle }) => (
-                        <>
-                           <div
-                              key={title}
-                              className="container-rounded flex items-center gap-3 bg-white p-3 "
-                           >
-                              <div className="flex-center flex rounded-full bg-gradient-to-r from-pink-400 to-pink-600 p-3">
-                                 {image}
-                              </div>
-                              <div className="text-[16px] font-medium md:text-[18px]">
-                                 <h5 className="uppercase">{title}</h5>
-                                 <p>{subtitle}</p>
-                              </div>
+                     ({ image, title, subtitle }, index) => (
+                        <div
+                           key={index}
+                           className="container-rounded flex items-center gap-3 bg-white p-3 "
+                        >
+                           <div className="flex-center flex rounded-full bg-gradient-to-r from-pink-400 to-pink-600 p-3">
+                              {image}
                            </div>
-                        </>
+                           <div className="text-[16px] font-medium md:text-[18px]">
+                              <h5 className="uppercase">{title}</h5>
+                              <p>{subtitle}</p>
+                           </div>
+                        </div>
                      )
                   )}
                </div>
