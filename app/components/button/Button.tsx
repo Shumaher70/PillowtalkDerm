@@ -1,3 +1,5 @@
+"use client"
+import { useRouter } from "next/navigation"
 import { spin } from "./spin"
 
 interface ButtonProps {
@@ -9,9 +11,11 @@ interface ButtonProps {
    children?: React.ReactNode
    load: boolean
    classText?: string
+   href?: string
 }
 
 const Button = ({
+   href,
    text = "button",
    size = "sm",
    className,
@@ -20,9 +24,15 @@ const Button = ({
    load,
    classText,
 }: ButtonProps) => {
+   const route = useRouter()
    return (
       <button
-         onClick={onClick}
+         onClick={(e) => {
+            onClick?.(e)
+            if (href) {
+               route.push(`${href}`)
+            }
+         }}
          disabled={soldOut || load ? true : false}
          className={`
          ${size === "lg" && "px-[24px] py-[14px] lg:px-[24px] lg:py-[12px]"}
