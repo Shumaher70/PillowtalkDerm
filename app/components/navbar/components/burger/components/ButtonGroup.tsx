@@ -3,15 +3,19 @@ import Button from "@/app/components/button/Button"
 interface ButtonGroupProps {
    shop: boolean
    blog: boolean
+   about: boolean
    shopHandler: () => void
    blogHandler: () => void
+   aboutHandler: () => void
 }
 
 const ButtonGroup = ({
+   about,
    shop,
    blog,
    shopHandler,
    blogHandler,
+   aboutHandler,
 }: ButtonGroupProps) => {
    return (
       <>
@@ -44,12 +48,18 @@ const ButtonGroup = ({
             load={false}
          />
          <Button
+            href="/our-story"
             text="about"
             size="sm"
-            className="
-            bg-white
-            capitalize !text-black"
+            className={`
+            capitalize
+            ${
+               about
+                  ? "bg-gradient-to-r from-pink-400 to-pink-600 text-white"
+                  : "bg-white !text-black"
+            }`}
             classText="text-p"
+            onClick={aboutHandler}
             load={false}
          />
       </>
