@@ -11,7 +11,6 @@ import BlogCard from "@/app/components/blogCard/BlogCard"
 import { BlogType, ProductType } from "@/types"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { sidebarBurger } from "@/redux/features/sidebarSlice"
-import { useRouter } from "next/navigation"
 
 interface BurgerProps {
    className?: string
@@ -22,7 +21,6 @@ interface BurgerProps {
 const Burger = ({ className, products, blogs }: BurgerProps) => {
    const dispatch = useAppDispatch()
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
-   const route = useRouter()
 
    const [shop, setShop] = useState(true)
    const [blog, setBlog] = useState(false)
@@ -114,11 +112,17 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                         {shop && (
                            <>
                               {productsMemo.slice(0, 5).map((product) => (
-                                 <Card
-                                    product={product}
+                                 <div
                                     key={product.id}
-                                    className="bg-white !p-[16px]"
-                                 />
+                                    onClick={() => {
+                                       dispatch(sidebarBurger(false))
+                                    }}
+                                 >
+                                    <Card
+                                       product={product}
+                                       className="bg-white !p-[16px]"
+                                    />
+                                 </div>
                               ))}
                               <div className="flex-center flex h-full w-full">
                                  <Button
@@ -126,7 +130,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                                     className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
                                     text="shop all"
                                     load={false}
-                                    onClick={() => route.push("/shop")}
+                                    href="/shop"
                                  />
                               </div>
                            </>
@@ -136,22 +140,28 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                            <>
                               {blogsMemo
                                  .slice(3)
-                                 .map(({ id, images, title, tags }) => {
+                                 .map(({ id, images, title }) => {
                                     return (
-                                       <BlogCard
-                                          extra={"Read me"}
+                                       <div
                                           key={id}
-                                          id={id}
-                                          images={images}
-                                          title={title}
-                                       />
+                                          onClick={() => {
+                                             dispatch(sidebarBurger(false))
+                                          }}
+                                       >
+                                          <BlogCard
+                                             extra={"Read me"}
+                                             id={id}
+                                             images={images}
+                                             title={title}
+                                          />
+                                       </div>
                                     )
                                  })}
 
                               <div className="flex-center flex h-full w-full">
                                  <div>
                                     <Button
-                                       onClick={() => route.push("/blogs/news")}
+                                       href="/blogs/news"
                                        size="sm"
                                        text="view all"
                                        className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase"
