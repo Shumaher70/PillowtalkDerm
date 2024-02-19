@@ -1,37 +1,40 @@
-import CarouseSection from './CarouseSection';
-import Button from '../../button/Button';
-import { schnyderMlightFont } from '@/app/layout';
-import ViewportMotionDiv from '@/motion/ViewPortMotionDiv';
+import CarouseSection from "./CarouseSection"
+import Button from "../../button/Button"
+import { schnyderMlightFont } from "@/app/layout"
+import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
 
 const GetNerdyWithUsSection = () => {
    return (
-      <section className="w-full max-h-full bg-accent">
+      <section className="bg-accent max-h-full w-full">
          <ViewportMotionDiv>
             <div className="relative -bottom-[20px]">
-               <div className="w-full container-px flex gap-5 flex-col justify-center items-center lg:flex-row lg:justify-between p-[16px]">
+               <div className="container-px flex w-full flex-col items-center justify-center gap-5 p-[16px] lg:flex-row lg:justify-between">
                   <h2
-                     className={`text-section leading-[50px] text-center lg:text-start ${schnyderMlightFont.className}`}
+                     className={`text-section text-center leading-[50px] lg:text-start ${schnyderMlightFont.className}`}
                   >
                      Get Nerdy with Us
                   </h2>
 
-                  <div className="flex flex-center gap-2 md:gap-5">
+                  <div className="flex-center flex gap-2 md:gap-5">
                      <Button
-                        className="uppercase bg-purple-700 text-white w-full md:w-auto whitespace-nowrap"
-                        text={'tik tok'}
-                        size={'lg'}
+                        href="https://www.tiktok.com/@shereeneidriss?lang=en"
+                        className="w-full whitespace-nowrap bg-purple-700 uppercase text-white md:w-auto"
+                        text={"tik tok"}
+                        size={"lg"}
                         load={false}
                      />
                      <Button
-                        className="uppercase bg-purple-700 text-white w-full md:w-auto whitespace-nowrap"
-                        text={'instagram'}
-                        size={'lg'}
+                        href="https://www.instagram.com/pillowtalkderm/?hl=en"
+                        className="w-full whitespace-nowrap bg-purple-700 uppercase text-white md:w-auto"
+                        text={"instagram"}
+                        size={"lg"}
                         load={false}
                      />
                      <Button
-                        className="uppercase bg-purple-700 text-white w-full md:w-auto whitespace-nowrap"
-                        text={'youtube'}
-                        size={'lg'}
+                        href="https://www.youtube.com/@shereeneidriss"
+                        className="w-full whitespace-nowrap bg-purple-700 uppercase text-white md:w-auto"
+                        text={"youtube"}
+                        size={"lg"}
                         load={false}
                      />
                   </div>
@@ -40,7 +43,7 @@ const GetNerdyWithUsSection = () => {
             </div>
          </ViewportMotionDiv>
       </section>
-   );
-};
+   )
+}
 
-export default GetNerdyWithUsSection;
+export default GetNerdyWithUsSection
