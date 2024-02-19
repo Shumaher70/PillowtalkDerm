@@ -26,6 +26,7 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
 
    const [shop, setShop] = useState(true)
    const [blog, setBlog] = useState(false)
+   const [about, setAbout] = useState(false)
    const [load, setLoad] = useState(false)
 
    const productsMemo = useMemo(() => {
@@ -52,10 +53,17 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
    const shopHandler = () => {
       setShop(true)
       setBlog(false)
+      setAbout(false)
    }
    const blogHandler = () => {
       setBlog(true)
       setShop(false)
+      setAbout(false)
+   }
+   const aboutHandler = () => {
+      setBlog(false)
+      setShop(false)
+      setAbout(true)
    }
    if (blogsMemo && productsMemo)
       return (
@@ -76,8 +84,10 @@ const Burger = ({ className, products, blogs }: BurgerProps) => {
                            <ButtonGroup
                               shop={shop}
                               blog={blog}
+                              about={about}
                               shopHandler={shopHandler}
                               blogHandler={blogHandler}
+                              aboutHandler={aboutHandler}
                            />
                         </div>
 
