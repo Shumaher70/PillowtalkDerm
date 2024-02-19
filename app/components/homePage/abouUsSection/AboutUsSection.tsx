@@ -18,6 +18,7 @@ const AboutUsSection = () => {
 
                <div>
                   <Button
+                     href="/our-story"
                      className="bg-purple-700 uppercase "
                      text={"about us"}
                      size={"lg"}
