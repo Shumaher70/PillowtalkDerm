@@ -21,6 +21,7 @@ const HeroSection = () => {
                </div>
 
                <Button
+                  href="/collections/shop"
                   text={"shop now"}
                   className="w-max bg-gradient-to-r from-pink-400 to-pink-600  uppercase"
                   size={"lg"}
