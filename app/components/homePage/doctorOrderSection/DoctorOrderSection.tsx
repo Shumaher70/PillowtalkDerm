@@ -1,20 +1,19 @@
-import ViewportMotionSection from '@/motion/ViewportMotionSection';
-import React from 'react';
-import Button from '../../button/Button';
-import { schnyderMlightFont } from '@/app/layout';
-import Image from 'next/image';
-import ImageSection from './ImageSection';
+import ViewportMotionSection from "@/motion/ViewportMotionSection"
+import React from "react"
+import Button from "../../button/Button"
+import { schnyderMlightFont } from "@/app/layout"
+import ImageSection from "./ImageSection"
 
 const DoctorOrderSection = () => {
    return (
       <ViewportMotionSection>
          <div
-            className={`w-full h-[80vh] container-rounded-b container-p relative overflow-hidden`}
+            className={`container-rounded-b container-p relative h-[80vh] w-full overflow-hidden`}
          >
-            <div className="w-full h-full flex flex-col text-center md:text-start justify-center items-center md:items-start md:justify-between gap-5">
+            <div className="flex h-full w-full flex-col items-center justify-center gap-5 text-center md:items-start md:justify-between md:text-start">
                <div>
                   <h1
-                     className={`text-hero text-white pb-2 leading-[1] ${schnyderMlightFont.className}`}
+                     className={`text-hero pb-2 leading-[1] text-white ${schnyderMlightFont.className}`}
                   >
                      {`Doctor's Orders`}
                   </h1>
@@ -23,9 +22,10 @@ const DoctorOrderSection = () => {
                </div>
 
                <Button
-                  text={'shop major fade'}
-                  className="bg-gradient-to-r from-pink-400 to-pink-600 uppercase  w-max"
-                  size={'lg'}
+                  href="/products/major-fade-solution-system"
+                  text={"shop major fade"}
+                  className="w-max bg-gradient-to-r from-pink-400 to-pink-600  uppercase"
+                  size={"lg"}
                   load={false}
                />
             </div>
@@ -33,7 +33,7 @@ const DoctorOrderSection = () => {
             <ImageSection />
          </div>
       </ViewportMotionSection>
-   );
-};
+   )
+}
 
-export default DoctorOrderSection;
+export default DoctorOrderSection
