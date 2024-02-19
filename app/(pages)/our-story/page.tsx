@@ -1,4 +1,4 @@
-import { MotionSection } from "@/motion/MotionSection"
+import ViewportMotionSection from "@/motion/ViewportMotionSection"
 import FoundedSection from "./components/FoundedSection"
 import OurPhilosophySection from "./components/OurPhilosophySection"
 import OurStorySection from "./components/OurStorySection"
@@ -8,25 +8,25 @@ import SocialImpactSection from "./components/SocialImpactSection"
 const page = () => {
    return (
       <main>
-         <MotionSection>
+         <ViewportMotionSection>
             <OurStorySection />
-         </MotionSection>
+         </ViewportMotionSection>
 
-         <MotionSection>
+         <ViewportMotionSection>
             <SkinIsComplexSection />
-         </MotionSection>
+         </ViewportMotionSection>
 
-         <MotionSection>
+         <ViewportMotionSection>
             <FoundedSection />
-         </MotionSection>
+         </ViewportMotionSection>
 
-         <MotionSection>
+         <ViewportMotionSection>
             <OurPhilosophySection />
-         </MotionSection>
+         </ViewportMotionSection>
 
-         <MotionSection>
+         <ViewportMotionSection>
             <SocialImpactSection />
-         </MotionSection>
+         </ViewportMotionSection>
       </main>
    )
 }
