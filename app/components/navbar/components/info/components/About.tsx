@@ -5,12 +5,14 @@ import {
    slideSkinNerdAcademy,
 } from "@/redux/features/sidebarSlice"
 import { useAppDispatch } from "@/redux/hooks"
+import Link from "next/link"
 import React from "react"
 
 const About = () => {
    const dispatch = useAppDispatch()
    return (
-      <p
+      <Link
+         href="/our-story"
          onMouseEnter={() => {
             dispatch(slideShop(false))
             dispatch(slideSkinNerdAcademy(false))
@@ -28,7 +30,7 @@ const About = () => {
          "
       >
          about
-      </p>
+      </Link>
    )
 }
 
