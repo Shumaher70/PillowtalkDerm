@@ -1,6 +1,8 @@
 "use client"
 import { useRouter } from "next/navigation"
 import { spin } from "./spin"
+import { useAppDispatch } from "@/redux/hooks"
+import { sidebarBurger } from "@/redux/features/sidebarSlice"
 
 interface ButtonProps {
    text: string
@@ -25,12 +27,16 @@ const Button = ({
    classText,
 }: ButtonProps) => {
    const route = useRouter()
+
+   const dispatch = useAppDispatch()
+
    return (
       <button
          onClick={(e) => {
             onClick?.(e)
             if (href) {
                route.push(`${href}`)
+               dispatch(sidebarBurger(false))
             }
          }}
          disabled={soldOut || load ? true : false}
