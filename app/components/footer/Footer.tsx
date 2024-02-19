@@ -16,7 +16,7 @@ const Footer = () => {
 
    useEffect(() => {
       dispatch(visibilityAction(page))
-   }, [page])
+   }, [dispatch, page])
    return (
       <footer
          className="container-rounded-t container-p bg-secondary relative flex w-full flex-col !pb-0 !pt-[48px]"
