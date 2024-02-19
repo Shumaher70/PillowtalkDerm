@@ -14,6 +14,7 @@ export default authMiddleware({
       "/api/reviews",
       "/api/dislike",
       "/blogs/news",
+      "/our-story",
       "/api/blog",
       "/api/cart",
       "/api/user",
