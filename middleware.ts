@@ -4,6 +4,7 @@ export default authMiddleware({
    publicRoutes: [
       "/blogs/news/ingredients-glossary",
       "/blogs/news/tagged/(.*)",
+      "/pages/(.*)",
       "/api/reviewsVerified",
       "/api/productsFilter",
       "/api/reviewsFilter",
