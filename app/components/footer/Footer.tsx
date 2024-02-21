@@ -32,7 +32,7 @@ const Footer = () => {
                   <Subscribe />
                </div>
 
-               <div className="w-full pt-10 lg:max-w-[300px] lg:pt-0">
+               <div className="w-full pt-2 lg:max-w-[300px] lg:pt-0">
                   <Menu />
                </div>
             </div>
