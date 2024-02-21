@@ -113,7 +113,12 @@ const Search = ({ className }: SearchProps) => {
                      )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 overflow-auto px-[16px] pb-[16px]">
+                  <div
+                     className="grid grid-cols-2 gap-4 overflow-auto px-[16px] pb-[16px]"
+                     onClick={() => {
+                        dispatch(sidebarSearch(false))
+                     }}
+                  >
                      {products.map((product) => {
                         return (
                            <Card

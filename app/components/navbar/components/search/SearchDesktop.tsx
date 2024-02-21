@@ -131,7 +131,12 @@ const SearchDesktop = ({ className }: SearchProps) => {
                      }}
                      className={`mt-3 overflow-auto`}
                   >
-                     <div className="grid grid-cols-4 gap-2">
+                     <div
+                        className="grid grid-cols-4 gap-2"
+                        onClick={() => {
+                           dispatch(slideSearch(false))
+                        }}
+                     >
                         {products.map((product) => (
                            <Card
                               key={product.id}
