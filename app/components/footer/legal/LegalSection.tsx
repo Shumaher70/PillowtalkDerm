@@ -3,19 +3,19 @@ import Link from "next/link"
 const legalControl = [
    {
       title: "Privacy Policy",
-      link: "",
+      link: "/pages/privacy-policy",
    },
    {
       title: "Terms & Conditions",
-      link: "",
+      link: "/pages/terms-conditions",
    },
    {
       title: "Accessibility",
-      link: "",
+      link: "/pages/accessibility",
    },
    {
       title: "Do Not Sell",
-      link: "",
+      link: "/pages/do-not-sell",
    },
 ]
 
