@@ -1,6 +1,7 @@
 "use client"
 
 import { useAppSelector } from "@/redux/hooks"
+import { useUser } from "@clerk/nextjs"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 
@@ -11,6 +12,8 @@ interface CheckOutProps {
 const CheckOut = ({ totalPrice }: CheckOutProps) => {
    const cardSlice = useAppSelector((state) => state.cartReducer.carts)
 
+   const { isSignedIn } = useUser()
+
    const route = useRouter()
 
    return (
@@ -19,17 +22,21 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
             <p className="text-p text-bold font-sans">Estimated Total</p>
             <p>Taxes and shipping calculated at checkout</p>
             <button
-               onClick={async () =>
-                  axios
-                     .post("http://localhost:3000/api/checkout", {
-                        products: cardSlice,
-                     })
-                     .then((response) => {
-                        if (response.data) {
-                           route.push(response.data.url)
-                        }
-                     })
-               }
+               onClick={async () => {
+                  if (isSignedIn) {
+                     axios
+                        .post("http://localhost:3000/api/checkout", {
+                           products: cardSlice,
+                        })
+                        .then((response) => {
+                           if (response.data) {
+                              route.push(response.data.url)
+                           }
+                        })
+                  } else {
+                     route.push("sign-in")
+                  }
+               }}
                className="flex-center !duration-250
                relative
                mt-4
