@@ -86,9 +86,16 @@ export const cart = createSlice({
             .map((cart) => cart.quantity)
             .reduce((sum, acc) => sum + acc, 0)
       },
+
+      refreshCarts: (state) => {
+         state.carts = []
+         state.totalPrice = 0
+         state.totalQuantity = 0
+      },
    },
 })
 
-export const { addCart, removeCart, updateCart, addOrder } = cart.actions
+export const { addCart, removeCart, updateCart, addOrder, refreshCarts } =
+   cart.actions
 
 export default cart.reducer
