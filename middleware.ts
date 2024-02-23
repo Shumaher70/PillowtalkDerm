@@ -18,6 +18,7 @@ export default authMiddleware({
       "/blogs/news",
       "/our-story",
       "/api/blog",
+      "/api/order",
       "/api/cart",
       "/api/user",
       "/api/like",
