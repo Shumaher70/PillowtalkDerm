@@ -1,7 +1,9 @@
 "use client"
 
 import { useAppSelector } from "@/redux/hooks"
+import { CartType } from "@/types"
 import { useUser } from "@clerk/nextjs"
+import { loadStripe } from "@stripe/stripe-js"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 
@@ -16,6 +18,20 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
 
    const route = useRouter()
 
+   const handleClick = async () => {
+      const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+      const stripe = await loadStripe(STRIPE_PK)
+
+      const body: CartType[] = cardSlice
+
+      const result = await axios.post("http://localhost:3000/api/checkout", {
+         products: body,
+      })
+      const sessionId = result.data.id
+
+      stripe?.redirectToCheckout({ sessionId })
+   }
+
    return (
       <div className="flex justify-between rounded-t-[8px] bg-white p-[16px] shadow-[0_-1px_10px_rgba(0,0,0,0.26)]">
          <div>
@@ -24,15 +40,7 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
             <button
                onClick={async () => {
                   if (isSignedIn) {
-                     axios
-                        .post("http://localhost:3000/api/checkout", {
-                           products: cardSlice,
-                        })
-                        .then((response) => {
-                           if (response.data) {
-                              route.push(response.data.url)
-                           }
-                        })
+                     handleClick()
                   } else {
                      route.push("sign-in")
                   }
