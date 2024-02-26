@@ -1,12 +1,17 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit"
 import { RootState } from "../store"
-import { addCart, removeCart, updateCart } from "../features/cartSlice"
+import {
+   addCart,
+   refreshCarts,
+   removeCart,
+   updateCart,
+} from "../features/cartSlice"
 
 const localStorageCart = () => {
    const localStorageCartMiddleware = createListenerMiddleware()
 
    localStorageCartMiddleware.startListening({
-      matcher: isAnyOf(addCart, removeCart, updateCart),
+      matcher: isAnyOf(addCart, removeCart, updateCart, refreshCarts),
       effect: (action, listenerApi) => {
          if (typeof localStorage !== "undefined") {
             localStorage.setItem(
