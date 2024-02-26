@@ -1,10 +1,12 @@
 import { CartType } from "@/types"
+import { auth } from "@clerk/nextjs"
 import { NextResponse } from "next/server"
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 const getActiveProducts = async () => {
    const checkProducts = await stripe.products.list()
+
    const availableProducts = await checkProducts.data.filter(
       (product: any) => product.active === true
    )
@@ -14,6 +16,7 @@ const getActiveProducts = async () => {
 
 export const POST = async (request: NextResponse) => {
    const { products } = await request.json()
+   const { userId } = auth()
 
    const data: CartType[] = products
 
@@ -63,10 +66,13 @@ export const POST = async (request: NextResponse) => {
    const session = await stripe.checkout.sessions.create({
       line_items: stripeItems,
       mode: "payment",
-      success_url: "http://localhost:3000/success",
+      success_url: `http://localhost:3000/account?userid=${userId}`,
       cancel_url: "http://localhost:3000/cancel",
       automatic_tax: { enabled: true },
+      metadata: {
+         id: userId,
+      },
    })
 
-   return NextResponse.json({ url: session.url })
+   return NextResponse.json(session)
 }
