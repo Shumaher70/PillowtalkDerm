@@ -8,6 +8,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
 import { extractRouterConfig } from "uploadthing/server"
 
 import { ourFileRouter } from "@/app/api/uploadthing/core"
+import ReactQueryProvider from "@/reactQueryProvider/ReactQueryProvider"
 
 export const schnyderMlightFont = localFont({
    src: "../public/fonts/SchnyderMLight.woff2",
@@ -27,7 +28,9 @@ export default function RootLayout({
                <NextSSRPlugin
                   routerConfig={extractRouterConfig(ourFileRouter)}
                />
-               <body>{children}</body>
+               <body>
+                  <ReactQueryProvider>{children}</ReactQueryProvider>
+               </body>
             </html>
          </Providers>
       </ClerkProvider>
