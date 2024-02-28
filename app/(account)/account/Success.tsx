@@ -1,58 +1,63 @@
 "use client"
 
 import Button from "@/app/components/button/Button"
-import { refreshCarts } from "@/redux/features/cartSlice"
+import cartSlice, { refreshCarts } from "@/redux/features/cartSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { CartType } from "@/types"
 import { useUser } from "@clerk/nextjs"
 import { Order } from "@prisma/client"
+
+import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
+const getOrders = async () => {
+   const orders: Order[] = await axios
+      .get("/api/order")
+      .then((response) => response.data)
+
+   return orders
+}
+
+const postOrders = async (orders: CartType[]) => {
+   await axios.post("http://localhost:3000/api/order", orders)
+}
+
 const Success = ({ userId }: { userId?: string }) => {
-   const [orders, setOrders] = useState<Order[]>([])
-   const [loading, setLoading] = useState(false)
    const cartsSlice = useAppSelector((state) => state.cartReducer.carts)
    const dispatch = useAppDispatch()
    const { user } = useUser()
    const route = useRouter()
 
-   useEffect(() => {
-      const getOrders = async () => {
-         await axios.get("http://localhost:3000/api/order").then((response) => {
-            setLoading(true)
-            setOrders(response.data)
-         })
-      }
+   const { data, isLoading, isSuccess } = useQuery({
+      queryKey: ["getOrders"],
+      queryFn: getOrders,
+   })
 
-      getOrders()
-   }, [])
+   const { mutate } = useMutation({
+      mutationFn: postOrders,
+      onSuccess: () => {
+         dispatch(refreshCarts())
+      },
+   })
 
    useEffect(() => {
-      const postOrders = async () => {
-         await axios
-            .post("http://localhost:3000/api/order", cartsSlice)
-            .then((response) => {
-               if (response.data) {
-                  dispatch(refreshCarts())
-               }
-            })
-      }
       if (userId === user?.id && cartsSlice.length > 0) {
-         postOrders()
+         mutate(cartsSlice)
       }
    }, [user?.id, userId])
 
    return (
       <>
-         {loading === true ? (
+         {isSuccess && (
             <>
-               {orders.length > 0 ? (
+               {data.length > 0 ? (
                   <div className="flex h-[80vh] w-full flex-col gap-5 overflow-auto">
-                     {orders.map((order) => (
+                     {data?.map((order) => (
                         <div
                            key={order.id}
                            className="container-rounded w-full gap-5 shadow-lg"
@@ -142,9 +147,11 @@ const Success = ({ userId }: { userId?: string }) => {
                   </div>
                )}
             </>
-         ) : (
-            <div className="flex-center flex h-full w-full">
-               <AiOutlineLoading3Quarters className="animate-spin text-[150px] text-pink-600" />
+         )}
+
+         {isLoading && (
+            <div className="flex-center flex">
+               <AiOutlineLoading3Quarters className="animate-spin text-[50px] text-pink-600 md:text-[100px] lg:text-[150px]" />
             </div>
          )}
       </>
