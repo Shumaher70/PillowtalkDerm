@@ -2,35 +2,48 @@
 
 import { UserType } from "@/types"
 import { useUser } from "@clerk/nextjs"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { useEffect, useState } from "react"
+
+const getUser = async () => {
+   const user: UserType[] = await axios
+      .get("/api/user")
+      .then((response) => response.data)
+   return user
+}
+
+const postUser = async (user: {
+   id: string
+   first_name: string
+   last_name: string
+   email: string
+   img: string
+}) => {
+   await axios.post("/api/user", user)
+}
 
 const Users = () => {
    const [usersPrisma, setUsersPrisma] = useState<UserType[]>([])
    const { isSignedIn, user } = useUser()
 
-   useEffect(() => {
-      const getUser = async () => {
-         await axios
-            .get("/api/user")
-            .then((response) => setUsersPrisma(response.data))
-      }
-      if (isSignedIn) {
-         getUser()
-      }
-   }, [isSignedIn])
+   const { data, isSuccess } = useQuery({
+      queryKey: ["user"],
+      queryFn: getUser,
+   })
+
+   const { mutate } = useMutation({
+      mutationFn: postUser,
+   })
 
    useEffect(() => {
       const createUserIfNotExist = async () => {
-         if (usersPrisma.length > 0 && isSignedIn) {
-            const userExist = usersPrisma.some(
-               (item) => item.email === user?.emailAddresses[0].emailAddress
-            )
+         if (isSuccess) {
+            if (data.length > 0 && isSignedIn) {
+               const userExist = data.some((item) => item.id === user.id)
 
-            if (!userExist) {
-               await fetch("/api/user", {
-                  method: "POST",
-                  body: JSON.stringify({
+               if (!userExist) {
+                  mutate({
                      id: user?.id,
                      first_name:
                         user?.firstName === null
@@ -42,11 +55,8 @@ const Users = () => {
                            : user?.lastName,
                      email: user?.emailAddresses[0].emailAddress,
                      img: user?.imageUrl,
-                  }),
-                  headers: {
-                     "Content-type": "application/json; charset=UTF-8",
-                  },
-               })
+                  })
+               }
             }
          }
       }
