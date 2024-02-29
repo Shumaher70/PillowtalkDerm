@@ -3,9 +3,18 @@
 import { refreshAction } from "@/redux/features/commentSlice"
 import { reviewForm } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useCallback, useEffect } from "react"
 import { IoCloseCircle } from "react-icons/io5"
+
+const handleDelete = async (imagesKey: string[]) => {
+   await await axios.delete("http://localhost:3000/api/uploadthing", {
+      data: {
+         url: imagesKey,
+      },
+   })
+}
 
 const ButtonClose = () => {
    const dispatch = useAppDispatch()
@@ -13,24 +22,24 @@ const ButtonClose = () => {
       (state) => state.commentSlice.review.imageKey as string[]
    )
 
+   const { mutate } = useMutation({
+      mutationFn: handleDelete,
+   })
+
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
    const handleUserKeyPress = useCallback(
-      async (event: { key: any; keyCode: any }) => {
+      (event: { key: any; keyCode: any }) => {
          const { key } = event
 
          if (key === "Escape" && stepSlice === 1) {
             dispatch(reviewForm(false))
             dispatch(refreshAction())
             if (imagesKeySlice.length > 0) {
-               await axios.delete("http://localhost:3000/api/uploadthing", {
-                  data: {
-                     url: imagesKeySlice,
-                  },
-               })
+               mutate(imagesKeySlice)
             }
          }
       },
-      [dispatch, imagesKeySlice, stepSlice]
+      [dispatch, imagesKeySlice, mutate, stepSlice]
    )
 
    useEffect(() => {
@@ -43,15 +52,11 @@ const ButtonClose = () => {
    return (
       <div
          className="absolute right-[10px] top-[10px] md:-right-[13px] md:-top-[13px]"
-         onClick={async () => {
+         onClick={() => {
             dispatch(reviewForm(false))
             dispatch(refreshAction())
             if (imagesKeySlice.length > 0) {
-               await axios.delete("http://localhost:3000/api/uploadthing", {
-                  data: {
-                     url: imagesKeySlice,
-                  },
-               })
+               mutate(imagesKeySlice)
             }
          }}
       >
