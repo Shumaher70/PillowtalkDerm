@@ -16,45 +16,33 @@ import {
 
 import { ImSpinner8 } from "react-icons/im"
 import Image from "next/image"
+import { useQuery } from "@tanstack/react-query"
 
 const Filter = ({ id }: { id: string }) => {
    const filterSlice = useAppSelector((state) => state.commentFilterReducer)
-   const [isLoading, setIsLoading] = useState(false)
+
    const [show, setShow] = useState(true)
    const dispatch = useAppDispatch()
 
-   useEffect(() => {
-      let subscribe = true
-      const getFilter = async () => {
-         setIsLoading(true)
-         await axios
-            .get(
-               `http://localhost:3000/api/reviewsFilter?sort=${filterSlice.sort}&media=${filterSlice.media}&stars=${filterSlice.stars}&take=${filterSlice.take}&id=${id}`
-            )
-            .then((response) => {
-               dispatch(dataReviewAction(response.data))
-            })
-            .catch(() => {
-               throw new Error(
-                  "something wrong with fetching data filter review"
-               )
-            })
-            .finally(() => setIsLoading(false))
-      }
-      if (subscribe) {
-         getFilter()
-      }
-      return () => {
-         subscribe = false
-      }
-   }, [
-      dispatch,
-      filterSlice.media,
-      filterSlice.sort,
-      filterSlice.stars,
-      filterSlice.take,
-      id,
-   ])
+   const getFilter = async () => {
+      await axios
+         .get(
+            `/api/reviewsFilter?sort=${filterSlice.sort}&media=${filterSlice.media}&stars=${filterSlice.stars}&take=${filterSlice.take}&id=${id}`
+         )
+         .then((response) => {
+            dispatch(dataReviewAction(response.data))
+         })
+   }
+
+   const { isLoading } = useQuery({
+      queryKey: [
+         filterSlice.sort,
+         filterSlice.media,
+         filterSlice.stars,
+         filterSlice.take,
+      ],
+      queryFn: getFilter,
+   })
 
    return (
       <>
