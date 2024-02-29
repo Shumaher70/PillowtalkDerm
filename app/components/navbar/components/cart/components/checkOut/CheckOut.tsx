@@ -4,6 +4,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { CartType } from "@/types"
 import { useUser } from "@clerk/nextjs"
 import { loadStripe } from "@stripe/stripe-js"
+import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 
@@ -11,8 +12,19 @@ interface CheckOutProps {
    totalPrice: number
 }
 
+const handlePost = async (body: CartType[]) => {
+   return await axios
+      .post("http://localhost:3000/api/checkout", {
+         products: body,
+      })
+      .then((response) => response.data)
+}
+
 const CheckOut = ({ totalPrice }: CheckOutProps) => {
    const cardSlice = useAppSelector((state) => state.cartReducer.carts)
+   const { mutate, data } = useMutation({
+      mutationFn: handlePost,
+   })
 
    const { isSignedIn } = useUser()
 
@@ -24,10 +36,8 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
 
       const body: CartType[] = cardSlice
 
-      const result = await axios.post("http://localhost:3000/api/checkout", {
-         products: body,
-      })
-      const sessionId = result.data.id
+      mutate(body)
+      const sessionId = data.data.id
 
       stripe?.redirectToCheckout({ sessionId })
    }
