@@ -21,6 +21,15 @@ import { UploadDropzone } from "@/utils/uploadthing"
 import { UploadFileResponse } from "uploadthing/client"
 
 import Button from "./button/Button"
+import { useMutation } from "@tanstack/react-query"
+
+const handleDelete = async (url: string) => {
+   await axios.delete("/api/uploadthing", {
+      data: {
+         url: url,
+      },
+   })
+}
 
 const Multimedia = () => {
    const dispatch = useAppDispatch()
@@ -40,6 +49,8 @@ const Multimedia = () => {
    const imageUrlSlice = useAppSelector(
       (state) => state.commentSlice.review.imageUrl as string[]
    )
+
+   const { mutate } = useMutation({ mutationFn: handleDelete })
 
    const handleUserKeyPress = useCallback(
       (event: { key: any; keyCode: any }) => {
@@ -192,14 +203,7 @@ const Multimedia = () => {
                                     className="absolute right-[-10px] top-[-10px] md:right-[-17px] md:top-[-17px]"
                                     onClick={async () => {
                                        filterRemoveMedia(item.url)
-                                       await axios.delete(
-                                          "http://localhost:3000/api/uploadthing",
-                                          {
-                                             data: {
-                                                url: item.url,
-                                             },
-                                          }
-                                       )
+                                       mutate(item.url)
                                     }}
                                  >
                                     <IoMdCloseCircle className="h-[20px] w-[20px] cursor-pointer text-black/50 md:h-[30px] md:w-[30px]" />
