@@ -5,10 +5,12 @@ import { CiSearch } from "react-icons/ci"
 interface InputProps {
    getInput?: (event: string) => void
    postInput?: string
+   cleanInput: () => void
 }
 
-const Input = ({ getInput, postInput }: InputProps) => {
-   const post = postInput || ""
+const Input = ({ getInput, postInput, cleanInput }: InputProps) => {
+   let post = postInput || ""
+
    const [outline, setOutline] = useState(false)
    const [input, setInput] = useState(post)
 
@@ -27,7 +29,7 @@ const Input = ({ getInput, postInput }: InputProps) => {
    }, [getInput, input])
 
    useEffect(() => {
-      if (post) setInput(post)
+      setInput(post)
    }, [post])
 
    const onFocus = () => setOutline(true)
@@ -78,7 +80,7 @@ const Input = ({ getInput, postInput }: InputProps) => {
          />
 
          {input.length > 0 && (
-            <p className="mr-[7px] cursor-pointer" onClick={() => setInput("")}>
+            <p className="mr-[7px] cursor-pointer" onClick={() => cleanInput()}>
                Clear
             </p>
          )}
