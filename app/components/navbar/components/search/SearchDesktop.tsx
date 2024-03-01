@@ -43,17 +43,6 @@ const SearchDesktop = () => {
       setChangeColumns(input.length > 0)
    }, [input.length])
 
-   useEffect(() => {
-      const loadHandler = () => {
-         if (window.innerWidth >= 1024) {
-            // setLoad(true)
-         }
-      }
-      loadHandler()
-      window.addEventListener("resize", loadHandler)
-      return () => window.removeEventListener("resize", loadHandler)
-   }, [])
-
    const fetchData = async () => {
       return await axios
          .get(`http://localhost:3000/api/productsFilter?filter=${input}`)
@@ -109,13 +98,13 @@ const SearchDesktop = () => {
                   </div>
                </div>
 
-               {input.length > 0 && isSuccess && (
+               {input.length > 0 && (
                   <div className="w-full">
                      {input.length > 0 &&
-                     (data.products.length || data.blogs.length) ? (
+                     (data?.products.length || data?.blogs.length) ? (
                         <p className="text-p">
-                           {data.blogs.length + data.products.length} result
-                           {data.blogs.length + data.products.length > 1
+                           {data?.blogs.length + data?.products.length} result
+                           {data?.blogs.length + data?.products.length > 1
                               ? "s"
                               : ""}
                            {` "${input}"`}
@@ -222,7 +211,7 @@ const SearchDesktop = () => {
                         </>
                      )}
                      {isPending && (
-                        <div className="flex-center flex h-full w-full">
+                        <div className="flex-center flex w-full">
                            <AiOutlineLoading3Quarters className="animate-spin text-[80px] text-pink-600" />
                         </div>
                      )}
