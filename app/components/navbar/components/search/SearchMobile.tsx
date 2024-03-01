@@ -97,11 +97,11 @@ const Search = ({ className }: SearchProps) => {
                   {input.length > 0 && (
                      <div>
                         {input.length > 0 &&
-                        (data?.products.length || data?.products.length) ? (
+                        (data?.products.length || data?.blogs.length) ? (
                            <p className="text-p">
-                              {data?.products.length + data?.products.length}{" "}
+                              {data?.products.length + data?.blogs.length}{" "}
                               result
-                              {data?.products.length + data?.products.length > 1
+                              {data?.products.length + data?.blogs.length > 1
                                  ? "s"
                                  : ""}
                               {` "${input}"`}

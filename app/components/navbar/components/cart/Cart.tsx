@@ -14,7 +14,7 @@ import CloseSidebar from "./components/CloseSidebar"
 import { CartType, ProductType } from "@/types"
 import { useEffect, useRef, useState } from "react"
 
-const Cart = ({ products }: { products: ProductType[] }) => {
+const Cart = ({ products }: { products: ProductType[] | undefined }) => {
    const dispatch = useAppDispatch()
    const { carts, totalPrice } = useAppSelector((state) => state.cartReducer)
    const cartSlice = useAppSelector((state) => state.sidebarReducer)
@@ -36,7 +36,7 @@ const Cart = ({ products }: { products: ProductType[] }) => {
    return (
       <>
          <CartIcon />
-         {products.length > 0 && (
+         {products && (
             <div>
                <Sidebar
                   triggerSidebar={cartSlice.sidebarCart}

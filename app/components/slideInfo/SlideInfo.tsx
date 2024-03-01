@@ -13,8 +13,8 @@ const SlideInfo = ({
    products,
    blogs,
 }: {
-   products: ProductType[]
-   blogs: BlogType[]
+   products: ProductType[] | undefined
+   blogs: BlogType[] | undefined
 }) => {
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
    const dispatch = useAppDispatch()
