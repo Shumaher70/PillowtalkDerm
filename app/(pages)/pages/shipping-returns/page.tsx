@@ -1,4 +1,11 @@
 import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+   title: "Shipping & Returns | PillowtalkDerm - Dr. Idriss ",
+   description:
+      "Shop PillowtalkDerm by Dr. Shereene Idriss. Free shipping on orders $135+.",
+}
 
 const page = () => {
    return (

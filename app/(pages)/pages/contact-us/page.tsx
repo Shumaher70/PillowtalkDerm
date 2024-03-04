@@ -1,5 +1,11 @@
+import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+   title: "Contact Us I Dr. Idriss",
+   description: "Email our customer care team at hello@dridriss.com",
+}
 
 const page = () => {
    return (

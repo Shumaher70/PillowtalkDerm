@@ -1,6 +1,13 @@
 import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import { Metadata } from "next"
 import Link from "next/link"
 import React from "react"
+
+export const metadata: Metadata = {
+   title: "Terms & Conditions | PillowtalkDerm",
+   description:
+      "Read the Dr. Idriss by Dr. Shereene Idriss terms & conditions of sale.",
+}
 
 const page = () => {
    return (

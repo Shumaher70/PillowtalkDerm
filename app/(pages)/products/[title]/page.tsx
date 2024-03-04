@@ -8,6 +8,31 @@ import Comments from "./components/comments/Comments"
 import Form from "./components/comments/components/review/components/reviewForm/components/form/Form"
 import ViewPortMotionDiv from "@/motion/ViewPortMotionDiv"
 import CardMotion from "./components/cardMotion/CardMotion"
+import { Metadata } from "next"
+
+type Props = {
+   params: { title: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   const metaTitle = await prisma.product.findMany({
+      where: {
+         title: {
+            mode: "insensitive",
+            contains: params.title
+               .split("")
+               .map((chart) => chart.replace("-", " "))
+               .join(""),
+         },
+      },
+   })
+
+   return {
+      title: `${metaTitle[0].title} | PillowTalkDerm`,
+      description:
+         "Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.",
+   }
+}
 
 const Product = async ({ params }: { params: { title: string } }) => {
    const { title } = params

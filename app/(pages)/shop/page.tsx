@@ -1,3 +1,5 @@
+import { Metadata } from "next"
+
 import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
 import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
 
@@ -5,6 +7,12 @@ import { schnyderMlightFont } from "@/app/layout"
 import { prisma } from "@/lib/prisma"
 import { ProductType } from "@/types"
 import Card from "@/app/components/card/Card"
+
+export const metadata: Metadata = {
+   title: "Shop - PillowTalkDerm",
+   description:
+      "Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.",
+}
 
 const ShopPage = async () => {
    const products: ProductType[] = await prisma.product.findMany({

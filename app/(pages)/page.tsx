@@ -10,7 +10,8 @@ import Users from "./Users"
 
 export const metadata: Metadata = {
    title: "PillowTalkDerm",
-   description: "PillowTalkDerm shop",
+   description:
+      "Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.",
 }
 
 export default function Home() {

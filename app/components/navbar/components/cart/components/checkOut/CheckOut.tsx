@@ -24,6 +24,7 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
    const cardSlice = useAppSelector((state) => state.cartReducer.carts)
    const { mutate, data } = useMutation({
       mutationFn: handlePost,
+      mutationKey: [cardSlice[0].id],
    })
 
    const { isSignedIn } = useUser()
@@ -37,7 +38,8 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
       const body: CartType[] = cardSlice
 
       mutate(body)
-      const sessionId = data.data.id
+
+      const sessionId = data.id
 
       stripe?.redirectToCheckout({ sessionId })
    }

@@ -5,8 +5,35 @@ import { prisma } from "@/lib/prisma"
 import backgroundTag from "@/utils/backgroundTag"
 import convertJsonToTsx from "@/utils/convertJsonToTsx"
 import dataCreateBlog from "@/utils/dataCreateBlog"
+import { Metadata, ResolvingMetadata } from "next"
 
 import React from "react"
+
+type Props = {
+   params: { blog: string }
+   searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+   const metaTitle = await prisma.blog.findMany({
+      where: {
+         title: {
+            mode: "insensitive",
+            contains: params.blog
+               .split("")
+               .map((chart) => chart.replace("-", " "))
+               .join("")
+               .slice(0, params.blog.length / 5),
+         },
+      },
+   })
+
+   return {
+      title: `${metaTitle[0].title} | PillowTalkDerm`,
+      description:
+         "Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.",
+   }
+}
 
 const BlogPage = async ({ params }: { params: { blog: string } }) => {
    const blogs = await prisma.blog.findMany({

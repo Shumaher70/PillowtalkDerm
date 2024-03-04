@@ -1,4 +1,11 @@
+import { Metadata } from "next"
 import FaqScroll from "./components/FaqScroll"
+
+export const metadata: Metadata = {
+   title: "FAQs | PillowtalkDerm - Dr. Idriss ",
+   description:
+      "Find the answers to commonly asked questions about PillowtalkDerm by Dr. Shereene Idriss products, including the Major Fade Solution System and The Depuffer.",
+}
 
 const page = () => {
    return (

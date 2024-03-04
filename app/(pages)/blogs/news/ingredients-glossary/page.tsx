@@ -1,7 +1,12 @@
-"use client"
-
 import { schnyderMlightFont } from "@/app/layout"
 import IngredientGlossaryFilter from "./components/IngredientGlossaryFilter"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+   title: "Ingredients Glossary - PillowTalkDerm",
+   description:
+      "Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.",
+}
 
 const page = () => {
    return (

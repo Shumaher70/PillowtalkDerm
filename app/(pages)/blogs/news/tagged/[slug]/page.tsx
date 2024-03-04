@@ -6,6 +6,43 @@ import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
 import NerdAcademy from "../../components/NerdAcademy"
 import Pages from "../../components/Pages"
 import IngredientsCarousel from "../../ingredients-glossary/components/IngredientsCarousel"
+import { Metadata, ResolvingMetadata } from "next"
+
+type Props = {
+   params: { slug: string }
+   searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+   { params, searchParams }: Props,
+   parent: ResolvingMetadata
+): Promise<Metadata> {
+   // read route params
+
+   const metaTitle = params.slug.includes("-")
+      ? params.slug
+           .replace(/%|2|B|0/g, " ")
+           .split(" ")
+           .map((item) =>
+              item
+                 .split("")
+                 .map((innerItem) => innerItem.replace("-", " "))
+                 .join("")
+           )
+           .filter((item) => item !== "")
+           .join(", ")
+      : params.slug
+           .replace(/%|2|B|0/g, " ")
+           .split(" ")
+           .filter((item) => item !== "")
+           .join(", ")
+
+   return {
+      title: `Skin Nerd Academy Blog - tagged "${metaTitle}" - PillowTalkDerm`,
+      description:
+         "Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.",
+   }
+}
 
 const page = async (query: {
    params: { slug: string }
