@@ -107,7 +107,10 @@ const IngredientsCarousel = () => {
             <h1 className={`${schnyderMlightFont.className} text-section`}>
                Ingredients Glossary
             </h1>
-            <button className="mt-2 h-min w-full max-w-[300px] rounded-full border-[1px] border-purple-700 bg-purple-700 px-[10px] py-[10px] text-[14px] uppercase text-white transition-all hover:border-pink-500 hover:bg-pink-500 md:px-[20px] md:py-[10px] md:text-[16px] lg:w-fit">
+            <button
+               onClick={() => route.push("/blogs/news/ingredients-glossary")}
+               className="mt-2 h-min w-full max-w-[300px] rounded-full border-[1px] border-purple-700 bg-purple-700 px-[10px] py-[10px] text-[14px] uppercase text-white transition-all hover:border-pink-500 hover:bg-pink-500 md:px-[20px] md:py-[10px] md:text-[16px] lg:w-fit"
+            >
                learn more
             </button>
          </div>

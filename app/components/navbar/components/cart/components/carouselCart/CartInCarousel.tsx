@@ -84,7 +84,16 @@ const CartInCarousel = ({
                   <Stars stars={calcRatingStars(reviews.length, reviews)} />
                )}
                <TitleCart title={title} />
-               {readme && <ReadMe text={readme} src={""} />}
+               {readme && (
+                  <ReadMe
+                     text={readme}
+                     src={`/products/${title
+                        .split("")
+                        .map((item) => item.replace(" ", "-"))
+                        .join("")
+                        .toLowerCase()}`}
+                  />
+               )}
             </div>
          </div>
 

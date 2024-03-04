@@ -79,7 +79,16 @@ const BlogCard = ({
             </div>
 
             <div className="z-10 text-center">
-               <ReadMe text={extra} src="" />
+               <ReadMe
+                  text={extra}
+                  src={`/blogs/news/${title
+                     .split("")
+                     .map((item) =>
+                        item.replace(/[:.,+'"?]/g, "").replace(/\s/g, "-")
+                     )
+                     .join("")
+                     .toLowerCase()}`}
+               />
             </div>
          </div>
       )
