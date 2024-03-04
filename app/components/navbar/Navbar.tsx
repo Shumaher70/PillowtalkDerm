@@ -85,7 +85,7 @@ const Navbar = () => {
                   dispatch(slideShop(false))
                   dispatch(slideSkinNerdAcademy(false))
                }}
-               className="container-px container-rounded-b bg-accent fixed top-0 z-10 w-full overflow-hidden py-[8px] md:!px-[40px]"
+               className="container-px container-rounded-b bg-accent fixed top-0 z-20 w-full overflow-hidden py-[8px] md:!px-[40px]"
             >
                <nav className="flex-between flex w-full md:h-[72px]">
                   <div className="flex w-full justify-start gap-3">
