@@ -30,7 +30,7 @@ const Menu = () => {
    return (
       <div className="grid grid-cols-2 gap-5">
          <div className="flex flex-col gap-2">
-            <p className="text-p font-bold">Help</p>
+            <p className="text-p font-bold">HELP</p>
             {helpControl.map(({ title, link }) => (
                <Link key={title} href={link} className="text-p cursor-pointer">
                   {title}
@@ -39,7 +39,7 @@ const Menu = () => {
          </div>
 
          <div className="flex flex-col gap-2">
-            <p className="text-p font-bold">Help</p>
+            <p className="text-p font-bold">LEARN</p>
             {learnControl.map(({ title, link }) => (
                <Link key={title} href={link} className="text-p cursor-pointer">
                   {title}
