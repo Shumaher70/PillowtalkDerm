@@ -1,8 +1,8 @@
 "use client"
 
+import { MotionDiv } from "@/motion/MotionDiv"
 import { sidebarCart } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { LazyMotion, domAnimation, m } from "framer-motion"
 
 interface SidebarProps {
    triggerSidebar: boolean
@@ -26,8 +26,8 @@ const Sidebar = ({
    const dispatch = useAppDispatch()
 
    return (
-      <LazyMotion features={domAnimation}>
-         <m.div
+      <>
+         <MotionDiv
             animate={triggerSidebar ? "open" : "closed"}
             transition={{ duration: 0.5 }}
             variants={sideBar}
@@ -47,14 +47,15 @@ const Sidebar = ({
          `}
          >
             {children}
-         </m.div>
+         </MotionDiv>
+
          {sidebarSlice.sidebarCart && (
             <div
                className="fixed right-0 top-0 z-[9] h-full w-full cursor-pointer bg-black/20"
                onClick={() => dispatch(sidebarCart(false))}
             />
          )}
-      </LazyMotion>
+      </>
    )
 }
 
