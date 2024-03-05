@@ -1,5 +1,4 @@
 "use client"
-import { MotionDiv } from "@/motion/MotionDiv"
 import { useAppSelector } from "@/redux/hooks"
 import React, { useEffect, useState } from "react"
 
@@ -41,12 +40,11 @@ const Overflow = () => {
    ])
 
    return (
-      <MotionDiv
-         initial={{ y: "-100%" }}
-         transition={{ duration: 0 }}
-         animate={{ y: `${overflow ? "-100%" : 0}` }}
-         className="fixed top-0 z-[5] h-full w-full bg-black/30"
-      ></MotionDiv>
+      <div
+         className={`fixed top-0 z-[5] h-full w-full bg-black/30 ${
+            overflow && "hidden"
+         }`}
+      ></div>
    )
 }
 
