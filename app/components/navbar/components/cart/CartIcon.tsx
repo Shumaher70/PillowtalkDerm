@@ -1,17 +1,12 @@
 "use client"
 import { sidebarCart } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import React, { useEffect, useState } from "react"
 
 const CartIcon = () => {
    const dispatch = useAppDispatch()
 
-   const [totalQuantity, setTotalQuantity] = useState(0)
-
    const cartReducer = useAppSelector((state) => state.cartReducer)
-   useEffect(() => {
-      setTotalQuantity(cartReducer.totalQuantity)
-   }, [cartReducer.totalQuantity])
+
    return (
       <div
          className="
@@ -28,7 +23,7 @@ const CartIcon = () => {
       "
          onClick={() => dispatch(sidebarCart(true))}
       >
-         {totalQuantity}
+         {cartReducer.totalQuantity ? cartReducer.totalQuantity : 0}
       </div>
    )
 }
