@@ -19,23 +19,6 @@ const SlideInfo = ({
    const sidebarSlice = useAppSelector((state) => state.sidebarReducer)
    const dispatch = useAppDispatch()
 
-   const [screenLg, setScreenLg] = useState(false)
-
-   useEffect(() => {
-      const screen = () => {
-         if (window.innerWidth >= 1024) {
-            setScreenLg(true)
-         } else {
-            setScreenLg(false)
-         }
-      }
-      screen()
-      window.addEventListener("resize", screen)
-      return () => {
-         return window.removeEventListener("resize", screen)
-      }
-   }, [])
-
    const displaySearch = {
       trigger: {
          transition: {
@@ -101,63 +84,59 @@ const SlideInfo = ({
    }
 
    return (
-      <>
-         {screenLg && (
-            <div
-               onMouseEnter={moveHandler}
-               onMouseLeave={blurHandler}
-               className="z-10 w-full"
+      <div
+         onMouseEnter={moveHandler}
+         onMouseLeave={blurHandler}
+         className="z-10 w-full"
+      >
+         <motion.div
+            className="bg-accent container-rounded-b container-px fixed z-10 h-full w-full"
+            variants={displaySearch}
+            initial={{ y: "-100%" }}
+            animate={"trigger"}
+         >
+            <motion.div
+               className="w-full"
+               variants={displaySearch}
+               initial={{ opacity: 0 }}
+               animate={"opacity"}
             >
-               <motion.div
-                  className="bg-accent container-rounded-b container-px fixed z-10 h-full w-full"
-                  variants={displaySearch}
-                  initial={{ y: "-100%" }}
-                  animate={"trigger"}
-               >
-                  <motion.div
-                     className="w-full"
-                     variants={displaySearch}
-                     initial={{ opacity: 0 }}
-                     animate={"opacity"}
-                  >
-                     <SearchDesktop />
-                  </motion.div>
-               </motion.div>
+               <SearchDesktop />
+            </motion.div>
+         </motion.div>
 
-               <motion.div
-                  className="bg-accent container-rounded-b container-px fixed top-[60px] z-10 w-full"
-                  variants={displayShop}
-                  initial={{ y: "-100%" }}
-                  animate={"trigger"}
-               >
-                  <motion.div
-                     variants={displayShop}
-                     initial={{ opacity: 1 }}
-                     animate="opacity"
-                  >
-                     <Shop products={products} />
-                  </motion.div>
-               </motion.div>
+         <motion.div
+            className="bg-accent container-rounded-b container-px fixed top-[60px] z-10 w-full"
+            variants={displayShop}
+            initial={{ y: "-100%" }}
+            animate={"trigger"}
+         >
+            <motion.div
+               variants={displayShop}
+               initial={{ opacity: 1 }}
+               animate="opacity"
+            >
+               <Shop products={products} />
+            </motion.div>
+         </motion.div>
 
-               <motion.div
-                  className="bg-accent container-rounded-b container-px fixed top-[60px] z-10 w-full"
-                  variants={displaySkin}
-                  initial={{ y: "-100%" }}
-                  animate={"trigger"}
-               >
-                  <motion.div
-                     variants={displaySkin}
-                     initial={{ opacity: 1 }}
-                     animate="opacity"
-                  >
-                     {sidebarSlice.slideSkinNerdAcademy && (
-                        <SkinNerdAcademy blogs={blogs} />
-                     )}
-                  </motion.div>
-               </motion.div>
-            </div>
-         )}
-      </>
+         <motion.div
+            className="bg-accent container-rounded-b container-px fixed top-[60px] z-10 w-full"
+            variants={displaySkin}
+            initial={{ y: "-100%" }}
+            animate={"trigger"}
+         >
+            <motion.div
+               variants={displaySkin}
+               initial={{ opacity: 1 }}
+               animate="opacity"
+            >
+               {sidebarSlice.slideSkinNerdAcademy && (
+                  <SkinNerdAcademy blogs={blogs} />
+               )}
+            </motion.div>
+         </motion.div>
+      </div>
    )
 }
 
