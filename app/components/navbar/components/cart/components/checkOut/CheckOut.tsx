@@ -1,7 +1,6 @@
 "use client"
 
 import { useAppSelector } from "@/redux/hooks"
-import { useUser } from "@clerk/nextjs"
 import { loadStripe } from "@stripe/stripe-js"
 import axios from "axios"
 import { useRouter } from "next/navigation"
