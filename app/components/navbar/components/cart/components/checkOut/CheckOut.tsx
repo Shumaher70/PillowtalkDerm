@@ -1,10 +1,8 @@
 "use client"
 
 import { useAppSelector } from "@/redux/hooks"
-import { CartType } from "@/types"
 import { useUser } from "@clerk/nextjs"
 import { loadStripe } from "@stripe/stripe-js"
-import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 
@@ -12,20 +10,8 @@ interface CheckOutProps {
    totalPrice: number
 }
 
-const handlePost = async (body: CartType[]) => {
-   return await axios
-      .post("http://localhost:3000/api/checkout", {
-         products: body,
-      })
-      .then((response) => response.data)
-}
-
 const CheckOut = ({ totalPrice }: CheckOutProps) => {
    const cardSlice = useAppSelector((state) => state.cartReducer.carts)
-   const { mutate, data } = useMutation({
-      mutationFn: handlePost,
-      mutationKey: [cardSlice[0].id],
-   })
 
    const { isSignedIn } = useUser()
 
@@ -35,9 +21,11 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
       const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
       const stripe = await loadStripe(STRIPE_PK)
 
-      const body: CartType[] = cardSlice
-
-      mutate(body)
+      const data = await axios
+         .post("/api/checkout", {
+            products: cardSlice,
+         })
+         .then((response) => response.data)
 
       const sessionId = data.id
 
