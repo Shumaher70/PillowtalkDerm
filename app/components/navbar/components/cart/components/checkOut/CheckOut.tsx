@@ -8,12 +8,11 @@ import { useRouter } from "next/navigation"
 
 interface CheckOutProps {
    totalPrice: number
+   userId: string | undefined
 }
 
-const CheckOut = ({ totalPrice }: CheckOutProps) => {
+const CheckOut = ({ totalPrice, userId }: CheckOutProps) => {
    const cardSlice = useAppSelector((state) => state.cartReducer.carts)
-
-   const { isSignedIn } = useUser()
 
    const route = useRouter()
 
@@ -39,7 +38,7 @@ const CheckOut = ({ totalPrice }: CheckOutProps) => {
             <p>Taxes and shipping calculated at checkout</p>
             <button
                onClick={async () => {
-                  if (isSignedIn) {
+                  if (userId) {
                      handleClick()
                   } else {
                      route.push("sign-in")
