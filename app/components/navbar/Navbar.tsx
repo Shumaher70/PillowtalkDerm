@@ -1,5 +1,3 @@
-import { motion } from "framer-motion"
-
 import Burger from "./components/burger/Burger"
 import SearchMobile from "./components/search/SearchMobile"
 import Cart from "./components/cart/Cart"
@@ -61,7 +59,7 @@ const Navbar = async () => {
                   <div className="flex w-full items-center justify-end gap-3">
                      <DesktopButtonSearch />
                      <Login userImage={user?.imageUrl} userId={user?.id} />
-                     <Cart products={products} />
+                     <Cart products={products} userId={user?.id} />
                   </div>
                </nav>
             </header>
