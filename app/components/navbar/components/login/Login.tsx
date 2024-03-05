@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image"
-import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 
 import { AiOutlineUser } from "react-icons/ai"
@@ -8,24 +7,28 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { loginMenu } from "@/redux/features/sidebarSlice"
 import { useEffect } from "react"
 
-const Login = () => {
-   const { isSignedIn, user } = useUser()
+interface LoginProps {
+   userImage?: string
+   userId?: string
+}
+
+const Login = ({ userImage, userId }: LoginProps) => {
    const menuSlice = useAppSelector((state) => state.sidebarReducer.loginMenu)
    const dispatch = useAppDispatch()
 
    useEffect(() => {
-      if (!isSignedIn) {
+      if (userId) {
          dispatch(loginMenu(false))
       }
-   }, [dispatch, isSignedIn])
+   }, [userId])
 
    const route = useRouter()
 
-   const icon = isSignedIn ? (
+   const icon = userId ? (
       <Image
          width={32}
          height={32}
-         src={user?.imageUrl}
+         src={userImage!}
          alt="user icon"
          className="bg-accent cursor-pointer rounded-full"
          onClick={() => {
@@ -42,7 +45,7 @@ const Login = () => {
    return (
       <div
          onClick={() => {
-            if (!isSignedIn) {
+            if (!userId) {
                route.push("/sign-in")
             }
          }}
