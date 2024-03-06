@@ -6,7 +6,6 @@ import DoctorOrderSection from "../components/homePage/doctorOrderSection/Doctor
 import GetNerdyWithUsSection from "../components/homePage/getNerdyWithUsSection/GetNerdyWithUsSection"
 import HeroSection from "../components/homePage/heroSection/HeroSection"
 import SkinNerdAcademySection from "../components/homePage/skinNerdAcademySection/SkinNerdAcademySection"
-import Users from "./Users"
 
 export const metadata: Metadata = {
    title: "PillowTalkDerm",
@@ -24,7 +23,6 @@ export default function Home() {
          <AboutUsSection />
          <SkinNerdAcademySection />
          <GetNerdyWithUsSection />
-         <Users />
       </main>
    )
 }
