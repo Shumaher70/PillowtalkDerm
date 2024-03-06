@@ -39,11 +39,23 @@ export async function GET(request: NextRequest) {
                rating: Number(starsQuery) === 0 ? {} : Number(starsQuery),
             },
             orderBy: {
+               ...(sortQuery === "highest-rated" && { rating: "desc" }),
                ...(sortQuery === "most-recent" && { createdAt: "desc" }),
                ...(sortQuery === "oldest" && { createdAt: "asc" }),
-               ...(sortQuery === "highest-rated" && { rating: "desc" }),
                ...(sortQuery === "lowest-rated" && { rating: "asc" }),
                ...(sortQuery === "most-helpful" && { like: "desc" }),
+            },
+         })
+      }
+
+      if (filter.length === 0) {
+         filter = await prisma.review.findMany({
+            take: Number(takeQuery),
+            where: {
+               productId: IdQuery,
+            },
+            orderBy: {
+               createdAt: "desc",
             },
          })
       }
