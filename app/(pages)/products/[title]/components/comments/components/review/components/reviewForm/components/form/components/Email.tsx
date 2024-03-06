@@ -6,27 +6,33 @@ import Button from "./button/Button"
 import { emailAction, stepAction } from "@/redux/features/commentSlice"
 import { useCallback, useEffect, useRef, useState } from "react"
 import useStepFocus from "@/app/hooks/useStepFocus"
+import { z } from "zod"
 
 const Email = () => {
    const stepSlice = useAppSelector((state) => state.commentSlice.review.step!)
    const dispatch = useAppDispatch()
+   const [validation, setValidation] = useState(true)
    const [value, setValue] = useState("")
-   const [valid, setValid] = useState(false)
+
    const refInput = useRef<HTMLInputElement>(null)
    const closeFormSlice = useAppSelector(
       (state) => state.sidebarReducer.reviewForm
    )
+
+   const emailSchema = z
+      .string()
+      .min(2, "Password must be at least 2 characters long")
+      .email("Invalid e-mail format")
 
    const handleUserKeyPress = useCallback(
       (event: { key: any; keyCode: any }) => {
          const { key } = event
 
          if (key === "Enter" && stepSlice === 6) {
-            if (value.trim().length > 0 && value.includes("@")) {
+            if (validation) {
                dispatch(stepAction(7))
-               dispatch(emailAction(value.trim()))
+               dispatch(emailAction(value))
             }
-            setValid(value.trim().length === 0 ? true : false)
          }
          if (key === "Escape" && stepSlice === 6) {
             dispatch(stepAction(5))
@@ -50,6 +56,7 @@ const Email = () => {
 
    const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(e.currentTarget.value)
+      setValidation(emailSchema.safeParse(e.currentTarget.value).success)
    }
 
    return (
@@ -66,12 +73,12 @@ const Email = () => {
          className="absolute top-2/4  min-w-full -translate-y-2/4"
       >
          <h1 className="mb-[10px] text-[22px] font-bold">Enter your Email:</h1>
-         <div>
+         <div className="relative">
             <input
                ref={refInput}
                type="email"
                className={`w-full border-b-[1px] border-gray-300 bg-transparent p-3 outline-none ${
-                  valid && "border-[1px] border-red-500"
+                  !validation && "border-[1px] border-red-500"
                }`}
                placeholder="Type your title here..."
                onChange={changeHandler}
@@ -81,16 +88,12 @@ const Email = () => {
          </div>
          <Button
             onClick={() => {
-               if (value.trim().length > 0 && value.includes("@")) {
+               if (validation) {
                   dispatch(stepAction(7))
                   dispatch(emailAction(value.trim()))
+
+                  setValidation(emailSchema.safeParse(value).success)
                }
-               setValid(
-                  (value.trim().length === 0 && !value.includes("@")) ||
-                     !value.includes("@")
-                     ? true
-                     : false
-               )
             }}
          >
             Continue
