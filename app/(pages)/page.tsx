@@ -6,6 +6,7 @@ import DoctorOrderSection from "../components/homePage/doctorOrderSection/Doctor
 import GetNerdyWithUsSection from "../components/homePage/getNerdyWithUsSection/GetNerdyWithUsSection"
 import HeroSection from "../components/homePage/heroSection/HeroSection"
 import SkinNerdAcademySection from "../components/homePage/skinNerdAcademySection/SkinNerdAcademySection"
+import users from "@/lib/users"
 
 export const metadata: Metadata = {
    title: "PillowTalkDerm",
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
+   users()
+
    return (
       <main>
          <HeroSection />
