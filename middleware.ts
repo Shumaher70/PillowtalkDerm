@@ -22,8 +22,6 @@ export default authMiddleware({
       "/api/cart",
       "/api/user",
       "/api/like",
-      "/success",
-      "/cancel",
       "/shop",
       "/",
    ],
