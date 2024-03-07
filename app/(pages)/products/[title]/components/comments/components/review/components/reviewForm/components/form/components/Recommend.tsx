@@ -141,14 +141,20 @@ const Recommend = () => {
             <p>i recommend this product</p>
          </div>
          <button
-            disabled={isPendingUser && isPendingReview}
+            disabled={
+               (isPendingUser && isPendingReview) ||
+               (isSuccessUser && isSuccessReview)
+            }
             onClick={() => {
                dispatch(recommendAction(checked))
                mutateUser()
                mutateReview()
             }}
             className={`mt-5 cursor-pointer rounded-full px-[16px] py-[8px] uppercase text-white ${
-               isPendingUser && isPendingReview ? "opacity-50" : "opacity-1"
+               (isPendingUser && isPendingReview) ||
+               (isSuccessUser && isSuccessReview)
+                  ? "opacity-50"
+                  : "opacity-1"
             } ${
                isSuccessUser && isSuccessReview
                   ? "!bg-green-500"
