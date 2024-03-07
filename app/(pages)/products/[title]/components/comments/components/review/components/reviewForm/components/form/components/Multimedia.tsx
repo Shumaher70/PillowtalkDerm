@@ -163,7 +163,7 @@ const Multimedia = () => {
                               container: `p-0 m-0 cursor-pointer ${
                                  images.length === 0
                                     ? "rounded-none min-w-full border-none h-full relative"
-                                    : "relative block min-h-[75px] w-full rounded-[10px] border-2 border-dashed border-black/50 md:h-[100px]"
+                                    : "relative block h-full w-full rounded-[10px] border-2 border-dashed border-black/50"
                               }`,
                               uploadIcon: `w-[100px] h-[100px] ${
                                  images.length > 0 || progress > 0
