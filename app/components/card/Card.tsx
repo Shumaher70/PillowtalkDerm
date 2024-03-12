@@ -77,6 +77,7 @@ const Card = ({
 
    return (
       <div
+         data-testid="root"
          onClick={(e) => {
             dispatch(sidebarBurger(false))
             route.push(
@@ -97,12 +98,12 @@ const Card = ({
                   imageAnimated={imageAnimated}
                />
                {stars && (
-                  <div className="flex-center flex gap-1">
+                  <div className="flex-center flex gap-1" data-testid="stars">
                      <Stars stars={ratingStars} />
                   </div>
                )}
                {rating && (
-                  <div className="flex-center flex">
+                  <div className="flex-center flex " data-testid="rating">
                      <Rating rating={product.reviews.length} />
                   </div>
                )}
@@ -110,7 +111,7 @@ const Card = ({
                   <TitleCard title={product.title} />
                </div>
                {extra && (
-                  <div className="pt-[8px] text-center">
+                  <div className="pt-[8px] text-center" data-testid="extra">
                      <ReadMe text={extra} src="" />
                   </div>
                )}
@@ -118,6 +119,7 @@ const Card = ({
                   <div
                      className="flex-center flex w-full pt-[8px]"
                      onClick={(e) => e.stopPropagation()}
+                     data-testid="button"
                   >
                      <Button
                         text={`add - $${product.price}`}
@@ -134,7 +136,7 @@ const Card = ({
          </div>
 
          {win && (
-            <div className="absolute left-3 top-3">
+            <div className="absolute left-3 top-3" data-testid="win">
                <AwardWining />
             </div>
          )}
