@@ -29,8 +29,10 @@ const BlogCard = ({
       return (
          <div
             className={`relative flex h-full cursor-pointer flex-col gap-2 bg-white p-[8px] md:p-[16px] ${rounded}`}
+            data-testid="root"
          >
             <Link
+               data-testid="link"
                draggable={false}
                className="absolute right-0 top-0 z-10 h-full w-full"
                href={`/blogs/news/${title
@@ -47,7 +49,10 @@ const BlogCard = ({
 
             <div className="flex flex-grow flex-col items-center text-center">
                {tags && (
-                  <div className="flex-center my-[10px] flex flex-wrap gap-2">
+                  <div
+                     className="flex-center my-[10px] flex flex-wrap gap-2"
+                     data-testid="tags"
+                  >
                      {tags?.map((t) => {
                         let bg
                         const tag = t.trim().toLocaleLowerCase()

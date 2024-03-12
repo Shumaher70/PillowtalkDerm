@@ -16,18 +16,20 @@ const ImageCard = ({
          style={{ paddingTop: `${size}%` }}
          className={`relative overflow-hidden`}
       >
-         <Image
-            src={image}
-            alt={title}
-            className={`absolute top-0 h-full w-full object-cover transition-all ${
-               imageAnimated && "hover:-translate-y-[20px]"
-            }`}
-            sizes="100vw"
-            width={0}
-            height={0}
-            loading="lazy"
-            draggable="false"
-         />
+         {image && (
+            <Image
+               src={image}
+               alt={title}
+               className={`absolute top-0 h-full w-full object-cover transition-all ${
+                  imageAnimated && "hover:-translate-y-[20px]"
+               }`}
+               sizes="100vw"
+               width={0}
+               height={0}
+               loading="lazy"
+               draggable="false"
+            />
+         )}
       </div>
    )
 }
