@@ -37,6 +37,7 @@ const Input = ({ getInput, postInput, cleanInput }: InputProps) => {
 
    return (
       <div
+         data-testid="root"
          className={`
          flex-center 
          border-1 
@@ -54,6 +55,7 @@ const Input = ({ getInput, postInput, cleanInput }: InputProps) => {
       >
          {outline && (
             <div
+               data-testid="outline"
                className={`
                pointer-events-none 
                absolute 
@@ -70,6 +72,7 @@ const Input = ({ getInput, postInput, cleanInput }: InputProps) => {
 
          <CiSearch className={`cursor-pointer text-[20px]`} />
          <input
+            data-testid="input"
             value={input}
             type="text"
             placeholder="Search"
@@ -80,7 +83,11 @@ const Input = ({ getInput, postInput, cleanInput }: InputProps) => {
          />
 
          {input.length > 0 && (
-            <p className="mr-[7px] cursor-pointer" onClick={() => cleanInput()}>
+            <p
+               className="mr-[7px] cursor-pointer"
+               onClick={() => cleanInput()}
+               data-testid="cleanup"
+            >
                Clear
             </p>
          )}
