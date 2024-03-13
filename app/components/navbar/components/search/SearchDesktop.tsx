@@ -92,6 +92,7 @@ const SearchDesktop = () => {
                   />
                   <div className="rounded-full bg-white p-3">
                      <AiOutlineClose
+                        data-testid="close"
                         className="h-[20px] w-[20px] cursor-pointer"
                         onClick={() => dispatch(slideSearch(false))}
                      />
@@ -110,7 +111,7 @@ const SearchDesktop = () => {
                            {` "${input}"`}
                         </p>
                      ) : (
-                        <p className="text-p">
+                        <p className="text-p" data-testid="text-not-found">
                            No results found for “{input}”. Maybe these will
                            interest you...
                         </p>
