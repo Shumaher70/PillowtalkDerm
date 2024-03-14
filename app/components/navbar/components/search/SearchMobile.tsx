@@ -107,7 +107,7 @@ const Search = ({ className }: SearchProps) => {
                               {` "${input}"`}
                            </p>
                         ) : (
-                           <p className="text-p">
+                           <p className="text-p" data-testid="text-not-found">
                               No results found for “{input}”. Maybe these will
                               interest you...
                            </p>
