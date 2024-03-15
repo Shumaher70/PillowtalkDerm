@@ -12,7 +12,7 @@ const Input = ({ getInput, postInput, cleanInput }: InputProps) => {
    let post = postInput || ""
 
    const [outline, setOutline] = useState(false)
-   const [input, setInput] = useState(post)
+   const [input, setInput] = useState("")
 
    const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
       setInput(event.target.value)
@@ -85,7 +85,10 @@ const Input = ({ getInput, postInput, cleanInput }: InputProps) => {
          {input.length > 0 && (
             <p
                className="mr-[7px] cursor-pointer"
-               onClick={() => cleanInput()}
+               onClick={() => {
+                  cleanInput()
+                  setInput("")
+               }}
                data-testid="cleanup"
             >
                Clear

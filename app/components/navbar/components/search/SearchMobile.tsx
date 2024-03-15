@@ -33,7 +33,7 @@ const Search = ({ className }: SearchProps) => {
 
    const fetchData = async () => {
       return await axios
-         .get(`http://localhost:3000/api/productsFilter?filter=${input}`)
+         .get(`/api/productsFilter?filter=${input}`)
          .then(
             (response) =>
                response.data as { products: ProductType[]; blogs: BlogType[] }

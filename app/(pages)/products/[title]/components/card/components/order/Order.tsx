@@ -22,6 +22,7 @@ const Order = ({ product }: { product: ProductType }) => {
 
    useEffect(() => {
       dispatch(visibilityAction(page))
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [page])
 
    useEffect(() => {

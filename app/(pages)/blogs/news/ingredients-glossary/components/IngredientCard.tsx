@@ -111,7 +111,7 @@ const IngredientCard = ({ title, details, studies }: IngredientCardProps) => {
                      <Link
                         className="cursor-pointer underline hover:no-underline"
                         key={item}
-                        href={`https://${item}`}
+                        href={`/${item}`}
                      >
                         {item}
                      </Link>

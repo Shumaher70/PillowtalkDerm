@@ -8,6 +8,7 @@ import {
    slideShop,
    slideSkinNerdAcademy,
 } from "@/redux/features/sidebarSlice"
+import { useRouter } from "next/navigation"
 
 interface InfoProps {
    className?: string
@@ -16,6 +17,7 @@ interface InfoProps {
 const Info = ({ className }: InfoProps) => {
    const dispatch = useAppDispatch()
    const sliderSlice = useAppSelector((state) => state.sidebarReducer)
+   const route = useRouter()
 
    return (
       <div className={`flex gap-3 ${className}`}>
@@ -36,6 +38,7 @@ const Info = ({ className }: InfoProps) => {
                dispatch(slideSkinNerdAcademy(false))
                dispatch(slideSearch(false))
             }}
+            onClick={() => route.push("/shop")}
          >
             shop
          </p>
@@ -56,6 +59,7 @@ const Info = ({ className }: InfoProps) => {
                dispatch(slideShop(false))
                dispatch(slideSearch(false))
             }}
+            onClick={() => route.push("/blogs/news")}
          >
             SkinNerdAcademy
          </p>

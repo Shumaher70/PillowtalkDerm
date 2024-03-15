@@ -20,6 +20,7 @@ const Login = ({ userImage, userId }: LoginProps) => {
       if (userId) {
          dispatch(loginMenu(false))
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [userId])
 
    const route = useRouter()

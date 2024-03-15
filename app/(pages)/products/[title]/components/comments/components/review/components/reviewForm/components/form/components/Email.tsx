@@ -38,6 +38,7 @@ const Email = () => {
             dispatch(stepAction(5))
          }
       },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       [dispatch, stepSlice, value]
    )
 

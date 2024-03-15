@@ -9,7 +9,7 @@ import { useCallback, useEffect } from "react"
 import { IoCloseCircle } from "react-icons/io5"
 
 const handleDelete = async (imagesKey: string[]) => {
-   await await axios.delete("http://localhost:3000/api/uploadthing", {
+   await await axios.delete("/api/uploadthing", {
       data: {
          url: imagesKey,
       },

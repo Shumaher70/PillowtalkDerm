@@ -24,7 +24,7 @@ const getOrders = async () => {
 }
 
 const postOrders = async (orders: CartType[]) => {
-   await axios.post("http://localhost:3000/api/order", orders)
+   await axios.post("/api/order", orders)
 }
 
 const Success = ({ userId }: { userId?: string }) => {
@@ -49,6 +49,7 @@ const Success = ({ userId }: { userId?: string }) => {
       if (userId === user?.id && cartsSlice.length > 0) {
          mutate(cartsSlice)
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [user?.id, userId])
 
    return (
