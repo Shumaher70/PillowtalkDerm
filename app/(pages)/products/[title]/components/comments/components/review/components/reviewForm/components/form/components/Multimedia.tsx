@@ -18,7 +18,6 @@ import { IoMdCloseCircle } from "react-icons/io"
 import { PiPlusThin } from "react-icons/pi"
 
 import { UploadDropzone } from "@/utils/uploadthing"
-import { UploadFileResponse } from "uploadthing/client"
 
 import Button from "./button/Button"
 import { useMutation } from "@tanstack/react-query"
@@ -41,9 +40,12 @@ const Multimedia = () => {
       (state) => state.sidebarReducer.reviewForm
    )
    const [images, setImages] = useState<
-      UploadFileResponse<{
-         uploadedBy: string
-      }>[]
+      {
+         name: string
+         size: number
+         key: string
+         url: string
+      }[]
    >([])
 
    const imageUrlSlice = useAppSelector(
