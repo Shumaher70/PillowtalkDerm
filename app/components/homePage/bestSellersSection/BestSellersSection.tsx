@@ -4,8 +4,8 @@ import { ProductType } from "@/types"
 import bestSellers from "@/utils/bestSellers"
 import React from "react"
 import Card from "../../card/Card"
-import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
-import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
+import ViewportMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
+import ViewportMotionDivArr from "@/app/components/motion/ViewPortMotionDivArr"
 
 const BestSellersSection = async () => {
    const products: ProductType[] = await prisma.product.findMany({

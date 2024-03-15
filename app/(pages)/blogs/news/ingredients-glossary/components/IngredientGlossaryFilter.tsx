@@ -1,6 +1,6 @@
 "use client"
 
-import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import ViewportMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
 import { useMemo, useState } from "react"
 import IngredientCard from "./IngredientCard"
 import { ingredientData } from "./ingredientData"

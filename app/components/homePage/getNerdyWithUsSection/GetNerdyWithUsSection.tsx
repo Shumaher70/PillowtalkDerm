@@ -1,7 +1,7 @@
 import CarouseSection from "./CarouseSection"
 import Button from "../../button/Button"
 import { schnyderMlightFont } from "@/app/layout"
-import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import ViewportMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
 
 const GetNerdyWithUsSection = () => {
    return (

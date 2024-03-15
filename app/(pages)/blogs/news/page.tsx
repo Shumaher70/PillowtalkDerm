@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma"
 import BlogCard from "@/app/components/blogCard/BlogCard"
-import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
+import ViewportMotionDivArr from "@/app/components/motion/ViewPortMotionDivArr"
 import { schnyderMlightFont } from "@/app/layout"
-import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import ViewportMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
 import NerdAcademy from "./components/NerdAcademy"
 import Pages from "./components/Pages"
 import IngredientsCarousel from "./ingredients-glossary/components/IngredientsCarousel"
@@ -10,7 +10,8 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
    title: "Skin Nerd Academy blog - PillowTalkDerm",
-   description: 'Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.'
+   description:
+      "Dr. Idriss is a collection of fact-based, science-backed skincare solutions by Dr. Shereene Idriss.",
 }
 
 const page = async (query: {

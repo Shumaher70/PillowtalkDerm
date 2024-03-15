@@ -1,5 +1,5 @@
 import { schnyderMlightFont } from "@/app/layout"
-import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import ViewportMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
 import React from "react"
 import Button from "../../button/Button"
 import CarouseSection from "./CarouseSection"

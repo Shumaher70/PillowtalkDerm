@@ -5,7 +5,7 @@ import Carousel from "react-multi-carousel"
 import BlogCard from "../../blogCard/BlogCard"
 import { schnyderMlightFont } from "@/app/layout"
 import { useEffect, useState } from "react"
-import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
+import ViewportMotionDivArr from "@/app/components/motion/ViewPortMotionDivArr"
 
 const CarouseSection = ({ blogs }: { blogs: BlogType[] }) => {
    const [dots, setDots] = useState(true)

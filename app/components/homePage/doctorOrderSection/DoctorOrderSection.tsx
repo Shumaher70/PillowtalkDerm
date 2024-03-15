@@ -1,4 +1,4 @@
-import ViewportMotionSection from "@/motion/ViewportMotionSection"
+import ViewportMotionSection from "@/app/components/motion/ViewportMotionSection"
 import React from "react"
 import Button from "../../button/Button"
 import { schnyderMlightFont } from "@/app/layout"

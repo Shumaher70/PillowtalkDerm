@@ -6,7 +6,7 @@ import Tips from "./components/tips/Tips"
 import Description from "./components/description/Description"
 import Comments from "./components/comments/Comments"
 import Form from "./components/comments/components/review/components/reviewForm/components/form/Form"
-import ViewPortMotionDiv from "@/motion/ViewPortMotionDiv"
+import ViewPortMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
 import CardMotion from "./components/cardMotion/CardMotion"
 import { Metadata } from "next"
 

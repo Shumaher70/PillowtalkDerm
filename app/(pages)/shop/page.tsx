@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
-import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
-import ViewportMotionDivArr from "@/motion/ViewPortMotionDivArr"
+import ViewportMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
+import ViewportMotionDivArr from "@/app/components/motion/ViewPortMotionDivArr"
 
 import { schnyderMlightFont } from "@/app/layout"
 import { prisma } from "@/lib/prisma"

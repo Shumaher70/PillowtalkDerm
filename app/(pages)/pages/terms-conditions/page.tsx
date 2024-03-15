@@ -1,4 +1,4 @@
-import ViewportMotionDiv from "@/motion/ViewPortMotionDiv"
+import ViewportMotionDiv from "@/app/components/motion/ViewPortMotionDiv"
 import { Metadata } from "next"
 import Link from "next/link"
 import React from "react"

@@ -3,7 +3,7 @@
 import Button from "@/app/components/button/Button"
 import Rating from "@/app/components/card/components/Rating"
 import Stars from "@/app/components/card/components/Stars"
-import { MotionDiv } from "@/motion/MotionDiv"
+import { MotionDiv } from "@/app/components/motion/MotionDiv"
 import { addCart } from "@/redux/features/cartSlice"
 import { sidebarCart } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"

@@ -1,7 +1,7 @@
 import { schnyderMlightFont } from "@/app/layout"
 import Button from "../../button/Button"
 import Image from "next/image"
-import ViewportMotionSection from "@/motion/ViewportMotionSection"
+import ViewportMotionSection from "@/app/components/motion/ViewportMotionSection"
 
 const HeroSection = () => {
    return (

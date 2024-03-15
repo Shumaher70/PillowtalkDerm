@@ -1,6 +1,6 @@
 "use client"
 
-import { MotionDiv } from "@/motion/MotionDiv"
+import { MotionDiv } from "@/app/components/motion/MotionDiv"
 import { sidebarCart } from "@/redux/features/sidebarSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 

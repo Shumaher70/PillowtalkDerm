@@ -1,6 +1,6 @@
 "use client"
 
-import { MotionDiv } from "@/motion/MotionDiv"
+import { MotionDiv } from "@/app/components/motion/MotionDiv"
 import Link from "next/link"
 import { useLayoutEffect, useRef, useState } from "react"
 

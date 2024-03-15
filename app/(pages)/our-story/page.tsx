@@ -1,4 +1,4 @@
-import ViewportMotionSection from "@/motion/ViewportMotionSection"
+import ViewportMotionSection from "@/app/components/motion/ViewportMotionSection"
 import FoundedSection from "./components/FoundedSection"
 import OurPhilosophySection from "./components/OurPhilosophySection"
 import OurStorySection from "./components/OurStorySection"
