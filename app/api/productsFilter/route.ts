@@ -5,8 +5,6 @@ export const GET = async (request: NextRequest) => {
    try {
       const query = request.nextUrl.searchParams.get("filter") as string
 
-      let filter
-
       if (query.length > 0) {
          const productsFilter = await prisma.product.findMany({
             where: {
@@ -31,7 +29,13 @@ export const GET = async (request: NextRequest) => {
             },
          })
 
-         filter = { products: productsFilter, blogs: blogFilter }
+         return new NextResponse(
+            JSON.stringify({ products: productsFilter, blogs: blogFilter }),
+            {
+               status: 201,
+               headers: { "Content-Type": "application/json" },
+            }
+         )
       } else {
          const productsFilter = await prisma.product.findMany({
             take: 3,
@@ -46,13 +50,14 @@ export const GET = async (request: NextRequest) => {
             take: 1,
          })
 
-         filter = { products: productsFilter, blogs: blogFilter }
+         return new NextResponse(
+            JSON.stringify({ products: productsFilter, blogs: blogFilter }),
+            {
+               status: 201,
+               headers: { "Content-Type": "application/json" },
+            }
+         )
       }
-
-      return new NextResponse(JSON.stringify(filter), {
-         status: 201,
-         headers: { "Content-Type": "application/json" },
-      })
    } catch (error) {
       return new NextResponse("Something with the product filter ", {
          status: 500,
