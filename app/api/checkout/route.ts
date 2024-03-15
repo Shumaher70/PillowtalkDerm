@@ -65,8 +65,8 @@ export const POST = async (request: Request) => {
    const session = await stripe.checkout.sessions.create({
       line_items: stripeItems,
       mode: "payment",
-      success_url: `http://e95211sy.beget.tech/account?userid=${userId}`,
-      cancel_url: "http://e95211sy.beget.tech/cancel",
+      success_url: `http://localhost:3000/account?userid=${userId}`,
+      cancel_url: "http://localhost:3000/cancel",
       automatic_tax: { enabled: true },
       metadata: {
          id: userId,
