@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
@@ -43,14 +43,12 @@ const SearchDesktop = () => {
       setChangeColumns(input.length > 0)
    }, [input.length])
 
-   const fetchData = async () => {
-      return await axios
-         .get(`/api/productsFilter?filter=${input}`)
-         .then(
-            (response) =>
-               response.data as { products: ProductType[]; blogs: BlogType[] }
-         )
-   }
+   const fetchData = useCallback(async () => {
+      const response = await axios.get(
+         `/api/productsFilter${input ? `?filter=${input}` : ""}`
+      )
+      return response.data as { products: ProductType[]; blogs: BlogType[] }
+   }, [input])
 
    const { data, isSuccess, isPending } = useQuery({
       queryKey: [input],
