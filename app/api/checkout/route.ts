@@ -65,8 +65,8 @@ export const POST = async (request: Request) => {
    const session = await stripe.checkout.sessions.create({
       line_items: stripeItems,
       mode: "payment",
-      success_url: `/account?userid=${userId}`,
-      cancel_url: "/cancel",
+      success_url: `https://pillowtalk-derm.vercel.app/account?userid=${userId}`,
+      cancel_url: "https://pillowtalk-derm.vercel.app/cancel",
       automatic_tax: { enabled: true },
       metadata: {
          id: userId,
